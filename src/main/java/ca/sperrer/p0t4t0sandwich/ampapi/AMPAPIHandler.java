@@ -3,7 +3,7 @@ package ca.sperrer.p0t4t0sandwich.ampapi;
 import java.util.HashMap;
 import java.util.Map;
 
-class AMPAPIHandler extends AMPAPI {
+public class AMPAPIHandler extends AMPAPI {
     String username = "";
     String password = "";
     String rememberMeToken = "";
