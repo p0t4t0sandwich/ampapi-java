@@ -11,7 +11,7 @@ Please Note: This program is directly based on the [ampapi-node](https://github.
 ## Installation
 
 ### Maven
-```maven
+```xml
 <repository>
     <id>jitpack.io</id>
     <url>https://jitpack.io</url>
