@@ -1,5 +1,8 @@
 package ca.sperrer.p0t4t0sandwich.ampapi;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,19 +11,27 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
-public class AMPAPI {
-    private final Map<Object, Object> _API = new HashMap<>();
+public class AMPAPI_WIP {
+    class MultiArray {
+        String f1;
+        Integer f2;
+        Boolean f3;
+    }
+    private final Map<String, Object> _API = new HashMap<>();
+    private final Map<String, Map<String, Consumer<MultiArray[]>>> API = new HashMap<>();
     private final String baseURI;
     private final String dataSource;
+    private final String sessionId = "";
 
-    public AMPAPI(String baseURI) {
+    public AMPAPI_WIP(String baseURI) {
         this.baseURI = baseURI;
 
         if (baseURI.charAt(baseURI.length()-1) == '/') {
-            this.dataSource = baseURI + "API";
+            this.dataSource = this.baseURI + "API";
         } else {
-            this.dataSource = baseURI + "/API";
+            this.dataSource = this.baseURI + "/API";
         }
 
         Map<Object, Object> module = new HashMap<>();
@@ -28,18 +39,23 @@ public class AMPAPI {
         this._API.put("Core", module);
     }
 
-    String APICall(String module, String methodName, String[] args) {
-        String data_json = "{\"SESSIONID\":\"\"}";
-
+    Map APICall(String module, String methodName, MultiArray[] args) {
         try {
-            Map method = (Map) ((Map<?, ?>) this._API.get(module)).get(methodName);
+            Map method = (Map) ((Map) this._API.get(module)).get(methodName);
 
-            Map data = new HashMap<>();//
+            Map data = new HashMap<>();
 
             if (method.containsKey("Parameters")) {
-
+                Map[] methodParams = (Map[]) method.get("Parameters");
+                System.out.println(methodParams);
+                for (int i = 0; i < methodParams.length-1; i++) {
+                    data.put(((Map) methodParams[i]).get("Name"), args[i]);
+                }
             }
+            data.put("SESSIONID", this.sessionId);
 
+            Gson gson = new GsonBuilder().create();
+            String data_json = gson.toJson(data);
 
             URL url = new URL(this.dataSource + "/" + module + "/" + methodName);
 
@@ -53,15 +69,27 @@ public class AMPAPI {
             osw.close();
             BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
-            return br.readLine();
+            return gson.fromJson(br.readLine(), Map.class);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    static boolean init(boolean stage2) {
-        System.out.println("a" + stage2);
+    boolean init(boolean stage2) {
+        for (Map.Entry<String, Object> module_loop : this._API.entrySet()) {
+            String module = module_loop.getKey();
+            Map<String, Object> methods = (Map<String, Object>) module_loop.getValue();
+
+            Map<String, Consumer<MultiArray[]>> new_api_methods = new HashMap<>();
+
+            for (Map.Entry<String, Object> method_loop : methods.entrySet()) {
+                String method = method_loop.getKey();
+                new_api_methods.put(method, (args) -> this.APICall(module, method, args));
+            }
+            this.API.put(module, new_api_methods);
+        }
+        System.out.println(this.API);
         return stage2;
     }
 }
