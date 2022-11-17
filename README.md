@@ -10,8 +10,29 @@ Please Note: This program is directly based on the [ampapi-node](https://github.
 
 ## Installation
 
-```bash
-TODO
+### Maven
+```maven
+<repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+</repository>
+
+<dependency>
+    <groupId>com.github.p0t4t0sandwich</groupId>
+    <artifactId>ampapi-java</artifactId>
+    <version>{version}</version>
+    <scope>provided</scope>
+</dependency>
+```
+### Gradle
+```gradle
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    compileOnly 'com.github.p0t4t0sandwich:ampapi-java:{version}'
+}
 ```
 
 ## AMPAPI Example
