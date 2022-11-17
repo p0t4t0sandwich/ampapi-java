@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e229287-78bb-4ac6-9491-0197eed5b0e0" name="Changes" comment="Initial build has been put together, nowhere near completion.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/sperrer/p0t4t0sandwich/ampapi/AMPAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/sperrer/p0t4t0sandwich/ampapi/AMPAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/sperrer/p0t4t0sandwich/ampapi/AMPAPIHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/sperrer/p0t4t0sandwich/ampapi/AMPAPIHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/sperrer/p0t4t0sandwich/ampapi/Main.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
