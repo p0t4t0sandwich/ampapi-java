@@ -13,19 +13,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-public class AMPAPI_WIP {
+public class AMPAPI {
     class MultiArray {
         String f1;
         Integer f2;
         Boolean f3;
     }
     private final Map<String, Object> _API = new HashMap<>();
-    private final Map<String, Map<String, Consumer<MultiArray[]>>> API = new HashMap<>();
+    public final Map<String, Map<String, Consumer<Object[]>>> API = new HashMap<>();
     private final String baseURI;
     private final String dataSource;
     private final String sessionId = "";
 
-    public AMPAPI_WIP(String baseURI) {
+    public AMPAPI(String baseURI) {
         this.baseURI = baseURI;
 
         if (baseURI.charAt(baseURI.length()-1) == '/') {
@@ -39,7 +39,7 @@ public class AMPAPI_WIP {
         this._API.put("Core", module);
     }
 
-    Map APICall(String module, String methodName, MultiArray[] args) {
+    Map APICall(String module, String methodName, Object[] args) {
         try {
             Map method = (Map) ((Map) this._API.get(module)).get(methodName);
 
@@ -81,7 +81,7 @@ public class AMPAPI_WIP {
             String module = module_loop.getKey();
             Map<String, Object> methods = (Map<String, Object>) module_loop.getValue();
 
-            Map<String, Consumer<MultiArray[]>> new_api_methods = new HashMap<>();
+            Map<String, Consumer<Object[]>> new_api_methods = new HashMap<>();
 
             for (Map.Entry<String, Object> method_loop : methods.entrySet()) {
                 String method = method_loop.getKey();

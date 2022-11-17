@@ -1,29 +1,22 @@
 package ca.sperrer.p0t4t0sandwich.ampapi;
 
-import com.google.gson.Gson;
-
-import java.util.Map;
-
 public class Main {
     public static void main(String[] args) {
-        String[] arguments = new String[] {};
-
         AMPAPI API = new AMPAPI("http://172.16.1.172:8080/");
 
-        //System.out.println(((Map<?, ?>) API.API.get("Core")).get("GetAPISpec"));
+        System.out.println(API.init(true));
 
-        String res = API.APICall("Core", "GetAPISpec", arguments);
+        System.out.println(API.API.get("Core").get("GetAPISpec").accept(new Object[] {}));
 
-        Map<?, ?> res_map;
-        Gson gson = new Gson();
-        res_map = gson.fromJson(res, Map.class);
+        //API.API.get("Core").get("Login").accept(arguments);
 
-
-        System.out.println(
-                ((Map<?, ?>) ((Map<?, ?>) res_map
-                        .get("result"))
-                        .get("Core"))
-                        .get("Login")
-        );
+//        Map res = API.APICall("Core", "GetAPISpec", arguments);
+//
+//        System.out.println(
+//                ((Map<?, ?>) ((Map<?, ?>) res
+//                        .get("result"))
+//                        .get("Core"))
+//                        .get("Login")
+//        );
     }
 }
