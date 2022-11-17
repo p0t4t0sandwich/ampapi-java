@@ -13,17 +13,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AMPAPI {
-    private final String baseURI;
+    final String baseUri;
     private final String dataSource;
     String sessionId = "";
 
     public AMPAPI(String baseURI) {
-        this.baseURI = baseURI;
+        this.baseUri = baseURI;
 
         if (baseURI.charAt(baseURI.length()-1) == '/') {
-            this.dataSource = this.baseURI + "API";
+            this.dataSource = this.baseUri + "API";
         } else {
-            this.dataSource = this.baseURI + "/API";
+            this.dataSource = this.baseUri + "/API";
         }
     }
 

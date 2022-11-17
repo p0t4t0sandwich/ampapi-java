@@ -14,7 +14,7 @@ Please Note: This program is directly based on the [ampapi-node](https://github.
 TODO
 ```
 
-## Example
+## AMPAPI Example
 
 ```java
 import java.util.Map;
@@ -45,6 +45,41 @@ public class Main {
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
+    }
+}
+```
+## AMPAPIHandler Example
+
+```java
+import java.util.Map;
+
+public class Main {
+    public static void main(String[] args) {
+        AMPAPIHandler ADS = new AMPAPIHandler("http://localhost:8080/", "admin", "myfancypassword123", "", "");
+        ADS.Login();
+
+        ArrayList targets = (ArrayList) ADS.ADSModule_GetInstances().get("result");
+
+        Map target = (Map) targets.get(1);
+
+        ArrayList<Map<String,Object>> instances = (ArrayList<Map<String,Object>>) target.get("AvailableInstances");
+
+        String hub_instance_id = "";
+
+        for (Map instance : instances) {
+            if (Objects.equals(instance.get("InstanceName"), "Hub")) {
+                hub_instance_id = (String) instance.get("InstanceID");
+                break;
+            }
+        }
+
+        AMPAPIHandler Hub = ADS.InstanceLogin(hub_instance_id);
+        Hub.Login();
+
+        Map currentStatus = Hub.Core_GetStatus();
+
+        double CPUUsagePercent = (double) ((Map) ((Map) currentStatus.get("Metrics")).get("CPU Usage")).get("Percent");
+        Hub.Core_SendConsoleMessage("say Current CPU usage is: " + CPUUsagePercent + "%");
     }
 }
 ```
