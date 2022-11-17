@@ -17,7 +17,7 @@ public class AMPAPIHandler extends AMPAPI {
 
     }
 
-    Map Login() {
+    public Map Login() {
         Map loginResult = this.Core_Login(this.username, this.password, this.rememberMeToken, true);
         if ((boolean) loginResult.get("success")) {
             this.rememberMeToken = (String) loginResult.get("rememberMeToken");
@@ -26,11 +26,11 @@ public class AMPAPIHandler extends AMPAPI {
         return loginResult;
     }
 
-    Map InstanceAPICall(String instance_id, String endpoint, Map args) {
+    public Map InstanceAPICall(String instance_id, String endpoint, Map args) {
         return this.APICall("/ADSModule/Servers/" + instance_id + endpoint, args);
     }
 
-    AMPAPIHandler InstanceLogin(String instance_id) {
+    public AMPAPIHandler InstanceLogin(String instance_id) {
         Map args = new HashMap<>();
         args.put("username", this.username);
         args.put("password", this.password);
