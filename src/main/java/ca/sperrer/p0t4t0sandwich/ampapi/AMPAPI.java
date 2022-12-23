@@ -88,6 +88,12 @@ public class AMPAPI {
         return this.APICall("/ADSModule/GetDatastore", args);
     }
 
+    public Map ADSModule_RepairDatastore(Object id) {
+        Map<String, Object> args = new HashMap<>();
+        args.put("id", id);
+        return this.APICall("/ADSModule/RepairDatastore", args);
+    }
+
     public Map ADSModule_GetDatastoreInstances(Object datastoreId) {
         Map<String, Object> args = new HashMap<>();
         args.put("datastoreId", datastoreId);
