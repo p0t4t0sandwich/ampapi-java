@@ -21,8 +21,8 @@ def generate_java(spec):
 
             keys = str(["Object " + i for i in data.keys()]).replace("[","").replace("]","").replace("'","")
 
-            template = f"""    public Map {module}_{method}({keys}) {"{"}
-        Map<String, Object> args = new HashMap<>();
+            template = f"""    public HashMap<?, ?> {module}_{method}({keys}) {"{"}
+        HashMap<String, Object> args = new HashMap<>();
         {data_string}return this.APICall("/{module}/{method}", args);
     {"}"}\n\n"""
             f.write(template)
