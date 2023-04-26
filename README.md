@@ -31,14 +31,14 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'com.github.p0t4t0sandwich:ampapi-java:{version}'
+    implementation 'com.github.p0t4t0sandwich:ampapi-java:{version}'
 }
 ```
 
 ## AMPAPI Example
 
 ```java
-import java.util.Map;
+import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
@@ -46,7 +46,7 @@ public class Main {
 
         try {
             // The third parameter is either used for 2FA logins, or if no password is specified to use a remembered token from a previous login, or a service login token.
-            Map loginResult = API.Core_Login("admin", "myfancypassword123", "", false);
+            HashMap loginResult = API.Core_Login("admin", "myfancypassword123", "", false);
 
             if ((boolean) loginResult.get("success")) {
                 System.out.println("Login successful");
@@ -72,7 +72,7 @@ public class Main {
 ## AMPAPIHandler Example
 
 ```java
-import java.util.Map;
+import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
@@ -81,13 +81,13 @@ public class Main {
 
         ArrayList targets = (ArrayList) ADS.ADSModule_GetInstances().get("result");
 
-        Map target = (Map) targets.get(1);
+        HashMap target = (HashMap) targets.get(1);
 
-        ArrayList<Map<String,Object>> instances = (ArrayList<Map<String,Object>>) target.get("AvailableInstances");
+        ArrayList<HashMap<String,Object>> instances = (ArrayList<HashMap<String,Object>>) target.get("AvailableInstances");
 
         String hub_instance_id = "";
 
-        for (Map instance : instances) {
+        for (HashMap instance : instances) {
             if (Objects.equals(instance.get("InstanceName"), "Hub")) {
                 hub_instance_id = (String) instance.get("InstanceID");
                 break;
@@ -99,7 +99,7 @@ public class Main {
 
         Map currentStatus = Hub.Core_GetStatus();
 
-        double CPUUsagePercent = (double) ((Map) ((Map) currentStatus.get("Metrics")).get("CPU Usage")).get("Percent");
+        double CPUUsagePercent = (double) ((HashMap) ((HashMap) currentStatus.get("Metrics")).get("CPU Usage")).get("Percent");
         Hub.Core_SendConsoleMessage("say Current CPU usage is: " + CPUUsagePercent + "%");
     }
 }
