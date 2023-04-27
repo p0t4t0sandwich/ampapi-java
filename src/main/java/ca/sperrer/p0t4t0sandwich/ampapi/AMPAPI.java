@@ -10,6 +10,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 
 public class AMPAPI {
     final String baseUri;
@@ -35,7 +36,7 @@ public class AMPAPI {
      * @param endpoint The endpoint to call.
      * @param data The data to send.
      */
-    public HashMap<?,?> APICall(String endpoint, HashMap<String, Object> data) {
+    public Map<?,?> APICall(String endpoint, HashMap<String, Object> data) {
         try {
             data.put("SESSIONID", this.sessionId);
 
@@ -56,98 +57,98 @@ public class AMPAPI {
             osw.close();
             BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
-            return gson.fromJson(br.readLine(), HashMap.class);
+            return gson.fromJson(br.readLine(), Map.class);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public HashMap<?, ?> ADSModule_AddDatastore(Object newDatastore) {
+    public Map<?, ?> ADSModule_AddDatastore(Object newDatastore) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("newDatastore", newDatastore);
         return this.APICall("/ADSModule/AddDatastore", args);
     }
 
-    public HashMap<?, ?> ADSModule_DeleteDatastore(Object id) {
+    public Map<?, ?> ADSModule_DeleteDatastore(Object id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("id", id);
         return this.APICall("/ADSModule/DeleteDatastore", args);
     }
 
-    public HashMap<?, ?> ADSModule_UpdateDatastore(Object updatedDatastore) {
+    public Map<?, ?> ADSModule_UpdateDatastore(Object updatedDatastore) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("updatedDatastore", updatedDatastore);
         return this.APICall("/ADSModule/UpdateDatastore", args);
     }
 
-    public HashMap<?, ?> ADSModule_GetDatastores() {
+    public Map<?, ?> ADSModule_GetDatastores() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/ADSModule/GetDatastores", args);
     }
 
-    public HashMap<?, ?> ADSModule_RequestDatastoreSizeCalculation(Object datastoreId) {
+    public Map<?, ?> ADSModule_RequestDatastoreSizeCalculation(Object datastoreId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("datastoreId", datastoreId);
         return this.APICall("/ADSModule/RequestDatastoreSizeCalculation", args);
     }
 
-    public HashMap<?, ?> ADSModule_GetDatastore(Object id) {
+    public Map<?, ?> ADSModule_GetDatastore(Object id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("id", id);
         return this.APICall("/ADSModule/GetDatastore", args);
     }
 
-    public HashMap<?, ?> ADSModule_RepairDatastore(Object id) {
+    public Map<?, ?> ADSModule_RepairDatastore(Object id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("id", id);
         return this.APICall("/ADSModule/RepairDatastore", args);
     }
 
-    public HashMap<?, ?> ADSModule_GetDatastoreInstances(Object datastoreId) {
+    public Map<?, ?> ADSModule_GetDatastoreInstances(Object datastoreId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("datastoreId", datastoreId);
         return this.APICall("/ADSModule/GetDatastoreInstances", args);
     }
 
-    public HashMap<?, ?> ADSModule_MoveInstanceDatastore(Object instanceId, Object datastoreId) {
+    public Map<?, ?> ADSModule_MoveInstanceDatastore(Object instanceId, Object datastoreId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("instanceId", instanceId);
         args.put("datastoreId", datastoreId);
         return this.APICall("/ADSModule/MoveInstanceDatastore", args);
     }
 
-    public HashMap<?, ?> ADSModule_GetDeploymentTemplates() {
+    public Map<?, ?> ADSModule_GetDeploymentTemplates() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/ADSModule/GetDeploymentTemplates", args);
     }
 
-    public HashMap<?, ?> ADSModule_CreateDeploymentTemplate(Object Name) {
+    public Map<?, ?> ADSModule_CreateDeploymentTemplate(Object Name) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Name", Name);
         return this.APICall("/ADSModule/CreateDeploymentTemplate", args);
     }
 
-    public HashMap<?, ?> ADSModule_UpdateDeploymentTemplate(Object templateToUpdate) {
+    public Map<?, ?> ADSModule_UpdateDeploymentTemplate(Object templateToUpdate) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("templateToUpdate", templateToUpdate);
         return this.APICall("/ADSModule/UpdateDeploymentTemplate", args);
     }
 
-    public HashMap<?, ?> ADSModule_DeleteDeploymentTemplate(Object Id) {
+    public Map<?, ?> ADSModule_DeleteDeploymentTemplate(Object Id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         return this.APICall("/ADSModule/DeleteDeploymentTemplate", args);
     }
 
-    public HashMap<?, ?> ADSModule_CloneTemplate(Object Id, Object NewName) {
+    public Map<?, ?> ADSModule_CloneTemplate(Object Id, Object NewName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         args.put("NewName", NewName);
         return this.APICall("/ADSModule/CloneTemplate", args);
     }
 
-    public HashMap<?, ?> ADSModule_ApplyTemplate(Object InstanceID, Object TemplateID, Object NewFriendlyName, Object Secret, Object RestartIfPreviouslyRunning) {
+    public Map<?, ?> ADSModule_ApplyTemplate(Object InstanceID, Object TemplateID, Object NewFriendlyName, Object Secret, Object RestartIfPreviouslyRunning) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceID", InstanceID);
         args.put("TemplateID", TemplateID);
@@ -157,7 +158,7 @@ public class AMPAPI {
         return this.APICall("/ADSModule/ApplyTemplate", args);
     }
 
-    public HashMap<?, ?> ADSModule_DeployTemplate(Object TemplateID, Object NewUsername, Object NewPassword, Object NewEmail, Object RequiredTags, Object Tag, Object FriendlyName, Object Secret, Object PostCreate, Object ExtraProvisionSettings) {
+    public Map<?, ?> ADSModule_DeployTemplate(Object TemplateID, Object NewUsername, Object NewPassword, Object NewEmail, Object RequiredTags, Object Tag, Object FriendlyName, Object Secret, Object PostCreate, Object ExtraProvisionSettings) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TemplateID", TemplateID);
         args.put("NewUsername", NewUsername);
@@ -172,49 +173,49 @@ public class AMPAPI {
         return this.APICall("/ADSModule/DeployTemplate", args);
     }
 
-    public HashMap<?, ?> ADSModule_GetTargetInfo() {
+    public Map<?, ?> ADSModule_GetTargetInfo() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/ADSModule/GetTargetInfo", args);
     }
 
-    public HashMap<?, ?> ADSModule_GetSupportedApplications() {
+    public Map<?, ?> ADSModule_GetSupportedApplications() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/ADSModule/GetSupportedApplications", args);
     }
 
-    public HashMap<?, ?> ADSModule_RefreshAppCache() {
+    public Map<?, ?> ADSModule_RefreshAppCache() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/ADSModule/RefreshAppCache", args);
     }
 
-    public HashMap<?, ?> ADSModule_RefreshRemoteConfigStores() {
+    public Map<?, ?> ADSModule_RefreshRemoteConfigStores() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/ADSModule/RefreshRemoteConfigStores", args);
     }
 
-    public HashMap<?, ?> ADSModule_GetApplicationEndpoints(Object instanceId) {
+    public Map<?, ?> ADSModule_GetApplicationEndpoints(Object instanceId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("instanceId", instanceId);
         return this.APICall("/ADSModule/GetApplicationEndpoints", args);
     }
 
-    public HashMap<?, ?> ADSModule_ReactivateLocalInstances() {
+    public Map<?, ?> ADSModule_ReactivateLocalInstances() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/ADSModule/ReactivateLocalInstances", args);
     }
 
-    public HashMap<?, ?> ADSModule_GetInstances() {
+    public Map<?, ?> ADSModule_GetInstances() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/ADSModule/GetInstances", args);
     }
 
-    public HashMap<?, ?> ADSModule_GetInstance(Object InstanceId) {
+    public Map<?, ?> ADSModule_GetInstance(Object InstanceId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
         return this.APICall("/ADSModule/GetInstance", args);
     }
 
-    public HashMap<?, ?> ADSModule_ModifyCustomFirewallRule(Object instanceId, Object PortNumber, Object Range, Object Protocol, Object Description, Object Open) {
+    public Map<?, ?> ADSModule_ModifyCustomFirewallRule(Object instanceId, Object PortNumber, Object Range, Object Protocol, Object Description, Object Open) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("instanceId", instanceId);
         args.put("PortNumber", PortNumber);
@@ -225,40 +226,40 @@ public class AMPAPI {
         return this.APICall("/ADSModule/ModifyCustomFirewallRule", args);
     }
 
-    public HashMap<?, ?> ADSModule_ManageInstance(Object InstanceId) {
+    public Map<?, ?> ADSModule_ManageInstance(Object InstanceId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
         return this.APICall("/ADSModule/ManageInstance", args);
     }
 
-    public HashMap<?, ?> ADSModule_GetGroup(Object GroupId) {
+    public Map<?, ?> ADSModule_GetGroup(Object GroupId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("GroupId", GroupId);
         return this.APICall("/ADSModule/GetGroup", args);
     }
 
-    public HashMap<?, ?> ADSModule_RefreshGroup(Object GroupId) {
+    public Map<?, ?> ADSModule_RefreshGroup(Object GroupId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("GroupId", GroupId);
         return this.APICall("/ADSModule/RefreshGroup", args);
     }
 
-    public HashMap<?, ?> ADSModule_GetLocalInstances() {
+    public Map<?, ?> ADSModule_GetLocalInstances() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/ADSModule/GetLocalInstances", args);
     }
 
-    public HashMap<?, ?> ADSModule_GetInstanceStatuses() {
+    public Map<?, ?> ADSModule_GetInstanceStatuses() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/ADSModule/GetInstanceStatuses", args);
     }
 
-    public HashMap<?, ?> ADSModule_GetProvisionFitness() {
+    public Map<?, ?> ADSModule_GetProvisionFitness() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/ADSModule/GetProvisionFitness", args);
     }
 
-    public HashMap<?, ?> ADSModule_AttachADS(Object Friendly, Object IsHTTPS, Object Host, Object Port, Object InstanceID) {
+    public Map<?, ?> ADSModule_AttachADS(Object Friendly, Object IsHTTPS, Object Host, Object Port, Object InstanceID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Friendly", Friendly);
         args.put("IsHTTPS", IsHTTPS);
@@ -268,13 +269,13 @@ public class AMPAPI {
         return this.APICall("/ADSModule/AttachADS", args);
     }
 
-    public HashMap<?, ?> ADSModule_DetatchTarget(Object Id) {
+    public Map<?, ?> ADSModule_DetatchTarget(Object Id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         return this.APICall("/ADSModule/DetatchTarget", args);
     }
 
-    public HashMap<?, ?> ADSModule_UpdateTargetInfo(Object Id, Object FriendlyName, Object Url, Object Description, Object Tags) {
+    public Map<?, ?> ADSModule_UpdateTargetInfo(Object Id, Object FriendlyName, Object Url, Object Description, Object Tags) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         args.put("FriendlyName", FriendlyName);
@@ -284,26 +285,26 @@ public class AMPAPI {
         return this.APICall("/ADSModule/UpdateTargetInfo", args);
     }
 
-    public HashMap<?, ?> ADSModule_ConvertToManaged(Object InstanceName) {
+    public Map<?, ?> ADSModule_ConvertToManaged(Object InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
         return this.APICall("/ADSModule/ConvertToManaged", args);
     }
 
-    public HashMap<?, ?> ADSModule_GetInstanceNetworkInfo(Object InstanceName) {
+    public Map<?, ?> ADSModule_GetInstanceNetworkInfo(Object InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
         return this.APICall("/ADSModule/GetInstanceNetworkInfo", args);
     }
 
-    public HashMap<?, ?> ADSModule_SetInstanceNetworkInfo(Object InstanceId, Object PortMappings) {
+    public Map<?, ?> ADSModule_SetInstanceNetworkInfo(Object InstanceId, Object PortMappings) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
         args.put("PortMappings", PortMappings);
         return this.APICall("/ADSModule/SetInstanceNetworkInfo", args);
     }
 
-    public HashMap<?, ?> ADSModule_ApplyInstanceConfiguration(Object InstanceID, Object Args, Object RebuildConfiguration) {
+    public Map<?, ?> ADSModule_ApplyInstanceConfiguration(Object InstanceID, Object Args, Object RebuildConfiguration) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceID", InstanceID);
         args.put("Args", Args);
@@ -311,14 +312,14 @@ public class AMPAPI {
         return this.APICall("/ADSModule/ApplyInstanceConfiguration", args);
     }
 
-    public HashMap<?, ?> ADSModule_CreateLocalInstance(Object Instance, Object PostCreate) {
+    public Map<?, ?> ADSModule_CreateLocalInstance(Object Instance, Object PostCreate) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Instance", Instance);
         args.put("PostCreate", PostCreate);
         return this.APICall("/ADSModule/CreateLocalInstance", args);
     }
 
-    public HashMap<?, ?> ADSModule_CreateInstance(Object TargetADSInstance, Object NewInstanceId, Object Module, Object InstanceName, Object FriendlyName, Object IPBinding, Object PortNumber, Object AdminUsername, Object AdminPassword, Object ProvisionSettings, Object AutoConfigure, Object PostCreate, Object StartOnBoot, Object DisplayImageSource, Object TargetDatastore) {
+    public Map<?, ?> ADSModule_CreateInstance(Object TargetADSInstance, Object NewInstanceId, Object Module, Object InstanceName, Object FriendlyName, Object IPBinding, Object PortNumber, Object AdminUsername, Object AdminPassword, Object ProvisionSettings, Object AutoConfigure, Object PostCreate, Object StartOnBoot, Object DisplayImageSource, Object TargetDatastore) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TargetADSInstance", TargetADSInstance);
         args.put("NewInstanceId", NewInstanceId);
@@ -338,7 +339,7 @@ public class AMPAPI {
         return this.APICall("/ADSModule/CreateInstance", args);
     }
 
-    public HashMap<?, ?> ADSModule_SetInstanceConfig(Object InstanceName, Object SettingNode, Object Value) {
+    public Map<?, ?> ADSModule_SetInstanceConfig(Object InstanceName, Object SettingNode, Object Value) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
         args.put("SettingNode", SettingNode);
@@ -346,13 +347,13 @@ public class AMPAPI {
         return this.APICall("/ADSModule/SetInstanceConfig", args);
     }
 
-    public HashMap<?, ?> ADSModule_RefreshInstanceConfig(Object InstanceId) {
+    public Map<?, ?> ADSModule_RefreshInstanceConfig(Object InstanceId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
         return this.APICall("/ADSModule/RefreshInstanceConfig", args);
     }
 
-    public HashMap<?, ?> ADSModule_HandoutInstanceConfigs(Object ForModule, Object SettingNode, Object Values) {
+    public Map<?, ?> ADSModule_HandoutInstanceConfigs(Object ForModule, Object SettingNode, Object Values) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ForModule", ForModule);
         args.put("SettingNode", SettingNode);
@@ -360,13 +361,13 @@ public class AMPAPI {
         return this.APICall("/ADSModule/HandoutInstanceConfigs", args);
     }
 
-    public HashMap<?, ?> ADSModule_GetProvisionArguments(Object ModuleName) {
+    public Map<?, ?> ADSModule_GetProvisionArguments(Object ModuleName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ModuleName", ModuleName);
         return this.APICall("/ADSModule/GetProvisionArguments", args);
     }
 
-    public HashMap<?, ?> ADSModule_TestADSLoginDetails(Object url, Object username, Object password) {
+    public Map<?, ?> ADSModule_TestADSLoginDetails(Object url, Object username, Object password) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("url", url);
         args.put("username", username);
@@ -374,7 +375,7 @@ public class AMPAPI {
         return this.APICall("/ADSModule/TestADSLoginDetails", args);
     }
 
-    public HashMap<?, ?> ADSModule_RegisterTarget(Object controllerUrl, Object myUrl, Object username, Object password, Object twoFactorToken, Object friendlyName) {
+    public Map<?, ?> ADSModule_RegisterTarget(Object controllerUrl, Object myUrl, Object username, Object password, Object twoFactorToken, Object friendlyName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("controllerUrl", controllerUrl);
         args.put("myUrl", myUrl);
@@ -385,13 +386,13 @@ public class AMPAPI {
         return this.APICall("/ADSModule/RegisterTarget", args);
     }
 
-    public HashMap<?, ?> ADSModule_UpdateTarget(Object TargetID) {
+    public Map<?, ?> ADSModule_UpdateTarget(Object TargetID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TargetID", TargetID);
         return this.APICall("/ADSModule/UpdateTarget", args);
     }
 
-    public HashMap<?, ?> ADSModule_UpdateInstanceInfo(Object InstanceId, Object FriendlyName, Object Description, Object StartOnBoot, Object Suspended, Object ExcludeFromFirewall, Object RunInContainer, Object ContainerMemory, Object MemoryPolicy, Object ContainerMaxCPU) {
+    public Map<?, ?> ADSModule_UpdateInstanceInfo(Object InstanceId, Object FriendlyName, Object Description, Object StartOnBoot, Object Suspended, Object ExcludeFromFirewall, Object RunInContainer, Object ContainerMemory, Object MemoryPolicy, Object ContainerMaxCPU) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
         args.put("FriendlyName", FriendlyName);
@@ -406,90 +407,90 @@ public class AMPAPI {
         return this.APICall("/ADSModule/UpdateInstanceInfo", args);
     }
 
-    public HashMap<?, ?> ADSModule_SetInstanceSuspended(Object InstanceName, Object Suspended) {
+    public Map<?, ?> ADSModule_SetInstanceSuspended(Object InstanceName, Object Suspended) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
         args.put("Suspended", Suspended);
         return this.APICall("/ADSModule/SetInstanceSuspended", args);
     }
 
-    public HashMap<?, ?> ADSModule_UpgradeInstance(Object InstanceName) {
+    public Map<?, ?> ADSModule_UpgradeInstance(Object InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
         return this.APICall("/ADSModule/UpgradeInstance", args);
     }
 
-    public HashMap<?, ?> ADSModule_StartAllInstances() {
+    public Map<?, ?> ADSModule_StartAllInstances() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/ADSModule/StartAllInstances", args);
     }
 
-    public HashMap<?, ?> ADSModule_StopAllInstances() {
+    public Map<?, ?> ADSModule_StopAllInstances() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/ADSModule/StopAllInstances", args);
     }
 
-    public HashMap<?, ?> ADSModule_UpgradeAllInstances(Object RestartRunning) {
+    public Map<?, ?> ADSModule_UpgradeAllInstances(Object RestartRunning) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RestartRunning", RestartRunning);
         return this.APICall("/ADSModule/UpgradeAllInstances", args);
     }
 
-    public HashMap<?, ?> ADSModule_StartInstance(Object InstanceName) {
+    public Map<?, ?> ADSModule_StartInstance(Object InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
         return this.APICall("/ADSModule/StartInstance", args);
     }
 
-    public HashMap<?, ?> ADSModule_RestartInstance(Object InstanceName) {
+    public Map<?, ?> ADSModule_RestartInstance(Object InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
         return this.APICall("/ADSModule/RestartInstance", args);
     }
 
-    public HashMap<?, ?> ADSModule_StopInstance(Object InstanceName) {
+    public Map<?, ?> ADSModule_StopInstance(Object InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
         return this.APICall("/ADSModule/StopInstance", args);
     }
 
-    public HashMap<?, ?> ADSModule_DeleteInstanceUsers(Object InstanceId) {
+    public Map<?, ?> ADSModule_DeleteInstanceUsers(Object InstanceId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
         return this.APICall("/ADSModule/DeleteInstanceUsers", args);
     }
 
-    public HashMap<?, ?> ADSModule_DeleteInstance(Object InstanceName) {
+    public Map<?, ?> ADSModule_DeleteInstance(Object InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
         return this.APICall("/ADSModule/DeleteInstance", args);
     }
 
-    public HashMap<?, ?> ADSModule_ExtractEverywhere(Object SourceArchive) {
+    public Map<?, ?> ADSModule_ExtractEverywhere(Object SourceArchive) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("SourceArchive", SourceArchive);
         return this.APICall("/ADSModule/ExtractEverywhere", args);
     }
 
-    public HashMap<?, ?> ADSModule_Servers(Object id, Object REQ_RAWJSON) {
+    public Map<?, ?> ADSModule_Servers(Object id, Object REQ_RAWJSON) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("id", id);
         args.put("REQ_RAWJSON", REQ_RAWJSON);
         return this.APICall("/ADSModule/Servers", args);
     }
 
-    public HashMap<?, ?> FileManagerPlugin_Dummy() {
+    public Map<?, ?> FileManagerPlugin_Dummy() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/FileManagerPlugin/Dummy", args);
     }
 
-    public HashMap<?, ?> FileManagerPlugin_CalculateFileMD5Sum(Object FilePath) {
+    public Map<?, ?> FileManagerPlugin_CalculateFileMD5Sum(Object FilePath) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("FilePath", FilePath);
         return this.APICall("/FileManagerPlugin/CalculateFileMD5Sum", args);
     }
 
-    public HashMap<?, ?> FileManagerPlugin_ChangeExclusion(Object ModifyPath, Object AsDirectory, Object Exclude) {
+    public Map<?, ?> FileManagerPlugin_ChangeExclusion(Object ModifyPath, Object AsDirectory, Object Exclude) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ModifyPath", ModifyPath);
         args.put("AsDirectory", AsDirectory);
@@ -497,26 +498,26 @@ public class AMPAPI {
         return this.APICall("/FileManagerPlugin/ChangeExclusion", args);
     }
 
-    public HashMap<?, ?> FileManagerPlugin_CreateArchive(Object PathToArchive) {
+    public Map<?, ?> FileManagerPlugin_CreateArchive(Object PathToArchive) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("PathToArchive", PathToArchive);
         return this.APICall("/FileManagerPlugin/CreateArchive", args);
     }
 
-    public HashMap<?, ?> FileManagerPlugin_ExtractArchive(Object ArchivePath, Object DestinationPath) {
+    public Map<?, ?> FileManagerPlugin_ExtractArchive(Object ArchivePath, Object DestinationPath) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ArchivePath", ArchivePath);
         args.put("DestinationPath", DestinationPath);
         return this.APICall("/FileManagerPlugin/ExtractArchive", args);
     }
 
-    public HashMap<?, ?> FileManagerPlugin_GetDirectoryListing(Object Dir) {
+    public Map<?, ?> FileManagerPlugin_GetDirectoryListing(Object Dir) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Dir", Dir);
         return this.APICall("/FileManagerPlugin/GetDirectoryListing", args);
     }
 
-    public HashMap<?, ?> FileManagerPlugin_GetFileChunk(Object Filename, Object Position, Object Length) {
+    public Map<?, ?> FileManagerPlugin_GetFileChunk(Object Filename, Object Position, Object Length) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
         args.put("Position", Position);
@@ -524,7 +525,7 @@ public class AMPAPI {
         return this.APICall("/FileManagerPlugin/GetFileChunk", args);
     }
 
-    public HashMap<?, ?> FileManagerPlugin_AppendFileChunk(Object Filename, Object Data, Object Delete) {
+    public Map<?, ?> FileManagerPlugin_AppendFileChunk(Object Filename, Object Data, Object Delete) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
         args.put("Data", Data);
@@ -532,7 +533,7 @@ public class AMPAPI {
         return this.APICall("/FileManagerPlugin/AppendFileChunk", args);
     }
 
-    public HashMap<?, ?> FileManagerPlugin_WriteFileChunk(Object Filename, Object Position, Object Data) {
+    public Map<?, ?> FileManagerPlugin_WriteFileChunk(Object Filename, Object Position, Object Data) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
         args.put("Position", Position);
@@ -540,107 +541,107 @@ public class AMPAPI {
         return this.APICall("/FileManagerPlugin/WriteFileChunk", args);
     }
 
-    public HashMap<?, ?> FileManagerPlugin_DownloadFileFromURL(Object Source, Object TargetDirectory) {
+    public Map<?, ?> FileManagerPlugin_DownloadFileFromURL(Object Source, Object TargetDirectory) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Source", Source);
         args.put("TargetDirectory", TargetDirectory);
         return this.APICall("/FileManagerPlugin/DownloadFileFromURL", args);
     }
 
-    public HashMap<?, ?> FileManagerPlugin_RenameFile(Object Filename, Object NewFilename) {
+    public Map<?, ?> FileManagerPlugin_RenameFile(Object Filename, Object NewFilename) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
         args.put("NewFilename", NewFilename);
         return this.APICall("/FileManagerPlugin/RenameFile", args);
     }
 
-    public HashMap<?, ?> FileManagerPlugin_CopyFile(Object Origin, Object TargetDirectory) {
+    public Map<?, ?> FileManagerPlugin_CopyFile(Object Origin, Object TargetDirectory) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Origin", Origin);
         args.put("TargetDirectory", TargetDirectory);
         return this.APICall("/FileManagerPlugin/CopyFile", args);
     }
 
-    public HashMap<?, ?> FileManagerPlugin_TrashFile(Object Filename) {
+    public Map<?, ?> FileManagerPlugin_TrashFile(Object Filename) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
         return this.APICall("/FileManagerPlugin/TrashFile", args);
     }
 
-    public HashMap<?, ?> FileManagerPlugin_TrashDirectory(Object DirectoryName) {
+    public Map<?, ?> FileManagerPlugin_TrashDirectory(Object DirectoryName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("DirectoryName", DirectoryName);
         return this.APICall("/FileManagerPlugin/TrashDirectory", args);
     }
 
-    public HashMap<?, ?> FileManagerPlugin_EmptyTrash(Object TrashDirectoryName) {
+    public Map<?, ?> FileManagerPlugin_EmptyTrash(Object TrashDirectoryName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TrashDirectoryName", TrashDirectoryName);
         return this.APICall("/FileManagerPlugin/EmptyTrash", args);
     }
 
-    public HashMap<?, ?> FileManagerPlugin_CreateDirectory(Object NewPath) {
+    public Map<?, ?> FileManagerPlugin_CreateDirectory(Object NewPath) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("NewPath", NewPath);
         return this.APICall("/FileManagerPlugin/CreateDirectory", args);
     }
 
-    public HashMap<?, ?> FileManagerPlugin_RenameDirectory(Object oldDirectory, Object NewDirectoryName) {
+    public Map<?, ?> FileManagerPlugin_RenameDirectory(Object oldDirectory, Object NewDirectoryName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("oldDirectory", oldDirectory);
         args.put("NewDirectoryName", NewDirectoryName);
         return this.APICall("/FileManagerPlugin/RenameDirectory", args);
     }
 
-    public HashMap<?, ?> EmailSenderPlugin_TestSMTPSettings() {
+    public Map<?, ?> EmailSenderPlugin_TestSMTPSettings() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/EmailSenderPlugin/TestSMTPSettings", args);
     }
 
-    public HashMap<?, ?> LocalFileBackupPlugin_UploadToS3(Object BackupId) {
+    public Map<?, ?> LocalFileBackupPlugin_UploadToS3(Object BackupId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
         return this.APICall("/LocalFileBackupPlugin/UploadToS3", args);
     }
 
-    public HashMap<?, ?> LocalFileBackupPlugin_DownloadFromS3(Object BackupId) {
+    public Map<?, ?> LocalFileBackupPlugin_DownloadFromS3(Object BackupId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
         return this.APICall("/LocalFileBackupPlugin/DownloadFromS3", args);
     }
 
-    public HashMap<?, ?> LocalFileBackupPlugin_DeleteFromS3(Object BackupId) {
+    public Map<?, ?> LocalFileBackupPlugin_DeleteFromS3(Object BackupId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
         return this.APICall("/LocalFileBackupPlugin/DeleteFromS3", args);
     }
 
-    public HashMap<?, ?> LocalFileBackupPlugin_GetBackups() {
+    public Map<?, ?> LocalFileBackupPlugin_GetBackups() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/LocalFileBackupPlugin/GetBackups", args);
     }
 
-    public HashMap<?, ?> LocalFileBackupPlugin_RestoreBackup(Object BackupId, Object DeleteExistingData) {
+    public Map<?, ?> LocalFileBackupPlugin_RestoreBackup(Object BackupId, Object DeleteExistingData) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
         args.put("DeleteExistingData", DeleteExistingData);
         return this.APICall("/LocalFileBackupPlugin/RestoreBackup", args);
     }
 
-    public HashMap<?, ?> LocalFileBackupPlugin_DeleteLocalBackup(Object BackupId) {
+    public Map<?, ?> LocalFileBackupPlugin_DeleteLocalBackup(Object BackupId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
         return this.APICall("/LocalFileBackupPlugin/DeleteLocalBackup", args);
     }
 
-    public HashMap<?, ?> LocalFileBackupPlugin_SetBackupSticky(Object BackupId, Object Sticky) {
+    public Map<?, ?> LocalFileBackupPlugin_SetBackupSticky(Object BackupId, Object Sticky) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
         args.put("Sticky", Sticky);
         return this.APICall("/LocalFileBackupPlugin/SetBackupSticky", args);
     }
 
-    public HashMap<?, ?> LocalFileBackupPlugin_TakeBackup(Object Title, Object Description, Object Sticky) {
+    public Map<?, ?> LocalFileBackupPlugin_TakeBackup(Object Title, Object Description, Object Sticky) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Title", Title);
         args.put("Description", Description);
@@ -648,103 +649,103 @@ public class AMPAPI {
         return this.APICall("/LocalFileBackupPlugin/TakeBackup", args);
     }
 
-    public HashMap<?, ?> Core_GetAuditLogEntries(Object Before, Object Count) {
+    public Map<?, ?> Core_GetAuditLogEntries(Object Before, Object Count) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Before", Before);
         args.put("Count", Count);
         return this.APICall("/Core/GetAuditLogEntries", args);
     }
 
-    public HashMap<?, ?> Core_GetSettingsSpec() {
+    public Map<?, ?> Core_GetSettingsSpec() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetSettingsSpec", args);
     }
 
-    public HashMap<?, ?> Core_RefreshSettingValueList(Object Node) {
+    public Map<?, ?> Core_RefreshSettingValueList(Object Node) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Node", Node);
         return this.APICall("/Core/RefreshSettingValueList", args);
     }
 
-    public HashMap<?, ?> Core_RefreshSettingsSourceCache() {
+    public Map<?, ?> Core_RefreshSettingsSourceCache() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/RefreshSettingsSourceCache", args);
     }
 
-    public HashMap<?, ?> Core_GetSettingValues(Object SettingNode, Object WithRefresh) {
+    public Map<?, ?> Core_GetSettingValues(Object SettingNode, Object WithRefresh) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("SettingNode", SettingNode);
         args.put("WithRefresh", WithRefresh);
         return this.APICall("/Core/GetSettingValues", args);
     }
 
-    public HashMap<?, ?> Core_GetProvisionSpec() {
+    public Map<?, ?> Core_GetProvisionSpec() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetProvisionSpec", args);
     }
 
-    public HashMap<?, ?> Core_GetConfig(Object node) {
+    public Map<?, ?> Core_GetConfig(Object node) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("node", node);
         return this.APICall("/Core/GetConfig", args);
     }
 
-    public HashMap<?, ?> Core_GetConfigs(Object nodes) {
+    public Map<?, ?> Core_GetConfigs(Object nodes) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("nodes", nodes);
         return this.APICall("/Core/GetConfigs", args);
     }
 
-    public HashMap<?, ?> Core_SetConfigs(Object data) {
+    public Map<?, ?> Core_SetConfigs(Object data) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("data", data);
         return this.APICall("/Core/SetConfigs", args);
     }
 
-    public HashMap<?, ?> Core_SetConfig(Object node, Object value) {
+    public Map<?, ?> Core_SetConfig(Object node, Object value) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("node", node);
         args.put("value", value);
         return this.APICall("/Core/SetConfig", args);
     }
 
-    public HashMap<?, ?> Core_GetRoleData() {
+    public Map<?, ?> Core_GetRoleData() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetRoleData", args);
     }
 
-    public HashMap<?, ?> Core_GetRoleIds() {
+    public Map<?, ?> Core_GetRoleIds() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetRoleIds", args);
     }
 
-    public HashMap<?, ?> Core_GetRole(Object RoleId) {
+    public Map<?, ?> Core_GetRole(Object RoleId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
         return this.APICall("/Core/GetRole", args);
     }
 
-    public HashMap<?, ?> Core_CreateRole(Object Name, Object AsCommonRole) {
+    public Map<?, ?> Core_CreateRole(Object Name, Object AsCommonRole) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Name", Name);
         args.put("AsCommonRole", AsCommonRole);
         return this.APICall("/Core/CreateRole", args);
     }
 
-    public HashMap<?, ?> Core_DeleteRole(Object RoleId) {
+    public Map<?, ?> Core_DeleteRole(Object RoleId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
         return this.APICall("/Core/DeleteRole", args);
     }
 
-    public HashMap<?, ?> Core_RenameRole(Object RoleId, Object NewName) {
+    public Map<?, ?> Core_RenameRole(Object RoleId, Object NewName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
         args.put("NewName", NewName);
         return this.APICall("/Core/RenameRole", args);
     }
 
-    public HashMap<?, ?> Core_SetAMPRolePermission(Object RoleId, Object PermissionNode, Object Enabled) {
+    public Map<?, ?> Core_SetAMPRolePermission(Object RoleId, Object PermissionNode, Object Enabled) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
         args.put("PermissionNode", PermissionNode);
@@ -752,30 +753,30 @@ public class AMPAPI {
         return this.APICall("/Core/SetAMPRolePermission", args);
     }
 
-    public HashMap<?, ?> Core_GetAMPRolePermissions(Object RoleId) {
+    public Map<?, ?> Core_GetAMPRolePermissions(Object RoleId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
         return this.APICall("/Core/GetAMPRolePermissions", args);
     }
 
-    public HashMap<?, ?> Core_GetScheduleData() {
+    public Map<?, ?> Core_GetScheduleData() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetScheduleData", args);
     }
 
-    public HashMap<?, ?> Core_AddEventTrigger(Object triggerId) {
+    public Map<?, ?> Core_AddEventTrigger(Object triggerId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("triggerId", triggerId);
         return this.APICall("/Core/AddEventTrigger", args);
     }
 
-    public HashMap<?, ?> Core_RunEventTriggerImmediately(Object triggerId) {
+    public Map<?, ?> Core_RunEventTriggerImmediately(Object triggerId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("triggerId", triggerId);
         return this.APICall("/Core/RunEventTriggerImmediately", args);
     }
 
-    public HashMap<?, ?> Core_AddIntervalTrigger(Object months, Object days, Object hours, Object minutes, Object daysOfMonth, Object description) {
+    public Map<?, ?> Core_AddIntervalTrigger(Object months, Object days, Object hours, Object minutes, Object daysOfMonth, Object description) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("months", months);
         args.put("days", days);
@@ -786,13 +787,13 @@ public class AMPAPI {
         return this.APICall("/Core/AddIntervalTrigger", args);
     }
 
-    public HashMap<?, ?> Core_GetTimeIntervalTrigger(Object Id) {
+    public Map<?, ?> Core_GetTimeIntervalTrigger(Object Id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         return this.APICall("/Core/GetTimeIntervalTrigger", args);
     }
 
-    public HashMap<?, ?> Core_EditIntervalTrigger(Object Id, Object months, Object days, Object hours, Object minutes, Object daysOfMonth, Object description) {
+    public Map<?, ?> Core_EditIntervalTrigger(Object Id, Object months, Object days, Object hours, Object minutes, Object daysOfMonth, Object description) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         args.put("months", months);
@@ -804,14 +805,14 @@ public class AMPAPI {
         return this.APICall("/Core/EditIntervalTrigger", args);
     }
 
-    public HashMap<?, ?> Core_SetTriggerEnabled(Object Id, Object Enabled) {
+    public Map<?, ?> Core_SetTriggerEnabled(Object Id, Object Enabled) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         args.put("Enabled", Enabled);
         return this.APICall("/Core/SetTriggerEnabled", args);
     }
 
-    public HashMap<?, ?> Core_AddTask(Object TriggerID, Object MethodID, Object ParameterMapping) {
+    public Map<?, ?> Core_AddTask(Object TriggerID, Object MethodID, Object ParameterMapping) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
         args.put("MethodID", MethodID);
@@ -819,7 +820,7 @@ public class AMPAPI {
         return this.APICall("/Core/AddTask", args);
     }
 
-    public HashMap<?, ?> Core_EditTask(Object TriggerID, Object TaskID, Object ParameterMapping) {
+    public Map<?, ?> Core_EditTask(Object TriggerID, Object TaskID, Object ParameterMapping) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
         args.put("TaskID", TaskID);
@@ -827,7 +828,7 @@ public class AMPAPI {
         return this.APICall("/Core/EditTask", args);
     }
 
-    public HashMap<?, ?> Core_ChangeTaskOrder(Object TriggerID, Object TaskID, Object NewOrder) {
+    public Map<?, ?> Core_ChangeTaskOrder(Object TriggerID, Object TaskID, Object NewOrder) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
         args.put("TaskID", TaskID);
@@ -835,47 +836,47 @@ public class AMPAPI {
         return this.APICall("/Core/ChangeTaskOrder", args);
     }
 
-    public HashMap<?, ?> Core_DeleteTask(Object TriggerID, Object TaskID) {
+    public Map<?, ?> Core_DeleteTask(Object TriggerID, Object TaskID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
         args.put("TaskID", TaskID);
         return this.APICall("/Core/DeleteTask", args);
     }
 
-    public HashMap<?, ?> Core_DeleteTrigger(Object TriggerID) {
+    public Map<?, ?> Core_DeleteTrigger(Object TriggerID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
         return this.APICall("/Core/DeleteTrigger", args);
     }
 
-    public HashMap<?, ?> Core_GetActiveAMPSessions() {
+    public Map<?, ?> Core_GetActiveAMPSessions() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetActiveAMPSessions", args);
     }
 
-    public HashMap<?, ?> Core_EndUserSession(Object Id) {
+    public Map<?, ?> Core_EndUserSession(Object Id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         return this.APICall("/Core/EndUserSession", args);
     }
 
-    public HashMap<?, ?> Core_GetAMPUsersSummary() {
+    public Map<?, ?> Core_GetAMPUsersSummary() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetAMPUsersSummary", args);
     }
 
-    public HashMap<?, ?> Core_GetAMPUserInfo(Object Username) {
+    public Map<?, ?> Core_GetAMPUserInfo(Object Username) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         return this.APICall("/Core/GetAMPUserInfo", args);
     }
 
-    public HashMap<?, ?> Core_GetAllAMPUserInfo() {
+    public Map<?, ?> Core_GetAllAMPUserInfo() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetAllAMPUserInfo", args);
     }
 
-    public HashMap<?, ?> Core_SetAMPUserRoleMembership(Object UserId, Object RoleId, Object IsMember) {
+    public Map<?, ?> Core_SetAMPUserRoleMembership(Object UserId, Object RoleId, Object IsMember) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("UserId", UserId);
         args.put("RoleId", RoleId);
@@ -883,24 +884,24 @@ public class AMPAPI {
         return this.APICall("/Core/SetAMPUserRoleMembership", args);
     }
 
-    public HashMap<?, ?> Core_GetPermissionsSpec() {
+    public Map<?, ?> Core_GetPermissionsSpec() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetPermissionsSpec", args);
     }
 
-    public HashMap<?, ?> Core_CreateUser(Object Username) {
+    public Map<?, ?> Core_CreateUser(Object Username) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         return this.APICall("/Core/CreateUser", args);
     }
 
-    public HashMap<?, ?> Core_DeleteUser(Object Username) {
+    public Map<?, ?> Core_DeleteUser(Object Username) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         return this.APICall("/Core/DeleteUser", args);
     }
 
-    public HashMap<?, ?> Core_UpdateUserInfo(Object Username, Object Disabled, Object PasswordExpires, Object CannotChangePassword, Object MustChangePassword, Object EmailAddress) {
+    public Map<?, ?> Core_UpdateUserInfo(Object Username, Object Disabled, Object PasswordExpires, Object CannotChangePassword, Object MustChangePassword, Object EmailAddress) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         args.put("Disabled", Disabled);
@@ -911,18 +912,18 @@ public class AMPAPI {
         return this.APICall("/Core/UpdateUserInfo", args);
     }
 
-    public HashMap<?, ?> Core_GetWebauthnChallenge() {
+    public Map<?, ?> Core_GetWebauthnChallenge() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetWebauthnChallenge", args);
     }
 
-    public HashMap<?, ?> Core_GetWebauthnCredentialIDs(Object username) {
+    public Map<?, ?> Core_GetWebauthnCredentialIDs(Object username) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("username", username);
         return this.APICall("/Core/GetWebauthnCredentialIDs", args);
     }
 
-    public HashMap<?, ?> Core_WebauthnRegister(Object attestationObject, Object clientDataJSON, Object description) {
+    public Map<?, ?> Core_WebauthnRegister(Object attestationObject, Object clientDataJSON, Object description) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("attestationObject", attestationObject);
         args.put("clientDataJSON", clientDataJSON);
@@ -930,59 +931,59 @@ public class AMPAPI {
         return this.APICall("/Core/WebauthnRegister", args);
     }
 
-    public HashMap<?, ?> Core_GetWebauthnCredentialSummaries() {
+    public Map<?, ?> Core_GetWebauthnCredentialSummaries() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetWebauthnCredentialSummaries", args);
     }
 
-    public HashMap<?, ?> Core_RevokeWebauthnCredential(Object ID) {
+    public Map<?, ?> Core_RevokeWebauthnCredential(Object ID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ID", ID);
         return this.APICall("/Core/RevokeWebauthnCredential", args);
     }
 
-    public HashMap<?, ?> Core_UpdateAccountInfo(Object EmailAddress, Object TwoFactorPIN) {
+    public Map<?, ?> Core_UpdateAccountInfo(Object EmailAddress, Object TwoFactorPIN) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("EmailAddress", EmailAddress);
         args.put("TwoFactorPIN", TwoFactorPIN);
         return this.APICall("/Core/UpdateAccountInfo", args);
     }
 
-    public HashMap<?, ?> Core_EnableTwoFactor(Object Username, Object Password) {
+    public Map<?, ?> Core_EnableTwoFactor(Object Username, Object Password) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         args.put("Password", Password);
         return this.APICall("/Core/EnableTwoFactor", args);
     }
 
-    public HashMap<?, ?> Core_ConfirmTwoFactorSetup(Object Username, Object TwoFactorCode) {
+    public Map<?, ?> Core_ConfirmTwoFactorSetup(Object Username, Object TwoFactorCode) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         args.put("TwoFactorCode", TwoFactorCode);
         return this.APICall("/Core/ConfirmTwoFactorSetup", args);
     }
 
-    public HashMap<?, ?> Core_DisableTwoFactor(Object Password, Object TwoFactorCode) {
+    public Map<?, ?> Core_DisableTwoFactor(Object Password, Object TwoFactorCode) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Password", Password);
         args.put("TwoFactorCode", TwoFactorCode);
         return this.APICall("/Core/DisableTwoFactor", args);
     }
 
-    public HashMap<?, ?> Core_ResetUserPassword(Object Username, Object NewPassword) {
+    public Map<?, ?> Core_ResetUserPassword(Object Username, Object NewPassword) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         args.put("NewPassword", NewPassword);
         return this.APICall("/Core/ResetUserPassword", args);
     }
 
-    public HashMap<?, ?> Core_DeleteInstanceUsers(Object InstanceId) {
+    public Map<?, ?> Core_DeleteInstanceUsers(Object InstanceId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
         return this.APICall("/Core/DeleteInstanceUsers", args);
     }
 
-    public HashMap<?, ?> Core_ChangeUserPassword(Object Username, Object OldPassword, Object NewPassword, Object TwoFactorPIN) {
+    public Map<?, ?> Core_ChangeUserPassword(Object Username, Object OldPassword, Object NewPassword, Object TwoFactorPIN) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         args.put("OldPassword", OldPassword);
@@ -991,121 +992,121 @@ public class AMPAPI {
         return this.APICall("/Core/ChangeUserPassword", args);
     }
 
-    public HashMap<?, ?> Core_GetUpdates() {
+    public Map<?, ?> Core_GetUpdates() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetUpdates", args);
     }
 
-    public HashMap<?, ?> Core_GetNewGuid() {
+    public Map<?, ?> Core_GetNewGuid() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetNewGuid", args);
     }
 
-    public HashMap<?, ?> Core_GetUserList() {
+    public Map<?, ?> Core_GetUserList() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetUserList", args);
     }
 
-    public HashMap<?, ?> Core_CurrentSessionHasPermission(Object PermissionNode) {
+    public Map<?, ?> Core_CurrentSessionHasPermission(Object PermissionNode) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("PermissionNode", PermissionNode);
         return this.APICall("/Core/CurrentSessionHasPermission", args);
     }
 
-    public HashMap<?, ?> Core_GetTasks() {
+    public Map<?, ?> Core_GetTasks() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetTasks", args);
     }
 
-    public HashMap<?, ?> Core_GetStatus() {
+    public Map<?, ?> Core_GetStatus() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetStatus", args);
     }
 
-    public HashMap<?, ?> Core_CancelTask(Object TaskId) {
+    public Map<?, ?> Core_CancelTask(Object TaskId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TaskId", TaskId);
         return this.APICall("/Core/CancelTask", args);
     }
 
-    public HashMap<?, ?> Core_DismissTask(Object TaskId) {
+    public Map<?, ?> Core_DismissTask(Object TaskId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TaskId", TaskId);
         return this.APICall("/Core/DismissTask", args);
     }
 
-    public HashMap<?, ?> Core_DismissAllTasks() {
+    public Map<?, ?> Core_DismissAllTasks() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/DismissAllTasks", args);
     }
 
-    public HashMap<?, ?> Core_GetUserInfo(Object UID) {
+    public Map<?, ?> Core_GetUserInfo(Object UID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("UID", UID);
         return this.APICall("/Core/GetUserInfo", args);
     }
 
-    public HashMap<?, ?> Core_Start() {
+    public Map<?, ?> Core_Start() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/Start", args);
     }
 
-    public HashMap<?, ?> Core_Suspend() {
+    public Map<?, ?> Core_Suspend() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/Suspend", args);
     }
 
-    public HashMap<?, ?> Core_Resume() {
+    public Map<?, ?> Core_Resume() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/Resume", args);
     }
 
-    public HashMap<?, ?> Core_Stop() {
+    public Map<?, ?> Core_Stop() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/Stop", args);
     }
 
-    public HashMap<?, ?> Core_Restart() {
+    public Map<?, ?> Core_Restart() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/Restart", args);
     }
 
-    public HashMap<?, ?> Core_Kill() {
+    public Map<?, ?> Core_Kill() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/Kill", args);
     }
 
-    public HashMap<?, ?> Core_Sleep() {
+    public Map<?, ?> Core_Sleep() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/Sleep", args);
     }
 
-    public HashMap<?, ?> Core_UpdateApplication() {
+    public Map<?, ?> Core_UpdateApplication() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/UpdateApplication", args);
     }
 
-    public HashMap<?, ?> Core_AcknowledgeAMPUpdate() {
+    public Map<?, ?> Core_AcknowledgeAMPUpdate() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/AcknowledgeAMPUpdate", args);
     }
 
-    public HashMap<?, ?> Core_GetModuleInfo() {
+    public Map<?, ?> Core_GetModuleInfo() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetModuleInfo", args);
     }
 
-    public HashMap<?, ?> Core_GetAPISpec() {
+    public Map<?, ?> Core_GetAPISpec() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetAPISpec", args);
     }
 
-    public HashMap<?, ?> Core_GetUserActionsSpec() {
+    public Map<?, ?> Core_GetUserActionsSpec() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetUserActionsSpec", args);
     }
 
-    public HashMap<?, ?> Core_Login(Object username, Object password, Object token, Object rememberMe) {
+    public Map<?, ?> Core_Login(Object username, Object password, Object token, Object rememberMe) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("username", username);
         args.put("password", password);
@@ -1114,55 +1115,55 @@ public class AMPAPI {
         return this.APICall("/Core/Login", args);
     }
 
-    public HashMap<?, ?> Core_GetRemoteLoginToken(Object Description, Object IsTemporary) {
+    public Map<?, ?> Core_GetRemoteLoginToken(Object Description, Object IsTemporary) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Description", Description);
         args.put("IsTemporary", IsTemporary);
         return this.APICall("/Core/GetRemoteLoginToken", args);
     }
 
-    public HashMap<?, ?> Core_SendConsoleMessage(Object message) {
+    public Map<?, ?> Core_SendConsoleMessage(Object message) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("message", message);
         return this.APICall("/Core/SendConsoleMessage", args);
     }
 
-    public HashMap<?, ?> Core_UpdateAMPInstance() {
+    public Map<?, ?> Core_UpdateAMPInstance() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/UpdateAMPInstance", args);
     }
 
-    public HashMap<?, ?> Core_GetUpdateInfo() {
+    public Map<?, ?> Core_GetUpdateInfo() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetUpdateInfo", args);
     }
 
-    public HashMap<?, ?> Core_Logout() {
+    public Map<?, ?> Core_Logout() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/Logout", args);
     }
 
-    public HashMap<?, ?> Core_RestartAMP() {
+    public Map<?, ?> Core_RestartAMP() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/RestartAMP", args);
     }
 
-    public HashMap<?, ?> Core_UpgradeAMP() {
+    public Map<?, ?> Core_UpgradeAMP() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/UpgradeAMP", args);
     }
 
-    public HashMap<?, ?> Core_GetDiagnosticsInfo() {
+    public Map<?, ?> Core_GetDiagnosticsInfo() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/GetDiagnosticsInfo", args);
     }
 
-    public HashMap<?, ?> Core_CreateTestTask() {
+    public Map<?, ?> Core_CreateTestTask() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/CreateTestTask", args);
     }
 
-    public HashMap<?, ?> Core_AsyncTest() {
+    public Map<?, ?> Core_AsyncTest() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("/Core/AsyncTest", args);
     }

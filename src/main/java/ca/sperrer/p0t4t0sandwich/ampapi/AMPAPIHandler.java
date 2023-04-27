@@ -1,6 +1,7 @@
 package ca.sperrer.p0t4t0sandwich.ampapi;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class AMPAPIHandler extends AMPAPI {
     String username;
@@ -29,8 +30,8 @@ public class AMPAPIHandler extends AMPAPI {
      * Simplified login function
      * @return The result of the login
      */
-    public HashMap<?, ?> Login() {
-        HashMap<String, Object> loginResult = (HashMap<String, Object>) this.Core_Login(this.username, this.password, this.rememberMeToken, true);
+    public Map<?, ?> Login() {
+        Map<String, Object> loginResult = (Map<String, Object>) this.Core_Login(this.username, this.password, this.rememberMeToken, true);
         if (loginResult != null && (boolean) loginResult.get("success")) {
             this.rememberMeToken = (String) loginResult.get("rememberMeToken");
             this.sessionId = (String) loginResult.get("sessionID");
