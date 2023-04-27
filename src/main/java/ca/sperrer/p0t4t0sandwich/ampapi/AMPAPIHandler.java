@@ -31,7 +31,7 @@ public class AMPAPIHandler extends AMPAPI {
      * @return The result of the login
      */
     public Map<?, ?> Login() {
-        Map<String, Object> loginResult = (Map<String, Object>) this.Core_Login(this.username, this.password, this.rememberMeToken, true);
+        Map<Object, Object> loginResult = (Map<Object, Object>) this.Core_Login(this.username, this.password, this.rememberMeToken, true);
         if (loginResult != null && (boolean) loginResult.get("success")) {
             this.rememberMeToken = (String) loginResult.get("rememberMeToken");
             this.sessionId = (String) loginResult.get("sessionID");
@@ -45,12 +45,12 @@ public class AMPAPIHandler extends AMPAPI {
      * @return A new AMPAPIHandler for the instance
      */
     public AMPAPIHandler InstanceLogin(String instance_id) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("username", this.username);
         args.put("password", this.password);
         args.put("token", "");
         args.put("rememberMe", true);
-        HashMap<String, Object> loginResult = (HashMap<String, Object>) this.APICall("/ADSModule/Servers/" + instance_id + "/API/Core/Login", args);
+        Map<String, Object> loginResult = (Map<String, Object>) this.APICall("/ADSModule/Servers/" + instance_id + "/API/Core/Login", args);
 
         if (loginResult != null && (boolean) loginResult.get("success")) {
             return new AMPAPIHandler(this.baseUri + "API/ADSModule/Servers/" + instance_id, this.username, "", (String) loginResult.get("rememberMeToken"), (String) loginResult.get("sessionID"));

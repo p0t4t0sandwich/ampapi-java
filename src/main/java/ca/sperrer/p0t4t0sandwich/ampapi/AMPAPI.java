@@ -36,7 +36,7 @@ public class AMPAPI {
      * @param endpoint The endpoint to call.
      * @param data The data to send.
      */
-    public Map<?,?> APICall(String endpoint, HashMap<String, Object> data) {
+    public Map<?,?> APICall(String endpoint, Map<String, Object> data) {
         try {
             data.put("SESSIONID", this.sessionId);
 
