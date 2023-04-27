@@ -1,11 +1,7 @@
-from dotenv import load_dotenv
-import os
-
 from ampapi.ampapi import AMPAPI
 
-load_dotenv()
-username = os.getenv("AMP_API_USER")
-password = os.getenv("AMP_API_PASSWORD")
+username = ""
+password = ""
 
 def generate_java(spec):
     f = open("auto_java_gen.txt","w+")
@@ -15,13 +11,27 @@ def generate_java(spec):
             methodParams = spec[module][method]["Parameters"]
             data = {methodParams[i]["Name"]:methodParams[i]["Name"] for i in range(len(methodParams))}
 
+            javadoc = ""
+            for i in range(len(methodParams)):
+                name = methodParams[i]["Name"]
+                type_name = methodParams[i]["TypeName"]
+                description = methodParams[i]["Description"]
+                optional = methodParams[i]["Optional"]
+
+                javadoc += f"     * @param {name} {type_name} {description} {optional}\n"
+            return_type = spec[module][method]["ReturnTypeName"]
+            is_complex_type = spec[module][method]["IsComplexType"]
+            javadoc += f"     *  ReturnTypeName IsComplexType\n     * @return {return_type} {is_complex_type}\n"
+
             data_string = ""
             for i in range(len(methodParams)):
                 data_string += 'args.put("' + methodParams[i]["Name"] + '", ' + methodParams[i]["Name"] + ");\n        "
 
             keys = str(["Object " + i for i in data.keys()]).replace("[","").replace("]","").replace("'","")
 
-            template = f"""    public HashMap<?, ?> {module}_{method}({keys}) {"{"}
+            template = f"""    /** Name TypeName Description Optional
+{javadoc}     */
+    public Map<?, ?> {module}_{method}({keys}) {"{"}
         HashMap<String, Object> args = new HashMap<>();
         {data_string}return this.APICall("/{module}/{method}", args);
     {"}"}\n\n"""
