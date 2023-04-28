@@ -39,8 +39,8 @@ public class AMPAPIHandler extends AMPAPI {
         args.put("password", this.password);
         args.put("token", this.rememberMeToken);
         args.put("rememberMe", true);
-        Map<String, Object> loginResult = (Map<String, Object>) this.APICall("API/Core/Login", args);
-        if (loginResult != null && (boolean) loginResult.get("success")) {
+        Map<String, Object> loginResult = (Map<String, Object>) this.APICall("Core/Login", args);
+        if (loginResult != null && loginResult.containsKey("success") && (boolean) loginResult.get("success")) {
             this.rememberMeToken = (String) loginResult.get("rememberMeToken");
             this.sessionId = (String) loginResult.get("sessionID");
         }
