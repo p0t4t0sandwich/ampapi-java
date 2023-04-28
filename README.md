@@ -6,8 +6,6 @@ This API allows you to communicate with AMP installations from within Java.
 
 Documentation for available API calls can be found by appending /API to the URL of any existing AMP installation.
 
-Please Note: This program is directly based on the [ampapi-node](https://github.com/CubeCoders/ampapi-node) implementation and is almost verbatim in some aspects.
-
 ## Installation
 
 ### Maven

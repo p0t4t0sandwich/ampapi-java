@@ -1,74 +1,186 @@
-from ampapi.ampapi import AMPAPI
+#!/bin/python3
+from __future__ import annotations
 
-username = ""
-password = ""
+import requests
+import json
+
+import os
+
+class AMPAPI():
+    def __init__(self, baseUri: str) -> None:
+        self.baseUri = baseUri
+        self.sessionId = ""
+        self.dataSource = ""
+
+        if not self.baseUri[-1] == "/":
+            self.dataSource = self.baseUri + "/API"
+        else:
+            self.dataSource = self.baseUri + "API"
+
+    def APICall(self, endpoint: str, data: dict = {}) -> dict:
+        headers = {'Accept': 'text/javascript',}
+        session = {"SESSIONID": self.sessionId}
+        data_added = dict(session, **data)
+
+        data_json = json.dumps(data_added)
+
+        res = requests.post(
+            url=f"{self.dataSource}/{endpoint}",
+            headers=headers,
+            data=data_json
+        )
+        res_json = json.loads(res.content)
+
+        return res_json
+
+type_dict = {
+    "InstanceDatastore": "",
+    "ActionResult": "",
+    "Int32": "Integer",
+    "IEnumerable<InstanceDatastore>": "List<?>",
+    "RunningTask": "",
+    "IEnumerable<JObject>": "List<Map<?, ?>>",
+    "Guid": "String",
+    "Task<RunningTask>": "",
+    "IEnumerable<DeploymentTemplate>": "List<?>",
+    "String": "String",
+    "DeploymentTemplate": "",
+    "Boolean": "boolean",
+    "List<String>": "List<String>",
+    "PostCreateActions": "",
+    "Dictionary<String, String>": "Map<String, String>",
+    "RemoteTargetInfo": "",
+    "IEnumerable<ApplicationSpec>": "List<?>",
+    "Void": "void",
+    "IEnumerable<EndpointInfo>": "List<?>",
+    "IEnumerable<IADSInstance>": "List<?>",
+    "JObject": "Map<?, ?>",
+    "PortProtocol": "String",
+    "Task<ActionResult>": "",
+    "ActionResult<String>": "",
+    "IADSInstance": "bool",
+    "Uri": "String",
+    "IEnumerable<PortUsage>": "List<?>",
+    "Dictionary<String, Int32>": "Map<String, Integer>",
+    "LocalAMPInstance": "",
+    "ContainerMemoryPolicy": "",
+    "Single": "",
+    "Task<JObject>": "",
+    "Int64": "Integer",
+    "FileChunkData": "",
+    "IEnumerable<BackupManifest>": "List<Map<?, ?>>",
+    "Nullable<DateTime>": "",
+    "IEnumerable<IAuditLogEntry>": "Map<?, ?>",
+    "Dictionary<String, IEnumerable<JObject>>": "dict[str, list[dict]]",
+    "IDictionary<String, String>": "Map<String, String>",
+    "List<JObject>": "List<Map<?, ?>>",
+    "String[]": "List<String>",
+    "Task<IEnumerable<AuthRoleSummary>>": "",
+    "Task<IDictionary<Guid, String>>": "",
+    "Task<AuthRoleSummary>": "",
+    "Task<ActionResult<Guid>>": "",
+    "Nullable<Boolean>": "boolean",
+    "Task<IEnumerable<String>>": "",
+    "ScheduleInfo": "",
+    "Int32[]": "List<Integer>",
+    "TimeIntervalTrigger": "",
+    "IEnumerable<WebSessionSummary>": "List<?>",
+    "Task<IEnumerable<UserInfoSummary>>": "",
+    "Task<UserInfo>": "",
+    "Task<IEnumerable<UserInfo>>": "",
+    "IList<IPermissionsTreeNode>": "List<?>",
+    "WebauthnLoginInfo": "",
+    "IEnumerable<WebauthnCredentialSummary>": "List<?>",
+    "Task<ActionResult<TwoFactorSetupInfo>>": "",
+    "IEnumerable<RunningTask>": "", "ModuleInfo": "",
+    "Dictionary<String, Dictionary<String, MethodInfoSummary>>": "Map<String, Map<String, Object>>",
+    "Object": "",
+    "Task<String>": "",
+    "UpdateInfo": ""
+}
 
 def generate_java(spec):
-    f = open("auto_java_gen.txt","w+")
+    f = open("auto_java_gen.java","w+")
     for module in spec.keys():
         methods = spec[module]
         for method in methods.keys():
             methodParams = spec[module][method]["Parameters"]
             data = {methodParams[i]["Name"]:methodParams[i]["Name"] for i in range(len(methodParams))}
 
-            javadoc = ""
+            ##################### Add docs
+            description = ""
+            if "Description" in spec[module][method].keys():
+                description = "\n     * " + spec[module][method]["Description"]
+
+            javadoc = f"    /**{description}\n     * Name TypeName Description Optional"
+
+            ########## Parameters
             for i in range(len(methodParams)):
                 name = methodParams[i]["Name"]
                 type_name = methodParams[i]["TypeName"]
+
+                # Print out the type if it hasn't been added to the type_dict
+                if not type_name in type_dict.keys(): print(type_name)
                 description = methodParams[i]["Description"]
                 optional = methodParams[i]["Optional"]
+                if optional == "true": type_name + ", optional"
+                javadoc += f"\n     * @param {name} {type_dict[type_name]} AMPType: {type_name} {description}"
 
-                javadoc += f"     * @param {name} {type_name} {description} {optional}\n"
+            ##########
+
+            ########## Return type
             return_type = spec[module][method]["ReturnTypeName"]
-            is_complex_type = spec[module][method]["IsComplexType"]
-            javadoc += f"     *  ReturnTypeName IsComplexType\n     * @return {return_type} {is_complex_type}\n"
+
+            # Print out the type if it hasn't been added to the type_dict
+            if not return_type in type_dict.keys(): print(return_type)
+            javadoc += f"\n     * @return {type_dict[return_type]} AMPType: {return_type}"
+            ##########
+
+            javadoc += "\n     */"
+            #####################
 
             data_string = ""
             for i in range(len(methodParams)):
                 data_string += 'args.put("' + methodParams[i]["Name"] + '", ' + methodParams[i]["Name"] + ");\n        "
 
-            keys = str(["Object " + i for i in data.keys()]).replace("[","").replace("]","").replace("'","")
+            params = ""
+            if len(data.keys()) != 0:
+                for i in range(len(methodParams)):
+                    param_type = "Object "
+                    if not type_dict[methodParams[i]["TypeName"]] == "":
+                        param_type = f"{type_dict[methodParams[i]['TypeName']]} "
+                    params += param_type + methodParams[i]["Name"] + ", "
+                params = params[:-2]
 
-            template = f"""    /** Name TypeName Description Optional
-{javadoc}     */
-    public Map<?, ?> {module}_{method}({keys}) {"{"}
+            template = f"""{javadoc}
+    public Map<?, ?> {module}_{method}({params}) {"{"}
         HashMap<String, Object> args = new HashMap<>();
-        {data_string}return this.APICall("/{module}/{method}", args);
+        {data_string}return this.APICall("{module}/{method}", args);
     {"}"}\n\n"""
             f.write(template)
     f.close()
 
 
 def start() -> None:
-    API = AMPAPI("http://localhost:8080")
+    URL = os.getenv("AMP_URL")
+    USERNAME = os.getenv("AMP_USERNAME")
+    PASSWORD = os.getenv("AMP_PASSWORD")
 
-    # try:
-    APIInitOK = API.init()
+    API = AMPAPI(URL)
 
-    if not APIInitOK:
-        print("API Init failed")
-        return
-
-    loginResult = API.Core.Login(username, password, "", False)
+    loginResult = API.APICall("Core/Login", {"username": USERNAME, "password": PASSWORD, "token": "", "rememberMe": False})
 
     if "success" in loginResult.keys() and loginResult["success"]:
         print("Login successful")
         API.sessionId = loginResult["sessionID"]
 
-        APIInitOK = API.init()
-        if not APIInitOK:
-            print("API Stage 2 Init failed")
-            return
-
         # Grab the APISpec
-        spec = API.Core.GetAPISpec()["result"]
+        spec = API.APICall("Core/GetAPISpec")["result"]
+
         generate_java(spec)
 
     else:
         print("Login failed")
         print(loginResult)
-
-    # except Exception as err:
-    #     print(err)
 
 start()
