@@ -720,7 +720,7 @@ public class AMPAPI {
     /**
      * Name TypeName Description Optional
      * @param InstanceName String AMPType: String
-     * @return  AMPType: Task<ActionResult>
+     * @return  AMPType: ActionResult
      */
     public Map<?, ?> ADSModule_UpgradeInstance(String InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
@@ -771,7 +771,7 @@ public class AMPAPI {
     /**
      * Name TypeName Description Optional
      * @param InstanceName String AMPType: String
-     * @return  AMPType: Task<ActionResult>
+     * @return  AMPType: ActionResult
      */
     public Map<?, ?> ADSModule_RestartInstance(String InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
@@ -782,7 +782,7 @@ public class AMPAPI {
     /**
      * Name TypeName Description Optional
      * @param InstanceName String AMPType: String
-     * @return  AMPType: Task<ActionResult>
+     * @return  AMPType: ActionResult
      */
     public Map<?, ?> ADSModule_StopInstance(String InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
@@ -939,15 +939,30 @@ public class AMPAPI {
     /**
      * Name TypeName Description Optional
      * @param Filename String AMPType: String
-     * @param Position Integer AMPType: Int64
-     * @param Data String AMPType: String
-     * @return void AMPType: Void
+     * @param Offset Integer AMPType: Int64
+     * @return  AMPType: ActionResult<String>
      */
-    public Map<?, ?> FileManagerPlugin_WriteFileChunk(String Filename, Integer Position, String Data) {
+    public Map<?, ?> FileManagerPlugin_ReadFileChunk(String Filename, Integer Offset) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
-        args.put("Position", Position);
+        args.put("Offset", Offset);
+        return this.APICall("FileManagerPlugin/ReadFileChunk", args);
+    }
+
+    /**
+     * Name TypeName Description Optional
+     * @param Filename String AMPType: String
+     * @param Data String AMPType: String
+     * @param Offset Integer AMPType: Int64
+     * @param FinalChunk boolean AMPType: Boolean
+     * @return  AMPType: ActionResult
+     */
+    public Map<?, ?> FileManagerPlugin_WriteFileChunk(String Filename, String Data, Integer Offset, boolean FinalChunk) {
+        HashMap<String, Object> args = new HashMap<>();
+        args.put("Filename", Filename);
         args.put("Data", Data);
+        args.put("Offset", Offset);
+        args.put("FinalChunk", FinalChunk);
         return this.APICall("FileManagerPlugin/WriteFileChunk", args);
     }
 
@@ -2097,6 +2112,15 @@ public class AMPAPI {
     public Map<?, ?> Core_GetDiagnosticsInfo() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("Core/GetDiagnosticsInfo", args);
+    }
+
+    /**
+     * Name TypeName Description Optional
+     * @return  AMPType: Object
+     */
+    public Map<?, ?> Core_GetWebserverMetrics() {
+        HashMap<String, Object> args = new HashMap<>();
+        return this.APICall("Core/GetWebserverMetrics", args);
     }
 
     /**
