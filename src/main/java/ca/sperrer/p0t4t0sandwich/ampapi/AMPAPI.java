@@ -249,7 +249,7 @@ public class AMPAPI {
      * @param Tag String AMPType: String Unrelated to RequiredTags. This is to uniquely identify this instance to your own systems. It may be something like an order ID or service ID so you can find the associated instance again at a later time. If 'UseTagAsInstanceName' is enabled, then this will also be used as the instance name for the created instance - but it must be unique.
      * @param FriendlyName String AMPType: String A friendly name for this instance. If left blank, AMP will generate one for you.
      * @param Secret String AMPType: String Must be a non-empty strong in order to get a callback on deployment state change. This secret will be passed back to you in the callback so you can verify the request.
-     * @param PostCreate  AMPType: PostCreateActions 0: Do nothing, 10: Start instance only, 20: Start instance and update application, 30: Full application startup.
+     * @param PostCreate  AMPType: PostCreateActions 0: Do nothing, 1: Start instance only, 2: Start instance and update application, 3: Full application startup.
      * @param ExtraProvisionSettings Map<String, String> AMPType: Dictionary<String, String> A dictionary of setting nodes and values to create the new instance with. Identical in function to the provisioning arguments in the template itself.
      * @return  AMPType: RunningTask
      */
@@ -940,12 +940,14 @@ public class AMPAPI {
      * Name TypeName Description Optional
      * @param Filename String AMPType: String
      * @param Offset Integer AMPType: Int64
+     * @param ChunkSize Integer AMPType: Int64
      * @return  AMPType: ActionResult<String>
      */
-    public Map<?, ?> FileManagerPlugin_ReadFileChunk(String Filename, Integer Offset) {
+    public Map<?, ?> FileManagerPlugin_ReadFileChunk(String Filename, Integer Offset, Integer ChunkSize) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
         args.put("Offset", Offset);
+        args.put("ChunkSize", ChunkSize);
         return this.APICall("FileManagerPlugin/ReadFileChunk", args);
     }
 
