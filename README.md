@@ -6,6 +6,8 @@ Documentation for available API calls can be found by appending /API to the URL 
 
 ## Installation
 
+[![](https://jitpack.io/v/p0t4t0sandwich/ampapi-java.svg)](https://jitpack.io/#p0t4t0sandwich/ampapi-java)
+
 ### Maven
 ```xml
 <repository>
