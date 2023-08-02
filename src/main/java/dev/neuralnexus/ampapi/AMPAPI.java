@@ -1,4 +1,4 @@
-package ca.sperrer.p0t4t0sandwich.ampapi;
+package dev.neuralnexus.ampapi;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -687,9 +687,10 @@ public class AMPAPI {
      * @param ContainerMemory Integer AMPType: Int32
      * @param MemoryPolicy  AMPType: ContainerMemoryPolicy
      * @param ContainerMaxCPU  AMPType: Single
+     * @param ContainerImage String AMPType: String
      * @return  AMPType: Task<ActionResult>
      */
-    public Map<?, ?> ADSModule_UpdateInstanceInfo(String InstanceId, String FriendlyName, String Description, boolean StartOnBoot, boolean Suspended, boolean ExcludeFromFirewall, boolean RunInContainer, Integer ContainerMemory, Object MemoryPolicy, Object ContainerMaxCPU) {
+    public Map<?, ?> ADSModule_UpdateInstanceInfo(String InstanceId, String FriendlyName, String Description, boolean StartOnBoot, boolean Suspended, boolean ExcludeFromFirewall, boolean RunInContainer, Integer ContainerMemory, Object MemoryPolicy, Object ContainerMaxCPU, String ContainerImage) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
         args.put("FriendlyName", FriendlyName);
@@ -701,6 +702,7 @@ public class AMPAPI {
         args.put("ContainerMemory", ContainerMemory);
         args.put("MemoryPolicy", MemoryPolicy);
         args.put("ContainerMaxCPU", ContainerMaxCPU);
+        args.put("ContainerImage", ContainerImage);
         return this.APICall("ADSModule/UpdateInstanceInfo", args);
     }
 
@@ -1857,6 +1859,15 @@ public class AMPAPI {
     public Map<?, ?> Core_GetTasks() {
         HashMap<String, Object> args = new HashMap<>();
         return this.APICall("Core/GetTasks", args);
+    }
+
+    /**
+     * Name TypeName Description Optional
+     * @return List<?> AMPType: IEnumerable<ListeningPortSummary>
+     */
+    public Map<?, ?> Core_GetPortSummaries() {
+        HashMap<String, Object> args = new HashMap<>();
+        return this.APICall("Core/GetPortSummaries", args);
     }
 
     /**

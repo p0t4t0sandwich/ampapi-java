@@ -1,7 +1,5 @@
 # ampapi-java
 
-## This implementation is under active development, please feel free to contribute or create an issue if you've found anything that needs fixing
-
 This API allows you to communicate with AMP installations from within Java.
 
 Documentation for available API calls can be found by appending /API to the URL of any existing AMP installation.

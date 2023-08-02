@@ -1,4 +1,4 @@
-package ca.sperrer.p0t4t0sandwich.ampapi;
+package dev.neuralnexus.ampapi;
 
 import java.util.HashMap;
 import java.util.Map;

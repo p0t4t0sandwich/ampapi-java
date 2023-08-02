@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ca.sperrer.p0t4t0sandwich.ampapi</groupId>
+    <groupId>dev.neuralnexus.ampapi</groupId>
     <artifactId>ampapi</artifactId>
-    <version>1.0.12</version>
+    <version>1.1.0</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

@@ -96,7 +96,8 @@ type_dict = {
     "Dictionary<String, Dictionary<String, MethodInfoSummary>>": "Map<String, Map<String, Object>>",
     "Object": "",
     "Task<String>": "",
-    "UpdateInfo": ""
+    "UpdateInfo": "",
+    "IEnumerable<ListeningPortSummary>": "List<?>",
 }
 
 def generate_java(spec):
