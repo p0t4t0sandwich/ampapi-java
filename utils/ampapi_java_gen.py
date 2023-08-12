@@ -4,8 +4,6 @@ from __future__ import annotations
 import requests
 import json
 
-import os
-
 type_dict = {
     "InstanceDatastore": "",
     "ActionResult": "",

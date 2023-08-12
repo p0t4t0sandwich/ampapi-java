@@ -6,30 +6,35 @@ Documentation for available API calls can be found by appending /API to the URL 
 
 ## Installation
 
-[![](https://jitpack.io/v/p0t4t0sandwich/ampapi-java.svg)](https://jitpack.io/#p0t4t0sandwich/ampapi-java)
-
 ### Maven
+
+`{version}` just refers to the release tag, without the `v` prefix.
+
 ```xml
 <repository>
-    <id>jitpack.io</id>
-    <url>https://jitpack.io</url>
+    <id>neural-nexus</id>
+    <name>NerualNexus</name>
+    <url>https://maven.neuralnexus.dev/releases</url>
 </repository>
 
 <dependency>
-    <groupId>com.github.p0t4t0sandwich</groupId>
-    <artifactId>ampapi-java</artifactId>
+    <groupId>dev.neuralnexus</groupId>
+    <artifactId>ampapi</artifactId>
     <version>{version}</version>
     <scope>provided</scope>
 </dependency>
 ```
+
 ### Gradle
+
 ```gradle
-repositories {
-    maven { url 'https://jitpack.io' }
+maven {
+    name "NerualNexus"
+    url "https://maven.neuralnexus.dev/releases"
 }
 
 dependencies {
-    implementation 'com.github.p0t4t0sandwich:ampapi-java:{version}'
+    implementation 'dev.neuralnexus:ampapi:{version}'
 }
 ```
 
