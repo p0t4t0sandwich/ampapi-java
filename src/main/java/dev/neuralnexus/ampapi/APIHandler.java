@@ -37,7 +37,7 @@ public class APIHandler {
      * @param requestMethod The request method to use.
      * @param returnClass The class to use when serializing the response.
      */
-    public Object APICall(String endpoint, String requestMethod, Map<String, Object> data, Class<?> returnClass) {
+    public <T> T APICall(String endpoint, String requestMethod, Map<String, Object> data, Class<T> returnClass) {
         try {
             Gson gson = new GsonBuilder().create();
 

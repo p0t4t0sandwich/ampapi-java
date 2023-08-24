@@ -10,7 +10,7 @@ public class Main {
         String instanceId = "17f66f29";
         String instanceModule = "Minecraft";
 
-        Minecraft minecraft = (Minecraft) ads.InstanceLogin(instanceId, instanceModule);
+        Minecraft minecraft = ads.InstanceLogin(instanceId, Minecraft.class);
 
         System.out.println(minecraft.Core.GetStatus());
     }

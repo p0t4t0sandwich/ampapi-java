@@ -55,7 +55,7 @@ public class AMPAPIBase extends APIHandler {
      * @param endpoint The endpoint to call.
      * @param data The data to send.
      */
-    public Object APICall(String endpoint, Map<String, Object> data, Class<?> returnClass) {
+    public <T> T APICall(String endpoint, Map<String, Object> data, Class<T> returnClass) {
         data.put("SESSIONID", this.sessionId);
         return this.APICall(endpoint, "POST", data, returnClass);
     }
@@ -66,7 +66,7 @@ public class AMPAPIBase extends APIHandler {
      * @param data The data to send.
      */
     public Map<?,?> APICall(String endpoint, Map<String, Object> data) {
-        return (Map<?, ?>) this.APICall(endpoint, data, Map.class);
+        return this.APICall(endpoint, data, Map.class);
     }
 
     /**

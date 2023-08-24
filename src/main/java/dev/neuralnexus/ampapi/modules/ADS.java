@@ -83,9 +83,10 @@ public class ADS extends AMPAPIBase {
     /**
      * Proxies a login request to an instance and returns a new AMPAPIHandler for that instance.
      * @param instance_id The instance ID of the instance to log in to
+     * @param moduleClass The class of the module to return
      * @return A new AMPAPIHandler for the instance
      */
-    public AMPAPIBase InstanceLogin(String instance_id, String module) {
+    public <T> T InstanceLogin(String instance_id, Class<T> moduleClass) {
         Map<String, Object> args = new HashMap<>();
         args.put("username", this.username);
         args.put("password", this.password);
@@ -101,16 +102,30 @@ public class ADS extends AMPAPIBase {
             String sessionId = (String) loginResult.get("sessionID");
 
             // Return the correct module
-            switch (module) {
-                case "Minecraft":
-                    return new Minecraft(newBaseUri, this.username, "", rememberMeToken, sessionId);
-                case "GenericModule":
-                    return new GenericModule(newBaseUri, this.username, "", rememberMeToken, sessionId);
-                default:
-                    return new AMPAPIBase(newBaseUri, this.username, "", rememberMeToken, sessionId);
+            if (Minecraft.class.equals(moduleClass)) {
+                return (T) new Minecraft(newBaseUri, this.username, "", rememberMeToken, sessionId);
+            } else if (GenericModule.class.equals(moduleClass)) {
+                return (T) new GenericModule(newBaseUri, this.username, "", rememberMeToken, sessionId);
             }
+            return (T) new AMPAPIBase(newBaseUri, this.username, "", rememberMeToken, sessionId);
         } else {
             return null;
+        }
+    }
+
+    /**
+     * Proxies a login request to an instance and returns a new AMPAPIHandler for that instance.
+     * @param instance_id The instance ID of the instance to log in to
+     * @param module The module to log in to
+     * @return A new AMPAPIHandler for the instance
+     */
+    public AMPAPIBase InstanceLogin(String instance_id, String module) {
+        if (module.equals("Minecraft")) {
+            return this.InstanceLogin(instance_id, Minecraft.class);
+        } else if (module.equals("GenericModule")) {
+            return this.InstanceLogin(instance_id, GenericModule.class);
+        } else {
+            return this.InstanceLogin(instance_id);
         }
     }
 }
