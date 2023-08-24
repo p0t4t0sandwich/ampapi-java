@@ -72,9 +72,20 @@ type_dict = {
 }
 
 def generate_java(spec):
-    f = open("auto_java_gen.java","w+")
+    # Read the template file
+    template_file = ""
+    with open("template.txt", "r") as template_file:
+        template_file = template_file.read()
+
     for module in spec.keys():
         methods = spec[module]
+
+        # Create a new file called f{module}.java
+        f = open(f"../src/main/java/dev/neuralnexus/ampapi/apimodules/{module}.java","w+")
+
+        module_template = (template_file + '.')[:-1]
+        f.write(module_template.replace("%module_name%", module))
+
         for method in methods.keys():
             methodParams = spec[module][method]["Parameters"]
             data = {methodParams[i]["Name"]:methodParams[i]["Name"] for i in range(len(methodParams))}
@@ -95,7 +106,7 @@ def generate_java(spec):
                 if not type_name in type_dict.keys(): print(type_name)
                 description = methodParams[i]["Description"]
                 optional = methodParams[i]["Optional"]
-                if optional == "true": type_name + ", optional"
+                if optional == "true": type_name + ", " + optional
                 javadoc += f"\n     * @param {name} {type_dict[type_name]} AMPType: {type_name} {description}"
 
             ##########
@@ -125,12 +136,13 @@ def generate_java(spec):
                 params = params[:-2]
 
             template = f"""{javadoc}
-    public Map<?, ?> {module}_{method}({params}) {"{"}
+    public Map<?, ?> {method}({params}) {"{"}
         HashMap<String, Object> args = new HashMap<>();
         {data_string}return this.APICall("{module}/{method}", args);
     {"}"}\n\n"""
             f.write(template)
-    f.close()
+        f.write("}\n")
+        f.close()
 
 if __name__ == "__main__":
     res = requests.get("https://raw.githubusercontent.com/p0t4t0sandwich/ampapi-spec/main/APISpec.json")
