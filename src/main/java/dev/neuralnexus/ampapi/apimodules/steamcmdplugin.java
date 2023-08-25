@@ -1,6 +1,7 @@
 package dev.neuralnexus.ampapi.apimodules;
 
 import dev.neuralnexus.ampapi.AMPAPI;
+import dev.neuralnexus.ampapi.responses.steamcmdplugin.*;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,6 +1,7 @@
 package dev.neuralnexus.ampapi.apimodules;
 
 import dev.neuralnexus.ampapi.AMPAPI;
+import dev.neuralnexus.ampapi.responses.Core.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -552,11 +553,11 @@ public class Core extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return GetStatusResult
      */
-    public Map GetStatus() {
+    public GetStatusResult GetStatus() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetStatus", args, Map.class);
+        return this.APICall("Core/GetStatus", args, GetStatusResult.class);
     }
 
     /**

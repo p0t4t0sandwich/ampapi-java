@@ -120,10 +120,10 @@ public class ADS extends AMPAPI {
      * @return A new AMPAPIHandler for the instance
      */
     public AMPAPI InstanceLogin(String instance_id, String module) {
-        if (module.equals("Minecraft")) {
-            return this.InstanceLogin(instance_id, Minecraft.class);
-        } else if (module.equals("GenericModule")) {
+        if (module.equals("GenericModule")) {
             return this.InstanceLogin(instance_id, GenericModule.class);
+        } else if (module.equals("Minecraft")) {
+            return this.InstanceLogin(instance_id, Minecraft.class);
         } else {
             return this.InstanceLogin(instance_id);
         }

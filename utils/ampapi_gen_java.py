@@ -1,75 +1,80 @@
 #!/bin/python3
 from __future__ import annotations
 
+import sys
+
 import requests
 import json
 
 type_dict = {
-    "InstanceDatastore": "Object", # Undefined Type
-    "ActionResult": "Object", # Undefined Type
+    "InstanceDatastore": "Object",
+    "ActionResult": "Object",
     "Int32": "Integer",
     "IEnumerable<InstanceDatastore>": "List",
-    "RunningTask": "Object", # Undefined Type
+    "RunningTask": "Object",
     "IEnumerable<JObject>": "List",
     "Guid": "String",
-    "Task<RunningTask>": "Object", # Undefined Type
+    "Task<RunningTask>": "Object",
     "IEnumerable<DeploymentTemplate>": "List",
     "String": "String",
-    "DeploymentTemplate": "Object", # Undefined Type
+    "DeploymentTemplate": "Object",
     "Boolean": "boolean",
     "List<String>": "List",
-    "PostCreateActions": "Object", # Undefined Type
+    "PostCreateActions": "Object",
     "Dictionary<String, String>": "Map",
-    "RemoteTargetInfo": "Object", # Undefined Type
+    "RemoteTargetInfo": "Object",
     "IEnumerable<ApplicationSpec>": "List",
     "Void": "Void",
     "IEnumerable<EndpointInfo>": "List",
     "IEnumerable<IADSInstance>": "List",
     "JObject": "Map",
     "PortProtocol": "String",
-    "Task<ActionResult>": "Object", # Undefined Type
-    "ActionResult<String>": "Object", # Undefined Type
+    "Task<ActionResult>": "Object",
+    "ActionResult<String>": "Object",
     "IADSInstance": "boolean",
     "Uri": "String",
     "IEnumerable<PortUsage>": "List",
     "Dictionary<String, Int32>": "Map",
-    "LocalAMPInstance": "Object", # Undefined Type
-    "ContainerMemoryPolicy": "Object", # Undefined Type
-    "Single": "Object", # Undefined Type
-    "Task<JObject>": "Object", # Undefined Type
+    "LocalAMPInstance": "Object",
+    "ContainerMemoryPolicy": "Object",
+    "Single": "Object",
+    "Task<JObject>": "Object",
     "Int64": "Integer",
-    "FileChunkData": "Object", # Undefined Type
+    "FileChunkData": "Object",
     "IEnumerable<BackupManifest>": "List",
-    "Nullable<DateTime>": "Object", # Undefined Type
+    "Nullable<DateTime>": "Object",
     "IEnumerable<IAuditLogEntry>": "Map",
     "Dictionary<String, IEnumerable<JObject>>": "Map",
     "IDictionary<String, String>": "Map",
     "List<JObject>": "List",
     "String[]": "List",
-    "Task<IEnumerable<AuthRoleSummary>>": "Object", # Undefined Type
-    "Task<IDictionary<Guid, String>>": "Object", # Undefined Type
-    "Task<AuthRoleSummary>": "Object", # Undefined Type
-    "Task<ActionResult<Guid>>": "Object", # Undefined Type
+    "Task<IEnumerable<AuthRoleSummary>>": "Object",
+    "Task<IDictionary<Guid, String>>": "Object",
+    "Task<AuthRoleSummary>": "Object",
+    "Task<ActionResult<Guid>>": "Object",
     "Nullable<Boolean>": "boolean",
-    "Task<IEnumerable<String>>": "Object", # Undefined Type
-    "ScheduleInfo": "Object", # Undefined Type
+    "Task<IEnumerable<String>>": "Object",
+    "ScheduleInfo": "Object",
     "Int32[]": "List<Integer>",
-    "TimeIntervalTrigger": "Object", # Undefined Type
+    "TimeIntervalTrigger": "Object",
     "IEnumerable<WebSessionSummary>": "List",
-    "Task<IEnumerable<UserInfoSummary>>": "Object", # Undefined Type
-    "Task<UserInfo>": "Object", # Undefined Type
-    "Task<IEnumerable<UserInfo>>": "Object", # Undefined Type
+    "Task<IEnumerable<UserInfoSummary>>": "Object",
+    "Task<UserInfo>": "Object",
+    "Task<IEnumerable<UserInfo>>": "Object",
     "IList<IPermissionsTreeNode>": "List",
-    "WebauthnLoginInfo": "Object", # Undefined Type
+    "WebauthnLoginInfo": "Object",
     "IEnumerable<WebauthnCredentialSummary>": "List",
-    "Task<ActionResult<TwoFactorSetupInfo>>": "Object", # Undefined Type
-    "IEnumerable<RunningTask>": "Object", # Undefined Type
-    "ModuleInfo": "Object", # Undefined Type
+    "Task<ActionResult<TwoFactorSetupInfo>>": "Object",
+    "IEnumerable<RunningTask>": "Object",
+    "ModuleInfo": "Object",
     "Dictionary<String, Dictionary<String, MethodInfoSummary>>": "Map",
     "Object": "Object",
-    "Task<String>": "Object", # Undefined Type
-    "UpdateInfo": "Object", # Undefined Type
+    "Task<String>": "Object",
+    "UpdateInfo": "Object",
     "IEnumerable<ListeningPortSummary>": "List",
+
+    # Custom types
+    "GetStatusResult": "GetStatusResult",
 }
 
 def generate_apimodule_method(module: str, method: str, method_spec: dict):
@@ -107,6 +112,7 @@ def generate_apimodule_method(module: str, method: str, method_spec: dict):
 
         template = api_module_method_parameter_doc_template\
             .replace("%METHOD_PARAMETER_NAME%", name)\
+            .replace("%METHOD_PARAMETER_TYPE%", type_dict[type_name])\
             .replace("%METHOD_PARAMETER_DESCRIPTION%", description)\
             .replace("%METHOD_PARAMETER_OPTIONAL%", str(optional))
 
@@ -181,8 +187,20 @@ def generate_spec(spec: dict):
         generate_apimodule(module, spec[module])
 
 if __name__ == "__main__":
-    res = requests.get("https://raw.githubusercontent.com/p0t4t0sandwich/ampapi-spec/main/APISpec.json")
-    res_json = json.loads(res.content)
+    spec = ""
+    if len(sys.argv) >= 2 and sys.argv[1] == "-l":
+        print("Using local spec...")
+        # Load local file
 
-    generate_spec(res_json)
+        with open("LocalSpec.json", "r") as f:
+            spec = json.load(f)
+            f.close()
+    else:
+        print("Using remote spec...")
+
+        # Load remote file
+        res = requests.get("https://raw.githubusercontent.com/p0t4t0sandwich/ampapi-spec/main/APISpec.json")
+        spec = json.loads(res.content)
+
+    generate_spec(spec)
 

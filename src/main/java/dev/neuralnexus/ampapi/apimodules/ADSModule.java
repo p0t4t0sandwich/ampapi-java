@@ -1,6 +1,7 @@
 package dev.neuralnexus.ampapi.apimodules;
 
 import dev.neuralnexus.ampapi.AMPAPI;
+import dev.neuralnexus.ampapi.responses.ADSModule.*;
 
 import java.util.HashMap;
 import java.util.List;

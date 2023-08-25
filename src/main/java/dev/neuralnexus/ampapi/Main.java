@@ -2,6 +2,7 @@ package dev.neuralnexus.ampapi;
 
 import dev.neuralnexus.ampapi.modules.ADS;
 import dev.neuralnexus.ampapi.modules.Minecraft;
+import dev.neuralnexus.ampapi.responses.Core.GetStatusResult;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,6 +13,7 @@ public class Main {
 
         Minecraft minecraft = ads.InstanceLogin(instanceId, Minecraft.class);
 
-        System.out.println(minecraft.Core.GetStatus());
+        GetStatusResult status = minecraft.Core.GetStatus();
+        System.out.println(status.Metrics.get("CPU Usage").Percent);
     }
 }
