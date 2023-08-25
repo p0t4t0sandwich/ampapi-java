@@ -6,9 +6,9 @@ Documentation for available API calls can be found by appending /API to the URL 
 
 ## Installation
 
-### Maven
-
 `{version}` just refers to the release tag, without the `v` prefix.
+
+### Maven
 
 ```xml
 <repository>
@@ -40,7 +40,7 @@ dependencies {
 
 ## Notes
 
-- If a function returns an "Object", it's safe to assume it's a Map<?,?>, it just doesn't have a defined type yet.
+- If a function returns an `Object`, it's safe to assume it's a `Map`, it just doesn't have a defined type yet.
 
 ## Examples
 
@@ -156,11 +156,8 @@ public class Main {
 
 ## TODO
 
+- Add a check to see if it's been 5min since the last API call, and if so, attempt to re-log
+
 ## Release Notes
 
-- Utter and complete overhaul of everything, with the addition of custom types
-- Created Responses for:
-  - API.ADSModule.GetInstance
-  - API.ADSModule.GetInstances
-  - API.Core.Login
-  - API.Core.GetStatus
+- `ADS#InstanceLogin` can now return another ADS, in the case of a Controller ADS proxying a login directly to a Target ADS

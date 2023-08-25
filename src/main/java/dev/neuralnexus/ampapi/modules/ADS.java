@@ -89,7 +89,9 @@ public class ADS extends CommonAPI {
             String sessionId = loginResult.sessionID;
 
             // Return the correct module
-            if (Minecraft.class.equals(moduleClass)) {
+            if (ADS.class.equals(moduleClass)) {
+                return (T) new ADS(newBaseUri, this.username, "", rememberMeToken, sessionId);
+            } else if (Minecraft.class.equals(moduleClass)) {
                 return (T) new Minecraft(newBaseUri, this.username, "", rememberMeToken, sessionId);
             } else if (GenericModule.class.equals(moduleClass)) {
                 return (T) new GenericModule(newBaseUri, this.username, "", rememberMeToken, sessionId);
@@ -107,12 +109,15 @@ public class ADS extends CommonAPI {
      * @return A new AMPAPIHandler for the instance
      */
     public CommonAPI InstanceLogin(String instance_id, String module) {
-        if (module.equals("GenericModule")) {
-            return this.InstanceLogin(instance_id, GenericModule.class);
-        } else if (module.equals("Minecraft")) {
-            return this.InstanceLogin(instance_id, Minecraft.class);
-        } else {
-            return this.InstanceLogin(instance_id);
+        switch (module) {
+            case "ADS":
+                return this.InstanceLogin(instance_id, ADS.class);
+            case "GenericModule":
+                return this.InstanceLogin(instance_id, GenericModule.class);
+            case "Minecraft":
+                return this.InstanceLogin(instance_id, Minecraft.class);
+            default:
+                return this.InstanceLogin(instance_id);
         }
     }
 }
