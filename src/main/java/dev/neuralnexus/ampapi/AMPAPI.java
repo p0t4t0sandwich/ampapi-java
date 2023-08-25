@@ -2,6 +2,7 @@ package dev.neuralnexus.ampapi;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dev.neuralnexus.ampapi.responses.Core.LoginResult;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -109,6 +110,10 @@ public class AMPAPI {
 
             BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
+            if (returnClass == Void.class) {
+                return null;
+            }
+
             return gson.fromJson(br.readLine(), returnClass);
 
         } catch (IOException e) {
@@ -157,16 +162,16 @@ public class AMPAPI {
      * Simplified login function
      * @return The result of the login
      */
-    public Map<?, ?> Login() {
+    public LoginResult Login() {
         Map<String, Object> args = new HashMap<>();
         args.put("username", this.username);
         args.put("password", this.password);
         args.put("token", this.rememberMeToken);
         args.put("rememberMe", true);
-        Map<String, Object> loginResult = (Map<String, Object>) this.APICall("Core/Login", args);
-        if (loginResult != null && loginResult.containsKey("success") && (boolean) loginResult.get("success")) {
-            this.rememberMeToken = (String) loginResult.get("rememberMeToken");
-            this.sessionId = (String) loginResult.get("sessionID");
+        LoginResult loginResult = this.APICall("Core/Login", args, LoginResult.class);
+        if (loginResult != null && loginResult.success) {
+            this.rememberMeToken = loginResult.rememberMeToken;
+            this.sessionId = loginResult.sessionID;
         }
         return loginResult;
     }

@@ -323,12 +323,12 @@ public class ADSModule extends AMPAPI {
     /**
      * Name Description Optional
      * @param InstanceId  False
-     * @return Map
+     * @return GetInstanceResult
      */
-    public Map GetInstance(String InstanceId) {
+    public GetInstanceResult GetInstance(String InstanceId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
-        return this.APICall("ADSModule/GetInstance", args, Map.class);
+        return this.APICall("ADSModule/GetInstance", args, GetInstanceResult.class);
     }
 
     /**
@@ -353,11 +353,11 @@ public class ADSModule extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return List
+     * @return GetInstancesResult
      */
-    public List GetInstances() {
+    public GetInstancesResult GetInstances() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("ADSModule/GetInstances", args, List.class);
+        return this.APICall("ADSModule/GetInstances", args, GetInstancesResult.class);
     }
 
     /**

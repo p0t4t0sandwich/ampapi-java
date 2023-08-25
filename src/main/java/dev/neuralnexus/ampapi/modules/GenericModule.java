@@ -1,18 +1,11 @@
 package dev.neuralnexus.ampapi.modules;
 
-import dev.neuralnexus.ampapi.AMPAPI;
 import dev.neuralnexus.ampapi.apimodules.*;
+import dev.neuralnexus.ampapi.responses.Core.LoginResult;
 
-import java.util.Map;
-
-public class GenericModule extends AMPAPI {
-    public final CommonCorePlugin CommonCorePlugin = new CommonCorePlugin(this);
-    public final Core Core = new Core(this);
-    public final EmailSenderPlugin EmailSenderPlugin = new EmailSenderPlugin(this);
-    public final FileManagerPlugin FileManagerPlugin = new FileManagerPlugin(this);
-    public final LocalFileBackupPlugin LocalFileBackupPlugin = new LocalFileBackupPlugin(this);
-    public final RCONPlugin RCONPlugin = new RCONPlugin(this);
-    public final steamcmdplugin steamcmdplugin = new steamcmdplugin(this);
+public class GenericModule extends CommonAPI {
+    public RCONPlugin RCONPlugin = new RCONPlugin(this);
+    public steamcmdplugin steamcmdplugin = new steamcmdplugin(this);
 
     /**
      * Constructor
@@ -33,31 +26,26 @@ public class GenericModule extends AMPAPI {
      * Simplified login function
      * @return The result of the login
      */
-    public Map<?,?> Login() {
-        Map<?, ?> loginResult = super.Login();
-        String rememberMeToken = "";
-        String sessionId = "";
+    public LoginResult Login() {
+        LoginResult loginResult = super.Login();
 
-        if (loginResult != null && loginResult.containsKey("success") && (boolean) loginResult.get("success")) {
-            rememberMeToken = (String) loginResult.get("rememberMeToken");
-            sessionId = (String) loginResult.get("sessionID");
+        if (loginResult != null && loginResult.success) {
+            this.rememberMeToken = loginResult.rememberMeToken;
+            this.sessionId = loginResult.sessionID;
+
+            // Update the session ID and remember me token of submodules
+            if (this.RCONPlugin == null) {
+                this.RCONPlugin = new RCONPlugin(this);
+            }
+            if (this.steamcmdplugin == null) {
+                this.steamcmdplugin = new steamcmdplugin(this);
+            }
+
+            this.RCONPlugin.sessionId = this.sessionId;
+            this.RCONPlugin.rememberMeToken = this.rememberMeToken;
+            this.steamcmdplugin.sessionId = this.sessionId;
+            this.steamcmdplugin.rememberMeToken = this.rememberMeToken;
         }
-
-        // Update the session ID and remember me token of submodules
-        this.CommonCorePlugin.sessionId = sessionId;
-        this.CommonCorePlugin.rememberMeToken = rememberMeToken;
-        this.Core.sessionId = sessionId;
-        this.Core.rememberMeToken = rememberMeToken;
-        this.EmailSenderPlugin.sessionId = sessionId;
-        this.EmailSenderPlugin.rememberMeToken = rememberMeToken;
-        this.FileManagerPlugin.sessionId = sessionId;
-        this.FileManagerPlugin.rememberMeToken = rememberMeToken;
-        this.LocalFileBackupPlugin.sessionId = sessionId;
-        this.LocalFileBackupPlugin.rememberMeToken = rememberMeToken;
-        this.RCONPlugin.sessionId = sessionId;
-        this.RCONPlugin.rememberMeToken = rememberMeToken;
-        this.steamcmdplugin.sessionId = sessionId;
-        this.steamcmdplugin.rememberMeToken = rememberMeToken;
 
         return loginResult;
     }

@@ -1,18 +1,13 @@
 package dev.neuralnexus.ampapi.modules;
 
-import dev.neuralnexus.ampapi.AMPAPI;
 import dev.neuralnexus.ampapi.apimodules.*;
+import dev.neuralnexus.ampapi.responses.Core.LoginResult;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class ADS extends AMPAPI {
-    public final ADSModule ADSModule = new ADSModule(this);
-    public final CommonCorePlugin CommonCorePlugin = new CommonCorePlugin(this);
-    public final Core Core = new Core(this);
-    public final EmailSenderPlugin EmailSenderPlugin = new EmailSenderPlugin(this);
-    public final FileManagerPlugin FileManagerPlugin = new FileManagerPlugin(this);
-    public final LocalFileBackupPlugin LocalFileBackupPlugin = new LocalFileBackupPlugin(this);
+public class ADS extends CommonAPI {
+    public ADSModule ADSModule = new ADSModule(this);
 
     /**
      * Constructor
@@ -33,29 +28,21 @@ public class ADS extends AMPAPI {
      * Simplified login function
      * @return The result of the login
      */
-    public Map<?,?> Login() {
-        Map<?, ?> loginResult = super.Login();
-        String rememberMeToken = "";
-        String sessionId = "";
+    public LoginResult Login() {
+        LoginResult loginResult = super.Login();
 
-        if (loginResult != null && loginResult.containsKey("success") && (boolean) loginResult.get("success")) {
-            rememberMeToken = (String) loginResult.get("rememberMeToken");
-            sessionId = (String) loginResult.get("sessionID");
+        if (loginResult != null && loginResult.success) {
+            this.rememberMeToken = loginResult.rememberMeToken;
+            this.sessionId = loginResult.sessionID;
+
+            // Update the session ID and remember me token of submodules
+            if (this.ADSModule == null) {
+                this.ADSModule = new ADSModule(this);
+            }
+
+            this.ADSModule.sessionId = this.sessionId;
+            this.ADSModule.rememberMeToken = this.rememberMeToken;
         }
-
-        // Update the session ID and remember me token of submodules
-        this.ADSModule.sessionId = sessionId;
-        this.ADSModule.rememberMeToken = rememberMeToken;
-        this.CommonCorePlugin.sessionId = sessionId;
-        this.CommonCorePlugin.rememberMeToken = rememberMeToken;
-        this.Core.sessionId = sessionId;
-        this.Core.rememberMeToken = rememberMeToken;
-        this.EmailSenderPlugin.sessionId = sessionId;
-        this.EmailSenderPlugin.rememberMeToken = rememberMeToken;
-        this.FileManagerPlugin.sessionId = sessionId;
-        this.FileManagerPlugin.rememberMeToken = rememberMeToken;
-        this.LocalFileBackupPlugin.sessionId = sessionId;
-        this.LocalFileBackupPlugin.rememberMeToken = rememberMeToken;
 
         return loginResult;
     }
@@ -65,16 +52,16 @@ public class ADS extends AMPAPI {
      * @param instance_id The instance ID of the instance to log in to
      * @return A new AMPAPIHandler for the instance
      */
-    public AMPAPI InstanceLogin(String instance_id) {
+    public CommonAPI InstanceLogin(String instance_id) {
         Map<String, Object> args = new HashMap<>();
         args.put("username", this.username);
         args.put("password", this.password);
         args.put("token", "");
         args.put("rememberMe", true);
-        Map<String, Object> loginResult = (Map<String, Object>) this.APICall("ADSModule/Servers/" + instance_id + "/API/Core/Login", args);
+        LoginResult loginResult = this.APICall("ADSModule/Servers/" + instance_id + "/API/Core/Login", args, LoginResult.class);
 
-        if (loginResult != null && (boolean) loginResult.get("success")) {
-            return new AMPAPI(this.baseUri + "API/ADSModule/Servers/" + instance_id, this.username, "", (String) loginResult.get("rememberMeToken"), (String) loginResult.get("sessionID"));
+        if (loginResult != null && loginResult.success) {
+            return new CommonAPI(this.baseUri + "API/ADSModule/Servers/" + instance_id, this.username, "", loginResult.rememberMeToken, loginResult.sessionID);
         } else {
             return null;
         }
@@ -93,13 +80,13 @@ public class ADS extends AMPAPI {
         args.put("token", "");
         args.put("rememberMe", true);
 
-        Map<String, Object> loginResult = (Map<String, Object>) this.APICall("ADSModule/Servers/" + instance_id + "/API/Core/Login", args);
+        LoginResult loginResult = this.APICall("ADSModule/Servers/" + instance_id + "/API/Core/Login", args, LoginResult.class);
 
-        if (loginResult != null && (boolean) loginResult.get("success")) {
+        if (loginResult != null && loginResult.success) {
             // Prepare the parameters for the instance
             String newBaseUri = this.baseUri + "API/ADSModule/Servers/" + instance_id;
-            String rememberMeToken = (String) loginResult.get("rememberMeToken");
-            String sessionId = (String) loginResult.get("sessionID");
+            String rememberMeToken = loginResult.rememberMeToken;
+            String sessionId = loginResult.sessionID;
 
             // Return the correct module
             if (Minecraft.class.equals(moduleClass)) {
@@ -107,7 +94,7 @@ public class ADS extends AMPAPI {
             } else if (GenericModule.class.equals(moduleClass)) {
                 return (T) new GenericModule(newBaseUri, this.username, "", rememberMeToken, sessionId);
             }
-            return (T) new AMPAPI(newBaseUri, this.username, "", rememberMeToken, sessionId);
+            return (T) new CommonAPI(newBaseUri, this.username, "", rememberMeToken, sessionId);
         } else {
             return null;
         }
@@ -119,7 +106,7 @@ public class ADS extends AMPAPI {
      * @param module The module to log in to
      * @return A new AMPAPIHandler for the instance
      */
-    public AMPAPI InstanceLogin(String instance_id, String module) {
+    public CommonAPI InstanceLogin(String instance_id, String module) {
         if (module.equals("GenericModule")) {
             return this.InstanceLogin(instance_id, GenericModule.class);
         } else if (module.equals("Minecraft")) {

@@ -1,17 +1,10 @@
 package dev.neuralnexus.ampapi.modules;
 
-import dev.neuralnexus.ampapi.AMPAPI;
 import dev.neuralnexus.ampapi.apimodules.*;
+import dev.neuralnexus.ampapi.responses.Core.LoginResult;
 
-import java.util.Map;
-
-public class Minecraft extends AMPAPI {
-    public final CommonCorePlugin CommonCorePlugin = new CommonCorePlugin(this);
-    public final Core Core = new Core(this);
-    public final EmailSenderPlugin EmailSenderPlugin = new EmailSenderPlugin(this);
-    public final FileManagerPlugin FileManagerPlugin = new FileManagerPlugin(this);
-    public final LocalFileBackupPlugin LocalFileBackupPlugin = new LocalFileBackupPlugin(this);
-    public final MinecraftModule MinecraftModule = new MinecraftModule(this);
+public class Minecraft extends CommonAPI {
+    public MinecraftModule MinecraftModule = new MinecraftModule(this);
 
     /**
      * Constructor
@@ -32,29 +25,21 @@ public class Minecraft extends AMPAPI {
      * Simplified login function
      * @return The result of the login
      */
-    public Map<?,?> Login() {
-        Map<?, ?> loginResult = super.Login();
-        String rememberMeToken = "";
-        String sessionId = "";
+    public LoginResult Login() {
+        LoginResult loginResult = super.Login();
 
-        if (loginResult != null && loginResult.containsKey("success") && (boolean) loginResult.get("success")) {
-            rememberMeToken = (String) loginResult.get("rememberMeToken");
-            sessionId = (String) loginResult.get("sessionID");
+        if (loginResult != null && loginResult.success) {
+            this.rememberMeToken = loginResult.rememberMeToken;
+            this.sessionId = loginResult.sessionID;
+
+            // Update the session ID and remember me token of submodules
+            if (this.MinecraftModule == null) {
+                this.MinecraftModule = new MinecraftModule(this);
+            }
+
+            this.MinecraftModule.sessionId = this.sessionId;
+            this.MinecraftModule.rememberMeToken = this.rememberMeToken;
         }
-
-        // Update the session ID and remember me token of submodules
-        this.CommonCorePlugin.sessionId = sessionId;
-        this.CommonCorePlugin.rememberMeToken = rememberMeToken;
-        this.Core.sessionId = sessionId;
-        this.Core.rememberMeToken = rememberMeToken;
-        this.EmailSenderPlugin.sessionId = sessionId;
-        this.EmailSenderPlugin.rememberMeToken = rememberMeToken;
-        this.FileManagerPlugin.sessionId = sessionId;
-        this.FileManagerPlugin.rememberMeToken = rememberMeToken;
-        this.LocalFileBackupPlugin.sessionId = sessionId;
-        this.LocalFileBackupPlugin.rememberMeToken = rememberMeToken;
-        this.MinecraftModule.sessionId = sessionId;
-        this.MinecraftModule.rememberMeToken = rememberMeToken;
 
         return loginResult;
     }

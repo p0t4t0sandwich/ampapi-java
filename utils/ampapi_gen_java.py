@@ -26,7 +26,7 @@ type_dict = {
     "IEnumerable<ApplicationSpec>": "List",
     "Void": "Void",
     "IEnumerable<EndpointInfo>": "List",
-    "IEnumerable<IADSInstance>": "List",
+    "IEnumerable<IADSInstance>": "Map",
     "JObject": "Map",
     "PortProtocol": "String",
     "Task<ActionResult>": "Object",
@@ -75,6 +75,9 @@ type_dict = {
 
     # Custom types
     "GetStatusResult": "GetStatusResult",
+    "GetInstanceResult": "GetInstanceResult",
+    "GetInstancesResult": "GetInstancesResult",
+    "LoginResult": "LoginResult",
 }
 
 def generate_apimodule_method(module: str, method: str, method_spec: dict):

@@ -682,15 +682,15 @@ public class Core extends AMPAPI {
      * @param password  False
      * @param token  False
      * @param rememberMe  False
-     * @return Object
+     * @return LoginResult
      */
-    public Object Login(String username, String password, String token, boolean rememberMe) {
+    public LoginResult Login(String username, String password, String token, boolean rememberMe) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("username", username);
         args.put("password", password);
         args.put("token", token);
         args.put("rememberMe", rememberMe);
-        return this.APICall("Core/Login", args, Object.class);
+        return this.APICall("Core/Login", args, LoginResult.class);
     }
 
     /**
