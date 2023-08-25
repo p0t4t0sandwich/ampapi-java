@@ -1,0 +1,14 @@
+package dev.neuralnexus.ampapi.apimodules;
+
+import dev.neuralnexus.ampapi.AMPAPI;
+import dev.neuralnexus.ampapi.responses.%MODULE_NAME%.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class %MODULE_NAME% extends AMPAPI {
+    public %MODULE_NAME%(AMPAPI ampapi) {
+        super(ampapi);
+    }
+

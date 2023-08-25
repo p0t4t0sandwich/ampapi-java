@@ -38,29 +38,110 @@ dependencies {
 }
 ```
 
-## AMPAPI Example
+## Notes
+
+- If a function returns an "Object", it's safe to assume it's a Map<?,?>, it just doesn't have a defined type yet.
+
+## Examples
+
+### CommonAPI Example
 
 ```java
-import java.util.HashMap;
+import dev.neuralnexus.ampapi.modules.CommonAPI;
+import dev.neuralnexus.ampapi.responses.Core.GetStatusResult;
 
 public class Main {
     public static void main(String[] args) {
-        AMPAPI API = new AMPAPI("http://localhost:8080/");
+        CommonAPI API = new CommonAPI("http://localhost:8080/", "admin", "myfancypassword123", "");
+        
+        // API call parameters are simply in the same order as shown in the documentation.
+        API.Core.SendConsoleMessage("say Hello Everyone, this message was sent from the Java API!");
+        
+        GetStatusResult currentStatus = API.Core.GetStatus();
+        double CPUUsagePercent = currentStatus.Metrics.get("CPU Usage").Percent;
+        
+        System.out.println("Current CPU usage is: " + CPUUsagePercent + "%");
+    }
+}
+```
+
+### Example using the ADS to manage an instance
+
+```java
+import dev.neuralnexus.ampapi.modules.ADS;
+import dev.neuralnexus.ampapi.modules.Minecraft;
+import dev.neuralnexus.ampapi.responses.ADSModule.GetInstancesResult;
+import dev.neuralnexus.ampapi.responses.Core.GetStatusResult;
+import dev.neuralnexus.ampapi.types.ADSInstance;
+import dev.neuralnexus.ampapi.types.Instance;
+
+public class Main {
+    public static void main(String[] args) {
+        ADS API = new ADS("http://localhost:8080/", "admin", "myfancypassword123", "", "");
+
+        // Get the available instances
+        GetInstancesResult instancesResult = API.ADSModule.GetInstances();
+        ADSInstance[] targets = instancesResult.result;
+
+        // In this example, my Hub server is on the second target
+        // If you're running a standalone setup, you can just use targets[0]
+        ADSInstance target = targets[1];
+
+        String hub_instance_id = "";
+
+        // Get the available instances
+        Instance[] instances = target.AvailableInstances;
+        for (Instance instance : instances) {
+            // Find the instance named "Hub"
+            if (instance.InstanceName.equals("Hub")) {
+                hub_instance_id = instance.InstanceID;
+                break;
+            }
+        }
+
+        // Use the instance ID to get the API for the instance
+        Minecraft Hub = API.InstanceLogin(hub_instance_id, Minecraft.class);
+
+        // Get the current CPU usage
+        GetStatusResult currentStatus = API.Core.GetStatus();
+        double CPUUsagePercent = currentStatus.Metrics.get("CPU Usage").Percent;
+
+        // Send a message to the console
+        Hub.Core.SendConsoleMessage("say Current CPU usage is: " + CPUUsagePercent + "%");
+    }
+}
+```
+
+### CommonAPI Example, handling the sessionId and rememberMeToken manually (not recommended)
+
+```java
+import dev.neuralnexus.ampapi.modules.CommonAPI;
+import dev.neuralnexus.ampapi.responses.Core.GetStatusResult;
+import dev.neuralnexus.ampapi.responses.Core.LoginResult;
+
+public class Main {
+    public static void main(String[] args) {
+        CommonAPI API = new CommonAPI("http://localhost:8080/");
 
         try {
             // The third parameter is either used for 2FA logins, or if no password is specified to use a remembered token from a previous login, or a service login token.
-            HashMap loginResult = API.Core_Login("admin", "myfancypassword123", "", false);
+            LoginResult loginResult = API.Core.Login("admin", "myfancypassword123", "", false);
 
-            if ((boolean) loginResult.get("success")) {
+            if (loginResult.success) {
                 System.out.println("Login successful");
-                API.sessionId = (String) loginResult.get("sessionID");
 
-                //API call parameters are simply in the same order as shown in the documentation.
-                API.Core_SendConsoleMessage("say Hello Everyone, this message was sent from the Java API!");
-                Map currentStatus = API.Core_GetStatus();
-                double CPUUsagePercent = (double) ((Map) ((Map) currentStatus.get("Metrics")).get("CPU Usage")).get("Percent");
+                // Update the session ID
+                String sessionId = loginResult.sessionID;
+                API.sessionId = sessionId;
+                API.Core.sessionId = sessionId;
+
+                // API call parameters are simply in the same order as shown in the documentation.
+                API.Core.SendConsoleMessage("say Hello Everyone, this message was sent from the Java API!");
+                
+                GetStatusResult currentStatus = API.Core.GetStatus();
+                double CPUUsagePercent = currentStatus.Metrics.get("CPU Usage").Percent;
+                
                 System.out.println("Current CPU usage is: " + CPUUsagePercent + "%");
-
 
             } else {
                 System.out.println("Login failed");
@@ -72,38 +153,14 @@ public class Main {
     }
 }
 ```
-## AMPAPIHandler Example
 
-```java
-import java.util.HashMap;
+## TODO
 
-public class Main {
-    public static void main(String[] args) {
-        AMPAPIHandler ADS = new AMPAPIHandler("http://localhost:8080/", "admin", "myfancypassword123", "", "");
-        ADS.Login();
+## Release Notes
 
-        ArrayList targets = (ArrayList) ADS.ADSModule_GetInstances().get("result");
-
-        HashMap target = (HashMap) targets.get(1);
-
-        ArrayList<HashMap<String,Object>> instances = (ArrayList<HashMap<String,Object>>) target.get("AvailableInstances");
-
-        String hub_instance_id = "";
-
-        for (HashMap instance : instances) {
-            if (Objects.equals(instance.get("InstanceName"), "Hub")) {
-                hub_instance_id = (String) instance.get("InstanceID");
-                break;
-            }
-        }
-
-        AMPAPIHandler Hub = ADS.InstanceLogin(hub_instance_id);
-        Hub.Login();
-
-        Map currentStatus = Hub.Core_GetStatus();
-
-        double CPUUsagePercent = (double) ((HashMap) ((HashMap) currentStatus.get("Metrics")).get("CPU Usage")).get("Percent");
-        Hub.Core_SendConsoleMessage("say Current CPU usage is: " + CPUUsagePercent + "%");
-    }
-}
-```
+- Utter and complete overhaul of everything, with the addition of custom types
+- Created Responses for:
+  - API.ADSModule.GetInstance
+  - API.ADSModule.GetInstances
+  - API.Core.Login
+  - API.Core.GetStatus

@@ -1,0 +1,9 @@
+    /**%METHOD_DESCRIPTION%
+     * Name Description Optional%METHOD_PARAMETER_DOC%
+     * @return %METHOD_RETURN_TYPE%
+     */
+    public %METHOD_RETURN_TYPE% %METHOD_NAME%(%METHOD_PARAMETERS%) {
+        HashMap<String, Object> args = new HashMap<>();%METHOD_PARAMETER_MAP%
+        return this.APICall("%MODULE_NAME%/%METHOD_NAME%", args, %METHOD_RETURN_TYPE%.class);
+    }
+
