@@ -1,23 +1,23 @@
 package dev.neuralnexus.ampapi.apimodules;
 
-import dev.neuralnexus.ampapi.AMPAPIBase;
+import dev.neuralnexus.ampapi.AMPAPI;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EmailSenderPlugin extends AMPAPIBase {
-    public EmailSenderPlugin(AMPAPIBase ampapiBase) {
-        super(ampapiBase);
+public class EmailSenderPlugin extends AMPAPI {
+    public EmailSenderPlugin(AMPAPI ampapi) {
+        super(ampapi);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return  AMPType: Task<ActionResult>
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> TestSMTPSettings() {
+    public Map TestSMTPSettings() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("EmailSenderPlugin/TestSMTPSettings", args);
+        return this.APICall("EmailSenderPlugin/TestSMTPSettings", args, Map.class);
     }
 
 }

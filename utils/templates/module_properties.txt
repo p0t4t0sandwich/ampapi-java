@@ -1,0 +1,1 @@
+    public final %property_name% %property_name% = new %property_name%(this);

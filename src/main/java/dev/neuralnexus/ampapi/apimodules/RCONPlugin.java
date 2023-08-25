@@ -1,23 +1,23 @@
 package dev.neuralnexus.ampapi.apimodules;
 
-import dev.neuralnexus.ampapi.AMPAPIBase;
+import dev.neuralnexus.ampapi.AMPAPI;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RCONPlugin extends AMPAPIBase {
-    public RCONPlugin(AMPAPIBase ampapiBase) {
-        super(ampapiBase);
+public class RCONPlugin extends AMPAPI {
+    public RCONPlugin(AMPAPI ampapi) {
+        super(ampapi);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return void AMPType: Void
+     * Name Description Optional
+     * @return Void
      */
-    public Map<?, ?> Dummy() {
+    public Void Dummy() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("RCONPlugin/Dummy", args);
+        return this.APICall("RCONPlugin/Dummy", args, Void.class);
     }
 
 }

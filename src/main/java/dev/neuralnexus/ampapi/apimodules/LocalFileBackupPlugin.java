@@ -1,108 +1,108 @@
 package dev.neuralnexus.ampapi.apimodules;
 
-import dev.neuralnexus.ampapi.AMPAPIBase;
+import dev.neuralnexus.ampapi.AMPAPI;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LocalFileBackupPlugin extends AMPAPIBase {
-    public LocalFileBackupPlugin(AMPAPIBase ampapiBase) {
-        super(ampapiBase);
+public class LocalFileBackupPlugin extends AMPAPI {
+    public LocalFileBackupPlugin(AMPAPI ampapi) {
+        super(ampapi);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param BackupId String AMPType: Guid 
-     * @return  AMPType: Task<ActionResult>
+     * Name Description Optional
+     * @param BackupId  False
+     * @return Map
      */
-    public Map<?, ?> DeleteFromS3(String BackupId) {
+    public Map DeleteFromS3(String BackupId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
-        return this.APICall("LocalFileBackupPlugin/DeleteFromS3", args);
+        return this.APICall("LocalFileBackupPlugin/DeleteFromS3", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param BackupId String AMPType: Guid 
-     * @return void AMPType: Void
+     * Name Description Optional
+     * @param BackupId  False
+     * @return Void
      */
-    public Map<?, ?> DeleteLocalBackup(String BackupId) {
+    public Void DeleteLocalBackup(String BackupId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
-        return this.APICall("LocalFileBackupPlugin/DeleteLocalBackup", args);
+        return this.APICall("LocalFileBackupPlugin/DeleteLocalBackup", args, Void.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param BackupId String AMPType: Guid 
-     * @return  AMPType: RunningTask
+     * Name Description Optional
+     * @param BackupId  False
+     * @return Map
      */
-    public Map<?, ?> DownloadFromS3(String BackupId) {
+    public Map DownloadFromS3(String BackupId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
-        return this.APICall("LocalFileBackupPlugin/DownloadFromS3", args);
+        return this.APICall("LocalFileBackupPlugin/DownloadFromS3", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return List<Map<?, ?>> AMPType: IEnumerable<BackupManifest>
+     * Name Description Optional
+     * @return List
      */
-    public Map<?, ?> GetBackups() {
+    public List GetBackups() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("LocalFileBackupPlugin/GetBackups", args);
+        return this.APICall("LocalFileBackupPlugin/GetBackups", args, List.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param BackupId String AMPType: Guid 
-     * @param DeleteExistingData boolean AMPType: Boolean 
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @param BackupId  False
+     * @param DeleteExistingData  True
+     * @return Map
      */
-    public Map<?, ?> RestoreBackup(String BackupId, boolean DeleteExistingData) {
+    public Map RestoreBackup(String BackupId, boolean DeleteExistingData) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
         args.put("DeleteExistingData", DeleteExistingData);
-        return this.APICall("LocalFileBackupPlugin/RestoreBackup", args);
+        return this.APICall("LocalFileBackupPlugin/RestoreBackup", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param BackupId String AMPType: Guid 
-     * @param Sticky boolean AMPType: Boolean 
-     * @return void AMPType: Void
+     * Name Description Optional
+     * @param BackupId  False
+     * @param Sticky  False
+     * @return Void
      */
-    public Map<?, ?> SetBackupSticky(String BackupId, boolean Sticky) {
+    public Void SetBackupSticky(String BackupId, boolean Sticky) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
         args.put("Sticky", Sticky);
-        return this.APICall("LocalFileBackupPlugin/SetBackupSticky", args);
+        return this.APICall("LocalFileBackupPlugin/SetBackupSticky", args, Void.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param Title String AMPType: String 
-     * @param Description String AMPType: String 
-     * @param Sticky boolean AMPType: Boolean 
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @param Title  False
+     * @param Description  False
+     * @param Sticky  False
+     * @return Map
      */
-    public Map<?, ?> TakeBackup(String Title, String Description, boolean Sticky) {
+    public Map TakeBackup(String Title, String Description, boolean Sticky) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Title", Title);
         args.put("Description", Description);
         args.put("Sticky", Sticky);
-        return this.APICall("LocalFileBackupPlugin/TakeBackup", args);
+        return this.APICall("LocalFileBackupPlugin/TakeBackup", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param BackupId String AMPType: Guid 
-     * @return  AMPType: RunningTask
+     * Name Description Optional
+     * @param BackupId  False
+     * @return Map
      */
-    public Map<?, ?> UploadToS3(String BackupId) {
+    public Map UploadToS3(String BackupId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
-        return this.APICall("LocalFileBackupPlugin/UploadToS3", args);
+        return this.APICall("LocalFileBackupPlugin/UploadToS3", args, Map.class);
     }
 
 }

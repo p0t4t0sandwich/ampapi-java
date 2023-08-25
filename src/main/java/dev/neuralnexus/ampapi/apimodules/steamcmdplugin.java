@@ -1,47 +1,47 @@
 package dev.neuralnexus.ampapi.apimodules;
 
-import dev.neuralnexus.ampapi.AMPAPIBase;
+import dev.neuralnexus.ampapi.AMPAPI;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class steamcmdplugin extends AMPAPIBase {
-    public steamcmdplugin(AMPAPIBase ampapiBase) {
-        super(ampapiBase);
+public class steamcmdplugin extends AMPAPI {
+    public steamcmdplugin(AMPAPI ampapi) {
+        super(ampapi);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return void AMPType: Void
+     * Name Description Optional
+     * @return Void
      */
-    public Map<?, ?> CancelSteamGuard() {
+    public Void CancelSteamGuard() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("steamcmdplugin/CancelSteamGuard", args);
+        return this.APICall("steamcmdplugin/CancelSteamGuard", args, Void.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param code String AMPType: String 
-     * @return void AMPType: Void
+     * Name Description Optional
+     * @param code  False
+     * @return Void
      */
-    public Map<?, ?> SteamGuardCode(String code) {
+    public Void SteamGuardCode(String code) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("code", code);
-        return this.APICall("steamcmdplugin/SteamGuardCode", args);
+        return this.APICall("steamcmdplugin/SteamGuardCode", args, Void.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param username String AMPType: String 
-     * @param password String AMPType: String 
-     * @return void AMPType: Void
+     * Name Description Optional
+     * @param username  False
+     * @param password  False
+     * @return Void
      */
-    public Map<?, ?> SteamUsernamePassword(String username, String password) {
+    public Void SteamUsernamePassword(String username, String password) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("username", username);
         args.put("password", password);
-        return this.APICall("steamcmdplugin/SteamUsernamePassword", args);
+        return this.APICall("steamcmdplugin/SteamUsernamePassword", args, Void.class);
     }
 
 }

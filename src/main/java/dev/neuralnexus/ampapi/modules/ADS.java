@@ -1,12 +1,12 @@
 package dev.neuralnexus.ampapi.modules;
 
-import dev.neuralnexus.ampapi.AMPAPIBase;
+import dev.neuralnexus.ampapi.AMPAPI;
 import dev.neuralnexus.ampapi.apimodules.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class ADS extends AMPAPIBase {
+public class ADS extends AMPAPI {
     public final ADSModule ADSModule = new ADSModule(this);
     public final CommonCorePlugin CommonCorePlugin = new CommonCorePlugin(this);
     public final Core Core = new Core(this);
@@ -65,7 +65,7 @@ public class ADS extends AMPAPIBase {
      * @param instance_id The instance ID of the instance to log in to
      * @return A new AMPAPIHandler for the instance
      */
-    public AMPAPIBase InstanceLogin(String instance_id) {
+    public AMPAPI InstanceLogin(String instance_id) {
         Map<String, Object> args = new HashMap<>();
         args.put("username", this.username);
         args.put("password", this.password);
@@ -74,7 +74,7 @@ public class ADS extends AMPAPIBase {
         Map<String, Object> loginResult = (Map<String, Object>) this.APICall("ADSModule/Servers/" + instance_id + "/API/Core/Login", args);
 
         if (loginResult != null && (boolean) loginResult.get("success")) {
-            return new AMPAPIBase(this.baseUri + "API/ADSModule/Servers/" + instance_id, this.username, "", (String) loginResult.get("rememberMeToken"), (String) loginResult.get("sessionID"));
+            return new AMPAPI(this.baseUri + "API/ADSModule/Servers/" + instance_id, this.username, "", (String) loginResult.get("rememberMeToken"), (String) loginResult.get("sessionID"));
         } else {
             return null;
         }
@@ -107,7 +107,7 @@ public class ADS extends AMPAPIBase {
             } else if (GenericModule.class.equals(moduleClass)) {
                 return (T) new GenericModule(newBaseUri, this.username, "", rememberMeToken, sessionId);
             }
-            return (T) new AMPAPIBase(newBaseUri, this.username, "", rememberMeToken, sessionId);
+            return (T) new AMPAPI(newBaseUri, this.username, "", rememberMeToken, sessionId);
         } else {
             return null;
         }
@@ -119,7 +119,7 @@ public class ADS extends AMPAPIBase {
      * @param module The module to log in to
      * @return A new AMPAPIHandler for the instance
      */
-    public AMPAPIBase InstanceLogin(String instance_id, String module) {
+    public AMPAPI InstanceLogin(String instance_id, String module) {
         if (module.equals("Minecraft")) {
             return this.InstanceLogin(instance_id, Minecraft.class);
         } else if (module.equals("GenericModule")) {

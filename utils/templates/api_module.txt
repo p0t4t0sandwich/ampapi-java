@@ -6,9 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CommonCorePlugin extends AMPAPI {
-    public CommonCorePlugin(AMPAPI ampapi) {
+public class %MODULE_NAME% extends AMPAPI {
+    public %MODULE_NAME%(AMPAPI ampapi) {
         super(ampapi);
     }
 
-}

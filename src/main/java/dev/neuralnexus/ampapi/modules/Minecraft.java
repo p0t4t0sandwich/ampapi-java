@@ -1,11 +1,11 @@
 package dev.neuralnexus.ampapi.modules;
 
-import dev.neuralnexus.ampapi.AMPAPIBase;
+import dev.neuralnexus.ampapi.AMPAPI;
 import dev.neuralnexus.ampapi.apimodules.*;
 
 import java.util.Map;
 
-public class Minecraft extends AMPAPIBase {
+public class Minecraft extends AMPAPI {
     public final CommonCorePlugin CommonCorePlugin = new CommonCorePlugin(this);
     public final Core Core = new Core(this);
     public final EmailSenderPlugin EmailSenderPlugin = new EmailSenderPlugin(this);

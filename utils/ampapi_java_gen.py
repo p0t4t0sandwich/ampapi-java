@@ -8,44 +8,44 @@ type_dict = {
     "InstanceDatastore": "",
     "ActionResult": "",
     "Int32": "Integer",
-    "IEnumerable<InstanceDatastore>": "List<?>",
+    "IEnumerable<InstanceDatastore>": "List",
     "RunningTask": "",
-    "IEnumerable<JObject>": "List<Map<?, ?>>",
+    "IEnumerable<JObject>": "List",
     "Guid": "String",
     "Task<RunningTask>": "",
-    "IEnumerable<DeploymentTemplate>": "List<?>",
+    "IEnumerable<DeploymentTemplate>": "List",
     "String": "String",
     "DeploymentTemplate": "",
     "Boolean": "boolean",
-    "List<String>": "List<String>",
+    "List<String>": "List",
     "PostCreateActions": "",
-    "Dictionary<String, String>": "Map<String, String>",
+    "Dictionary<String, String>": "Map",
     "RemoteTargetInfo": "",
-    "IEnumerable<ApplicationSpec>": "List<?>",
-    "Void": "void",
-    "IEnumerable<EndpointInfo>": "List<?>",
-    "IEnumerable<IADSInstance>": "List<?>",
-    "JObject": "Map<?, ?>",
+    "IEnumerable<ApplicationSpec>": "List",
+    "Void": "Void",
+    "IEnumerable<EndpointInfo>": "List",
+    "IEnumerable<IADSInstance>": "List",
+    "JObject": "Map",
     "PortProtocol": "String",
     "Task<ActionResult>": "",
     "ActionResult<String>": "",
-    "IADSInstance": "bool",
+    "IADSInstance": "boolean",
     "Uri": "String",
-    "IEnumerable<PortUsage>": "List<?>",
-    "Dictionary<String, Int32>": "Map<String, Integer>",
+    "IEnumerable<PortUsage>": "List",
+    "Dictionary<String, Int32>": "Map",
     "LocalAMPInstance": "",
     "ContainerMemoryPolicy": "",
     "Single": "",
     "Task<JObject>": "",
     "Int64": "Integer",
     "FileChunkData": "",
-    "IEnumerable<BackupManifest>": "List<Map<?, ?>>",
+    "IEnumerable<BackupManifest>": "List",
     "Nullable<DateTime>": "",
-    "IEnumerable<IAuditLogEntry>": "Map<?, ?>",
-    "Dictionary<String, IEnumerable<JObject>>": "dict[str, list[dict]]",
-    "IDictionary<String, String>": "Map<String, String>",
-    "List<JObject>": "List<Map<?, ?>>",
-    "String[]": "List<String>",
+    "IEnumerable<IAuditLogEntry>": "Map",
+    "Dictionary<String, IEnumerable<JObject>>": "Map",
+    "IDictionary<String, String>": "Map",
+    "List<JObject>": "List",
+    "String[]": "List",
     "Task<IEnumerable<AuthRoleSummary>>": "",
     "Task<IDictionary<Guid, String>>": "",
     "Task<AuthRoleSummary>": "",
@@ -55,97 +55,141 @@ type_dict = {
     "ScheduleInfo": "",
     "Int32[]": "List<Integer>",
     "TimeIntervalTrigger": "",
-    "IEnumerable<WebSessionSummary>": "List<?>",
+    "IEnumerable<WebSessionSummary>": "List",
     "Task<IEnumerable<UserInfoSummary>>": "",
     "Task<UserInfo>": "",
     "Task<IEnumerable<UserInfo>>": "",
-    "IList<IPermissionsTreeNode>": "List<?>",
+    "IList<IPermissionsTreeNode>": "List",
     "WebauthnLoginInfo": "",
-    "IEnumerable<WebauthnCredentialSummary>": "List<?>",
+    "IEnumerable<WebauthnCredentialSummary>": "List",
     "Task<ActionResult<TwoFactorSetupInfo>>": "",
     "IEnumerable<RunningTask>": "", "ModuleInfo": "",
-    "Dictionary<String, Dictionary<String, MethodInfoSummary>>": "Map<String, Map<String, Object>>",
+    "Dictionary<String, Dictionary<String, MethodInfoSummary>>": "Map",
     "Object": "",
     "Task<String>": "",
     "UpdateInfo": "",
-    "IEnumerable<ListeningPortSummary>": "List<?>",
+    "IEnumerable<ListeningPortSummary>": "List",
 }
 
-def generate_java(spec):
+def generate_apimodule_method(module: str, method: str, method_spec: dict):
     # Read the template file
-    template_file = ""
-    with open("template.txt", "r") as template_file:
-        template_file = template_file.read()
+    api_module_method_template = ""
+    with open("templates/api_module_method.txt", "r") as tf:
+        api_module_method_template = tf.read()
+        tf.close()
 
+    # Get the method description
+    description = ""
+    if "Description" in method_spec.keys():
+        description = "\n     * " + method_spec["Description"]
+
+    # Get the method parameters
+    parameters_docs = ""
+    methodParams = method_spec["Parameters"]
+    if len(methodParams) > 0:
+        parameters_docs += "\n"
+    for i in range(len(methodParams)):
+        api_module_method_parameter_doc_template = ""
+        with open("templates/api_module_method_parameter_doc.txt", "r") as tf:
+            api_module_method_parameter_doc_template = tf.read()
+            tf.close()
+
+        name = methodParams[i]["Name"]
+        type_name = methodParams[i]["TypeName"]
+
+        # Print out the type if it hasn't been added to the type_dict
+        if not type_name in type_dict.keys(): print(type_name)
+
+        description = methodParams[i]["Description"]
+        optional = methodParams[i]["Optional"]
+        if optional == "true": type_name += ", " + optional
+
+        template = api_module_method_parameter_doc_template\
+            .replace("%METHOD_PARAMETER_NAME%", name)\
+            .replace("%METHOD_PARAMETER_DESCRIPTION%", description)\
+            .replace("%METHOD_PARAMETER_OPTIONAL%", str(optional))
+
+        parameters_docs += template
+    parameters_docs = parameters_docs[:-1]
+
+    # Get the method return type
+    return_type = method_spec["ReturnTypeName"]
+
+    # Print out the type if it hasn't been added to the type_dict
+    if not return_type in type_dict.keys(): print(return_type)
+    if not type_dict[return_type] == "":
+        return_type = type_dict[return_type]
+    else:
+        return_type = "Map"
+
+    # Get the method parameters
+    parameters = ""
+    for i in range(len(methodParams)):
+        name = methodParams[i]["Name"]
+        type_name = methodParams[i]["TypeName"]
+
+        # Print out the type if it hasn't been added to the type_dict
+        if not type_name in type_dict.keys(): print(type_name)
+
+        type = "Object"
+        if not type_dict[type_name] == "":
+            type = type_dict[type_name]
+
+        parameters += f"{type} {name}, "
+
+    parameters = parameters[:-2]
+
+    # Get the parameters for the data map
+    map_string = ""
+    if len(methodParams) > 0:
+        map_string += "\n"
+    for i in range(len(methodParams)):
+        api_module_method_parameter_map_template = ""
+        with open("templates/api_module_method_parameter_map.txt", "r") as tf:
+            api_module_method_parameter_map_template = tf.read()
+            tf.close()
+
+        name = methodParams[i]["Name"]
+        map_string += api_module_method_parameter_map_template.replace("%METHOD_PARAMETER_NAME%", name)
+    map_string = map_string[:-1]
+
+    # Replace placeholders
+    template = api_module_method_template\
+        .replace("%METHOD_DESCRIPTION%", description)\
+        .replace("%METHOD_PARAMETER_DOC%", parameters_docs)\
+        .replace("%MODULE_NAME%", module)\
+        .replace("%METHOD_NAME%", method)\
+        .replace("%METHOD_PARAMETERS%", parameters)\
+        .replace("%METHOD_RETURN_TYPE%", return_type)\
+        .replace("%METHOD_PARAMETER_MAP%", map_string)
+
+    # End result will return a string
+    return template
+
+def generate_apimodule(module: str, methods: dict):
+    # Read the template file
+    api_module_template = ""
+    with open("templates/api_module.txt", "r") as tf:
+        api_module_template = tf.read()
+        tf.close()
+
+    # Create a new file called f{module}.java
+    f = open(f"../src/main/java/dev/neuralnexus/ampapi/apimodules/{module}.java","w+")
+    f.write(api_module_template.replace("%MODULE_NAME%", module))
+
+    for method in methods.keys():
+        f.write(generate_apimodule_method(module, method, methods[method]))
+
+    f.write("}\n")
+    f.close()
+
+def generate_spec(spec: dict):
     for module in spec.keys():
-        methods = spec[module]
-
-        # Create a new file called f{module}.java
-        f = open(f"../src/main/java/dev/neuralnexus/ampapi/apimodules/{module}.java","w+")
-
-        module_template = (template_file + '.')[:-1]
-        f.write(module_template.replace("%module_name%", module))
-
-        for method in methods.keys():
-            methodParams = spec[module][method]["Parameters"]
-            data = {methodParams[i]["Name"]:methodParams[i]["Name"] for i in range(len(methodParams))}
-
-            ##################### Add docs
-            description = ""
-            if "Description" in spec[module][method].keys():
-                description = "\n     * " + spec[module][method]["Description"]
-
-            javadoc = f"    /**{description}\n     * Name TypeName Description Optional"
-
-            ########## Parameters
-            for i in range(len(methodParams)):
-                name = methodParams[i]["Name"]
-                type_name = methodParams[i]["TypeName"]
-
-                # Print out the type if it hasn't been added to the type_dict
-                if not type_name in type_dict.keys(): print(type_name)
-                description = methodParams[i]["Description"]
-                optional = methodParams[i]["Optional"]
-                if optional == "true": type_name + ", " + optional
-                javadoc += f"\n     * @param {name} {type_dict[type_name]} AMPType: {type_name} {description}"
-
-            ##########
-
-            ########## Return type
-            return_type = spec[module][method]["ReturnTypeName"]
-
-            # Print out the type if it hasn't been added to the type_dict
-            if not return_type in type_dict.keys(): print(return_type)
-            javadoc += f"\n     * @return {type_dict[return_type]} AMPType: {return_type}"
-            ##########
-
-            javadoc += "\n     */"
-            #####################
-
-            data_string = ""
-            for i in range(len(methodParams)):
-                data_string += 'args.put("' + methodParams[i]["Name"] + '", ' + methodParams[i]["Name"] + ");\n        "
-
-            params = ""
-            if len(data.keys()) != 0:
-                for i in range(len(methodParams)):
-                    param_type = "Object "
-                    if not type_dict[methodParams[i]["TypeName"]] == "":
-                        param_type = f"{type_dict[methodParams[i]['TypeName']]} "
-                    params += param_type + methodParams[i]["Name"] + ", "
-                params = params[:-2]
-
-            template = f"""{javadoc}
-    public Map<?, ?> {method}({params}) {"{"}
-        HashMap<String, Object> args = new HashMap<>();
-        {data_string}return this.APICall("{module}/{method}", args);
-    {"}"}\n\n"""
-            f.write(template)
-        f.write("}\n")
-        f.close()
+        generate_apimodule(module, spec[module])
 
 if __name__ == "__main__":
     res = requests.get("https://raw.githubusercontent.com/p0t4t0sandwich/ampapi-spec/main/APISpec.json")
     res_json = json.loads(res.content)
 
-    generate_java(res_json)
+    generate_spec(res_json)
+

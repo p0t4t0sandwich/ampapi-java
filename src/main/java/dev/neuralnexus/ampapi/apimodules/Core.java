@@ -1,47 +1,47 @@
 package dev.neuralnexus.ampapi.apimodules;
 
-import dev.neuralnexus.ampapi.AMPAPIBase;
+import dev.neuralnexus.ampapi.AMPAPI;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Core extends AMPAPIBase {
-    public Core(AMPAPIBase ampapiBase) {
-        super(ampapiBase);
+public class Core extends AMPAPI {
+    public Core(AMPAPI ampapi) {
+        super(ampapi);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return void AMPType: Void
+     * Name Description Optional
+     * @return Void
      */
-    public Map<?, ?> AcknowledgeAMPUpdate() {
+    public Void AcknowledgeAMPUpdate() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/AcknowledgeAMPUpdate", args);
+        return this.APICall("Core/AcknowledgeAMPUpdate", args, Void.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param triggerId String AMPType: Guid 
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @param triggerId  False
+     * @return Map
      */
-    public Map<?, ?> AddEventTrigger(String triggerId) {
+    public Map AddEventTrigger(String triggerId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("triggerId", triggerId);
-        return this.APICall("Core/AddEventTrigger", args);
+        return this.APICall("Core/AddEventTrigger", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param months List<Integer> AMPType: Int32[] 
-     * @param days List<Integer> AMPType: Int32[] 
-     * @param hours List<Integer> AMPType: Int32[] 
-     * @param minutes List<Integer> AMPType: Int32[] 
-     * @param daysOfMonth List<Integer> AMPType: Int32[] 
-     * @param description String AMPType: String 
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @param months  False
+     * @param days  False
+     * @param hours  False
+     * @param minutes  False
+     * @param daysOfMonth  False
+     * @param description  False
+     * @return Map
      */
-    public Map<?, ?> AddIntervalTrigger(List<Integer> months, List<Integer> days, List<Integer> hours, List<Integer> minutes, List<Integer> daysOfMonth, String description) {
+    public Map AddIntervalTrigger(List<Integer> months, List<Integer> days, List<Integer> hours, List<Integer> minutes, List<Integer> daysOfMonth, String description) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("months", months);
         args.put("days", days);
@@ -49,239 +49,237 @@ public class Core extends AMPAPIBase {
         args.put("minutes", minutes);
         args.put("daysOfMonth", daysOfMonth);
         args.put("description", description);
-        return this.APICall("Core/AddIntervalTrigger", args);
+        return this.APICall("Core/AddIntervalTrigger", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param TriggerID String AMPType: Guid 
-     * @param MethodID String AMPType: String 
-     * @param ParameterMapping Map<String, String> AMPType: Dictionary<String, String> 
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @param TriggerID  False
+     * @param MethodID  False
+     * @param ParameterMapping  False
+     * @return Map
      */
-    public Map<?, ?> AddTask(String TriggerID, String MethodID, Map<String, String> ParameterMapping) {
+    public Map AddTask(String TriggerID, String MethodID, Map ParameterMapping) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
         args.put("MethodID", MethodID);
         args.put("ParameterMapping", ParameterMapping);
-        return this.APICall("Core/AddTask", args);
+        return this.APICall("Core/AddTask", args, Map.class);
     }
 
     /**
      * DEV: Async test method
-     * Name TypeName Description Optional
-     * @return  AMPType: Task<String>
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> AsyncTest() {
+    public Map AsyncTest() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/AsyncTest", args);
+        return this.APICall("Core/AsyncTest", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param TaskId String AMPType: Guid 
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @param TaskId  False
+     * @return Map
      */
-    public Map<?, ?> CancelTask(String TaskId) {
+    public Map CancelTask(String TaskId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TaskId", TaskId);
-        return this.APICall("Core/CancelTask", args);
+        return this.APICall("Core/CancelTask", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param TriggerID String AMPType: Guid 
-     * @param TaskID String AMPType: Guid 
-     * @param NewOrder Integer AMPType: Int32 
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @param TriggerID  False
+     * @param TaskID  False
+     * @param NewOrder  False
+     * @return Map
      */
-    public Map<?, ?> ChangeTaskOrder(String TriggerID, String TaskID, Integer NewOrder) {
+    public Map ChangeTaskOrder(String TriggerID, String TaskID, Integer NewOrder) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
         args.put("TaskID", TaskID);
         args.put("NewOrder", NewOrder);
-        return this.APICall("Core/ChangeTaskOrder", args);
+        return this.APICall("Core/ChangeTaskOrder", args, Map.class);
     }
 
     /**
-     * For a user to change their own password, requires knowing the old password
-     * Name TypeName Description Optional
-     * @param Username String AMPType: String 
-     * @param OldPassword String AMPType: String 
-     * @param NewPassword String AMPType: String 
-     * @param TwoFactorPIN String AMPType: String 
-     * @return  AMPType: Task<ActionResult>
+     * Name Description Optional
+     * @param Username  False
+     * @param OldPassword  False
+     * @param NewPassword  False
+     * @param TwoFactorPIN  False
+     * @return Map
      */
-    public Map<?, ?> ChangeUserPassword(String Username, String OldPassword, String NewPassword, String TwoFactorPIN) {
+    public Map ChangeUserPassword(String Username, String OldPassword, String NewPassword, String TwoFactorPIN) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         args.put("OldPassword", OldPassword);
         args.put("NewPassword", NewPassword);
         args.put("TwoFactorPIN", TwoFactorPIN);
-        return this.APICall("Core/ChangeUserPassword", args);
+        return this.APICall("Core/ChangeUserPassword", args, Map.class);
     }
 
     /**
-     * Completes two-factor setup by supplying a valid two factor code based on the secret provided by EnableTwoFactor
-     * Name TypeName Description Optional
-     * @param Username String AMPType: String 
-     * @param TwoFactorCode String AMPType: String 
-     * @return  AMPType: Task<ActionResult>
+     * Name Description Optional
+     * @param Username  False
+     * @param TwoFactorCode  False
+     * @return Map
      */
-    public Map<?, ?> ConfirmTwoFactorSetup(String Username, String TwoFactorCode) {
+    public Map ConfirmTwoFactorSetup(String Username, String TwoFactorCode) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         args.put("TwoFactorCode", TwoFactorCode);
-        return this.APICall("Core/ConfirmTwoFactorSetup", args);
+        return this.APICall("Core/ConfirmTwoFactorSetup", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param Name String AMPType: String 
-     * @param AsCommonRole boolean AMPType: Boolean 
-     * @return  AMPType: Task<ActionResult<Guid>>
+     * Name Description Optional
+     * @param Name  False
+     * @param AsCommonRole  True
+     * @return Map
      */
-    public Map<?, ?> CreateRole(String Name, boolean AsCommonRole) {
+    public Map CreateRole(String Name, boolean AsCommonRole) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Name", Name);
         args.put("AsCommonRole", AsCommonRole);
-        return this.APICall("Core/CreateRole", args);
+        return this.APICall("Core/CreateRole", args, Map.class);
     }
 
     /**
      * DEV: Creates a non-ending task with 50% progress for testing purposes
-     * Name TypeName Description Optional
-     * @return void AMPType: Void
+     * Name Description Optional
+     * @return Void
      */
-    public Map<?, ?> CreateTestTask() {
+    public Void CreateTestTask() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/CreateTestTask", args);
+        return this.APICall("Core/CreateTestTask", args, Void.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param Username String AMPType: String 
-     * @return  AMPType: Task<ActionResult<Guid>>
+     * Name Description Optional
+     * @param Username  False
+     * @return Map
      */
-    public Map<?, ?> CreateUser(String Username) {
+    public Map CreateUser(String Username) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
-        return this.APICall("Core/CreateUser", args);
+        return this.APICall("Core/CreateUser", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param PermissionNode String AMPType: String 
-     * @return boolean AMPType: Boolean
+     * Name Description Optional
+     * @param PermissionNode  False
+     * @return boolean
      */
-    public Map<?, ?> CurrentSessionHasPermission(String PermissionNode) {
+    public boolean CurrentSessionHasPermission(String PermissionNode) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("PermissionNode", PermissionNode);
-        return this.APICall("Core/CurrentSessionHasPermission", args);
+        return this.APICall("Core/CurrentSessionHasPermission", args, boolean.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param InstanceId String AMPType: Guid 
-     * @return  AMPType: Task<ActionResult>
+     * Name Description Optional
+     * @param InstanceId  False
+     * @return Map
      */
-    public Map<?, ?> DeleteInstanceUsers(String InstanceId) {
+    public Map DeleteInstanceUsers(String InstanceId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
-        return this.APICall("Core/DeleteInstanceUsers", args);
+        return this.APICall("Core/DeleteInstanceUsers", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param RoleId String AMPType: Guid 
-     * @return  AMPType: Task<ActionResult>
+     * Name Description Optional
+     * @param RoleId  False
+     * @return Map
      */
-    public Map<?, ?> DeleteRole(String RoleId) {
+    public Map DeleteRole(String RoleId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
-        return this.APICall("Core/DeleteRole", args);
+        return this.APICall("Core/DeleteRole", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param TriggerID String AMPType: Guid 
-     * @param TaskID String AMPType: Guid 
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @param TriggerID  False
+     * @param TaskID  False
+     * @return Map
      */
-    public Map<?, ?> DeleteTask(String TriggerID, String TaskID) {
+    public Map DeleteTask(String TriggerID, String TaskID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
         args.put("TaskID", TaskID);
-        return this.APICall("Core/DeleteTask", args);
+        return this.APICall("Core/DeleteTask", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param TriggerID String AMPType: Guid 
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @param TriggerID  False
+     * @return Map
      */
-    public Map<?, ?> DeleteTrigger(String TriggerID) {
+    public Map DeleteTrigger(String TriggerID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
-        return this.APICall("Core/DeleteTrigger", args);
+        return this.APICall("Core/DeleteTrigger", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param Username String AMPType: String 
-     * @return  AMPType: Task<ActionResult>
+     * Name Description Optional
+     * @param Username  False
+     * @return Map
      */
-    public Map<?, ?> DeleteUser(String Username) {
+    public Map DeleteUser(String Username) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
-        return this.APICall("Core/DeleteUser", args);
+        return this.APICall("Core/DeleteUser", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param Password String AMPType: String 
-     * @param TwoFactorCode String AMPType: String 
-     * @return  AMPType: Task<ActionResult>
+     * Name Description Optional
+     * @param Password  False
+     * @param TwoFactorCode  False
+     * @return Map
      */
-    public Map<?, ?> DisableTwoFactor(String Password, String TwoFactorCode) {
+    public Map DisableTwoFactor(String Password, String TwoFactorCode) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Password", Password);
         args.put("TwoFactorCode", TwoFactorCode);
-        return this.APICall("Core/DisableTwoFactor", args);
+        return this.APICall("Core/DisableTwoFactor", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> DismissAllTasks() {
+    public Map DismissAllTasks() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/DismissAllTasks", args);
+        return this.APICall("Core/DismissAllTasks", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param TaskId String AMPType: Guid 
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @param TaskId  False
+     * @return Map
      */
-    public Map<?, ?> DismissTask(String TaskId) {
+    public Map DismissTask(String TaskId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TaskId", TaskId);
-        return this.APICall("Core/DismissTask", args);
+        return this.APICall("Core/DismissTask", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param Id String AMPType: Guid 
-     * @param months List<Integer> AMPType: Int32[] 
-     * @param days List<Integer> AMPType: Int32[] 
-     * @param hours List<Integer> AMPType: Int32[] 
-     * @param minutes List<Integer> AMPType: Int32[] 
-     * @param daysOfMonth List<Integer> AMPType: Int32[] 
-     * @param description String AMPType: String 
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @param Id  False
+     * @param months  False
+     * @param days  False
+     * @param hours  False
+     * @param minutes  False
+     * @param daysOfMonth  False
+     * @param description  False
+     * @return Map
      */
-    public Map<?, ?> EditIntervalTrigger(String Id, List<Integer> months, List<Integer> days, List<Integer> hours, List<Integer> minutes, List<Integer> daysOfMonth, String description) {
+    public Map EditIntervalTrigger(String Id, List<Integer> months, List<Integer> days, List<Integer> hours, List<Integer> minutes, List<Integer> daysOfMonth, String description) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         args.put("months", months);
@@ -290,675 +288,672 @@ public class Core extends AMPAPIBase {
         args.put("minutes", minutes);
         args.put("daysOfMonth", daysOfMonth);
         args.put("description", description);
-        return this.APICall("Core/EditIntervalTrigger", args);
+        return this.APICall("Core/EditIntervalTrigger", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param TriggerID String AMPType: Guid 
-     * @param TaskID String AMPType: Guid 
-     * @param ParameterMapping Map<String, String> AMPType: Dictionary<String, String> 
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @param TriggerID  False
+     * @param TaskID  False
+     * @param ParameterMapping  False
+     * @return Map
      */
-    public Map<?, ?> EditTask(String TriggerID, String TaskID, Map<String, String> ParameterMapping) {
+    public Map EditTask(String TriggerID, String TaskID, Map ParameterMapping) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
         args.put("TaskID", TaskID);
         args.put("ParameterMapping", ParameterMapping);
-        return this.APICall("Core/EditTask", args);
+        return this.APICall("Core/EditTask", args, Map.class);
     }
 
     /**
-     * Sets up two-factor authentication for the given user. ConfirmTwoFactorSetup must be invoked to complete setup.
-     * Name TypeName Description Optional
-     * @param Username String AMPType: String 
-     * @param Password String AMPType: String 
-     * @return  AMPType: Task<ActionResult<TwoFactorSetupInfo>>
+     * Name Description Optional
+     * @param Username  False
+     * @param Password  False
+     * @return Map
      */
-    public Map<?, ?> EnableTwoFactor(String Username, String Password) {
+    public Map EnableTwoFactor(String Username, String Password) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         args.put("Password", Password);
-        return this.APICall("Core/EnableTwoFactor", args);
+        return this.APICall("Core/EnableTwoFactor", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param Id String AMPType: Guid 
-     * @return void AMPType: Void
+     * Name Description Optional
+     * @param Id  False
+     * @return Void
      */
-    public Map<?, ?> EndUserSession(String Id) {
+    public Void EndUserSession(String Id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
-        return this.APICall("Core/EndUserSession", args);
+        return this.APICall("Core/EndUserSession", args, Void.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param RoleId String AMPType: Guid 
-     * @return  AMPType: Task<IEnumerable<String>>
+     * Name Description Optional
+     * @param RoleId  False
+     * @return Map
      */
-    public Map<?, ?> GetAMPRolePermissions(String RoleId) {
+    public Map GetAMPRolePermissions(String RoleId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
-        return this.APICall("Core/GetAMPRolePermissions", args);
+        return this.APICall("Core/GetAMPRolePermissions", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param Username String AMPType: String 
-     * @return  AMPType: Task<UserInfo>
+     * Name Description Optional
+     * @param Username  False
+     * @return Map
      */
-    public Map<?, ?> GetAMPUserInfo(String Username) {
+    public Map GetAMPUserInfo(String Username) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
-        return this.APICall("Core/GetAMPUserInfo", args);
+        return this.APICall("Core/GetAMPUserInfo", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return  AMPType: Task<IEnumerable<UserInfoSummary>>
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> GetAMPUsersSummary() {
+    public Map GetAMPUsersSummary() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetAMPUsersSummary", args);
+        return this.APICall("Core/GetAMPUsersSummary", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return Map<String, Map<String, Object>> AMPType: Dictionary<String, Dictionary<String, MethodInfoSummary>>
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> GetAPISpec() {
+    public Map GetAPISpec() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetAPISpec", args);
+        return this.APICall("Core/GetAPISpec", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return List<?> AMPType: IEnumerable<WebSessionSummary>
+     * Name Description Optional
+     * @return List
      */
-    public Map<?, ?> GetActiveAMPSessions() {
+    public List GetActiveAMPSessions() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetActiveAMPSessions", args);
+        return this.APICall("Core/GetActiveAMPSessions", args, List.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return  AMPType: Task<IEnumerable<UserInfo>>
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> GetAllAMPUserInfo() {
+    public Map GetAllAMPUserInfo() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetAllAMPUserInfo", args);
+        return this.APICall("Core/GetAllAMPUserInfo", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param Before  AMPType: Nullable<DateTime> 
-     * @param Count Integer AMPType: Int32 
-     * @return Map<?, ?> AMPType: IEnumerable<IAuditLogEntry>
+     * Name Description Optional
+     * @param Before  False
+     * @param Count  False
+     * @return Map
      */
-    public Map<?, ?> GetAuditLogEntries(Object Before, Integer Count) {
+    public Map GetAuditLogEntries(Object Before, Integer Count) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Before", Before);
         args.put("Count", Count);
-        return this.APICall("Core/GetAuditLogEntries", args);
+        return this.APICall("Core/GetAuditLogEntries", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param node String AMPType: String 
-     * @return Map<?, ?> AMPType: JObject
+     * Name Description Optional
+     * @param node  False
+     * @return Map
      */
-    public Map<?, ?> GetConfig(String node) {
+    public Map GetConfig(String node) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("node", node);
-        return this.APICall("Core/GetConfig", args);
+        return this.APICall("Core/GetConfig", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param nodes List<String> AMPType: String[] 
-     * @return List<Map<?, ?>> AMPType: IEnumerable<JObject>
+     * Name Description Optional
+     * @param nodes  False
+     * @return List
      */
-    public Map<?, ?> GetConfigs(List<String> nodes) {
+    public List GetConfigs(List nodes) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("nodes", nodes);
-        return this.APICall("Core/GetConfigs", args);
+        return this.APICall("Core/GetConfigs", args, List.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return Map<String, String> AMPType: Dictionary<String, String>
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> GetDiagnosticsInfo() {
+    public Map GetDiagnosticsInfo() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetDiagnosticsInfo", args);
+        return this.APICall("Core/GetDiagnosticsInfo", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return  AMPType: ModuleInfo
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> GetModuleInfo() {
+    public Map GetModuleInfo() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetModuleInfo", args);
+        return this.APICall("Core/GetModuleInfo", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return String AMPType: Guid
+     * Name Description Optional
+     * @return String
      */
-    public Map<?, ?> GetNewGuid() {
+    public String GetNewGuid() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetNewGuid", args);
+        return this.APICall("Core/GetNewGuid", args, String.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return List<?> AMPType: IList<IPermissionsTreeNode>
+     * Name Description Optional
+     * @return List
      */
-    public Map<?, ?> GetPermissionsSpec() {
+    public List GetPermissionsSpec() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetPermissionsSpec", args);
+        return this.APICall("Core/GetPermissionsSpec", args, List.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return List<?> AMPType: IEnumerable<ListeningPortSummary>
+     * Name Description Optional
+     * @return List
      */
-    public Map<?, ?> GetPortSummaries() {
+    public List GetPortSummaries() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetPortSummaries", args);
+        return this.APICall("Core/GetPortSummaries", args, List.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return List<Map<?, ?>> AMPType: List<JObject>
+     * Name Description Optional
+     * @return List
      */
-    public Map<?, ?> GetProvisionSpec() {
+    public List GetProvisionSpec() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetProvisionSpec", args);
+        return this.APICall("Core/GetProvisionSpec", args, List.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param Description String AMPType: String 
-     * @param IsTemporary boolean AMPType: Boolean 
-     * @return  AMPType: Task<String>
+     * Name Description Optional
+     * @param Description  True
+     * @param IsTemporary  True
+     * @return Map
      */
-    public Map<?, ?> GetRemoteLoginToken(String Description, boolean IsTemporary) {
+    public Map GetRemoteLoginToken(String Description, boolean IsTemporary) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Description", Description);
         args.put("IsTemporary", IsTemporary);
-        return this.APICall("Core/GetRemoteLoginToken", args);
+        return this.APICall("Core/GetRemoteLoginToken", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param RoleId String AMPType: Guid 
-     * @return  AMPType: Task<AuthRoleSummary>
+     * Name Description Optional
+     * @param RoleId  False
+     * @return Map
      */
-    public Map<?, ?> GetRole(String RoleId) {
+    public Map GetRole(String RoleId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
-        return this.APICall("Core/GetRole", args);
+        return this.APICall("Core/GetRole", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return  AMPType: Task<IEnumerable<AuthRoleSummary>>
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> GetRoleData() {
+    public Map GetRoleData() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetRoleData", args);
+        return this.APICall("Core/GetRoleData", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return  AMPType: Task<IDictionary<Guid, String>>
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> GetRoleIds() {
+    public Map GetRoleIds() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetRoleIds", args);
+        return this.APICall("Core/GetRoleIds", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return  AMPType: ScheduleInfo
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> GetScheduleData() {
+    public Map GetScheduleData() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetScheduleData", args);
+        return this.APICall("Core/GetScheduleData", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param SettingNode String AMPType: String 
-     * @param WithRefresh boolean AMPType: Boolean 
-     * @return Map<String, String> AMPType: IDictionary<String, String>
+     * Name Description Optional
+     * @param SettingNode  False
+     * @param WithRefresh  True
+     * @return Map
      */
-    public Map<?, ?> GetSettingValues(String SettingNode, boolean WithRefresh) {
+    public Map GetSettingValues(String SettingNode, boolean WithRefresh) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("SettingNode", SettingNode);
         args.put("WithRefresh", WithRefresh);
-        return this.APICall("Core/GetSettingValues", args);
+        return this.APICall("Core/GetSettingValues", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return dict[str, list[dict]] AMPType: Dictionary<String, IEnumerable<JObject>>
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> GetSettingsSpec() {
+    public Map GetSettingsSpec() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetSettingsSpec", args);
+        return this.APICall("Core/GetSettingsSpec", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return Map<?, ?> AMPType: JObject
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> GetStatus() {
+    public Map GetStatus() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetStatus", args);
+        return this.APICall("Core/GetStatus", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return  AMPType: IEnumerable<RunningTask>
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> GetTasks() {
+    public Map GetTasks() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetTasks", args);
+        return this.APICall("Core/GetTasks", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param Id String AMPType: Guid 
-     * @return  AMPType: TimeIntervalTrigger
+     * Name Description Optional
+     * @param Id  False
+     * @return Map
      */
-    public Map<?, ?> GetTimeIntervalTrigger(String Id) {
+    public Map GetTimeIntervalTrigger(String Id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
-        return this.APICall("Core/GetTimeIntervalTrigger", args);
+        return this.APICall("Core/GetTimeIntervalTrigger", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return  AMPType: UpdateInfo
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> GetUpdateInfo() {
+    public Map GetUpdateInfo() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetUpdateInfo", args);
+        return this.APICall("Core/GetUpdateInfo", args, Map.class);
     }
 
     /**
      * Gets changes to the server status, in addition to any notifications or console output that have occured since the last time GetUpdates() was called by the current session.
-     * Name TypeName Description Optional
-     * @return Map<?, ?> AMPType: JObject
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> GetUpdates() {
+    public Map GetUpdates() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetUpdates", args);
+        return this.APICall("Core/GetUpdates", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return  AMPType: Object
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> GetUserActionsSpec() {
+    public Map GetUserActionsSpec() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetUserActionsSpec", args);
+        return this.APICall("Core/GetUserActionsSpec", args, Map.class);
     }
 
     /**
-     * Provides information about a given in-application user (as opposed to AMP system users)
-     * Name TypeName Description Optional
-     * @param UID String AMPType: String 
-     * @return Map<?, ?> AMPType: JObject
+     * Name Description Optional
+     * @param UID  False
+     * @return Map
      */
-    public Map<?, ?> GetUserInfo(String UID) {
+    public Map GetUserInfo(String UID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("UID", UID);
-        return this.APICall("Core/GetUserInfo", args);
+        return this.APICall("Core/GetUserInfo", args, Map.class);
     }
 
     /**
      * Returns a list of in-application users
-     * Name TypeName Description Optional
-     * @return Map<String, String> AMPType: Dictionary<String, String>
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> GetUserList() {
+    public Map GetUserList() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetUserList", args);
+        return this.APICall("Core/GetUserList", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return  AMPType: ActionResult<String>
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> GetWebauthnChallenge() {
+    public Map GetWebauthnChallenge() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetWebauthnChallenge", args);
+        return this.APICall("Core/GetWebauthnChallenge", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param username String AMPType: String 
-     * @return  AMPType: WebauthnLoginInfo
+     * Name Description Optional
+     * @param username  False
+     * @return Map
      */
-    public Map<?, ?> GetWebauthnCredentialIDs(String username) {
+    public Map GetWebauthnCredentialIDs(String username) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("username", username);
-        return this.APICall("Core/GetWebauthnCredentialIDs", args);
+        return this.APICall("Core/GetWebauthnCredentialIDs", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return List<?> AMPType: IEnumerable<WebauthnCredentialSummary>
+     * Name Description Optional
+     * @return List
      */
-    public Map<?, ?> GetWebauthnCredentialSummaries() {
+    public List GetWebauthnCredentialSummaries() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetWebauthnCredentialSummaries", args);
+        return this.APICall("Core/GetWebauthnCredentialSummaries", args, List.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return  AMPType: Object
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> GetWebserverMetrics() {
+    public Map GetWebserverMetrics() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetWebserverMetrics", args);
+        return this.APICall("Core/GetWebserverMetrics", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return void AMPType: Void
+     * Name Description Optional
+     * @return Void
      */
-    public Map<?, ?> Kill() {
+    public Void Kill() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/Kill", args);
+        return this.APICall("Core/Kill", args, Void.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param username String AMPType: String 
-     * @param password String AMPType: String 
-     * @param token String AMPType: String 
-     * @param rememberMe boolean AMPType: Boolean 
-     * @return  AMPType: Task<JObject>
+     * Name Description Optional
+     * @param username  False
+     * @param password  False
+     * @param token  False
+     * @param rememberMe  False
+     * @return Map
      */
-    public Map<?, ?> Login(String username, String password, String token, boolean rememberMe) {
+    public Map Login(String username, String password, String token, boolean rememberMe) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("username", username);
         args.put("password", password);
         args.put("token", token);
         args.put("rememberMe", rememberMe);
-        return this.APICall("Core/Login", args);
+        return this.APICall("Core/Login", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return void AMPType: Void
+     * Name Description Optional
+     * @return Void
      */
-    public Map<?, ?> Logout() {
+    public Void Logout() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/Logout", args);
+        return this.APICall("Core/Logout", args, Void.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param Node String AMPType: String 
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @param Node  False
+     * @return Map
      */
-    public Map<?, ?> RefreshSettingValueList(String Node) {
+    public Map RefreshSettingValueList(String Node) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Node", Node);
-        return this.APICall("Core/RefreshSettingValueList", args);
+        return this.APICall("Core/RefreshSettingValueList", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return void AMPType: Void
+     * Name Description Optional
+     * @return Void
      */
-    public Map<?, ?> RefreshSettingsSourceCache() {
+    public Void RefreshSettingsSourceCache() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/RefreshSettingsSourceCache", args);
+        return this.APICall("Core/RefreshSettingsSourceCache", args, Void.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param RoleId String AMPType: Guid 
-     * @param NewName String AMPType: String 
-     * @return  AMPType: Task<ActionResult>
+     * Name Description Optional
+     * @param RoleId  False
+     * @param NewName  False
+     * @return Map
      */
-    public Map<?, ?> RenameRole(String RoleId, String NewName) {
+    public Map RenameRole(String RoleId, String NewName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
         args.put("NewName", NewName);
-        return this.APICall("Core/RenameRole", args);
+        return this.APICall("Core/RenameRole", args, Map.class);
     }
 
     /**
-     * For administrative users to alter the password of another user
-     * Name TypeName Description Optional
-     * @param Username String AMPType: String 
-     * @param NewPassword String AMPType: String 
-     * @return  AMPType: Task<ActionResult>
+     * Name Description Optional
+     * @param Username  False
+     * @param NewPassword  False
+     * @return Map
      */
-    public Map<?, ?> ResetUserPassword(String Username, String NewPassword) {
+    public Map ResetUserPassword(String Username, String NewPassword) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         args.put("NewPassword", NewPassword);
-        return this.APICall("Core/ResetUserPassword", args);
+        return this.APICall("Core/ResetUserPassword", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> Restart() {
+    public Map Restart() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/Restart", args);
+        return this.APICall("Core/Restart", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return void AMPType: Void
+     * Name Description Optional
+     * @return Void
      */
-    public Map<?, ?> RestartAMP() {
+    public Void RestartAMP() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/RestartAMP", args);
+        return this.APICall("Core/RestartAMP", args, Void.class);
     }
 
     /**
      * Allows the service to be re-started after previously being suspended.
-     * Name TypeName Description Optional
-     * @return void AMPType: Void
+     * Name Description Optional
+     * @return Void
      */
-    public Map<?, ?> Resume() {
+    public Void Resume() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/Resume", args);
+        return this.APICall("Core/Resume", args, Void.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param ID Integer AMPType: Int32 
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @param ID  False
+     * @return Map
      */
-    public Map<?, ?> RevokeWebauthnCredential(Integer ID) {
+    public Map RevokeWebauthnCredential(Integer ID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ID", ID);
-        return this.APICall("Core/RevokeWebauthnCredential", args);
+        return this.APICall("Core/RevokeWebauthnCredential", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param triggerId String AMPType: Guid 
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @param triggerId  False
+     * @return Map
      */
-    public Map<?, ?> RunEventTriggerImmediately(String triggerId) {
+    public Map RunEventTriggerImmediately(String triggerId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("triggerId", triggerId);
-        return this.APICall("Core/RunEventTriggerImmediately", args);
+        return this.APICall("Core/RunEventTriggerImmediately", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param message String AMPType: String 
-     * @return void AMPType: Void
+     * Name Description Optional
+     * @param message  False
+     * @return Void
      */
-    public Map<?, ?> SendConsoleMessage(String message) {
+    public Void SendConsoleMessage(String message) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("message", message);
-        return this.APICall("Core/SendConsoleMessage", args);
+        return this.APICall("Core/SendConsoleMessage", args, Void.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param RoleId String AMPType: Guid 
-     * @param PermissionNode String AMPType: String 
-     * @param Enabled boolean AMPType: Nullable<Boolean> 
-     * @return  AMPType: Task<ActionResult>
+     * Name Description Optional
+     * @param RoleId  False
+     * @param PermissionNode  False
+     * @param Enabled  False
+     * @return Map
      */
-    public Map<?, ?> SetAMPRolePermission(String RoleId, String PermissionNode, boolean Enabled) {
+    public Map SetAMPRolePermission(String RoleId, String PermissionNode, boolean Enabled) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
         args.put("PermissionNode", PermissionNode);
         args.put("Enabled", Enabled);
-        return this.APICall("Core/SetAMPRolePermission", args);
+        return this.APICall("Core/SetAMPRolePermission", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param UserId String AMPType: Guid 
-     * @param RoleId String AMPType: Guid 
-     * @param IsMember boolean AMPType: Boolean 
-     * @return  AMPType: Task<ActionResult>
+     * Name Description Optional
+     * @param UserId  False
+     * @param RoleId  False
+     * @param IsMember  False
+     * @return Map
      */
-    public Map<?, ?> SetAMPUserRoleMembership(String UserId, String RoleId, boolean IsMember) {
+    public Map SetAMPUserRoleMembership(String UserId, String RoleId, boolean IsMember) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("UserId", UserId);
         args.put("RoleId", RoleId);
         args.put("IsMember", IsMember);
-        return this.APICall("Core/SetAMPUserRoleMembership", args);
+        return this.APICall("Core/SetAMPUserRoleMembership", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param node String AMPType: String 
-     * @param value String AMPType: String 
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @param node  False
+     * @param value  False
+     * @return Map
      */
-    public Map<?, ?> SetConfig(String node, String value) {
+    public Map SetConfig(String node, String value) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("node", node);
         args.put("value", value);
-        return this.APICall("Core/SetConfig", args);
+        return this.APICall("Core/SetConfig", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param data Map<String, String> AMPType: Dictionary<String, String> 
-     * @return boolean AMPType: Boolean
+     * Name Description Optional
+     * @param data  False
+     * @return boolean
      */
-    public Map<?, ?> SetConfigs(Map<String, String> data) {
+    public boolean SetConfigs(Map data) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("data", data);
-        return this.APICall("Core/SetConfigs", args);
+        return this.APICall("Core/SetConfigs", args, boolean.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param Id String AMPType: Guid 
-     * @param Enabled boolean AMPType: Boolean 
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @param Id  False
+     * @param Enabled  False
+     * @return Map
      */
-    public Map<?, ?> SetTriggerEnabled(String Id, boolean Enabled) {
+    public Map SetTriggerEnabled(String Id, boolean Enabled) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         args.put("Enabled", Enabled);
-        return this.APICall("Core/SetTriggerEnabled", args);
+        return this.APICall("Core/SetTriggerEnabled", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> Sleep() {
+    public Map Sleep() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/Sleep", args);
+        return this.APICall("Core/Sleep", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> Start() {
+    public Map Start() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/Start", args);
+        return this.APICall("Core/Start", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return void AMPType: Void
+     * Name Description Optional
+     * @return Void
      */
-    public Map<?, ?> Stop() {
+    public Void Stop() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/Stop", args);
+        return this.APICall("Core/Stop", args, Void.class);
     }
 
     /**
      * Prevents the current instance from being started, and stops it if it's currently running.
-     * Name TypeName Description Optional
-     * @return void AMPType: Void
+     * Name Description Optional
+     * @return Void
      */
-    public Map<?, ?> Suspend() {
+    public Void Suspend() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/Suspend", args);
+        return this.APICall("Core/Suspend", args, Void.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return void AMPType: Void
+     * Name Description Optional
+     * @return Void
      */
-    public Map<?, ?> UpdateAMPInstance() {
+    public Void UpdateAMPInstance() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/UpdateAMPInstance", args);
+        return this.APICall("Core/UpdateAMPInstance", args, Void.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param EmailAddress String AMPType: String 
-     * @param TwoFactorPIN String AMPType: String 
-     * @return  AMPType: Task<ActionResult>
+     * Name Description Optional
+     * @param EmailAddress  False
+     * @param TwoFactorPIN  False
+     * @return Map
      */
-    public Map<?, ?> UpdateAccountInfo(String EmailAddress, String TwoFactorPIN) {
+    public Map UpdateAccountInfo(String EmailAddress, String TwoFactorPIN) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("EmailAddress", EmailAddress);
         args.put("TwoFactorPIN", TwoFactorPIN);
-        return this.APICall("Core/UpdateAccountInfo", args);
+        return this.APICall("Core/UpdateAccountInfo", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @return Map
      */
-    public Map<?, ?> UpdateApplication() {
+    public Map UpdateApplication() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/UpdateApplication", args);
+        return this.APICall("Core/UpdateApplication", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param Username String AMPType: String 
-     * @param Disabled boolean AMPType: Boolean 
-     * @param PasswordExpires boolean AMPType: Boolean 
-     * @param CannotChangePassword boolean AMPType: Boolean 
-     * @param MustChangePassword boolean AMPType: Boolean 
-     * @param EmailAddress String AMPType: String 
-     * @return  AMPType: Task<ActionResult>
+     * Name Description Optional
+     * @param Username  False
+     * @param Disabled  False
+     * @param PasswordExpires  False
+     * @param CannotChangePassword  False
+     * @param MustChangePassword  False
+     * @param EmailAddress  True
+     * @return Map
      */
-    public Map<?, ?> UpdateUserInfo(String Username, boolean Disabled, boolean PasswordExpires, boolean CannotChangePassword, boolean MustChangePassword, String EmailAddress) {
+    public Map UpdateUserInfo(String Username, boolean Disabled, boolean PasswordExpires, boolean CannotChangePassword, boolean MustChangePassword, String EmailAddress) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         args.put("Disabled", Disabled);
@@ -966,31 +961,31 @@ public class Core extends AMPAPIBase {
         args.put("CannotChangePassword", CannotChangePassword);
         args.put("MustChangePassword", MustChangePassword);
         args.put("EmailAddress", EmailAddress);
-        return this.APICall("Core/UpdateUserInfo", args);
+        return this.APICall("Core/UpdateUserInfo", args, Map.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @return void AMPType: Void
+     * Name Description Optional
+     * @return Void
      */
-    public Map<?, ?> UpgradeAMP() {
+    public Void UpgradeAMP() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/UpgradeAMP", args);
+        return this.APICall("Core/UpgradeAMP", args, Void.class);
     }
 
     /**
-     * Name TypeName Description Optional
-     * @param attestationObject String AMPType: String 
-     * @param clientDataJSON String AMPType: String 
-     * @param description String AMPType: String 
-     * @return  AMPType: ActionResult
+     * Name Description Optional
+     * @param attestationObject  False
+     * @param clientDataJSON  False
+     * @param description  True
+     * @return Map
      */
-    public Map<?, ?> WebauthnRegister(String attestationObject, String clientDataJSON, String description) {
+    public Map WebauthnRegister(String attestationObject, String clientDataJSON, String description) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("attestationObject", attestationObject);
         args.put("clientDataJSON", clientDataJSON);
         args.put("description", description);
-        return this.APICall("Core/WebauthnRegister", args);
+        return this.APICall("Core/WebauthnRegister", args, Map.class);
     }
 
 }
