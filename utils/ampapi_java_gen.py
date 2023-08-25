@@ -5,69 +5,70 @@ import requests
 import json
 
 type_dict = {
-    "InstanceDatastore": "",
-    "ActionResult": "",
+    "InstanceDatastore": "Object", # Undefined Type
+    "ActionResult": "Object", # Undefined Type
     "Int32": "Integer",
     "IEnumerable<InstanceDatastore>": "List",
-    "RunningTask": "",
+    "RunningTask": "Object", # Undefined Type
     "IEnumerable<JObject>": "List",
     "Guid": "String",
-    "Task<RunningTask>": "",
+    "Task<RunningTask>": "Object", # Undefined Type
     "IEnumerable<DeploymentTemplate>": "List",
     "String": "String",
-    "DeploymentTemplate": "",
+    "DeploymentTemplate": "Object", # Undefined Type
     "Boolean": "boolean",
     "List<String>": "List",
-    "PostCreateActions": "",
+    "PostCreateActions": "Object", # Undefined Type
     "Dictionary<String, String>": "Map",
-    "RemoteTargetInfo": "",
+    "RemoteTargetInfo": "Object", # Undefined Type
     "IEnumerable<ApplicationSpec>": "List",
     "Void": "Void",
     "IEnumerable<EndpointInfo>": "List",
     "IEnumerable<IADSInstance>": "List",
     "JObject": "Map",
     "PortProtocol": "String",
-    "Task<ActionResult>": "",
-    "ActionResult<String>": "",
+    "Task<ActionResult>": "Object", # Undefined Type
+    "ActionResult<String>": "Object", # Undefined Type
     "IADSInstance": "boolean",
     "Uri": "String",
     "IEnumerable<PortUsage>": "List",
     "Dictionary<String, Int32>": "Map",
-    "LocalAMPInstance": "",
-    "ContainerMemoryPolicy": "",
-    "Single": "",
-    "Task<JObject>": "",
+    "LocalAMPInstance": "Object", # Undefined Type
+    "ContainerMemoryPolicy": "Object", # Undefined Type
+    "Single": "Object", # Undefined Type
+    "Task<JObject>": "Object", # Undefined Type
     "Int64": "Integer",
-    "FileChunkData": "",
+    "FileChunkData": "Object", # Undefined Type
     "IEnumerable<BackupManifest>": "List",
-    "Nullable<DateTime>": "",
+    "Nullable<DateTime>": "Object", # Undefined Type
     "IEnumerable<IAuditLogEntry>": "Map",
     "Dictionary<String, IEnumerable<JObject>>": "Map",
     "IDictionary<String, String>": "Map",
     "List<JObject>": "List",
     "String[]": "List",
-    "Task<IEnumerable<AuthRoleSummary>>": "",
-    "Task<IDictionary<Guid, String>>": "",
-    "Task<AuthRoleSummary>": "",
-    "Task<ActionResult<Guid>>": "",
+    "Task<IEnumerable<AuthRoleSummary>>": "Object", # Undefined Type
+    "Task<IDictionary<Guid, String>>": "Object", # Undefined Type
+    "Task<AuthRoleSummary>": "Object", # Undefined Type
+    "Task<ActionResult<Guid>>": "Object", # Undefined Type
     "Nullable<Boolean>": "boolean",
-    "Task<IEnumerable<String>>": "",
-    "ScheduleInfo": "",
+    "Task<IEnumerable<String>>": "Object", # Undefined Type
+    "ScheduleInfo": "Object", # Undefined Type
     "Int32[]": "List<Integer>",
-    "TimeIntervalTrigger": "",
+    "TimeIntervalTrigger": "Object", # Undefined Type
     "IEnumerable<WebSessionSummary>": "List",
-    "Task<IEnumerable<UserInfoSummary>>": "",
-    "Task<UserInfo>": "",
-    "Task<IEnumerable<UserInfo>>": "",
+    "Task<IEnumerable<UserInfoSummary>>": "Object", # Undefined Type
+    "Task<UserInfo>": "Object", # Undefined Type
+    "Task<IEnumerable<UserInfo>>": "Object", # Undefined Type
     "IList<IPermissionsTreeNode>": "List",
-    "WebauthnLoginInfo": "",
+    "WebauthnLoginInfo": "Object", # Undefined Type
     "IEnumerable<WebauthnCredentialSummary>": "List",
-    "Task<ActionResult<TwoFactorSetupInfo>>": "",
-    "IEnumerable<RunningTask>": "", "ModuleInfo": "",
+    "Task<ActionResult<TwoFactorSetupInfo>>": "Object", # Undefined Type
+    "IEnumerable<RunningTask>": "Object", # Undefined Type
+    "ModuleInfo": "Object", # Undefined Type
     "Dictionary<String, Dictionary<String, MethodInfoSummary>>": "Map",
-    "Object": "",
-    "Task<String>": "",
-    "UpdateInfo": "",
+    "Object": "Object",
+    "Task<String>": "Object", # Undefined Type
+    "UpdateInfo": "Object", # Undefined Type
     "IEnumerable<ListeningPortSummary>": "List",
 }
 
@@ -117,10 +118,7 @@ def generate_apimodule_method(module: str, method: str, method_spec: dict):
 
     # Print out the type if it hasn't been added to the type_dict
     if not return_type in type_dict.keys(): print(return_type)
-    if not type_dict[return_type] == "":
-        return_type = type_dict[return_type]
-    else:
-        return_type = "Map"
+    return_type = type_dict[return_type]
 
     # Get the method parameters
     parameters = ""
@@ -130,12 +128,7 @@ def generate_apimodule_method(module: str, method: str, method_spec: dict):
 
         # Print out the type if it hasn't been added to the type_dict
         if not type_name in type_dict.keys(): print(type_name)
-
-        type = "Object"
-        if not type_dict[type_name] == "":
-            type = type_dict[type_name]
-
-        parameters += f"{type} {name}, "
+        parameters += f"{type_dict[type_name]} {name}, "
 
     parameters = parameters[:-2]
 

@@ -14,12 +14,12 @@ public class LocalFileBackupPlugin extends AMPAPI {
     /**
      * Name Description Optional
      * @param BackupId  False
-     * @return Map
+     * @return Object
      */
-    public Map DeleteFromS3(String BackupId) {
+    public Object DeleteFromS3(String BackupId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
-        return this.APICall("LocalFileBackupPlugin/DeleteFromS3", args, Map.class);
+        return this.APICall("LocalFileBackupPlugin/DeleteFromS3", args, Object.class);
     }
 
     /**
@@ -36,12 +36,12 @@ public class LocalFileBackupPlugin extends AMPAPI {
     /**
      * Name Description Optional
      * @param BackupId  False
-     * @return Map
+     * @return Object
      */
-    public Map DownloadFromS3(String BackupId) {
+    public Object DownloadFromS3(String BackupId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
-        return this.APICall("LocalFileBackupPlugin/DownloadFromS3", args, Map.class);
+        return this.APICall("LocalFileBackupPlugin/DownloadFromS3", args, Object.class);
     }
 
     /**
@@ -57,13 +57,13 @@ public class LocalFileBackupPlugin extends AMPAPI {
      * Name Description Optional
      * @param BackupId  False
      * @param DeleteExistingData  True
-     * @return Map
+     * @return Object
      */
-    public Map RestoreBackup(String BackupId, boolean DeleteExistingData) {
+    public Object RestoreBackup(String BackupId, boolean DeleteExistingData) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
         args.put("DeleteExistingData", DeleteExistingData);
-        return this.APICall("LocalFileBackupPlugin/RestoreBackup", args, Map.class);
+        return this.APICall("LocalFileBackupPlugin/RestoreBackup", args, Object.class);
     }
 
     /**
@@ -84,25 +84,25 @@ public class LocalFileBackupPlugin extends AMPAPI {
      * @param Title  False
      * @param Description  False
      * @param Sticky  False
-     * @return Map
+     * @return Object
      */
-    public Map TakeBackup(String Title, String Description, boolean Sticky) {
+    public Object TakeBackup(String Title, String Description, boolean Sticky) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Title", Title);
         args.put("Description", Description);
         args.put("Sticky", Sticky);
-        return this.APICall("LocalFileBackupPlugin/TakeBackup", args, Map.class);
+        return this.APICall("LocalFileBackupPlugin/TakeBackup", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param BackupId  False
-     * @return Map
+     * @return Object
      */
-    public Map UploadToS3(String BackupId) {
+    public Object UploadToS3(String BackupId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
-        return this.APICall("LocalFileBackupPlugin/UploadToS3", args, Map.class);
+        return this.APICall("LocalFileBackupPlugin/UploadToS3", args, Object.class);
     }
 
 }

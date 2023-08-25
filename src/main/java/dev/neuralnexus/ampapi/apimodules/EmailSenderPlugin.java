@@ -13,11 +13,11 @@ public class EmailSenderPlugin extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map TestSMTPSettings() {
+    public Object TestSMTPSettings() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("EmailSenderPlugin/TestSMTPSettings", args, Map.class);
+        return this.APICall("EmailSenderPlugin/TestSMTPSettings", args, Object.class);
     }
 
 }

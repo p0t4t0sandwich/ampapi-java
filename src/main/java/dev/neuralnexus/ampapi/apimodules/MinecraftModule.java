@@ -23,23 +23,23 @@ public class MinecraftModule extends AMPAPI {
     /**
      * Name Description Optional
      * @param UserOrUUID  False
-     * @return Map
+     * @return Object
      */
-    public Map AddOPEntry(String UserOrUUID) {
+    public Object AddOPEntry(String UserOrUUID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("UserOrUUID", UserOrUUID);
-        return this.APICall("MinecraftModule/AddOPEntry", args, Map.class);
+        return this.APICall("MinecraftModule/AddOPEntry", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param UserOrUUID  False
-     * @return Map
+     * @return Object
      */
-    public Map AddToWhitelist(String UserOrUUID) {
+    public Object AddToWhitelist(String UserOrUUID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("UserOrUUID", UserOrUUID);
-        return this.APICall("MinecraftModule/AddToWhitelist", args, Map.class);
+        return this.APICall("MinecraftModule/AddToWhitelist", args, Object.class);
     }
 
     /**
@@ -65,12 +65,12 @@ public class MinecraftModule extends AMPAPI {
     /**
      * Name Description Optional
      * @param pluginId  False
-     * @return Map
+     * @return Object
      */
-    public Map BukGetInstallUpdatePlugin(Integer pluginId) {
+    public Object BukGetInstallUpdatePlugin(Integer pluginId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("pluginId", pluginId);
-        return this.APICall("MinecraftModule/BukGetInstallUpdatePlugin", args, Map.class);
+        return this.APICall("MinecraftModule/BukGetInstallUpdatePlugin", args, Object.class);
     }
 
     /**

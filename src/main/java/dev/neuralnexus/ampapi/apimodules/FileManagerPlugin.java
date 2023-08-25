@@ -29,12 +29,12 @@ public class FileManagerPlugin extends AMPAPI {
     /**
      * Name Description Optional
      * @param FilePath  False
-     * @return Map
+     * @return Object
      */
-    public Map CalculateFileMD5Sum(String FilePath) {
+    public Object CalculateFileMD5Sum(String FilePath) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("FilePath", FilePath);
-        return this.APICall("FileManagerPlugin/CalculateFileMD5Sum", args, Map.class);
+        return this.APICall("FileManagerPlugin/CalculateFileMD5Sum", args, Object.class);
     }
 
     /**
@@ -42,62 +42,62 @@ public class FileManagerPlugin extends AMPAPI {
      * @param ModifyPath  False
      * @param AsDirectory  False
      * @param Exclude  False
-     * @return Map
+     * @return Object
      */
-    public Map ChangeExclusion(String ModifyPath, boolean AsDirectory, boolean Exclude) {
+    public Object ChangeExclusion(String ModifyPath, boolean AsDirectory, boolean Exclude) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ModifyPath", ModifyPath);
         args.put("AsDirectory", AsDirectory);
         args.put("Exclude", Exclude);
-        return this.APICall("FileManagerPlugin/ChangeExclusion", args, Map.class);
+        return this.APICall("FileManagerPlugin/ChangeExclusion", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param Origin  False
      * @param TargetDirectory  False
-     * @return Map
+     * @return Object
      */
-    public Map CopyFile(String Origin, String TargetDirectory) {
+    public Object CopyFile(String Origin, String TargetDirectory) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Origin", Origin);
         args.put("TargetDirectory", TargetDirectory);
-        return this.APICall("FileManagerPlugin/CopyFile", args, Map.class);
+        return this.APICall("FileManagerPlugin/CopyFile", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param PathToArchive  False
-     * @return Map
+     * @return Object
      */
-    public Map CreateArchive(String PathToArchive) {
+    public Object CreateArchive(String PathToArchive) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("PathToArchive", PathToArchive);
-        return this.APICall("FileManagerPlugin/CreateArchive", args, Map.class);
+        return this.APICall("FileManagerPlugin/CreateArchive", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param NewPath  False
-     * @return Map
+     * @return Object
      */
-    public Map CreateDirectory(String NewPath) {
+    public Object CreateDirectory(String NewPath) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("NewPath", NewPath);
-        return this.APICall("FileManagerPlugin/CreateDirectory", args, Map.class);
+        return this.APICall("FileManagerPlugin/CreateDirectory", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param Source  False
      * @param TargetDirectory  False
-     * @return Map
+     * @return Object
      */
-    public Map DownloadFileFromURL(String Source, String TargetDirectory) {
+    public Object DownloadFileFromURL(String Source, String TargetDirectory) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Source", Source);
         args.put("TargetDirectory", TargetDirectory);
-        return this.APICall("FileManagerPlugin/DownloadFileFromURL", args, Map.class);
+        return this.APICall("FileManagerPlugin/DownloadFileFromURL", args, Object.class);
     }
 
     /**
@@ -112,25 +112,25 @@ public class FileManagerPlugin extends AMPAPI {
     /**
      * Name Description Optional
      * @param TrashDirectoryName  False
-     * @return Map
+     * @return Object
      */
-    public Map EmptyTrash(String TrashDirectoryName) {
+    public Object EmptyTrash(String TrashDirectoryName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TrashDirectoryName", TrashDirectoryName);
-        return this.APICall("FileManagerPlugin/EmptyTrash", args, Map.class);
+        return this.APICall("FileManagerPlugin/EmptyTrash", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param ArchivePath  False
      * @param DestinationPath  True
-     * @return Map
+     * @return Object
      */
-    public Map ExtractArchive(String ArchivePath, String DestinationPath) {
+    public Object ExtractArchive(String ArchivePath, String DestinationPath) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ArchivePath", ArchivePath);
         args.put("DestinationPath", DestinationPath);
-        return this.APICall("FileManagerPlugin/ExtractArchive", args, Map.class);
+        return this.APICall("FileManagerPlugin/ExtractArchive", args, Object.class);
     }
 
     /**
@@ -149,14 +149,14 @@ public class FileManagerPlugin extends AMPAPI {
      * @param Filename  False
      * @param Position  False
      * @param Length  False
-     * @return Map
+     * @return Object
      */
-    public Map GetFileChunk(String Filename, Integer Position, Integer Length) {
+    public Object GetFileChunk(String Filename, Integer Position, Integer Length) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
         args.put("Position", Position);
         args.put("Length", Length);
-        return this.APICall("FileManagerPlugin/GetFileChunk", args, Map.class);
+        return this.APICall("FileManagerPlugin/GetFileChunk", args, Object.class);
     }
 
     /**
@@ -164,62 +164,62 @@ public class FileManagerPlugin extends AMPAPI {
      * @param Filename  False
      * @param Offset  False
      * @param ChunkSize  True
-     * @return Map
+     * @return Object
      */
-    public Map ReadFileChunk(String Filename, Integer Offset, Integer ChunkSize) {
+    public Object ReadFileChunk(String Filename, Integer Offset, Integer ChunkSize) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
         args.put("Offset", Offset);
         args.put("ChunkSize", ChunkSize);
-        return this.APICall("FileManagerPlugin/ReadFileChunk", args, Map.class);
+        return this.APICall("FileManagerPlugin/ReadFileChunk", args, Object.class);
     }
 
     /**The name component of the new directory (not the full path)
      * Name Description Optional
      * @param oldDirectory The full path to the old directory False
      * @param NewDirectoryName The name component of the new directory (not the full path) False
-     * @return Map
+     * @return Object
      */
-    public Map RenameDirectory(String oldDirectory, String NewDirectoryName) {
+    public Object RenameDirectory(String oldDirectory, String NewDirectoryName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("oldDirectory", oldDirectory);
         args.put("NewDirectoryName", NewDirectoryName);
-        return this.APICall("FileManagerPlugin/RenameDirectory", args, Map.class);
+        return this.APICall("FileManagerPlugin/RenameDirectory", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param Filename  False
      * @param NewFilename  False
-     * @return Map
+     * @return Object
      */
-    public Map RenameFile(String Filename, String NewFilename) {
+    public Object RenameFile(String Filename, String NewFilename) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
         args.put("NewFilename", NewFilename);
-        return this.APICall("FileManagerPlugin/RenameFile", args, Map.class);
+        return this.APICall("FileManagerPlugin/RenameFile", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param DirectoryName  False
-     * @return Map
+     * @return Object
      */
-    public Map TrashDirectory(String DirectoryName) {
+    public Object TrashDirectory(String DirectoryName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("DirectoryName", DirectoryName);
-        return this.APICall("FileManagerPlugin/TrashDirectory", args, Map.class);
+        return this.APICall("FileManagerPlugin/TrashDirectory", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param Filename  False
-     * @return Map
+     * @return Object
      */
-    public Map TrashFile(String Filename) {
+    public Object TrashFile(String Filename) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
-        return this.APICall("FileManagerPlugin/TrashFile", args, Map.class);
+        return this.APICall("FileManagerPlugin/TrashFile", args, Object.class);
     }
 
     /**
@@ -228,15 +228,15 @@ public class FileManagerPlugin extends AMPAPI {
      * @param Data  False
      * @param Offset  False
      * @param FinalChunk  False
-     * @return Map
+     * @return Object
      */
-    public Map WriteFileChunk(String Filename, String Data, Integer Offset, boolean FinalChunk) {
+    public Object WriteFileChunk(String Filename, String Data, Integer Offset, boolean FinalChunk) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
         args.put("Data", Data);
         args.put("Offset", Offset);
         args.put("FinalChunk", FinalChunk);
-        return this.APICall("FileManagerPlugin/WriteFileChunk", args, Map.class);
+        return this.APICall("FileManagerPlugin/WriteFileChunk", args, Object.class);
     }
 
 }

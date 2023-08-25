@@ -23,12 +23,12 @@ public class Core extends AMPAPI {
     /**
      * Name Description Optional
      * @param triggerId  False
-     * @return Map
+     * @return Object
      */
-    public Map AddEventTrigger(String triggerId) {
+    public Object AddEventTrigger(String triggerId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("triggerId", triggerId);
-        return this.APICall("Core/AddEventTrigger", args, Map.class);
+        return this.APICall("Core/AddEventTrigger", args, Object.class);
     }
 
     /**
@@ -39,9 +39,9 @@ public class Core extends AMPAPI {
      * @param minutes  False
      * @param daysOfMonth  False
      * @param description  False
-     * @return Map
+     * @return Object
      */
-    public Map AddIntervalTrigger(List<Integer> months, List<Integer> days, List<Integer> hours, List<Integer> minutes, List<Integer> daysOfMonth, String description) {
+    public Object AddIntervalTrigger(List<Integer> months, List<Integer> days, List<Integer> hours, List<Integer> minutes, List<Integer> daysOfMonth, String description) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("months", months);
         args.put("days", days);
@@ -49,7 +49,7 @@ public class Core extends AMPAPI {
         args.put("minutes", minutes);
         args.put("daysOfMonth", daysOfMonth);
         args.put("description", description);
-        return this.APICall("Core/AddIntervalTrigger", args, Map.class);
+        return this.APICall("Core/AddIntervalTrigger", args, Object.class);
     }
 
     /**
@@ -57,35 +57,35 @@ public class Core extends AMPAPI {
      * @param TriggerID  False
      * @param MethodID  False
      * @param ParameterMapping  False
-     * @return Map
+     * @return Object
      */
-    public Map AddTask(String TriggerID, String MethodID, Map ParameterMapping) {
+    public Object AddTask(String TriggerID, String MethodID, Map ParameterMapping) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
         args.put("MethodID", MethodID);
         args.put("ParameterMapping", ParameterMapping);
-        return this.APICall("Core/AddTask", args, Map.class);
+        return this.APICall("Core/AddTask", args, Object.class);
     }
 
     /**
      * DEV: Async test method
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map AsyncTest() {
+    public Object AsyncTest() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/AsyncTest", args, Map.class);
+        return this.APICall("Core/AsyncTest", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param TaskId  False
-     * @return Map
+     * @return Object
      */
-    public Map CancelTask(String TaskId) {
+    public Object CancelTask(String TaskId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TaskId", TaskId);
-        return this.APICall("Core/CancelTask", args, Map.class);
+        return this.APICall("Core/CancelTask", args, Object.class);
     }
 
     /**
@@ -93,14 +93,14 @@ public class Core extends AMPAPI {
      * @param TriggerID  False
      * @param TaskID  False
      * @param NewOrder  False
-     * @return Map
+     * @return Object
      */
-    public Map ChangeTaskOrder(String TriggerID, String TaskID, Integer NewOrder) {
+    public Object ChangeTaskOrder(String TriggerID, String TaskID, Integer NewOrder) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
         args.put("TaskID", TaskID);
         args.put("NewOrder", NewOrder);
-        return this.APICall("Core/ChangeTaskOrder", args, Map.class);
+        return this.APICall("Core/ChangeTaskOrder", args, Object.class);
     }
 
     /**
@@ -109,41 +109,41 @@ public class Core extends AMPAPI {
      * @param OldPassword  False
      * @param NewPassword  False
      * @param TwoFactorPIN  False
-     * @return Map
+     * @return Object
      */
-    public Map ChangeUserPassword(String Username, String OldPassword, String NewPassword, String TwoFactorPIN) {
+    public Object ChangeUserPassword(String Username, String OldPassword, String NewPassword, String TwoFactorPIN) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         args.put("OldPassword", OldPassword);
         args.put("NewPassword", NewPassword);
         args.put("TwoFactorPIN", TwoFactorPIN);
-        return this.APICall("Core/ChangeUserPassword", args, Map.class);
+        return this.APICall("Core/ChangeUserPassword", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param Username  False
      * @param TwoFactorCode  False
-     * @return Map
+     * @return Object
      */
-    public Map ConfirmTwoFactorSetup(String Username, String TwoFactorCode) {
+    public Object ConfirmTwoFactorSetup(String Username, String TwoFactorCode) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         args.put("TwoFactorCode", TwoFactorCode);
-        return this.APICall("Core/ConfirmTwoFactorSetup", args, Map.class);
+        return this.APICall("Core/ConfirmTwoFactorSetup", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param Name  False
      * @param AsCommonRole  True
-     * @return Map
+     * @return Object
      */
-    public Map CreateRole(String Name, boolean AsCommonRole) {
+    public Object CreateRole(String Name, boolean AsCommonRole) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Name", Name);
         args.put("AsCommonRole", AsCommonRole);
-        return this.APICall("Core/CreateRole", args, Map.class);
+        return this.APICall("Core/CreateRole", args, Object.class);
     }
 
     /**
@@ -159,12 +159,12 @@ public class Core extends AMPAPI {
     /**
      * Name Description Optional
      * @param Username  False
-     * @return Map
+     * @return Object
      */
-    public Map CreateUser(String Username) {
+    public Object CreateUser(String Username) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
-        return this.APICall("Core/CreateUser", args, Map.class);
+        return this.APICall("Core/CreateUser", args, Object.class);
     }
 
     /**
@@ -181,91 +181,91 @@ public class Core extends AMPAPI {
     /**
      * Name Description Optional
      * @param InstanceId  False
-     * @return Map
+     * @return Object
      */
-    public Map DeleteInstanceUsers(String InstanceId) {
+    public Object DeleteInstanceUsers(String InstanceId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
-        return this.APICall("Core/DeleteInstanceUsers", args, Map.class);
+        return this.APICall("Core/DeleteInstanceUsers", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param RoleId  False
-     * @return Map
+     * @return Object
      */
-    public Map DeleteRole(String RoleId) {
+    public Object DeleteRole(String RoleId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
-        return this.APICall("Core/DeleteRole", args, Map.class);
+        return this.APICall("Core/DeleteRole", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param TriggerID  False
      * @param TaskID  False
-     * @return Map
+     * @return Object
      */
-    public Map DeleteTask(String TriggerID, String TaskID) {
+    public Object DeleteTask(String TriggerID, String TaskID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
         args.put("TaskID", TaskID);
-        return this.APICall("Core/DeleteTask", args, Map.class);
+        return this.APICall("Core/DeleteTask", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param TriggerID  False
-     * @return Map
+     * @return Object
      */
-    public Map DeleteTrigger(String TriggerID) {
+    public Object DeleteTrigger(String TriggerID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
-        return this.APICall("Core/DeleteTrigger", args, Map.class);
+        return this.APICall("Core/DeleteTrigger", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param Username  False
-     * @return Map
+     * @return Object
      */
-    public Map DeleteUser(String Username) {
+    public Object DeleteUser(String Username) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
-        return this.APICall("Core/DeleteUser", args, Map.class);
+        return this.APICall("Core/DeleteUser", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param Password  False
      * @param TwoFactorCode  False
-     * @return Map
+     * @return Object
      */
-    public Map DisableTwoFactor(String Password, String TwoFactorCode) {
+    public Object DisableTwoFactor(String Password, String TwoFactorCode) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Password", Password);
         args.put("TwoFactorCode", TwoFactorCode);
-        return this.APICall("Core/DisableTwoFactor", args, Map.class);
+        return this.APICall("Core/DisableTwoFactor", args, Object.class);
     }
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map DismissAllTasks() {
+    public Object DismissAllTasks() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/DismissAllTasks", args, Map.class);
+        return this.APICall("Core/DismissAllTasks", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param TaskId  False
-     * @return Map
+     * @return Object
      */
-    public Map DismissTask(String TaskId) {
+    public Object DismissTask(String TaskId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TaskId", TaskId);
-        return this.APICall("Core/DismissTask", args, Map.class);
+        return this.APICall("Core/DismissTask", args, Object.class);
     }
 
     /**
@@ -277,9 +277,9 @@ public class Core extends AMPAPI {
      * @param minutes  False
      * @param daysOfMonth  False
      * @param description  False
-     * @return Map
+     * @return Object
      */
-    public Map EditIntervalTrigger(String Id, List<Integer> months, List<Integer> days, List<Integer> hours, List<Integer> minutes, List<Integer> daysOfMonth, String description) {
+    public Object EditIntervalTrigger(String Id, List<Integer> months, List<Integer> days, List<Integer> hours, List<Integer> minutes, List<Integer> daysOfMonth, String description) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         args.put("months", months);
@@ -288,7 +288,7 @@ public class Core extends AMPAPI {
         args.put("minutes", minutes);
         args.put("daysOfMonth", daysOfMonth);
         args.put("description", description);
-        return this.APICall("Core/EditIntervalTrigger", args, Map.class);
+        return this.APICall("Core/EditIntervalTrigger", args, Object.class);
     }
 
     /**
@@ -296,27 +296,27 @@ public class Core extends AMPAPI {
      * @param TriggerID  False
      * @param TaskID  False
      * @param ParameterMapping  False
-     * @return Map
+     * @return Object
      */
-    public Map EditTask(String TriggerID, String TaskID, Map ParameterMapping) {
+    public Object EditTask(String TriggerID, String TaskID, Map ParameterMapping) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
         args.put("TaskID", TaskID);
         args.put("ParameterMapping", ParameterMapping);
-        return this.APICall("Core/EditTask", args, Map.class);
+        return this.APICall("Core/EditTask", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param Username  False
      * @param Password  False
-     * @return Map
+     * @return Object
      */
-    public Map EnableTwoFactor(String Username, String Password) {
+    public Object EnableTwoFactor(String Username, String Password) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         args.put("Password", Password);
-        return this.APICall("Core/EnableTwoFactor", args, Map.class);
+        return this.APICall("Core/EnableTwoFactor", args, Object.class);
     }
 
     /**
@@ -333,32 +333,32 @@ public class Core extends AMPAPI {
     /**
      * Name Description Optional
      * @param RoleId  False
-     * @return Map
+     * @return Object
      */
-    public Map GetAMPRolePermissions(String RoleId) {
+    public Object GetAMPRolePermissions(String RoleId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
-        return this.APICall("Core/GetAMPRolePermissions", args, Map.class);
+        return this.APICall("Core/GetAMPRolePermissions", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param Username  False
-     * @return Map
+     * @return Object
      */
-    public Map GetAMPUserInfo(String Username) {
+    public Object GetAMPUserInfo(String Username) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
-        return this.APICall("Core/GetAMPUserInfo", args, Map.class);
+        return this.APICall("Core/GetAMPUserInfo", args, Object.class);
     }
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map GetAMPUsersSummary() {
+    public Object GetAMPUsersSummary() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetAMPUsersSummary", args, Map.class);
+        return this.APICall("Core/GetAMPUsersSummary", args, Object.class);
     }
 
     /**
@@ -381,11 +381,11 @@ public class Core extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map GetAllAMPUserInfo() {
+    public Object GetAllAMPUserInfo() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetAllAMPUserInfo", args, Map.class);
+        return this.APICall("Core/GetAllAMPUserInfo", args, Object.class);
     }
 
     /**
@@ -434,11 +434,11 @@ public class Core extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map GetModuleInfo() {
+    public Object GetModuleInfo() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetModuleInfo", args, Map.class);
+        return this.APICall("Core/GetModuleInfo", args, Object.class);
     }
 
     /**
@@ -481,51 +481,51 @@ public class Core extends AMPAPI {
      * Name Description Optional
      * @param Description  True
      * @param IsTemporary  True
-     * @return Map
+     * @return Object
      */
-    public Map GetRemoteLoginToken(String Description, boolean IsTemporary) {
+    public Object GetRemoteLoginToken(String Description, boolean IsTemporary) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Description", Description);
         args.put("IsTemporary", IsTemporary);
-        return this.APICall("Core/GetRemoteLoginToken", args, Map.class);
+        return this.APICall("Core/GetRemoteLoginToken", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param RoleId  False
-     * @return Map
+     * @return Object
      */
-    public Map GetRole(String RoleId) {
+    public Object GetRole(String RoleId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
-        return this.APICall("Core/GetRole", args, Map.class);
+        return this.APICall("Core/GetRole", args, Object.class);
     }
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map GetRoleData() {
+    public Object GetRoleData() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetRoleData", args, Map.class);
+        return this.APICall("Core/GetRoleData", args, Object.class);
     }
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map GetRoleIds() {
+    public Object GetRoleIds() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetRoleIds", args, Map.class);
+        return this.APICall("Core/GetRoleIds", args, Object.class);
     }
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map GetScheduleData() {
+    public Object GetScheduleData() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetScheduleData", args, Map.class);
+        return this.APICall("Core/GetScheduleData", args, Object.class);
     }
 
     /**
@@ -561,31 +561,31 @@ public class Core extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map GetTasks() {
+    public Object GetTasks() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetTasks", args, Map.class);
+        return this.APICall("Core/GetTasks", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param Id  False
-     * @return Map
+     * @return Object
      */
-    public Map GetTimeIntervalTrigger(String Id) {
+    public Object GetTimeIntervalTrigger(String Id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
-        return this.APICall("Core/GetTimeIntervalTrigger", args, Map.class);
+        return this.APICall("Core/GetTimeIntervalTrigger", args, Object.class);
     }
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map GetUpdateInfo() {
+    public Object GetUpdateInfo() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetUpdateInfo", args, Map.class);
+        return this.APICall("Core/GetUpdateInfo", args, Object.class);
     }
 
     /**
@@ -600,11 +600,11 @@ public class Core extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map GetUserActionsSpec() {
+    public Object GetUserActionsSpec() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetUserActionsSpec", args, Map.class);
+        return this.APICall("Core/GetUserActionsSpec", args, Object.class);
     }
 
     /**
@@ -630,22 +630,22 @@ public class Core extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map GetWebauthnChallenge() {
+    public Object GetWebauthnChallenge() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetWebauthnChallenge", args, Map.class);
+        return this.APICall("Core/GetWebauthnChallenge", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param username  False
-     * @return Map
+     * @return Object
      */
-    public Map GetWebauthnCredentialIDs(String username) {
+    public Object GetWebauthnCredentialIDs(String username) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("username", username);
-        return this.APICall("Core/GetWebauthnCredentialIDs", args, Map.class);
+        return this.APICall("Core/GetWebauthnCredentialIDs", args, Object.class);
     }
 
     /**
@@ -659,11 +659,11 @@ public class Core extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map GetWebserverMetrics() {
+    public Object GetWebserverMetrics() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetWebserverMetrics", args, Map.class);
+        return this.APICall("Core/GetWebserverMetrics", args, Object.class);
     }
 
     /**
@@ -681,15 +681,15 @@ public class Core extends AMPAPI {
      * @param password  False
      * @param token  False
      * @param rememberMe  False
-     * @return Map
+     * @return Object
      */
-    public Map Login(String username, String password, String token, boolean rememberMe) {
+    public Object Login(String username, String password, String token, boolean rememberMe) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("username", username);
         args.put("password", password);
         args.put("token", token);
         args.put("rememberMe", rememberMe);
-        return this.APICall("Core/Login", args, Map.class);
+        return this.APICall("Core/Login", args, Object.class);
     }
 
     /**
@@ -704,12 +704,12 @@ public class Core extends AMPAPI {
     /**
      * Name Description Optional
      * @param Node  False
-     * @return Map
+     * @return Object
      */
-    public Map RefreshSettingValueList(String Node) {
+    public Object RefreshSettingValueList(String Node) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Node", Node);
-        return this.APICall("Core/RefreshSettingValueList", args, Map.class);
+        return this.APICall("Core/RefreshSettingValueList", args, Object.class);
     }
 
     /**
@@ -725,35 +725,35 @@ public class Core extends AMPAPI {
      * Name Description Optional
      * @param RoleId  False
      * @param NewName  False
-     * @return Map
+     * @return Object
      */
-    public Map RenameRole(String RoleId, String NewName) {
+    public Object RenameRole(String RoleId, String NewName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
         args.put("NewName", NewName);
-        return this.APICall("Core/RenameRole", args, Map.class);
+        return this.APICall("Core/RenameRole", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param Username  False
      * @param NewPassword  False
-     * @return Map
+     * @return Object
      */
-    public Map ResetUserPassword(String Username, String NewPassword) {
+    public Object ResetUserPassword(String Username, String NewPassword) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         args.put("NewPassword", NewPassword);
-        return this.APICall("Core/ResetUserPassword", args, Map.class);
+        return this.APICall("Core/ResetUserPassword", args, Object.class);
     }
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map Restart() {
+    public Object Restart() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/Restart", args, Map.class);
+        return this.APICall("Core/Restart", args, Object.class);
     }
 
     /**
@@ -778,23 +778,23 @@ public class Core extends AMPAPI {
     /**
      * Name Description Optional
      * @param ID  False
-     * @return Map
+     * @return Object
      */
-    public Map RevokeWebauthnCredential(Integer ID) {
+    public Object RevokeWebauthnCredential(Integer ID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ID", ID);
-        return this.APICall("Core/RevokeWebauthnCredential", args, Map.class);
+        return this.APICall("Core/RevokeWebauthnCredential", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param triggerId  False
-     * @return Map
+     * @return Object
      */
-    public Map RunEventTriggerImmediately(String triggerId) {
+    public Object RunEventTriggerImmediately(String triggerId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("triggerId", triggerId);
-        return this.APICall("Core/RunEventTriggerImmediately", args, Map.class);
+        return this.APICall("Core/RunEventTriggerImmediately", args, Object.class);
     }
 
     /**
@@ -813,14 +813,14 @@ public class Core extends AMPAPI {
      * @param RoleId  False
      * @param PermissionNode  False
      * @param Enabled  False
-     * @return Map
+     * @return Object
      */
-    public Map SetAMPRolePermission(String RoleId, String PermissionNode, boolean Enabled) {
+    public Object SetAMPRolePermission(String RoleId, String PermissionNode, boolean Enabled) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
         args.put("PermissionNode", PermissionNode);
         args.put("Enabled", Enabled);
-        return this.APICall("Core/SetAMPRolePermission", args, Map.class);
+        return this.APICall("Core/SetAMPRolePermission", args, Object.class);
     }
 
     /**
@@ -828,27 +828,27 @@ public class Core extends AMPAPI {
      * @param UserId  False
      * @param RoleId  False
      * @param IsMember  False
-     * @return Map
+     * @return Object
      */
-    public Map SetAMPUserRoleMembership(String UserId, String RoleId, boolean IsMember) {
+    public Object SetAMPUserRoleMembership(String UserId, String RoleId, boolean IsMember) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("UserId", UserId);
         args.put("RoleId", RoleId);
         args.put("IsMember", IsMember);
-        return this.APICall("Core/SetAMPUserRoleMembership", args, Map.class);
+        return this.APICall("Core/SetAMPUserRoleMembership", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param node  False
      * @param value  False
-     * @return Map
+     * @return Object
      */
-    public Map SetConfig(String node, String value) {
+    public Object SetConfig(String node, String value) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("node", node);
         args.put("value", value);
-        return this.APICall("Core/SetConfig", args, Map.class);
+        return this.APICall("Core/SetConfig", args, Object.class);
     }
 
     /**
@@ -866,31 +866,31 @@ public class Core extends AMPAPI {
      * Name Description Optional
      * @param Id  False
      * @param Enabled  False
-     * @return Map
+     * @return Object
      */
-    public Map SetTriggerEnabled(String Id, boolean Enabled) {
+    public Object SetTriggerEnabled(String Id, boolean Enabled) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         args.put("Enabled", Enabled);
-        return this.APICall("Core/SetTriggerEnabled", args, Map.class);
+        return this.APICall("Core/SetTriggerEnabled", args, Object.class);
     }
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map Sleep() {
+    public Object Sleep() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/Sleep", args, Map.class);
+        return this.APICall("Core/Sleep", args, Object.class);
     }
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map Start() {
+    public Object Start() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/Start", args, Map.class);
+        return this.APICall("Core/Start", args, Object.class);
     }
 
     /**
@@ -925,22 +925,22 @@ public class Core extends AMPAPI {
      * Name Description Optional
      * @param EmailAddress  False
      * @param TwoFactorPIN  False
-     * @return Map
+     * @return Object
      */
-    public Map UpdateAccountInfo(String EmailAddress, String TwoFactorPIN) {
+    public Object UpdateAccountInfo(String EmailAddress, String TwoFactorPIN) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("EmailAddress", EmailAddress);
         args.put("TwoFactorPIN", TwoFactorPIN);
-        return this.APICall("Core/UpdateAccountInfo", args, Map.class);
+        return this.APICall("Core/UpdateAccountInfo", args, Object.class);
     }
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map UpdateApplication() {
+    public Object UpdateApplication() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/UpdateApplication", args, Map.class);
+        return this.APICall("Core/UpdateApplication", args, Object.class);
     }
 
     /**
@@ -951,9 +951,9 @@ public class Core extends AMPAPI {
      * @param CannotChangePassword  False
      * @param MustChangePassword  False
      * @param EmailAddress  True
-     * @return Map
+     * @return Object
      */
-    public Map UpdateUserInfo(String Username, boolean Disabled, boolean PasswordExpires, boolean CannotChangePassword, boolean MustChangePassword, String EmailAddress) {
+    public Object UpdateUserInfo(String Username, boolean Disabled, boolean PasswordExpires, boolean CannotChangePassword, boolean MustChangePassword, String EmailAddress) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         args.put("Disabled", Disabled);
@@ -961,7 +961,7 @@ public class Core extends AMPAPI {
         args.put("CannotChangePassword", CannotChangePassword);
         args.put("MustChangePassword", MustChangePassword);
         args.put("EmailAddress", EmailAddress);
-        return this.APICall("Core/UpdateUserInfo", args, Map.class);
+        return this.APICall("Core/UpdateUserInfo", args, Object.class);
     }
 
     /**
@@ -978,14 +978,14 @@ public class Core extends AMPAPI {
      * @param attestationObject  False
      * @param clientDataJSON  False
      * @param description  True
-     * @return Map
+     * @return Object
      */
-    public Map WebauthnRegister(String attestationObject, String clientDataJSON, String description) {
+    public Object WebauthnRegister(String attestationObject, String clientDataJSON, String description) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("attestationObject", attestationObject);
         args.put("clientDataJSON", clientDataJSON);
         args.put("description", description);
-        return this.APICall("Core/WebauthnRegister", args, Map.class);
+        return this.APICall("Core/WebauthnRegister", args, Object.class);
     }
 
 }

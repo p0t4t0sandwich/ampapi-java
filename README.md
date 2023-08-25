@@ -38,6 +38,10 @@ dependencies {
 }
 ```
 
+## Notes
+
+- If a function returns an "Object", it's safe to assume it's a Map<?,?>, it just doesn't have a defined type yet.
+
 ## AMPAPI Example
 
 ```java

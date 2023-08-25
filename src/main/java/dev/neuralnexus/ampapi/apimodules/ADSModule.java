@@ -14,12 +14,12 @@ public class ADSModule extends AMPAPI {
     /**
      * Name Description Optional
      * @param newDatastore  False
-     * @return Map
+     * @return Object
      */
-    public Map AddDatastore(Object newDatastore) {
+    public Object AddDatastore(Object newDatastore) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("newDatastore", newDatastore);
-        return this.APICall("ADSModule/AddDatastore", args, Map.class);
+        return this.APICall("ADSModule/AddDatastore", args, Object.class);
     }
 
     /**
@@ -27,14 +27,14 @@ public class ADSModule extends AMPAPI {
      * @param InstanceID  False
      * @param Args  False
      * @param RebuildConfiguration  True
-     * @return Map
+     * @return Object
      */
-    public Map ApplyInstanceConfiguration(String InstanceID, Map Args, boolean RebuildConfiguration) {
+    public Object ApplyInstanceConfiguration(String InstanceID, Map Args, boolean RebuildConfiguration) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceID", InstanceID);
         args.put("Args", Args);
         args.put("RebuildConfiguration", RebuildConfiguration);
-        return this.APICall("ADSModule/ApplyInstanceConfiguration", args, Map.class);
+        return this.APICall("ADSModule/ApplyInstanceConfiguration", args, Object.class);
     }
 
     /**
@@ -44,16 +44,16 @@ public class ADSModule extends AMPAPI {
      * @param NewFriendlyName  True
      * @param Secret  True
      * @param RestartIfPreviouslyRunning  True
-     * @return Map
+     * @return Object
      */
-    public Map ApplyTemplate(String InstanceID, Integer TemplateID, String NewFriendlyName, String Secret, boolean RestartIfPreviouslyRunning) {
+    public Object ApplyTemplate(String InstanceID, Integer TemplateID, String NewFriendlyName, String Secret, boolean RestartIfPreviouslyRunning) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceID", InstanceID);
         args.put("TemplateID", TemplateID);
         args.put("NewFriendlyName", NewFriendlyName);
         args.put("Secret", Secret);
         args.put("RestartIfPreviouslyRunning", RestartIfPreviouslyRunning);
-        return this.APICall("ADSModule/ApplyTemplate", args, Map.class);
+        return this.APICall("ADSModule/ApplyTemplate", args, Object.class);
     }
 
     /**
@@ -63,51 +63,51 @@ public class ADSModule extends AMPAPI {
      * @param Host  False
      * @param Port  False
      * @param InstanceID  False
-     * @return Map
+     * @return Object
      */
-    public Map AttachADS(String Friendly, boolean IsHTTPS, String Host, Integer Port, String InstanceID) {
+    public Object AttachADS(String Friendly, boolean IsHTTPS, String Host, Integer Port, String InstanceID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Friendly", Friendly);
         args.put("IsHTTPS", IsHTTPS);
         args.put("Host", Host);
         args.put("Port", Port);
         args.put("InstanceID", InstanceID);
-        return this.APICall("ADSModule/AttachADS", args, Map.class);
+        return this.APICall("ADSModule/AttachADS", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param Id  False
      * @param NewName  False
-     * @return Map
+     * @return Object
      */
-    public Map CloneTemplate(Integer Id, String NewName) {
+    public Object CloneTemplate(Integer Id, String NewName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         args.put("NewName", NewName);
-        return this.APICall("ADSModule/CloneTemplate", args, Map.class);
+        return this.APICall("ADSModule/CloneTemplate", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param InstanceName  False
-     * @return Map
+     * @return Object
      */
-    public Map ConvertToManaged(String InstanceName) {
+    public Object ConvertToManaged(String InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
-        return this.APICall("ADSModule/ConvertToManaged", args, Map.class);
+        return this.APICall("ADSModule/ConvertToManaged", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param Name  False
-     * @return Map
+     * @return Object
      */
-    public Map CreateDeploymentTemplate(String Name) {
+    public Object CreateDeploymentTemplate(String Name) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Name", Name);
-        return this.APICall("ADSModule/CreateDeploymentTemplate", args, Map.class);
+        return this.APICall("ADSModule/CreateDeploymentTemplate", args, Object.class);
     }
 
     /**
@@ -127,9 +127,9 @@ public class ADSModule extends AMPAPI {
      * @param StartOnBoot  True
      * @param DisplayImageSource  True
      * @param TargetDatastore  True
-     * @return Map
+     * @return Object
      */
-    public Map CreateInstance(String TargetADSInstance, String NewInstanceId, String Module, String InstanceName, String FriendlyName, String IPBinding, Integer PortNumber, String AdminUsername, String AdminPassword, Map ProvisionSettings, boolean AutoConfigure, Object PostCreate, boolean StartOnBoot, String DisplayImageSource, Integer TargetDatastore) {
+    public Object CreateInstance(String TargetADSInstance, String NewInstanceId, String Module, String InstanceName, String FriendlyName, String IPBinding, Integer PortNumber, String AdminUsername, String AdminPassword, Map ProvisionSettings, boolean AutoConfigure, Object PostCreate, boolean StartOnBoot, String DisplayImageSource, Integer TargetDatastore) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TargetADSInstance", TargetADSInstance);
         args.put("NewInstanceId", NewInstanceId);
@@ -146,64 +146,64 @@ public class ADSModule extends AMPAPI {
         args.put("StartOnBoot", StartOnBoot);
         args.put("DisplayImageSource", DisplayImageSource);
         args.put("TargetDatastore", TargetDatastore);
-        return this.APICall("ADSModule/CreateInstance", args, Map.class);
+        return this.APICall("ADSModule/CreateInstance", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param Instance  False
      * @param PostCreate  True
-     * @return Map
+     * @return Object
      */
-    public Map CreateLocalInstance(Object Instance, Object PostCreate) {
+    public Object CreateLocalInstance(Object Instance, Object PostCreate) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Instance", Instance);
         args.put("PostCreate", PostCreate);
-        return this.APICall("ADSModule/CreateLocalInstance", args, Map.class);
+        return this.APICall("ADSModule/CreateLocalInstance", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param id  False
-     * @return Map
+     * @return Object
      */
-    public Map DeleteDatastore(Integer id) {
+    public Object DeleteDatastore(Integer id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("id", id);
-        return this.APICall("ADSModule/DeleteDatastore", args, Map.class);
+        return this.APICall("ADSModule/DeleteDatastore", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param Id  False
-     * @return Map
+     * @return Object
      */
-    public Map DeleteDeploymentTemplate(Integer Id) {
+    public Object DeleteDeploymentTemplate(Integer Id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
-        return this.APICall("ADSModule/DeleteDeploymentTemplate", args, Map.class);
+        return this.APICall("ADSModule/DeleteDeploymentTemplate", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param InstanceName  False
-     * @return Map
+     * @return Object
      */
-    public Map DeleteInstance(String InstanceName) {
+    public Object DeleteInstance(String InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
-        return this.APICall("ADSModule/DeleteInstance", args, Map.class);
+        return this.APICall("ADSModule/DeleteInstance", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param InstanceId  False
-     * @return Map
+     * @return Object
      */
-    public Map DeleteInstanceUsers(String InstanceId) {
+    public Object DeleteInstanceUsers(String InstanceId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
-        return this.APICall("ADSModule/DeleteInstanceUsers", args, Map.class);
+        return this.APICall("ADSModule/DeleteInstanceUsers", args, Object.class);
     }
 
     /**A dictionary of setting nodes and values to create the new instance with. Identical in function to the provisioning arguments in the template itself.
@@ -218,9 +218,9 @@ public class ADSModule extends AMPAPI {
      * @param Secret Must be a non-empty strong in order to get a callback on deployment state change. This secret will be passed back to you in the callback so you can verify the request. True
      * @param PostCreate 0: Do nothing, 1: Start instance only, 2: Start instance and update application, 3: Full application startup. True
      * @param ExtraProvisionSettings A dictionary of setting nodes and values to create the new instance with. Identical in function to the provisioning arguments in the template itself. True
-     * @return Map
+     * @return Object
      */
-    public Map DeployTemplate(Integer TemplateID, String NewUsername, String NewPassword, String NewEmail, List RequiredTags, String Tag, String FriendlyName, String Secret, Object PostCreate, Map ExtraProvisionSettings) {
+    public Object DeployTemplate(Integer TemplateID, String NewUsername, String NewPassword, String NewEmail, List RequiredTags, String Tag, String FriendlyName, String Secret, Object PostCreate, Map ExtraProvisionSettings) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TemplateID", TemplateID);
         args.put("NewUsername", NewUsername);
@@ -232,29 +232,29 @@ public class ADSModule extends AMPAPI {
         args.put("Secret", Secret);
         args.put("PostCreate", PostCreate);
         args.put("ExtraProvisionSettings", ExtraProvisionSettings);
-        return this.APICall("ADSModule/DeployTemplate", args, Map.class);
+        return this.APICall("ADSModule/DeployTemplate", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param Id  False
-     * @return Map
+     * @return Object
      */
-    public Map DetatchTarget(String Id) {
+    public Object DetatchTarget(String Id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
-        return this.APICall("ADSModule/DetatchTarget", args, Map.class);
+        return this.APICall("ADSModule/DetatchTarget", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param SourceArchive  False
-     * @return Map
+     * @return Object
      */
-    public Map ExtractEverywhere(String SourceArchive) {
+    public Object ExtractEverywhere(String SourceArchive) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("SourceArchive", SourceArchive);
-        return this.APICall("ADSModule/ExtractEverywhere", args, Map.class);
+        return this.APICall("ADSModule/ExtractEverywhere", args, Object.class);
     }
 
     /**
@@ -271,12 +271,12 @@ public class ADSModule extends AMPAPI {
     /**
      * Name Description Optional
      * @param id  False
-     * @return Map
+     * @return Object
      */
-    public Map GetDatastore(Integer id) {
+    public Object GetDatastore(Integer id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("id", id);
-        return this.APICall("ADSModule/GetDatastore", args, Map.class);
+        return this.APICall("ADSModule/GetDatastore", args, Object.class);
     }
 
     /**
@@ -399,11 +399,11 @@ public class ADSModule extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map GetTargetInfo() {
+    public Object GetTargetInfo() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("ADSModule/GetTargetInfo", args, Map.class);
+        return this.APICall("ADSModule/GetTargetInfo", args, Object.class);
     }
 
     /**
@@ -411,25 +411,25 @@ public class ADSModule extends AMPAPI {
      * @param ForModule  False
      * @param SettingNode  False
      * @param Values  False
-     * @return Map
+     * @return Object
      */
-    public Map HandoutInstanceConfigs(String ForModule, String SettingNode, List Values) {
+    public Object HandoutInstanceConfigs(String ForModule, String SettingNode, List Values) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ForModule", ForModule);
         args.put("SettingNode", SettingNode);
         args.put("Values", Values);
-        return this.APICall("ADSModule/HandoutInstanceConfigs", args, Map.class);
+        return this.APICall("ADSModule/HandoutInstanceConfigs", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param InstanceId  False
-     * @return Map
+     * @return Object
      */
-    public Map ManageInstance(String InstanceId) {
+    public Object ManageInstance(String InstanceId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
-        return this.APICall("ADSModule/ManageInstance", args, Map.class);
+        return this.APICall("ADSModule/ManageInstance", args, Object.class);
     }
 
     /**
@@ -440,9 +440,9 @@ public class ADSModule extends AMPAPI {
      * @param Protocol  False
      * @param Description  False
      * @param Open  False
-     * @return Map
+     * @return Object
      */
-    public Map ModifyCustomFirewallRule(String instanceId, Integer PortNumber, Integer Range, String Protocol, String Description, boolean Open) {
+    public Object ModifyCustomFirewallRule(String instanceId, Integer PortNumber, Integer Range, String Protocol, String Description, boolean Open) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("instanceId", instanceId);
         args.put("PortNumber", PortNumber);
@@ -450,29 +450,29 @@ public class ADSModule extends AMPAPI {
         args.put("Protocol", Protocol);
         args.put("Description", Description);
         args.put("Open", Open);
-        return this.APICall("ADSModule/ModifyCustomFirewallRule", args, Map.class);
+        return this.APICall("ADSModule/ModifyCustomFirewallRule", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param instanceId  False
      * @param datastoreId  False
-     * @return Map
+     * @return Object
      */
-    public Map MoveInstanceDatastore(String instanceId, Integer datastoreId) {
+    public Object MoveInstanceDatastore(String instanceId, Integer datastoreId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("instanceId", instanceId);
         args.put("datastoreId", datastoreId);
-        return this.APICall("ADSModule/MoveInstanceDatastore", args, Map.class);
+        return this.APICall("ADSModule/MoveInstanceDatastore", args, Object.class);
     }
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map ReactivateLocalInstances() {
+    public Object ReactivateLocalInstances() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("ADSModule/ReactivateLocalInstances", args, Map.class);
+        return this.APICall("ADSModule/ReactivateLocalInstances", args, Object.class);
     }
 
     /**
@@ -487,23 +487,23 @@ public class ADSModule extends AMPAPI {
     /**
      * Name Description Optional
      * @param GroupId  False
-     * @return Map
+     * @return Object
      */
-    public Map RefreshGroup(String GroupId) {
+    public Object RefreshGroup(String GroupId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("GroupId", GroupId);
-        return this.APICall("ADSModule/RefreshGroup", args, Map.class);
+        return this.APICall("ADSModule/RefreshGroup", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param InstanceId  False
-     * @return Map
+     * @return Object
      */
-    public Map RefreshInstanceConfig(String InstanceId) {
+    public Object RefreshInstanceConfig(String InstanceId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
-        return this.APICall("ADSModule/RefreshInstanceConfig", args, Map.class);
+        return this.APICall("ADSModule/RefreshInstanceConfig", args, Object.class);
     }
 
     /**
@@ -523,9 +523,9 @@ public class ADSModule extends AMPAPI {
      * @param password  False
      * @param twoFactorToken  False
      * @param friendlyName  False
-     * @return Map
+     * @return Object
      */
-    public Map RegisterTarget(String controllerUrl, String myUrl, String username, String password, String twoFactorToken, String friendlyName) {
+    public Object RegisterTarget(String controllerUrl, String myUrl, String username, String password, String twoFactorToken, String friendlyName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("controllerUrl", controllerUrl);
         args.put("myUrl", myUrl);
@@ -533,53 +533,53 @@ public class ADSModule extends AMPAPI {
         args.put("password", password);
         args.put("twoFactorToken", twoFactorToken);
         args.put("friendlyName", friendlyName);
-        return this.APICall("ADSModule/RegisterTarget", args, Map.class);
+        return this.APICall("ADSModule/RegisterTarget", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param id  False
-     * @return Map
+     * @return Object
      */
-    public Map RepairDatastore(Integer id) {
+    public Object RepairDatastore(Integer id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("id", id);
-        return this.APICall("ADSModule/RepairDatastore", args, Map.class);
+        return this.APICall("ADSModule/RepairDatastore", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param datastoreId  False
-     * @return Map
+     * @return Object
      */
-    public Map RequestDatastoreSizeCalculation(Integer datastoreId) {
+    public Object RequestDatastoreSizeCalculation(Integer datastoreId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("datastoreId", datastoreId);
-        return this.APICall("ADSModule/RequestDatastoreSizeCalculation", args, Map.class);
+        return this.APICall("ADSModule/RequestDatastoreSizeCalculation", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param InstanceName  False
-     * @return Map
+     * @return Object
      */
-    public Map RestartInstance(String InstanceName) {
+    public Object RestartInstance(String InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
-        return this.APICall("ADSModule/RestartInstance", args, Map.class);
+        return this.APICall("ADSModule/RestartInstance", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param id  False
      * @param REQ_RAWJSON  False
-     * @return Map
+     * @return Object
      */
-    public Map Servers(String id, String REQ_RAWJSON) {
+    public Object Servers(String id, String REQ_RAWJSON) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("id", id);
         args.put("REQ_RAWJSON", REQ_RAWJSON);
-        return this.APICall("ADSModule/Servers", args, Map.class);
+        return this.APICall("ADSModule/Servers", args, Object.class);
     }
 
     /**
@@ -587,80 +587,80 @@ public class ADSModule extends AMPAPI {
      * @param InstanceName  False
      * @param SettingNode  False
      * @param Value  False
-     * @return Map
+     * @return Object
      */
-    public Map SetInstanceConfig(String InstanceName, String SettingNode, String Value) {
+    public Object SetInstanceConfig(String InstanceName, String SettingNode, String Value) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
         args.put("SettingNode", SettingNode);
         args.put("Value", Value);
-        return this.APICall("ADSModule/SetInstanceConfig", args, Map.class);
+        return this.APICall("ADSModule/SetInstanceConfig", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param InstanceId  False
      * @param PortMappings  False
-     * @return Map
+     * @return Object
      */
-    public Map SetInstanceNetworkInfo(String InstanceId, Map PortMappings) {
+    public Object SetInstanceNetworkInfo(String InstanceId, Map PortMappings) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
         args.put("PortMappings", PortMappings);
-        return this.APICall("ADSModule/SetInstanceNetworkInfo", args, Map.class);
+        return this.APICall("ADSModule/SetInstanceNetworkInfo", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param InstanceName  False
      * @param Suspended  False
-     * @return Map
+     * @return Object
      */
-    public Map SetInstanceSuspended(String InstanceName, boolean Suspended) {
+    public Object SetInstanceSuspended(String InstanceName, boolean Suspended) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
         args.put("Suspended", Suspended);
-        return this.APICall("ADSModule/SetInstanceSuspended", args, Map.class);
+        return this.APICall("ADSModule/SetInstanceSuspended", args, Object.class);
     }
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Object
      */
-    public Map StartAllInstances() {
+    public Object StartAllInstances() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("ADSModule/StartAllInstances", args, Map.class);
-    }
-
-    /**
-     * Name Description Optional
-     * @param InstanceName  False
-     * @return Map
-     */
-    public Map StartInstance(String InstanceName) {
-        HashMap<String, Object> args = new HashMap<>();
-        args.put("InstanceName", InstanceName);
-        return this.APICall("ADSModule/StartInstance", args, Map.class);
-    }
-
-    /**
-     * Name Description Optional
-     * @return Map
-     */
-    public Map StopAllInstances() {
-        HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("ADSModule/StopAllInstances", args, Map.class);
+        return this.APICall("ADSModule/StartAllInstances", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param InstanceName  False
-     * @return Map
+     * @return Object
      */
-    public Map StopInstance(String InstanceName) {
+    public Object StartInstance(String InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
-        return this.APICall("ADSModule/StopInstance", args, Map.class);
+        return this.APICall("ADSModule/StartInstance", args, Object.class);
+    }
+
+    /**
+     * Name Description Optional
+     * @return Object
+     */
+    public Object StopAllInstances() {
+        HashMap<String, Object> args = new HashMap<>();
+        return this.APICall("ADSModule/StopAllInstances", args, Object.class);
+    }
+
+    /**
+     * Name Description Optional
+     * @param InstanceName  False
+     * @return Object
+     */
+    public Object StopInstance(String InstanceName) {
+        HashMap<String, Object> args = new HashMap<>();
+        args.put("InstanceName", InstanceName);
+        return this.APICall("ADSModule/StopInstance", args, Object.class);
     }
 
     /**
@@ -668,36 +668,36 @@ public class ADSModule extends AMPAPI {
      * @param url  False
      * @param username  False
      * @param password  False
-     * @return Map
+     * @return Object
      */
-    public Map TestADSLoginDetails(String url, String username, String password) {
+    public Object TestADSLoginDetails(String url, String username, String password) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("url", url);
         args.put("username", username);
         args.put("password", password);
-        return this.APICall("ADSModule/TestADSLoginDetails", args, Map.class);
+        return this.APICall("ADSModule/TestADSLoginDetails", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param updatedDatastore  False
-     * @return Map
+     * @return Object
      */
-    public Map UpdateDatastore(Object updatedDatastore) {
+    public Object UpdateDatastore(Object updatedDatastore) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("updatedDatastore", updatedDatastore);
-        return this.APICall("ADSModule/UpdateDatastore", args, Map.class);
+        return this.APICall("ADSModule/UpdateDatastore", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param templateToUpdate  False
-     * @return Map
+     * @return Object
      */
-    public Map UpdateDeploymentTemplate(Object templateToUpdate) {
+    public Object UpdateDeploymentTemplate(Object templateToUpdate) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("templateToUpdate", templateToUpdate);
-        return this.APICall("ADSModule/UpdateDeploymentTemplate", args, Map.class);
+        return this.APICall("ADSModule/UpdateDeploymentTemplate", args, Object.class);
     }
 
     /**
@@ -713,9 +713,9 @@ public class ADSModule extends AMPAPI {
      * @param MemoryPolicy  False
      * @param ContainerMaxCPU  False
      * @param ContainerImage  False
-     * @return Map
+     * @return Object
      */
-    public Map UpdateInstanceInfo(String InstanceId, String FriendlyName, String Description, boolean StartOnBoot, boolean Suspended, boolean ExcludeFromFirewall, boolean RunInContainer, Integer ContainerMemory, Object MemoryPolicy, Object ContainerMaxCPU, String ContainerImage) {
+    public Object UpdateInstanceInfo(String InstanceId, String FriendlyName, String Description, boolean StartOnBoot, boolean Suspended, boolean ExcludeFromFirewall, boolean RunInContainer, Integer ContainerMemory, Object MemoryPolicy, Object ContainerMaxCPU, String ContainerImage) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
         args.put("FriendlyName", FriendlyName);
@@ -728,7 +728,7 @@ public class ADSModule extends AMPAPI {
         args.put("MemoryPolicy", MemoryPolicy);
         args.put("ContainerMaxCPU", ContainerMaxCPU);
         args.put("ContainerImage", ContainerImage);
-        return this.APICall("ADSModule/UpdateInstanceInfo", args, Map.class);
+        return this.APICall("ADSModule/UpdateInstanceInfo", args, Object.class);
     }
 
     /**
@@ -749,38 +749,38 @@ public class ADSModule extends AMPAPI {
      * @param Url  False
      * @param Description  False
      * @param Tags  False
-     * @return Map
+     * @return Object
      */
-    public Map UpdateTargetInfo(String Id, String FriendlyName, String Url, String Description, List Tags) {
+    public Object UpdateTargetInfo(String Id, String FriendlyName, String Url, String Description, List Tags) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         args.put("FriendlyName", FriendlyName);
         args.put("Url", Url);
         args.put("Description", Description);
         args.put("Tags", Tags);
-        return this.APICall("ADSModule/UpdateTargetInfo", args, Map.class);
+        return this.APICall("ADSModule/UpdateTargetInfo", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param RestartRunning  False
-     * @return Map
+     * @return Object
      */
-    public Map UpgradeAllInstances(boolean RestartRunning) {
+    public Object UpgradeAllInstances(boolean RestartRunning) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RestartRunning", RestartRunning);
-        return this.APICall("ADSModule/UpgradeAllInstances", args, Map.class);
+        return this.APICall("ADSModule/UpgradeAllInstances", args, Object.class);
     }
 
     /**
      * Name Description Optional
      * @param InstanceName  False
-     * @return Map
+     * @return Object
      */
-    public Map UpgradeInstance(String InstanceName) {
+    public Object UpgradeInstance(String InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
-        return this.APICall("ADSModule/UpgradeInstance", args, Map.class);
+        return this.APICall("ADSModule/UpgradeInstance", args, Object.class);
     }
 
 }
