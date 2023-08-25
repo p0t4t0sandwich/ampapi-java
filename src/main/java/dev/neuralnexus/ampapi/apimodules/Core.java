@@ -1,7 +1,16 @@
 package dev.neuralnexus.ampapi.apimodules;
 
+import com.google.gson.reflect.TypeToken;
 import dev.neuralnexus.ampapi.AMPAPI;
+import dev.neuralnexus.ampapi.responses.*;
 import dev.neuralnexus.ampapi.responses.Core.*;
+import dev.neuralnexus.ampapi.types.*;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,18 +27,20 @@ public class Core extends AMPAPI {
      */
     public Void AcknowledgeAMPUpdate() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/AcknowledgeAMPUpdate", args, Void.class);
+        Type type = new TypeToken<Void>(){}.getType();
+        return (Void) this.APICall("Core/AcknowledgeAMPUpdate", args, type);
     }
 
     /**
      * Name Description Optional
      * @param triggerId  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object AddEventTrigger(String triggerId) {
+    public ActionResult AddEventTrigger(UUID triggerId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("triggerId", triggerId);
-        return this.APICall("Core/AddEventTrigger", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/AddEventTrigger", args, type);
     }
 
     /**
@@ -40,9 +51,9 @@ public class Core extends AMPAPI {
      * @param minutes  False
      * @param daysOfMonth  False
      * @param description  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object AddIntervalTrigger(List<Integer> months, List<Integer> days, List<Integer> hours, List<Integer> minutes, List<Integer> daysOfMonth, String description) {
+    public ActionResult AddIntervalTrigger(List<Integer> months, List<Integer> days, List<Integer> hours, List<Integer> minutes, List<Integer> daysOfMonth, String description) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("months", months);
         args.put("days", days);
@@ -50,7 +61,8 @@ public class Core extends AMPAPI {
         args.put("minutes", minutes);
         args.put("daysOfMonth", daysOfMonth);
         args.put("description", description);
-        return this.APICall("Core/AddIntervalTrigger", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/AddIntervalTrigger", args, type);
     }
 
     /**
@@ -58,35 +70,38 @@ public class Core extends AMPAPI {
      * @param TriggerID  False
      * @param MethodID  False
      * @param ParameterMapping  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object AddTask(String TriggerID, String MethodID, Map ParameterMapping) {
+    public ActionResult AddTask(UUID TriggerID, String MethodID, Map ParameterMapping) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
         args.put("MethodID", MethodID);
         args.put("ParameterMapping", ParameterMapping);
-        return this.APICall("Core/AddTask", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/AddTask", args, type);
     }
 
     /**
      * DEV: Async test method
      * Name Description Optional
-     * @return Object
+     * @return Task<String>
      */
-    public Object AsyncTest() {
+    public Task<String> AsyncTest() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/AsyncTest", args, Object.class);
+        Type type = new TypeToken<Task<String>>(){}.getType();
+        return (Task<String>) this.APICall("Core/AsyncTest", args, type);
     }
 
     /**
      * Name Description Optional
      * @param TaskId  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object CancelTask(String TaskId) {
+    public ActionResult CancelTask(UUID TaskId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TaskId", TaskId);
-        return this.APICall("Core/CancelTask", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/CancelTask", args, type);
     }
 
     /**
@@ -94,14 +109,15 @@ public class Core extends AMPAPI {
      * @param TriggerID  False
      * @param TaskID  False
      * @param NewOrder  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object ChangeTaskOrder(String TriggerID, String TaskID, Integer NewOrder) {
+    public ActionResult ChangeTaskOrder(UUID TriggerID, UUID TaskID, Integer NewOrder) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
         args.put("TaskID", TaskID);
         args.put("NewOrder", NewOrder);
-        return this.APICall("Core/ChangeTaskOrder", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/ChangeTaskOrder", args, type);
     }
 
     /**
@@ -110,41 +126,44 @@ public class Core extends AMPAPI {
      * @param OldPassword  False
      * @param NewPassword  False
      * @param TwoFactorPIN  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object ChangeUserPassword(String Username, String OldPassword, String NewPassword, String TwoFactorPIN) {
+    public Task<ActionResult> ChangeUserPassword(String Username, String OldPassword, String NewPassword, String TwoFactorPIN) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         args.put("OldPassword", OldPassword);
         args.put("NewPassword", NewPassword);
         args.put("TwoFactorPIN", TwoFactorPIN);
-        return this.APICall("Core/ChangeUserPassword", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("Core/ChangeUserPassword", args, type);
     }
 
     /**
      * Name Description Optional
      * @param Username  False
      * @param TwoFactorCode  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object ConfirmTwoFactorSetup(String Username, String TwoFactorCode) {
+    public Task<ActionResult> ConfirmTwoFactorSetup(String Username, String TwoFactorCode) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         args.put("TwoFactorCode", TwoFactorCode);
-        return this.APICall("Core/ConfirmTwoFactorSetup", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("Core/ConfirmTwoFactorSetup", args, type);
     }
 
     /**
      * Name Description Optional
      * @param Name  False
      * @param AsCommonRole  True
-     * @return Object
+     * @return Task<ActionResult<UUID>>
      */
-    public Object CreateRole(String Name, boolean AsCommonRole) {
+    public Task<ActionResult<UUID>> CreateRole(String Name, Boolean AsCommonRole) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Name", Name);
         args.put("AsCommonRole", AsCommonRole);
-        return this.APICall("Core/CreateRole", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult<UUID>>>(){}.getType();
+        return (Task<ActionResult<UUID>>) this.APICall("Core/CreateRole", args, type);
     }
 
     /**
@@ -154,119 +173,130 @@ public class Core extends AMPAPI {
      */
     public Void CreateTestTask() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/CreateTestTask", args, Void.class);
+        Type type = new TypeToken<Void>(){}.getType();
+        return (Void) this.APICall("Core/CreateTestTask", args, type);
     }
 
     /**
      * Name Description Optional
      * @param Username  False
-     * @return Object
+     * @return Task<ActionResult<UUID>>
      */
-    public Object CreateUser(String Username) {
+    public Task<ActionResult<UUID>> CreateUser(String Username) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
-        return this.APICall("Core/CreateUser", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult<UUID>>>(){}.getType();
+        return (Task<ActionResult<UUID>>) this.APICall("Core/CreateUser", args, type);
     }
 
     /**
      * Name Description Optional
      * @param PermissionNode  False
-     * @return boolean
+     * @return Boolean
      */
-    public boolean CurrentSessionHasPermission(String PermissionNode) {
+    public Boolean CurrentSessionHasPermission(String PermissionNode) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("PermissionNode", PermissionNode);
-        return this.APICall("Core/CurrentSessionHasPermission", args, boolean.class);
+        Type type = new TypeToken<Boolean>(){}.getType();
+        return (Boolean) this.APICall("Core/CurrentSessionHasPermission", args, type);
     }
 
     /**
      * Name Description Optional
      * @param InstanceId  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object DeleteInstanceUsers(String InstanceId) {
+    public Task<ActionResult> DeleteInstanceUsers(UUID InstanceId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
-        return this.APICall("Core/DeleteInstanceUsers", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("Core/DeleteInstanceUsers", args, type);
     }
 
     /**
      * Name Description Optional
      * @param RoleId  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object DeleteRole(String RoleId) {
+    public Task<ActionResult> DeleteRole(UUID RoleId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
-        return this.APICall("Core/DeleteRole", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("Core/DeleteRole", args, type);
     }
 
     /**
      * Name Description Optional
      * @param TriggerID  False
      * @param TaskID  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object DeleteTask(String TriggerID, String TaskID) {
+    public ActionResult DeleteTask(UUID TriggerID, UUID TaskID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
         args.put("TaskID", TaskID);
-        return this.APICall("Core/DeleteTask", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/DeleteTask", args, type);
     }
 
     /**
      * Name Description Optional
      * @param TriggerID  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object DeleteTrigger(String TriggerID) {
+    public ActionResult DeleteTrigger(UUID TriggerID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
-        return this.APICall("Core/DeleteTrigger", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/DeleteTrigger", args, type);
     }
 
     /**
      * Name Description Optional
      * @param Username  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object DeleteUser(String Username) {
+    public Task<ActionResult> DeleteUser(String Username) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
-        return this.APICall("Core/DeleteUser", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("Core/DeleteUser", args, type);
     }
 
     /**
      * Name Description Optional
      * @param Password  False
      * @param TwoFactorCode  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object DisableTwoFactor(String Password, String TwoFactorCode) {
+    public Task<ActionResult> DisableTwoFactor(String Password, String TwoFactorCode) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Password", Password);
         args.put("TwoFactorCode", TwoFactorCode);
-        return this.APICall("Core/DisableTwoFactor", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("Core/DisableTwoFactor", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return Object
+     * @return ActionResult
      */
-    public Object DismissAllTasks() {
+    public ActionResult DismissAllTasks() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/DismissAllTasks", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/DismissAllTasks", args, type);
     }
 
     /**
      * Name Description Optional
      * @param TaskId  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object DismissTask(String TaskId) {
+    public ActionResult DismissTask(UUID TaskId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TaskId", TaskId);
-        return this.APICall("Core/DismissTask", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/DismissTask", args, type);
     }
 
     /**
@@ -278,9 +308,9 @@ public class Core extends AMPAPI {
      * @param minutes  False
      * @param daysOfMonth  False
      * @param description  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object EditIntervalTrigger(String Id, List<Integer> months, List<Integer> days, List<Integer> hours, List<Integer> minutes, List<Integer> daysOfMonth, String description) {
+    public ActionResult EditIntervalTrigger(UUID Id, List<Integer> months, List<Integer> days, List<Integer> hours, List<Integer> minutes, List<Integer> daysOfMonth, String description) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         args.put("months", months);
@@ -289,7 +319,8 @@ public class Core extends AMPAPI {
         args.put("minutes", minutes);
         args.put("daysOfMonth", daysOfMonth);
         args.put("description", description);
-        return this.APICall("Core/EditIntervalTrigger", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/EditIntervalTrigger", args, type);
     }
 
     /**
@@ -297,27 +328,29 @@ public class Core extends AMPAPI {
      * @param TriggerID  False
      * @param TaskID  False
      * @param ParameterMapping  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object EditTask(String TriggerID, String TaskID, Map ParameterMapping) {
+    public ActionResult EditTask(UUID TriggerID, UUID TaskID, Map ParameterMapping) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
         args.put("TaskID", TaskID);
         args.put("ParameterMapping", ParameterMapping);
-        return this.APICall("Core/EditTask", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/EditTask", args, type);
     }
 
     /**
      * Name Description Optional
      * @param Username  False
      * @param Password  False
-     * @return Object
+     * @return Task<Object>
      */
-    public Object EnableTwoFactor(String Username, String Password) {
+    public Task<Object> EnableTwoFactor(String Username, String Password) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         args.put("Password", Password);
-        return this.APICall("Core/EnableTwoFactor", args, Object.class);
+        Type type = new TypeToken<Task<Object>>(){}.getType();
+        return (Task<Object>) this.APICall("Core/EnableTwoFactor", args, type);
     }
 
     /**
@@ -325,81 +358,89 @@ public class Core extends AMPAPI {
      * @param Id  False
      * @return Void
      */
-    public Void EndUserSession(String Id) {
+    public Void EndUserSession(UUID Id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
-        return this.APICall("Core/EndUserSession", args, Void.class);
+        Type type = new TypeToken<Void>(){}.getType();
+        return (Void) this.APICall("Core/EndUserSession", args, type);
     }
 
     /**
      * Name Description Optional
      * @param RoleId  False
-     * @return Object
+     * @return Task<List<String>>
      */
-    public Object GetAMPRolePermissions(String RoleId) {
+    public Task<List<String>> GetAMPRolePermissions(UUID RoleId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
-        return this.APICall("Core/GetAMPRolePermissions", args, Object.class);
+        Type type = new TypeToken<Task<List<String>>>(){}.getType();
+        return (Task<List<String>>) this.APICall("Core/GetAMPRolePermissions", args, type);
     }
 
     /**
      * Name Description Optional
      * @param Username  False
-     * @return Object
+     * @return Task<UserInfo>
      */
-    public Object GetAMPUserInfo(String Username) {
+    public Task<UserInfo> GetAMPUserInfo(String Username) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
-        return this.APICall("Core/GetAMPUserInfo", args, Object.class);
+        Type type = new TypeToken<Task<UserInfo>>(){}.getType();
+        return (Task<UserInfo>) this.APICall("Core/GetAMPUserInfo", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return Object
+     * @return Task<List<Object>>
      */
-    public Object GetAMPUsersSummary() {
+    public Task<List<Object>> GetAMPUsersSummary() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetAMPUsersSummary", args, Object.class);
+        Type type = new TypeToken<Task<List<Object>>>(){}.getType();
+        return (Task<List<Object>>) this.APICall("Core/GetAMPUsersSummary", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Map<String, Map<String, Object>>
      */
-    public Map GetAPISpec() {
+    public Map<String, Map<String, Object>> GetAPISpec() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetAPISpec", args, Map.class);
+        Type type = new TypeToken<Map<String, Map<String, Object>>>(){}.getType();
+        return (Map<String, Map<String, Object>>) this.APICall("Core/GetAPISpec", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return List
+     * @return Result<List<Object>>
      */
-    public List GetActiveAMPSessions() {
+    public Result<List<Object>> GetActiveAMPSessions() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetActiveAMPSessions", args, List.class);
+        Type type = new TypeToken<Result<List<Object>>>(){}.getType();
+        return (Result<List<Object>>) this.APICall("Core/GetActiveAMPSessions", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return Object
+     * @return Task<List<UserInfo>>
      */
-    public Object GetAllAMPUserInfo() {
+    public Task<List<UserInfo>> GetAllAMPUserInfo() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetAllAMPUserInfo", args, Object.class);
+        Type type = new TypeToken<Task<List<UserInfo>>>(){}.getType();
+        return (Task<List<UserInfo>>) this.APICall("Core/GetAllAMPUserInfo", args, type);
     }
 
     /**
      * Name Description Optional
      * @param Before  False
      * @param Count  False
-     * @return Map
+     * @return Result<List<Object>>
      */
-    public Map GetAuditLogEntries(Object Before, Integer Count) {
+    public Result<List<Object>> GetAuditLogEntries(Object Before, Integer Count) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Before", Before);
         args.put("Count", Count);
-        return this.APICall("Core/GetAuditLogEntries", args, Map.class);
+        Type type = new TypeToken<Result<List<Object>>>(){}.getType();
+        return (Result<List<Object>>) this.APICall("Core/GetAuditLogEntries", args, type);
     }
 
     /**
@@ -410,18 +451,20 @@ public class Core extends AMPAPI {
     public Map GetConfig(String node) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("node", node);
-        return this.APICall("Core/GetConfig", args, Map.class);
+        Type type = new TypeToken<Map>(){}.getType();
+        return (Map) this.APICall("Core/GetConfig", args, type);
     }
 
     /**
      * Name Description Optional
      * @param nodes  False
-     * @return List
+     * @return Result<List<Map<String, String>>>
      */
-    public List GetConfigs(List nodes) {
+    public Result<List<Map<String, String>>> GetConfigs(List<String> nodes) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("nodes", nodes);
-        return this.APICall("Core/GetConfigs", args, List.class);
+        Type type = new TypeToken<Result<List<Map<String, String>>>>(){}.getType();
+        return (Result<List<Map<String, String>>>) this.APICall("Core/GetConfigs", args, type);
     }
 
     /**
@@ -430,7 +473,8 @@ public class Core extends AMPAPI {
      */
     public Map GetDiagnosticsInfo() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetDiagnosticsInfo", args, Map.class);
+        Type type = new TypeToken<Map>(){}.getType();
+        return (Map) this.APICall("Core/GetDiagnosticsInfo", args, type);
     }
 
     /**
@@ -439,16 +483,18 @@ public class Core extends AMPAPI {
      */
     public Object GetModuleInfo() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetModuleInfo", args, Object.class);
+        Type type = new TypeToken<Object>(){}.getType();
+        return (Object) this.APICall("Core/GetModuleInfo", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return String
+     * @return UUID
      */
-    public String GetNewGuid() {
+    public UUID GetNewGuid() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetNewGuid", args, String.class);
+        Type type = new TypeToken<UUID>(){}.getType();
+        return (UUID) this.APICall("Core/GetNewGuid", args, type);
     }
 
     /**
@@ -457,67 +503,74 @@ public class Core extends AMPAPI {
      */
     public List GetPermissionsSpec() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetPermissionsSpec", args, List.class);
+        Type type = new TypeToken<List>(){}.getType();
+        return (List) this.APICall("Core/GetPermissionsSpec", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return List
+     * @return Result<List<Object>>
      */
-    public List GetPortSummaries() {
+    public Result<List<Object>> GetPortSummaries() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetPortSummaries", args, List.class);
+        Type type = new TypeToken<Result<List<Object>>>(){}.getType();
+        return (Result<List<Object>>) this.APICall("Core/GetPortSummaries", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return List
+     * @return List<Map<String, String>>
      */
-    public List GetProvisionSpec() {
+    public List<Map<String, String>> GetProvisionSpec() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetProvisionSpec", args, List.class);
+        Type type = new TypeToken<List<Map<String, String>>>(){}.getType();
+        return (List<Map<String, String>>) this.APICall("Core/GetProvisionSpec", args, type);
     }
 
     /**
      * Name Description Optional
      * @param Description  True
      * @param IsTemporary  True
-     * @return Object
+     * @return Task<String>
      */
-    public Object GetRemoteLoginToken(String Description, boolean IsTemporary) {
+    public Task<String> GetRemoteLoginToken(String Description, Boolean IsTemporary) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Description", Description);
         args.put("IsTemporary", IsTemporary);
-        return this.APICall("Core/GetRemoteLoginToken", args, Object.class);
+        Type type = new TypeToken<Task<String>>(){}.getType();
+        return (Task<String>) this.APICall("Core/GetRemoteLoginToken", args, type);
     }
 
     /**
      * Name Description Optional
      * @param RoleId  False
-     * @return Object
+     * @return Task<Object>
      */
-    public Object GetRole(String RoleId) {
+    public Task<Object> GetRole(UUID RoleId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
-        return this.APICall("Core/GetRole", args, Object.class);
+        Type type = new TypeToken<Task<Object>>(){}.getType();
+        return (Task<Object>) this.APICall("Core/GetRole", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return Object
+     * @return Task<List<Object>>
      */
-    public Object GetRoleData() {
+    public Task<List<Object>> GetRoleData() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetRoleData", args, Object.class);
+        Type type = new TypeToken<Task<List<Object>>>(){}.getType();
+        return (Task<List<Object>>) this.APICall("Core/GetRoleData", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return Object
+     * @return Task<Map<UUID, String>>
      */
-    public Object GetRoleIds() {
+    public Task<Map<UUID, String>> GetRoleIds() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetRoleIds", args, Object.class);
+        Type type = new TypeToken<Task<Map<UUID, String>>>(){}.getType();
+        return (Task<Map<UUID, String>>) this.APICall("Core/GetRoleIds", args, type);
     }
 
     /**
@@ -526,29 +579,32 @@ public class Core extends AMPAPI {
      */
     public Object GetScheduleData() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetScheduleData", args, Object.class);
+        Type type = new TypeToken<Object>(){}.getType();
+        return (Object) this.APICall("Core/GetScheduleData", args, type);
     }
 
     /**
      * Name Description Optional
      * @param SettingNode  False
      * @param WithRefresh  True
-     * @return Map
+     * @return Map<String, String>
      */
-    public Map GetSettingValues(String SettingNode, boolean WithRefresh) {
+    public Map<String, String> GetSettingValues(String SettingNode, Boolean WithRefresh) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("SettingNode", SettingNode);
         args.put("WithRefresh", WithRefresh);
-        return this.APICall("Core/GetSettingValues", args, Map.class);
+        Type type = new TypeToken<Map<String, String>>(){}.getType();
+        return (Map<String, String>) this.APICall("Core/GetSettingValues", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Map<String, List<Map<String, String>>>
      */
-    public Map GetSettingsSpec() {
+    public Map<String, List<Map<String, String>>> GetSettingsSpec() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetSettingsSpec", args, Map.class);
+        Type type = new TypeToken<Map<String, List<Map<String, String>>>>(){}.getType();
+        return (Map<String, List<Map<String, String>>>) this.APICall("Core/GetSettingsSpec", args, type);
     }
 
     /**
@@ -557,16 +613,18 @@ public class Core extends AMPAPI {
      */
     public GetStatusResult GetStatus() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetStatus", args, GetStatusResult.class);
+        Type type = new TypeToken<GetStatusResult>(){}.getType();
+        return (GetStatusResult) this.APICall("Core/GetStatus", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return Object
+     * @return Result<List<Object>>
      */
-    public Object GetTasks() {
+    public Result<List<Object>> GetTasks() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetTasks", args, Object.class);
+        Type type = new TypeToken<Result<List<Object>>>(){}.getType();
+        return (Result<List<Object>>) this.APICall("Core/GetTasks", args, type);
     }
 
     /**
@@ -574,10 +632,11 @@ public class Core extends AMPAPI {
      * @param Id  False
      * @return Object
      */
-    public Object GetTimeIntervalTrigger(String Id) {
+    public Object GetTimeIntervalTrigger(UUID Id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
-        return this.APICall("Core/GetTimeIntervalTrigger", args, Object.class);
+        Type type = new TypeToken<Object>(){}.getType();
+        return (Object) this.APICall("Core/GetTimeIntervalTrigger", args, type);
     }
 
     /**
@@ -586,7 +645,8 @@ public class Core extends AMPAPI {
      */
     public Object GetUpdateInfo() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetUpdateInfo", args, Object.class);
+        Type type = new TypeToken<Object>(){}.getType();
+        return (Object) this.APICall("Core/GetUpdateInfo", args, type);
     }
 
     /**
@@ -596,7 +656,8 @@ public class Core extends AMPAPI {
      */
     public Map GetUpdates() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetUpdates", args, Map.class);
+        Type type = new TypeToken<Map>(){}.getType();
+        return (Map) this.APICall("Core/GetUpdates", args, type);
     }
 
     /**
@@ -605,7 +666,8 @@ public class Core extends AMPAPI {
      */
     public Object GetUserActionsSpec() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetUserActionsSpec", args, Object.class);
+        Type type = new TypeToken<Object>(){}.getType();
+        return (Object) this.APICall("Core/GetUserActionsSpec", args, type);
     }
 
     /**
@@ -616,7 +678,8 @@ public class Core extends AMPAPI {
     public Map GetUserInfo(String UID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("UID", UID);
-        return this.APICall("Core/GetUserInfo", args, Map.class);
+        Type type = new TypeToken<Map>(){}.getType();
+        return (Map) this.APICall("Core/GetUserInfo", args, type);
     }
 
     /**
@@ -626,7 +689,8 @@ public class Core extends AMPAPI {
      */
     public Map GetUserList() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetUserList", args, Map.class);
+        Type type = new TypeToken<Map>(){}.getType();
+        return (Map) this.APICall("Core/GetUserList", args, type);
     }
 
     /**
@@ -635,7 +699,8 @@ public class Core extends AMPAPI {
      */
     public Object GetWebauthnChallenge() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetWebauthnChallenge", args, Object.class);
+        Type type = new TypeToken<Object>(){}.getType();
+        return (Object) this.APICall("Core/GetWebauthnChallenge", args, type);
     }
 
     /**
@@ -646,16 +711,18 @@ public class Core extends AMPAPI {
     public Object GetWebauthnCredentialIDs(String username) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("username", username);
-        return this.APICall("Core/GetWebauthnCredentialIDs", args, Object.class);
+        Type type = new TypeToken<Object>(){}.getType();
+        return (Object) this.APICall("Core/GetWebauthnCredentialIDs", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return List
+     * @return Result<List<Object>>
      */
-    public List GetWebauthnCredentialSummaries() {
+    public Result<List<Object>> GetWebauthnCredentialSummaries() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetWebauthnCredentialSummaries", args, List.class);
+        Type type = new TypeToken<Result<List<Object>>>(){}.getType();
+        return (Result<List<Object>>) this.APICall("Core/GetWebauthnCredentialSummaries", args, type);
     }
 
     /**
@@ -664,7 +731,8 @@ public class Core extends AMPAPI {
      */
     public Object GetWebserverMetrics() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/GetWebserverMetrics", args, Object.class);
+        Type type = new TypeToken<Object>(){}.getType();
+        return (Object) this.APICall("Core/GetWebserverMetrics", args, type);
     }
 
     /**
@@ -673,7 +741,8 @@ public class Core extends AMPAPI {
      */
     public Void Kill() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/Kill", args, Void.class);
+        Type type = new TypeToken<Void>(){}.getType();
+        return (Void) this.APICall("Core/Kill", args, type);
     }
 
     /**
@@ -684,13 +753,14 @@ public class Core extends AMPAPI {
      * @param rememberMe  False
      * @return LoginResult
      */
-    public LoginResult Login(String username, String password, String token, boolean rememberMe) {
+    public LoginResult Login(String username, String password, String token, Boolean rememberMe) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("username", username);
         args.put("password", password);
         args.put("token", token);
         args.put("rememberMe", rememberMe);
-        return this.APICall("Core/Login", args, LoginResult.class);
+        Type type = new TypeToken<LoginResult>(){}.getType();
+        return (LoginResult) this.APICall("Core/Login", args, type);
     }
 
     /**
@@ -699,18 +769,20 @@ public class Core extends AMPAPI {
      */
     public Void Logout() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/Logout", args, Void.class);
+        Type type = new TypeToken<Void>(){}.getType();
+        return (Void) this.APICall("Core/Logout", args, type);
     }
 
     /**
      * Name Description Optional
      * @param Node  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object RefreshSettingValueList(String Node) {
+    public ActionResult RefreshSettingValueList(String Node) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Node", Node);
-        return this.APICall("Core/RefreshSettingValueList", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/RefreshSettingValueList", args, type);
     }
 
     /**
@@ -719,42 +791,46 @@ public class Core extends AMPAPI {
      */
     public Void RefreshSettingsSourceCache() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/RefreshSettingsSourceCache", args, Void.class);
+        Type type = new TypeToken<Void>(){}.getType();
+        return (Void) this.APICall("Core/RefreshSettingsSourceCache", args, type);
     }
 
     /**
      * Name Description Optional
      * @param RoleId  False
      * @param NewName  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object RenameRole(String RoleId, String NewName) {
+    public Task<ActionResult> RenameRole(UUID RoleId, String NewName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
         args.put("NewName", NewName);
-        return this.APICall("Core/RenameRole", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("Core/RenameRole", args, type);
     }
 
     /**
      * Name Description Optional
      * @param Username  False
      * @param NewPassword  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object ResetUserPassword(String Username, String NewPassword) {
+    public Task<ActionResult> ResetUserPassword(String Username, String NewPassword) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         args.put("NewPassword", NewPassword);
-        return this.APICall("Core/ResetUserPassword", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("Core/ResetUserPassword", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return Object
+     * @return ActionResult
      */
-    public Object Restart() {
+    public ActionResult Restart() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/Restart", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/Restart", args, type);
     }
 
     /**
@@ -763,7 +839,8 @@ public class Core extends AMPAPI {
      */
     public Void RestartAMP() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/RestartAMP", args, Void.class);
+        Type type = new TypeToken<Void>(){}.getType();
+        return (Void) this.APICall("Core/RestartAMP", args, type);
     }
 
     /**
@@ -773,29 +850,32 @@ public class Core extends AMPAPI {
      */
     public Void Resume() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/Resume", args, Void.class);
+        Type type = new TypeToken<Void>(){}.getType();
+        return (Void) this.APICall("Core/Resume", args, type);
     }
 
     /**
      * Name Description Optional
      * @param ID  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object RevokeWebauthnCredential(Integer ID) {
+    public ActionResult RevokeWebauthnCredential(Integer ID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ID", ID);
-        return this.APICall("Core/RevokeWebauthnCredential", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/RevokeWebauthnCredential", args, type);
     }
 
     /**
      * Name Description Optional
      * @param triggerId  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object RunEventTriggerImmediately(String triggerId) {
+    public ActionResult RunEventTriggerImmediately(UUID triggerId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("triggerId", triggerId);
-        return this.APICall("Core/RunEventTriggerImmediately", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/RunEventTriggerImmediately", args, type);
     }
 
     /**
@@ -806,7 +886,8 @@ public class Core extends AMPAPI {
     public Void SendConsoleMessage(String message) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("message", message);
-        return this.APICall("Core/SendConsoleMessage", args, Void.class);
+        Type type = new TypeToken<Void>(){}.getType();
+        return (Void) this.APICall("Core/SendConsoleMessage", args, type);
     }
 
     /**
@@ -814,14 +895,15 @@ public class Core extends AMPAPI {
      * @param RoleId  False
      * @param PermissionNode  False
      * @param Enabled  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object SetAMPRolePermission(String RoleId, String PermissionNode, boolean Enabled) {
+    public Task<ActionResult> SetAMPRolePermission(UUID RoleId, String PermissionNode, Boolean Enabled) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
         args.put("PermissionNode", PermissionNode);
         args.put("Enabled", Enabled);
-        return this.APICall("Core/SetAMPRolePermission", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("Core/SetAMPRolePermission", args, type);
     }
 
     /**
@@ -829,69 +911,75 @@ public class Core extends AMPAPI {
      * @param UserId  False
      * @param RoleId  False
      * @param IsMember  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object SetAMPUserRoleMembership(String UserId, String RoleId, boolean IsMember) {
+    public Task<ActionResult> SetAMPUserRoleMembership(UUID UserId, UUID RoleId, Boolean IsMember) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("UserId", UserId);
         args.put("RoleId", RoleId);
         args.put("IsMember", IsMember);
-        return this.APICall("Core/SetAMPUserRoleMembership", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("Core/SetAMPUserRoleMembership", args, type);
     }
 
     /**
      * Name Description Optional
      * @param node  False
      * @param value  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object SetConfig(String node, String value) {
+    public ActionResult SetConfig(String node, String value) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("node", node);
         args.put("value", value);
-        return this.APICall("Core/SetConfig", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/SetConfig", args, type);
     }
 
     /**
      * Name Description Optional
      * @param data  False
-     * @return boolean
+     * @return Boolean
      */
-    public boolean SetConfigs(Map data) {
+    public Boolean SetConfigs(Map data) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("data", data);
-        return this.APICall("Core/SetConfigs", args, boolean.class);
+        Type type = new TypeToken<Boolean>(){}.getType();
+        return (Boolean) this.APICall("Core/SetConfigs", args, type);
     }
 
     /**
      * Name Description Optional
      * @param Id  False
      * @param Enabled  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object SetTriggerEnabled(String Id, boolean Enabled) {
+    public ActionResult SetTriggerEnabled(UUID Id, Boolean Enabled) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         args.put("Enabled", Enabled);
-        return this.APICall("Core/SetTriggerEnabled", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/SetTriggerEnabled", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return Object
+     * @return ActionResult
      */
-    public Object Sleep() {
+    public ActionResult Sleep() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/Sleep", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/Sleep", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return Object
+     * @return ActionResult
      */
-    public Object Start() {
+    public ActionResult Start() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/Start", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/Start", args, type);
     }
 
     /**
@@ -900,7 +988,8 @@ public class Core extends AMPAPI {
      */
     public Void Stop() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/Stop", args, Void.class);
+        Type type = new TypeToken<Void>(){}.getType();
+        return (Void) this.APICall("Core/Stop", args, type);
     }
 
     /**
@@ -910,7 +999,8 @@ public class Core extends AMPAPI {
      */
     public Void Suspend() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/Suspend", args, Void.class);
+        Type type = new TypeToken<Void>(){}.getType();
+        return (Void) this.APICall("Core/Suspend", args, type);
     }
 
     /**
@@ -919,29 +1009,32 @@ public class Core extends AMPAPI {
      */
     public Void UpdateAMPInstance() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/UpdateAMPInstance", args, Void.class);
+        Type type = new TypeToken<Void>(){}.getType();
+        return (Void) this.APICall("Core/UpdateAMPInstance", args, type);
     }
 
     /**
      * Name Description Optional
      * @param EmailAddress  False
      * @param TwoFactorPIN  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object UpdateAccountInfo(String EmailAddress, String TwoFactorPIN) {
+    public Task<ActionResult> UpdateAccountInfo(String EmailAddress, String TwoFactorPIN) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("EmailAddress", EmailAddress);
         args.put("TwoFactorPIN", TwoFactorPIN);
-        return this.APICall("Core/UpdateAccountInfo", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("Core/UpdateAccountInfo", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return Object
+     * @return ActionResult
      */
-    public Object UpdateApplication() {
+    public ActionResult UpdateApplication() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/UpdateApplication", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/UpdateApplication", args, type);
     }
 
     /**
@@ -952,9 +1045,9 @@ public class Core extends AMPAPI {
      * @param CannotChangePassword  False
      * @param MustChangePassword  False
      * @param EmailAddress  True
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object UpdateUserInfo(String Username, boolean Disabled, boolean PasswordExpires, boolean CannotChangePassword, boolean MustChangePassword, String EmailAddress) {
+    public Task<ActionResult> UpdateUserInfo(String Username, Boolean Disabled, Boolean PasswordExpires, Boolean CannotChangePassword, Boolean MustChangePassword, String EmailAddress) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         args.put("Disabled", Disabled);
@@ -962,7 +1055,8 @@ public class Core extends AMPAPI {
         args.put("CannotChangePassword", CannotChangePassword);
         args.put("MustChangePassword", MustChangePassword);
         args.put("EmailAddress", EmailAddress);
-        return this.APICall("Core/UpdateUserInfo", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("Core/UpdateUserInfo", args, type);
     }
 
     /**
@@ -971,7 +1065,8 @@ public class Core extends AMPAPI {
      */
     public Void UpgradeAMP() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("Core/UpgradeAMP", args, Void.class);
+        Type type = new TypeToken<Void>(){}.getType();
+        return (Void) this.APICall("Core/UpgradeAMP", args, type);
     }
 
     /**
@@ -979,14 +1074,15 @@ public class Core extends AMPAPI {
      * @param attestationObject  False
      * @param clientDataJSON  False
      * @param description  True
-     * @return Object
+     * @return ActionResult
      */
-    public Object WebauthnRegister(String attestationObject, String clientDataJSON, String description) {
+    public ActionResult WebauthnRegister(String attestationObject, String clientDataJSON, String description) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("attestationObject", attestationObject);
         args.put("clientDataJSON", clientDataJSON);
         args.put("description", description);
-        return this.APICall("Core/WebauthnRegister", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("Core/WebauthnRegister", args, type);
     }
 
 }

@@ -2,11 +2,13 @@ package dev.neuralnexus.ampapi;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import dev.neuralnexus.ampapi.responses.Core.LoginResult;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
@@ -85,9 +87,9 @@ public class AMPAPI {
      * General API call method.
      * @param endpoint The endpoint to call.
      * @param requestMethod The request method to use.
-     * @param returnClass The class to use when serializing the response.
+     * @param returnType The class to use when serializing the response.
      */
-    public <T> T APICall(String endpoint, String requestMethod, Map<String, Object> data, Class<T> returnClass) {
+    public Object APICall(String endpoint, String requestMethod, Map<String, Object> data, Type returnType) {
         try {
             Gson gson = new GsonBuilder().create();
 
@@ -110,11 +112,11 @@ public class AMPAPI {
 
             BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
-            if (returnClass == Void.class) {
+            if (returnType == Void.class) {
                 return null;
             }
 
-            return gson.fromJson(br.readLine(), returnClass);
+            return gson.fromJson(br.readLine(), returnType);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -128,7 +130,7 @@ public class AMPAPI {
      * @param data The data to send.
      */
     public Map<?,?> APICall(String endpoint, String requestMethod, Map<String, Object> data) {
-        return this.APICall(endpoint, requestMethod, data, Map.class);
+        return (Map<?, ?>) this.APICall(endpoint, requestMethod, data, Map.class);
     }
 
     /**
@@ -136,9 +138,9 @@ public class AMPAPI {
      * @param endpoint The endpoint to call.
      * @param data The data to send.
      */
-    public <T> T APICall(String endpoint, Map<String, Object> data, Class<T> returnClass) {
+    public Object APICall(String endpoint, Map<String, Object> data, Type returnType) {
         data.put("SESSIONID", this.sessionId);
-        return this.APICall(endpoint, "POST", data, returnClass);
+        return this.APICall(endpoint, "POST", data, returnType);
     }
 
     /**
@@ -147,7 +149,7 @@ public class AMPAPI {
      * @param data The data to send.
      */
     public Map<?,?> APICall(String endpoint, Map<String, Object> data) {
-        return this.APICall(endpoint, data, Map.class);
+        return (Map<?, ?>) this.APICall(endpoint, data, Map.class);
     }
 
     /**
@@ -168,7 +170,7 @@ public class AMPAPI {
         args.put("password", this.password);
         args.put("token", this.rememberMeToken);
         args.put("rememberMe", true);
-        LoginResult loginResult = this.APICall("Core/Login", args, LoginResult.class);
+        LoginResult loginResult = (LoginResult) this.APICall("Core/Login", args, LoginResult.class);
         if (loginResult != null && loginResult.success) {
             this.rememberMeToken = loginResult.rememberMeToken;
             this.sessionId = loginResult.sessionID;

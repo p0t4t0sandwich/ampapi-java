@@ -1,7 +1,16 @@
 package dev.neuralnexus.ampapi.apimodules;
 
+import com.google.gson.reflect.TypeToken;
 import dev.neuralnexus.ampapi.AMPAPI;
+import dev.neuralnexus.ampapi.responses.*;
 import dev.neuralnexus.ampapi.responses.ADSModule.*;
+import dev.neuralnexus.ampapi.types.*;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,12 +24,13 @@ public class ADSModule extends AMPAPI {
     /**
      * Name Description Optional
      * @param newDatastore  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object AddDatastore(Object newDatastore) {
+    public ActionResult AddDatastore(Object newDatastore) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("newDatastore", newDatastore);
-        return this.APICall("ADSModule/AddDatastore", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("ADSModule/AddDatastore", args, type);
     }
 
     /**
@@ -28,14 +38,15 @@ public class ADSModule extends AMPAPI {
      * @param InstanceID  False
      * @param Args  False
      * @param RebuildConfiguration  True
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object ApplyInstanceConfiguration(String InstanceID, Map Args, boolean RebuildConfiguration) {
+    public Task<ActionResult> ApplyInstanceConfiguration(UUID InstanceID, Map Args, Boolean RebuildConfiguration) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceID", InstanceID);
         args.put("Args", Args);
         args.put("RebuildConfiguration", RebuildConfiguration);
-        return this.APICall("ADSModule/ApplyInstanceConfiguration", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("ADSModule/ApplyInstanceConfiguration", args, type);
     }
 
     /**
@@ -45,16 +56,17 @@ public class ADSModule extends AMPAPI {
      * @param NewFriendlyName  True
      * @param Secret  True
      * @param RestartIfPreviouslyRunning  True
-     * @return Object
+     * @return ActionResult
      */
-    public Object ApplyTemplate(String InstanceID, Integer TemplateID, String NewFriendlyName, String Secret, boolean RestartIfPreviouslyRunning) {
+    public ActionResult ApplyTemplate(UUID InstanceID, Integer TemplateID, String NewFriendlyName, String Secret, Boolean RestartIfPreviouslyRunning) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceID", InstanceID);
         args.put("TemplateID", TemplateID);
         args.put("NewFriendlyName", NewFriendlyName);
         args.put("Secret", Secret);
         args.put("RestartIfPreviouslyRunning", RestartIfPreviouslyRunning);
-        return this.APICall("ADSModule/ApplyTemplate", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("ADSModule/ApplyTemplate", args, type);
     }
 
     /**
@@ -64,51 +76,55 @@ public class ADSModule extends AMPAPI {
      * @param Host  False
      * @param Port  False
      * @param InstanceID  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object AttachADS(String Friendly, boolean IsHTTPS, String Host, Integer Port, String InstanceID) {
+    public ActionResult AttachADS(String Friendly, Boolean IsHTTPS, String Host, Integer Port, UUID InstanceID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Friendly", Friendly);
         args.put("IsHTTPS", IsHTTPS);
         args.put("Host", Host);
         args.put("Port", Port);
         args.put("InstanceID", InstanceID);
-        return this.APICall("ADSModule/AttachADS", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("ADSModule/AttachADS", args, type);
     }
 
     /**
      * Name Description Optional
      * @param Id  False
      * @param NewName  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object CloneTemplate(Integer Id, String NewName) {
+    public ActionResult CloneTemplate(Integer Id, String NewName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         args.put("NewName", NewName);
-        return this.APICall("ADSModule/CloneTemplate", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("ADSModule/CloneTemplate", args, type);
     }
 
     /**
      * Name Description Optional
      * @param InstanceName  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object ConvertToManaged(String InstanceName) {
+    public ActionResult ConvertToManaged(String InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
-        return this.APICall("ADSModule/ConvertToManaged", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("ADSModule/ConvertToManaged", args, type);
     }
 
     /**
      * Name Description Optional
      * @param Name  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object CreateDeploymentTemplate(String Name) {
+    public ActionResult CreateDeploymentTemplate(String Name) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Name", Name);
-        return this.APICall("ADSModule/CreateDeploymentTemplate", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("ADSModule/CreateDeploymentTemplate", args, type);
     }
 
     /**
@@ -128,9 +144,9 @@ public class ADSModule extends AMPAPI {
      * @param StartOnBoot  True
      * @param DisplayImageSource  True
      * @param TargetDatastore  True
-     * @return Object
+     * @return ActionResult
      */
-    public Object CreateInstance(String TargetADSInstance, String NewInstanceId, String Module, String InstanceName, String FriendlyName, String IPBinding, Integer PortNumber, String AdminUsername, String AdminPassword, Map ProvisionSettings, boolean AutoConfigure, Object PostCreate, boolean StartOnBoot, String DisplayImageSource, Integer TargetDatastore) {
+    public ActionResult CreateInstance(UUID TargetADSInstance, UUID NewInstanceId, String Module, String InstanceName, String FriendlyName, String IPBinding, Integer PortNumber, String AdminUsername, String AdminPassword, Map ProvisionSettings, Boolean AutoConfigure, Object PostCreate, Boolean StartOnBoot, String DisplayImageSource, Integer TargetDatastore) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TargetADSInstance", TargetADSInstance);
         args.put("NewInstanceId", NewInstanceId);
@@ -147,42 +163,46 @@ public class ADSModule extends AMPAPI {
         args.put("StartOnBoot", StartOnBoot);
         args.put("DisplayImageSource", DisplayImageSource);
         args.put("TargetDatastore", TargetDatastore);
-        return this.APICall("ADSModule/CreateInstance", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("ADSModule/CreateInstance", args, type);
     }
 
     /**
      * Name Description Optional
      * @param Instance  False
      * @param PostCreate  True
-     * @return Object
+     * @return ActionResult
      */
-    public Object CreateLocalInstance(Object Instance, Object PostCreate) {
+    public ActionResult CreateLocalInstance(Object Instance, Object PostCreate) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Instance", Instance);
         args.put("PostCreate", PostCreate);
-        return this.APICall("ADSModule/CreateLocalInstance", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("ADSModule/CreateLocalInstance", args, type);
     }
 
     /**
      * Name Description Optional
      * @param id  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object DeleteDatastore(Integer id) {
+    public ActionResult DeleteDatastore(Integer id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("id", id);
-        return this.APICall("ADSModule/DeleteDatastore", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("ADSModule/DeleteDatastore", args, type);
     }
 
     /**
      * Name Description Optional
      * @param Id  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object DeleteDeploymentTemplate(Integer Id) {
+    public ActionResult DeleteDeploymentTemplate(Integer Id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
-        return this.APICall("ADSModule/DeleteDeploymentTemplate", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("ADSModule/DeleteDeploymentTemplate", args, type);
     }
 
     /**
@@ -193,18 +213,20 @@ public class ADSModule extends AMPAPI {
     public Object DeleteInstance(String InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
-        return this.APICall("ADSModule/DeleteInstance", args, Object.class);
+        Type type = new TypeToken<Object>(){}.getType();
+        return (Object) this.APICall("ADSModule/DeleteInstance", args, type);
     }
 
     /**
      * Name Description Optional
      * @param InstanceId  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object DeleteInstanceUsers(String InstanceId) {
+    public Task<ActionResult> DeleteInstanceUsers(UUID InstanceId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
-        return this.APICall("ADSModule/DeleteInstanceUsers", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("ADSModule/DeleteInstanceUsers", args, type);
     }
 
     /**A dictionary of setting nodes and values to create the new instance with. Identical in function to the provisioning arguments in the template itself.
@@ -233,40 +255,44 @@ public class ADSModule extends AMPAPI {
         args.put("Secret", Secret);
         args.put("PostCreate", PostCreate);
         args.put("ExtraProvisionSettings", ExtraProvisionSettings);
-        return this.APICall("ADSModule/DeployTemplate", args, Object.class);
+        Type type = new TypeToken<Object>(){}.getType();
+        return (Object) this.APICall("ADSModule/DeployTemplate", args, type);
     }
 
     /**
      * Name Description Optional
      * @param Id  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object DetatchTarget(String Id) {
+    public ActionResult DetatchTarget(UUID Id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
-        return this.APICall("ADSModule/DetatchTarget", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("ADSModule/DetatchTarget", args, type);
     }
 
     /**
      * Name Description Optional
      * @param SourceArchive  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object ExtractEverywhere(String SourceArchive) {
+    public Task<ActionResult> ExtractEverywhere(String SourceArchive) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("SourceArchive", SourceArchive);
-        return this.APICall("ADSModule/ExtractEverywhere", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("ADSModule/ExtractEverywhere", args, type);
     }
 
     /**
      * Name Description Optional
      * @param instanceId  False
-     * @return List
+     * @return Result<List<Object>>
      */
-    public List GetApplicationEndpoints(String instanceId) {
+    public Result<List<Object>> GetApplicationEndpoints(UUID instanceId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("instanceId", instanceId);
-        return this.APICall("ADSModule/GetApplicationEndpoints", args, List.class);
+        Type type = new TypeToken<Result<List<Object>>>(){}.getType();
+        return (Result<List<Object>>) this.APICall("ADSModule/GetApplicationEndpoints", args, type);
     }
 
     /**
@@ -277,107 +303,118 @@ public class ADSModule extends AMPAPI {
     public Object GetDatastore(Integer id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("id", id);
-        return this.APICall("ADSModule/GetDatastore", args, Object.class);
+        Type type = new TypeToken<Object>(){}.getType();
+        return (Object) this.APICall("ADSModule/GetDatastore", args, type);
     }
 
     /**
      * Name Description Optional
      * @param datastoreId  False
-     * @return List
+     * @return Result<List<Map<String, String>>>
      */
-    public List GetDatastoreInstances(Integer datastoreId) {
+    public Result<List<Map<String, String>>> GetDatastoreInstances(Integer datastoreId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("datastoreId", datastoreId);
-        return this.APICall("ADSModule/GetDatastoreInstances", args, List.class);
+        Type type = new TypeToken<Result<List<Map<String, String>>>>(){}.getType();
+        return (Result<List<Map<String, String>>>) this.APICall("ADSModule/GetDatastoreInstances", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return List
+     * @return Result<List<Object>>
      */
-    public List GetDatastores() {
+    public Result<List<Object>> GetDatastores() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("ADSModule/GetDatastores", args, List.class);
+        Type type = new TypeToken<Result<List<Object>>>(){}.getType();
+        return (Result<List<Object>>) this.APICall("ADSModule/GetDatastores", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return List
+     * @return Result<List<Object>>
      */
-    public List GetDeploymentTemplates() {
+    public Result<List<Object>> GetDeploymentTemplates() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("ADSModule/GetDeploymentTemplates", args, List.class);
+        Type type = new TypeToken<Result<List<Object>>>(){}.getType();
+        return (Result<List<Object>>) this.APICall("ADSModule/GetDeploymentTemplates", args, type);
     }
 
     /**
      * Name Description Optional
      * @param GroupId  False
-     * @return boolean
+     * @return Result<ADSInstance>
      */
-    public boolean GetGroup(String GroupId) {
+    public Result<ADSInstance> GetGroup(UUID GroupId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("GroupId", GroupId);
-        return this.APICall("ADSModule/GetGroup", args, boolean.class);
+        Type type = new TypeToken<Result<ADSInstance>>(){}.getType();
+        return (Result<ADSInstance>) this.APICall("ADSModule/GetGroup", args, type);
     }
 
     /**
      * Name Description Optional
      * @param InstanceId  False
-     * @return GetInstanceResult
+     * @return Result<Instance>
      */
-    public GetInstanceResult GetInstance(String InstanceId) {
+    public Result<Instance> GetInstance(UUID InstanceId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
-        return this.APICall("ADSModule/GetInstance", args, GetInstanceResult.class);
+        Type type = new TypeToken<Result<Instance>>(){}.getType();
+        return (Result<Instance>) this.APICall("ADSModule/GetInstance", args, type);
     }
 
     /**
      * Name Description Optional
      * @param InstanceName  False
-     * @return List
+     * @return Result<List<Object>>
      */
-    public List GetInstanceNetworkInfo(String InstanceName) {
+    public Result<List<Object>> GetInstanceNetworkInfo(String InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
-        return this.APICall("ADSModule/GetInstanceNetworkInfo", args, List.class);
+        Type type = new TypeToken<Result<List<Object>>>(){}.getType();
+        return (Result<List<Object>>) this.APICall("ADSModule/GetInstanceNetworkInfo", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return List
+     * @return Result<List<Map<String, String>>>
      */
-    public List GetInstanceStatuses() {
+    public Result<List<Map<String, String>>> GetInstanceStatuses() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("ADSModule/GetInstanceStatuses", args, List.class);
+        Type type = new TypeToken<Result<List<Map<String, String>>>>(){}.getType();
+        return (Result<List<Map<String, String>>>) this.APICall("ADSModule/GetInstanceStatuses", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return GetInstancesResult
+     * @return Result<List<ADSInstance>>
      */
-    public GetInstancesResult GetInstances() {
+    public Result<List<ADSInstance>> GetInstances() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("ADSModule/GetInstances", args, GetInstancesResult.class);
+        Type type = new TypeToken<Result<List<ADSInstance>>>(){}.getType();
+        return (Result<List<ADSInstance>>) this.APICall("ADSModule/GetInstances", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return List
+     * @return Result<List<Map<String, String>>>
      */
-    public List GetLocalInstances() {
+    public Result<List<Map<String, String>>> GetLocalInstances() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("ADSModule/GetLocalInstances", args, List.class);
+        Type type = new TypeToken<Result<List<Map<String, String>>>>(){}.getType();
+        return (Result<List<Map<String, String>>>) this.APICall("ADSModule/GetLocalInstances", args, type);
     }
 
     /**
      * Name Description Optional
      * @param ModuleName  False
-     * @return List
+     * @return Result<List<Map<String, String>>>
      */
-    public List GetProvisionArguments(String ModuleName) {
+    public Result<List<Map<String, String>>> GetProvisionArguments(String ModuleName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ModuleName", ModuleName);
-        return this.APICall("ADSModule/GetProvisionArguments", args, List.class);
+        Type type = new TypeToken<Result<List<Map<String, String>>>>(){}.getType();
+        return (Result<List<Map<String, String>>>) this.APICall("ADSModule/GetProvisionArguments", args, type);
     }
 
     /**
@@ -386,16 +423,18 @@ public class ADSModule extends AMPAPI {
      */
     public Map GetProvisionFitness() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("ADSModule/GetProvisionFitness", args, Map.class);
+        Type type = new TypeToken<Map>(){}.getType();
+        return (Map) this.APICall("ADSModule/GetProvisionFitness", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return List
+     * @return Result<List<Object>>
      */
-    public List GetSupportedApplications() {
+    public Result<List<Object>> GetSupportedApplications() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("ADSModule/GetSupportedApplications", args, List.class);
+        Type type = new TypeToken<Result<List<Object>>>(){}.getType();
+        return (Result<List<Object>>) this.APICall("ADSModule/GetSupportedApplications", args, type);
     }
 
     /**
@@ -404,7 +443,8 @@ public class ADSModule extends AMPAPI {
      */
     public Object GetTargetInfo() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("ADSModule/GetTargetInfo", args, Object.class);
+        Type type = new TypeToken<Object>(){}.getType();
+        return (Object) this.APICall("ADSModule/GetTargetInfo", args, type);
     }
 
     /**
@@ -412,14 +452,15 @@ public class ADSModule extends AMPAPI {
      * @param ForModule  False
      * @param SettingNode  False
      * @param Values  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object HandoutInstanceConfigs(String ForModule, String SettingNode, List Values) {
+    public Task<ActionResult> HandoutInstanceConfigs(String ForModule, String SettingNode, List Values) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ForModule", ForModule);
         args.put("SettingNode", SettingNode);
         args.put("Values", Values);
-        return this.APICall("ADSModule/HandoutInstanceConfigs", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("ADSModule/HandoutInstanceConfigs", args, type);
     }
 
     /**
@@ -427,10 +468,11 @@ public class ADSModule extends AMPAPI {
      * @param InstanceId  False
      * @return Object
      */
-    public Object ManageInstance(String InstanceId) {
+    public Object ManageInstance(UUID InstanceId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
-        return this.APICall("ADSModule/ManageInstance", args, Object.class);
+        Type type = new TypeToken<Object>(){}.getType();
+        return (Object) this.APICall("ADSModule/ManageInstance", args, type);
     }
 
     /**
@@ -441,9 +483,9 @@ public class ADSModule extends AMPAPI {
      * @param Protocol  False
      * @param Description  False
      * @param Open  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object ModifyCustomFirewallRule(String instanceId, Integer PortNumber, Integer Range, String Protocol, String Description, boolean Open) {
+    public Task<ActionResult> ModifyCustomFirewallRule(UUID instanceId, Integer PortNumber, Integer Range, String Protocol, String Description, Boolean Open) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("instanceId", instanceId);
         args.put("PortNumber", PortNumber);
@@ -451,20 +493,22 @@ public class ADSModule extends AMPAPI {
         args.put("Protocol", Protocol);
         args.put("Description", Description);
         args.put("Open", Open);
-        return this.APICall("ADSModule/ModifyCustomFirewallRule", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("ADSModule/ModifyCustomFirewallRule", args, type);
     }
 
     /**
      * Name Description Optional
      * @param instanceId  False
      * @param datastoreId  False
-     * @return Object
+     * @return Task<Object>
      */
-    public Object MoveInstanceDatastore(String instanceId, Integer datastoreId) {
+    public Task<Object> MoveInstanceDatastore(UUID instanceId, Integer datastoreId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("instanceId", instanceId);
         args.put("datastoreId", datastoreId);
-        return this.APICall("ADSModule/MoveInstanceDatastore", args, Object.class);
+        Type type = new TypeToken<Task<Object>>(){}.getType();
+        return (Task<Object>) this.APICall("ADSModule/MoveInstanceDatastore", args, type);
     }
 
     /**
@@ -473,7 +517,8 @@ public class ADSModule extends AMPAPI {
      */
     public Object ReactivateLocalInstances() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("ADSModule/ReactivateLocalInstances", args, Object.class);
+        Type type = new TypeToken<Object>(){}.getType();
+        return (Object) this.APICall("ADSModule/ReactivateLocalInstances", args, type);
     }
 
     /**
@@ -482,29 +527,32 @@ public class ADSModule extends AMPAPI {
      */
     public Void RefreshAppCache() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("ADSModule/RefreshAppCache", args, Void.class);
+        Type type = new TypeToken<Void>(){}.getType();
+        return (Void) this.APICall("ADSModule/RefreshAppCache", args, type);
     }
 
     /**
      * Name Description Optional
      * @param GroupId  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object RefreshGroup(String GroupId) {
+    public ActionResult RefreshGroup(UUID GroupId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("GroupId", GroupId);
-        return this.APICall("ADSModule/RefreshGroup", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("ADSModule/RefreshGroup", args, type);
     }
 
     /**
      * Name Description Optional
      * @param InstanceId  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object RefreshInstanceConfig(String InstanceId) {
+    public Task<ActionResult> RefreshInstanceConfig(String InstanceId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
-        return this.APICall("ADSModule/RefreshInstanceConfig", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("ADSModule/RefreshInstanceConfig", args, type);
     }
 
     /**
@@ -513,7 +561,8 @@ public class ADSModule extends AMPAPI {
      */
     public Void RefreshRemoteConfigStores() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("ADSModule/RefreshRemoteConfigStores", args, Void.class);
+        Type type = new TypeToken<Void>(){}.getType();
+        return (Void) this.APICall("ADSModule/RefreshRemoteConfigStores", args, type);
     }
 
     /**
@@ -524,9 +573,9 @@ public class ADSModule extends AMPAPI {
      * @param password  False
      * @param twoFactorToken  False
      * @param friendlyName  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object RegisterTarget(String controllerUrl, String myUrl, String username, String password, String twoFactorToken, String friendlyName) {
+    public Task<ActionResult> RegisterTarget(String controllerUrl, String myUrl, String username, String password, String twoFactorToken, String friendlyName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("controllerUrl", controllerUrl);
         args.put("myUrl", myUrl);
@@ -534,7 +583,8 @@ public class ADSModule extends AMPAPI {
         args.put("password", password);
         args.put("twoFactorToken", twoFactorToken);
         args.put("friendlyName", friendlyName);
-        return this.APICall("ADSModule/RegisterTarget", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("ADSModule/RegisterTarget", args, type);
     }
 
     /**
@@ -545,7 +595,8 @@ public class ADSModule extends AMPAPI {
     public Object RepairDatastore(Integer id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("id", id);
-        return this.APICall("ADSModule/RepairDatastore", args, Object.class);
+        Type type = new TypeToken<Object>(){}.getType();
+        return (Object) this.APICall("ADSModule/RepairDatastore", args, type);
     }
 
     /**
@@ -556,31 +607,34 @@ public class ADSModule extends AMPAPI {
     public Object RequestDatastoreSizeCalculation(Integer datastoreId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("datastoreId", datastoreId);
-        return this.APICall("ADSModule/RequestDatastoreSizeCalculation", args, Object.class);
+        Type type = new TypeToken<Object>(){}.getType();
+        return (Object) this.APICall("ADSModule/RequestDatastoreSizeCalculation", args, type);
     }
 
     /**
      * Name Description Optional
      * @param InstanceName  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object RestartInstance(String InstanceName) {
+    public ActionResult RestartInstance(String InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
-        return this.APICall("ADSModule/RestartInstance", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("ADSModule/RestartInstance", args, type);
     }
 
     /**
      * Name Description Optional
      * @param id  False
      * @param REQ_RAWJSON  False
-     * @return Object
+     * @return Task<Map<String, String>>
      */
-    public Object Servers(String id, String REQ_RAWJSON) {
+    public Task<Map<String, String>> Servers(String id, String REQ_RAWJSON) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("id", id);
         args.put("REQ_RAWJSON", REQ_RAWJSON);
-        return this.APICall("ADSModule/Servers", args, Object.class);
+        Type type = new TypeToken<Task<Map<String, String>>>(){}.getType();
+        return (Task<Map<String, String>>) this.APICall("ADSModule/Servers", args, type);
     }
 
     /**
@@ -588,80 +642,87 @@ public class ADSModule extends AMPAPI {
      * @param InstanceName  False
      * @param SettingNode  False
      * @param Value  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object SetInstanceConfig(String InstanceName, String SettingNode, String Value) {
+    public Task<ActionResult> SetInstanceConfig(String InstanceName, String SettingNode, String Value) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
         args.put("SettingNode", SettingNode);
         args.put("Value", Value);
-        return this.APICall("ADSModule/SetInstanceConfig", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("ADSModule/SetInstanceConfig", args, type);
     }
 
     /**
      * Name Description Optional
      * @param InstanceId  False
      * @param PortMappings  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object SetInstanceNetworkInfo(String InstanceId, Map PortMappings) {
+    public Task<ActionResult> SetInstanceNetworkInfo(UUID InstanceId, Map PortMappings) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
         args.put("PortMappings", PortMappings);
-        return this.APICall("ADSModule/SetInstanceNetworkInfo", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("ADSModule/SetInstanceNetworkInfo", args, type);
     }
 
     /**
      * Name Description Optional
      * @param InstanceName  False
      * @param Suspended  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object SetInstanceSuspended(String InstanceName, boolean Suspended) {
+    public Task<ActionResult> SetInstanceSuspended(String InstanceName, Boolean Suspended) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
         args.put("Suspended", Suspended);
-        return this.APICall("ADSModule/SetInstanceSuspended", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("ADSModule/SetInstanceSuspended", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object StartAllInstances() {
+    public Task<ActionResult> StartAllInstances() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("ADSModule/StartAllInstances", args, Object.class);
-    }
-
-    /**
-     * Name Description Optional
-     * @param InstanceName  False
-     * @return Object
-     */
-    public Object StartInstance(String InstanceName) {
-        HashMap<String, Object> args = new HashMap<>();
-        args.put("InstanceName", InstanceName);
-        return this.APICall("ADSModule/StartInstance", args, Object.class);
-    }
-
-    /**
-     * Name Description Optional
-     * @return Object
-     */
-    public Object StopAllInstances() {
-        HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("ADSModule/StopAllInstances", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("ADSModule/StartAllInstances", args, type);
     }
 
     /**
      * Name Description Optional
      * @param InstanceName  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object StopInstance(String InstanceName) {
+    public Task<ActionResult> StartInstance(String InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
-        return this.APICall("ADSModule/StopInstance", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("ADSModule/StartInstance", args, type);
+    }
+
+    /**
+     * Name Description Optional
+     * @return Task<ActionResult>
+     */
+    public Task<ActionResult> StopAllInstances() {
+        HashMap<String, Object> args = new HashMap<>();
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("ADSModule/StopAllInstances", args, type);
+    }
+
+    /**
+     * Name Description Optional
+     * @param InstanceName  False
+     * @return ActionResult
+     */
+    public ActionResult StopInstance(String InstanceName) {
+        HashMap<String, Object> args = new HashMap<>();
+        args.put("InstanceName", InstanceName);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("ADSModule/StopInstance", args, type);
     }
 
     /**
@@ -669,36 +730,39 @@ public class ADSModule extends AMPAPI {
      * @param url  False
      * @param username  False
      * @param password  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object TestADSLoginDetails(String url, String username, String password) {
+    public Task<ActionResult> TestADSLoginDetails(String url, String username, String password) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("url", url);
         args.put("username", username);
         args.put("password", password);
-        return this.APICall("ADSModule/TestADSLoginDetails", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("ADSModule/TestADSLoginDetails", args, type);
     }
 
     /**
      * Name Description Optional
      * @param updatedDatastore  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object UpdateDatastore(Object updatedDatastore) {
+    public ActionResult UpdateDatastore(Object updatedDatastore) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("updatedDatastore", updatedDatastore);
-        return this.APICall("ADSModule/UpdateDatastore", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("ADSModule/UpdateDatastore", args, type);
     }
 
     /**
      * Name Description Optional
      * @param templateToUpdate  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object UpdateDeploymentTemplate(Object templateToUpdate) {
+    public ActionResult UpdateDeploymentTemplate(Object templateToUpdate) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("templateToUpdate", templateToUpdate);
-        return this.APICall("ADSModule/UpdateDeploymentTemplate", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("ADSModule/UpdateDeploymentTemplate", args, type);
     }
 
     /**
@@ -714,9 +778,9 @@ public class ADSModule extends AMPAPI {
      * @param MemoryPolicy  False
      * @param ContainerMaxCPU  False
      * @param ContainerImage  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object UpdateInstanceInfo(String InstanceId, String FriendlyName, String Description, boolean StartOnBoot, boolean Suspended, boolean ExcludeFromFirewall, boolean RunInContainer, Integer ContainerMemory, Object MemoryPolicy, Object ContainerMaxCPU, String ContainerImage) {
+    public Task<ActionResult> UpdateInstanceInfo(String InstanceId, String FriendlyName, String Description, Boolean StartOnBoot, Boolean Suspended, Boolean ExcludeFromFirewall, Boolean RunInContainer, Integer ContainerMemory, Object MemoryPolicy, Object ContainerMaxCPU, String ContainerImage) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
         args.put("FriendlyName", FriendlyName);
@@ -729,7 +793,8 @@ public class ADSModule extends AMPAPI {
         args.put("MemoryPolicy", MemoryPolicy);
         args.put("ContainerMaxCPU", ContainerMaxCPU);
         args.put("ContainerImage", ContainerImage);
-        return this.APICall("ADSModule/UpdateInstanceInfo", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("ADSModule/UpdateInstanceInfo", args, type);
     }
 
     /**
@@ -737,10 +802,11 @@ public class ADSModule extends AMPAPI {
      * @param TargetID  False
      * @return Void
      */
-    public Void UpdateTarget(String TargetID) {
+    public Void UpdateTarget(UUID TargetID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TargetID", TargetID);
-        return this.APICall("ADSModule/UpdateTarget", args, Void.class);
+        Type type = new TypeToken<Void>(){}.getType();
+        return (Void) this.APICall("ADSModule/UpdateTarget", args, type);
     }
 
     /**
@@ -750,38 +816,41 @@ public class ADSModule extends AMPAPI {
      * @param Url  False
      * @param Description  False
      * @param Tags  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object UpdateTargetInfo(String Id, String FriendlyName, String Url, String Description, List Tags) {
+    public ActionResult UpdateTargetInfo(UUID Id, String FriendlyName, String Url, String Description, List Tags) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         args.put("FriendlyName", FriendlyName);
         args.put("Url", Url);
         args.put("Description", Description);
         args.put("Tags", Tags);
-        return this.APICall("ADSModule/UpdateTargetInfo", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("ADSModule/UpdateTargetInfo", args, type);
     }
 
     /**
      * Name Description Optional
      * @param RestartRunning  False
-     * @return Object
+     * @return Task<ActionResult>
      */
-    public Object UpgradeAllInstances(boolean RestartRunning) {
+    public Task<ActionResult> UpgradeAllInstances(Boolean RestartRunning) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RestartRunning", RestartRunning);
-        return this.APICall("ADSModule/UpgradeAllInstances", args, Object.class);
+        Type type = new TypeToken<Task<ActionResult>>(){}.getType();
+        return (Task<ActionResult>) this.APICall("ADSModule/UpgradeAllInstances", args, type);
     }
 
     /**
      * Name Description Optional
      * @param InstanceName  False
-     * @return Object
+     * @return ActionResult
      */
-    public Object UpgradeInstance(String InstanceName) {
+    public ActionResult UpgradeInstance(String InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
-        return this.APICall("ADSModule/UpgradeInstance", args, Object.class);
+        Type type = new TypeToken<ActionResult>(){}.getType();
+        return (ActionResult) this.APICall("ADSModule/UpgradeInstance", args, type);
     }
 
 }

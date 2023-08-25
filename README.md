@@ -80,12 +80,12 @@ public class Main {
         ADS API = new ADS("http://localhost:8080/", "admin", "myfancypassword123", "", "");
 
         // Get the available instances
-        GetInstancesResult instancesResult = API.ADSModule.GetInstances();
-        ADSInstance[] targets = instancesResult.result;
+        Result<List<ADSInstance>> instancesResult = API.ADSModule.GetInstances();
+        List<ADSInstance> targets = instancesResult.result;
 
         // In this example, my Hub server is on the second target
-        // If you're running a standalone setup, you can just use targets[0]
-        ADSInstance target = targets[1];
+        // If you're running a standalone setup, you can just use targets.get(0)
+        ADSInstance target = targets.get(1);
 
         String hub_instance_id = "";
 
@@ -161,3 +161,4 @@ public class Main {
 ## Release Notes
 
 - `ADS#InstanceLogin` can now return another ADS, in the case of a Controller ADS proxying a login directly to a Target ADS
+- Huge breakthrough with return types, most AMP C# types are now mapped to Java types, with generics and everything!

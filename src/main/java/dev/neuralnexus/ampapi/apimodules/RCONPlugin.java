@@ -1,7 +1,16 @@
 package dev.neuralnexus.ampapi.apimodules;
 
+import com.google.gson.reflect.TypeToken;
 import dev.neuralnexus.ampapi.AMPAPI;
+import dev.neuralnexus.ampapi.responses.*;
 import dev.neuralnexus.ampapi.responses.RCONPlugin.*;
+import dev.neuralnexus.ampapi.types.*;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +27,8 @@ public class RCONPlugin extends AMPAPI {
      */
     public Void Dummy() {
         HashMap<String, Object> args = new HashMap<>();
-        return this.APICall("RCONPlugin/Dummy", args, Void.class);
+        Type type = new TypeToken<Void>(){}.getType();
+        return (Void) this.APICall("RCONPlugin/Dummy", args, type);
     }
 
 }

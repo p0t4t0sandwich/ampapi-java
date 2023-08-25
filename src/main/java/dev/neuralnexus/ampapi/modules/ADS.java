@@ -58,7 +58,7 @@ public class ADS extends CommonAPI {
         args.put("password", this.password);
         args.put("token", "");
         args.put("rememberMe", true);
-        LoginResult loginResult = this.APICall("ADSModule/Servers/" + instance_id + "/API/Core/Login", args, LoginResult.class);
+        LoginResult loginResult = (LoginResult) this.APICall("ADSModule/Servers/" + instance_id + "/API/Core/Login", args, LoginResult.class);
 
         if (loginResult != null && loginResult.success) {
             return new CommonAPI(this.baseUri + "API/ADSModule/Servers/" + instance_id, this.username, "", loginResult.rememberMeToken, loginResult.sessionID);
@@ -80,7 +80,7 @@ public class ADS extends CommonAPI {
         args.put("token", "");
         args.put("rememberMe", true);
 
-        LoginResult loginResult = this.APICall("ADSModule/Servers/" + instance_id + "/API/Core/Login", args, LoginResult.class);
+        LoginResult loginResult = (LoginResult) this.APICall("ADSModule/Servers/" + instance_id + "/API/Core/Login", args, LoginResult.class);
 
         if (loginResult != null && loginResult.success) {
             // Prepare the parameters for the instance

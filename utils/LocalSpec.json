@@ -492,7 +492,7 @@
                     "Optional": false
                 }
             ],
-            "ReturnTypeName": "GetInstanceResult",
+            "ReturnTypeName": "Result<Instance>",
             "IsComplexType": true
         },
         "GetInstanceNetworkInfo": {
@@ -514,7 +514,7 @@
         },
         "GetInstances": {
             "Parameters": [],
-            "ReturnTypeName": "GetInstancesResult",
+            "ReturnTypeName": "IEnumerable<IADSInstance>",
             "IsComplexType": false
         },
         "GetLocalInstances": {
