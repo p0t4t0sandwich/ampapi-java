@@ -310,13 +310,13 @@ public class ADSModule extends AMPAPI {
     /**
      * Name Description Optional
      * @param datastoreId  False
-     * @return Result<List<Map<String, String>>>
+     * @return Result<List<Map<String, Object>>>
      */
-    public Result<List<Map<String, String>>> GetDatastoreInstances(Integer datastoreId) {
+    public Result<List<Map<String, Object>>> GetDatastoreInstances(Integer datastoreId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("datastoreId", datastoreId);
-        Type type = new TypeToken<Result<List<Map<String, String>>>>(){}.getType();
-        return (Result<List<Map<String, String>>>) this.APICall("ADSModule/GetDatastoreInstances", args, type);
+        Type type = new TypeToken<Result<List<Map<String, Object>>>>(){}.getType();
+        return (Result<List<Map<String, Object>>>) this.APICall("ADSModule/GetDatastoreInstances", args, type);
     }
 
     /**
@@ -377,12 +377,12 @@ public class ADSModule extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Result<List<Map<String, String>>>
+     * @return Result<List<Map<String, Object>>>
      */
-    public Result<List<Map<String, String>>> GetInstanceStatuses() {
+    public Result<List<Map<String, Object>>> GetInstanceStatuses() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Result<List<Map<String, String>>>>(){}.getType();
-        return (Result<List<Map<String, String>>>) this.APICall("ADSModule/GetInstanceStatuses", args, type);
+        Type type = new TypeToken<Result<List<Map<String, Object>>>>(){}.getType();
+        return (Result<List<Map<String, Object>>>) this.APICall("ADSModule/GetInstanceStatuses", args, type);
     }
 
     /**
@@ -397,34 +397,34 @@ public class ADSModule extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Result<List<Map<String, String>>>
+     * @return Result<List<Map<String, Object>>>
      */
-    public Result<List<Map<String, String>>> GetLocalInstances() {
+    public Result<List<Map<String, Object>>> GetLocalInstances() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Result<List<Map<String, String>>>>(){}.getType();
-        return (Result<List<Map<String, String>>>) this.APICall("ADSModule/GetLocalInstances", args, type);
+        Type type = new TypeToken<Result<List<Map<String, Object>>>>(){}.getType();
+        return (Result<List<Map<String, Object>>>) this.APICall("ADSModule/GetLocalInstances", args, type);
     }
 
     /**
      * Name Description Optional
      * @param ModuleName  False
-     * @return Result<List<Map<String, String>>>
+     * @return Result<List<Map<String, Object>>>
      */
-    public Result<List<Map<String, String>>> GetProvisionArguments(String ModuleName) {
+    public Result<List<Map<String, Object>>> GetProvisionArguments(String ModuleName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ModuleName", ModuleName);
-        Type type = new TypeToken<Result<List<Map<String, String>>>>(){}.getType();
-        return (Result<List<Map<String, String>>>) this.APICall("ADSModule/GetProvisionArguments", args, type);
+        Type type = new TypeToken<Result<List<Map<String, Object>>>>(){}.getType();
+        return (Result<List<Map<String, Object>>>) this.APICall("ADSModule/GetProvisionArguments", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Map<String, Object>
      */
-    public Map GetProvisionFitness() {
+    public Map<String, Object> GetProvisionFitness() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Map>(){}.getType();
-        return (Map) this.APICall("ADSModule/GetProvisionFitness", args, type);
+        Type type = new TypeToken<Map<String, Object>>(){}.getType();
+        return (Map<String, Object>) this.APICall("ADSModule/GetProvisionFitness", args, type);
     }
 
     /**
@@ -627,14 +627,14 @@ public class ADSModule extends AMPAPI {
      * Name Description Optional
      * @param id  False
      * @param REQ_RAWJSON  False
-     * @return Task<Map<String, String>>
+     * @return Task<Map<String, Object>>
      */
-    public Task<Map<String, String>> Servers(String id, String REQ_RAWJSON) {
+    public Task<Map<String, Object>> Servers(String id, String REQ_RAWJSON) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("id", id);
         args.put("REQ_RAWJSON", REQ_RAWJSON);
-        Type type = new TypeToken<Task<Map<String, String>>>(){}.getType();
-        return (Task<Map<String, String>>) this.APICall("ADSModule/Servers", args, type);
+        Type type = new TypeToken<Task<Map<String, Object>>>(){}.getType();
+        return (Task<Map<String, Object>>) this.APICall("ADSModule/Servers", args, type);
     }
 
     /**

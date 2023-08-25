@@ -69,12 +69,12 @@ public class MinecraftModule extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Map<String, Object>
      */
-    public Map BukGetCategories() {
+    public Map<String, Object> BukGetCategories() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Map>(){}.getType();
-        return (Map) this.APICall("MinecraftModule/BukGetCategories", args, type);
+        Type type = new TypeToken<Map<String, Object>>(){}.getType();
+        return (Map<String, Object>) this.APICall("MinecraftModule/BukGetCategories", args, type);
     }
 
     /**
@@ -91,24 +91,24 @@ public class MinecraftModule extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Map<String, Object>
      */
-    public Map BukGetInstalledPlugins() {
+    public Map<String, Object> BukGetInstalledPlugins() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Map>(){}.getType();
-        return (Map) this.APICall("MinecraftModule/BukGetInstalledPlugins", args, type);
+        Type type = new TypeToken<Map<String, Object>>(){}.getType();
+        return (Map<String, Object>) this.APICall("MinecraftModule/BukGetInstalledPlugins", args, type);
     }
 
     /**
      * Name Description Optional
      * @param PluginId  False
-     * @return Map
+     * @return Map<String, Object>
      */
-    public Map BukGetPluginInfo(Integer PluginId) {
+    public Map<String, Object> BukGetPluginInfo(Integer PluginId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("PluginId", PluginId);
-        Type type = new TypeToken<Map>(){}.getType();
-        return (Map) this.APICall("MinecraftModule/BukGetPluginInfo", args, type);
+        Type type = new TypeToken<Map<String, Object>>(){}.getType();
+        return (Map<String, Object>) this.APICall("MinecraftModule/BukGetPluginInfo", args, type);
     }
 
     /**
@@ -116,25 +116,25 @@ public class MinecraftModule extends AMPAPI {
      * @param CategoryId  False
      * @param PageNumber  False
      * @param PageSize  False
-     * @return Map
+     * @return Map<String, Object>
      */
-    public Map BukGetPluginsForCategory(String CategoryId, Integer PageNumber, Integer PageSize) {
+    public Map<String, Object> BukGetPluginsForCategory(String CategoryId, Integer PageNumber, Integer PageSize) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("CategoryId", CategoryId);
         args.put("PageNumber", PageNumber);
         args.put("PageSize", PageSize);
-        Type type = new TypeToken<Map>(){}.getType();
-        return (Map) this.APICall("MinecraftModule/BukGetPluginsForCategory", args, type);
+        Type type = new TypeToken<Map<String, Object>>(){}.getType();
+        return (Map<String, Object>) this.APICall("MinecraftModule/BukGetPluginsForCategory", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Map<String, Object>
      */
-    public Map BukGetPopularPlugins() {
+    public Map<String, Object> BukGetPopularPlugins() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Map>(){}.getType();
-        return (Map) this.APICall("MinecraftModule/BukGetPopularPlugins", args, type);
+        Type type = new TypeToken<Map<String, Object>>(){}.getType();
+        return (Map<String, Object>) this.APICall("MinecraftModule/BukGetPopularPlugins", args, type);
     }
 
     /**
@@ -154,15 +154,15 @@ public class MinecraftModule extends AMPAPI {
      * @param Query  False
      * @param PageNumber  False
      * @param PageSize  False
-     * @return Map
+     * @return Map<String, Object>
      */
-    public Map BukGetSearch(String Query, Integer PageNumber, Integer PageSize) {
+    public Map<String, Object> BukGetSearch(String Query, Integer PageNumber, Integer PageSize) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Query", Query);
         args.put("PageNumber", PageNumber);
         args.put("PageSize", PageSize);
-        Type type = new TypeToken<Map>(){}.getType();
-        return (Map) this.APICall("MinecraftModule/BukGetSearch", args, type);
+        Type type = new TypeToken<Map<String, Object>>(){}.getType();
+        return (Map<String, Object>) this.APICall("MinecraftModule/BukGetSearch", args, type);
     }
 
     /**
@@ -201,22 +201,22 @@ public class MinecraftModule extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Map<String, Object>
      */
-    public Map GetOPWhitelist() {
+    public Map<String, Object> GetOPWhitelist() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Map>(){}.getType();
-        return (Map) this.APICall("MinecraftModule/GetOPWhitelist", args, type);
+        Type type = new TypeToken<Map<String, Object>>(){}.getType();
+        return (Map<String, Object>) this.APICall("MinecraftModule/GetOPWhitelist", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return Result<List<Map<String, String>>>
+     * @return Result<List<Map<String, Object>>>
      */
-    public Result<List<Map<String, String>>> GetWhitelist() {
+    public Result<List<Map<String, Object>>> GetWhitelist() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Result<List<Map<String, String>>>>(){}.getType();
-        return (Result<List<Map<String, String>>>) this.APICall("MinecraftModule/GetWhitelist", args, type);
+        Type type = new TypeToken<Result<List<Map<String, Object>>>>(){}.getType();
+        return (Result<List<Map<String, Object>>>) this.APICall("MinecraftModule/GetWhitelist", args, type);
     }
 
     /**
@@ -245,12 +245,12 @@ public class MinecraftModule extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Result<List<Map<String, String>>>
+     * @return Result<List<Map<String, Object>>>
      */
-    public Result<List<Map<String, String>>> LoadOPList() {
+    public Result<List<Map<String, Object>>> LoadOPList() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Result<List<Map<String, String>>>>(){}.getType();
-        return (Result<List<Map<String, String>>>) this.APICall("MinecraftModule/LoadOPList", args, type);
+        Type type = new TypeToken<Result<List<Map<String, Object>>>>(){}.getType();
+        return (Result<List<Map<String, Object>>>) this.APICall("MinecraftModule/LoadOPList", args, type);
     }
 
     /**

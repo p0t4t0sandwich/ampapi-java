@@ -446,25 +446,25 @@ public class Core extends AMPAPI {
     /**
      * Name Description Optional
      * @param node  False
-     * @return Map
+     * @return Map<String, Object>
      */
-    public Map GetConfig(String node) {
+    public Map<String, Object> GetConfig(String node) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("node", node);
-        Type type = new TypeToken<Map>(){}.getType();
-        return (Map) this.APICall("Core/GetConfig", args, type);
+        Type type = new TypeToken<Map<String, Object>>(){}.getType();
+        return (Map<String, Object>) this.APICall("Core/GetConfig", args, type);
     }
 
     /**
      * Name Description Optional
      * @param nodes  False
-     * @return Result<List<Map<String, String>>>
+     * @return Result<List<Map<String, Object>>>
      */
-    public Result<List<Map<String, String>>> GetConfigs(List<String> nodes) {
+    public Result<List<Map<String, Object>>> GetConfigs(List<String> nodes) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("nodes", nodes);
-        Type type = new TypeToken<Result<List<Map<String, String>>>>(){}.getType();
-        return (Result<List<Map<String, String>>>) this.APICall("Core/GetConfigs", args, type);
+        Type type = new TypeToken<Result<List<Map<String, Object>>>>(){}.getType();
+        return (Result<List<Map<String, Object>>>) this.APICall("Core/GetConfigs", args, type);
     }
 
     /**
@@ -519,12 +519,12 @@ public class Core extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return List<Map<String, String>>
+     * @return List<Map<String, Object>>
      */
-    public List<Map<String, String>> GetProvisionSpec() {
+    public List<Map<String, Object>> GetProvisionSpec() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<List<Map<String, String>>>(){}.getType();
-        return (List<Map<String, String>>) this.APICall("Core/GetProvisionSpec", args, type);
+        Type type = new TypeToken<List<Map<String, Object>>>(){}.getType();
+        return (List<Map<String, Object>>) this.APICall("Core/GetProvisionSpec", args, type);
     }
 
     /**
@@ -599,12 +599,12 @@ public class Core extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Map<String, List<Map<String, String>>>
+     * @return Map<String, List<Map<String, Object>>>
      */
-    public Map<String, List<Map<String, String>>> GetSettingsSpec() {
+    public Map<String, List<Map<String, Object>>> GetSettingsSpec() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Map<String, List<Map<String, String>>>>(){}.getType();
-        return (Map<String, List<Map<String, String>>>) this.APICall("Core/GetSettingsSpec", args, type);
+        Type type = new TypeToken<Map<String, List<Map<String, Object>>>>(){}.getType();
+        return (Map<String, List<Map<String, Object>>>) this.APICall("Core/GetSettingsSpec", args, type);
     }
 
     /**
@@ -652,12 +652,12 @@ public class Core extends AMPAPI {
     /**
      * Gets changes to the server status, in addition to any notifications or console output that have occured since the last time GetUpdates() was called by the current session.
      * Name Description Optional
-     * @return Map
+     * @return Map<String, Object>
      */
-    public Map GetUpdates() {
+    public Map<String, Object> GetUpdates() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Map>(){}.getType();
-        return (Map) this.APICall("Core/GetUpdates", args, type);
+        Type type = new TypeToken<Map<String, Object>>(){}.getType();
+        return (Map<String, Object>) this.APICall("Core/GetUpdates", args, type);
     }
 
     /**
@@ -673,13 +673,13 @@ public class Core extends AMPAPI {
     /**
      * Name Description Optional
      * @param UID  False
-     * @return Map
+     * @return Map<String, Object>
      */
-    public Map GetUserInfo(String UID) {
+    public Map<String, Object> GetUserInfo(String UID) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("UID", UID);
-        Type type = new TypeToken<Map>(){}.getType();
-        return (Map) this.APICall("Core/GetUserInfo", args, type);
+        Type type = new TypeToken<Map<String, Object>>(){}.getType();
+        return (Map<String, Object>) this.APICall("Core/GetUserInfo", args, type);
     }
 
     /**
