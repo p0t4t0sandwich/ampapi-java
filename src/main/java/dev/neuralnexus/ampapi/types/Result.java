@@ -1,4 +1,4 @@
-package dev.neuralnexus.ampapi.responses;
+package dev.neuralnexus.ampapi.types;
 
 /**
  * Generic response type for calls that return a result

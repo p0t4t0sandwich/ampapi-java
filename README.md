@@ -49,7 +49,7 @@ dependencies {
 
 ```java
 import dev.neuralnexus.ampapi.modules.CommonAPI;
-import dev.neuralnexus.ampapi.responses.Core.GetStatusResult;
+import dev.neuralnexus.ampapi.types.GetStatusResult;
 
 public class Main {
     public static void main(String[] args) {
@@ -71,8 +71,7 @@ public class Main {
 ```java
 import dev.neuralnexus.ampapi.modules.ADS;
 import dev.neuralnexus.ampapi.modules.Minecraft;
-import dev.neuralnexus.ampapi.responses.ADSModule.GetInstancesResult;
-import dev.neuralnexus.ampapi.responses.Core.GetStatusResult;
+import dev.neuralnexus.ampapi.types.GetStatusResult;
 import dev.neuralnexus.ampapi.types.IADSInstance;
 import dev.neuralnexus.ampapi.types.Instance;
 
@@ -117,42 +116,42 @@ public class Main {
 
 ```java
 import dev.neuralnexus.ampapi.modules.CommonAPI;
-import dev.neuralnexus.ampapi.responses.Core.GetStatusResult;
-import dev.neuralnexus.ampapi.responses.Core.LoginResult;
+import dev.neuralnexus.ampapi.types.GetStatusResult;
+import dev.neuralnexus.ampapi.types.LoginResult;
 
 public class Main {
-    public static void main(String[] args) {
-        CommonAPI API = new CommonAPI("http://localhost:8080/");
+  public static void main(String[] args) {
+    CommonAPI API = new CommonAPI("http://localhost:8080/");
 
-        try {
-            // The third parameter is either used for 2FA logins, or if no password is specified to use a remembered token from a previous login, or a service login token.
-            LoginResult loginResult = API.Core.Login("admin", "myfancypassword123", "", false);
+    try {
+      // The third parameter is either used for 2FA logins, or if no password is specified to use a remembered token from a previous login, or a service login token.
+      LoginResult loginResult = API.Core.Login("admin", "myfancypassword123", "", false);
 
-            if (loginResult.success) {
-                System.out.println("Login successful");
+      if (loginResult.success) {
+        System.out.println("Login successful");
 
-                // Update the session ID
-                String sessionId = loginResult.sessionID;
-                API.sessionId = sessionId;
-                API.Core.sessionId = sessionId;
+        // Update the session ID
+        String sessionId = loginResult.sessionID;
+        API.sessionId = sessionId;
+        API.Core.sessionId = sessionId;
 
-                // API call parameters are simply in the same order as shown in the documentation.
-                API.Core.SendConsoleMessage("say Hello Everyone, this message was sent from the Java API!");
-                
-                GetStatusResult currentStatus = API.Core.GetStatus();
-                double CPUUsagePercent = currentStatus.Metrics.get("CPU Usage").Percent;
-                
-                System.out.println("Current CPU usage is: " + CPUUsagePercent + "%");
+        // API call parameters are simply in the same order as shown in the documentation.
+        API.Core.SendConsoleMessage("say Hello Everyone, this message was sent from the Java API!");
 
-            } else {
-                System.out.println("Login failed");
-                System.out.println(loginResult);
-            }
-        } catch (RuntimeException e) {
-            // In reality, you'd handle this exception better
-            throw new RuntimeException(e);
-        }
+        GetStatusResult currentStatus = API.Core.GetStatus();
+        double CPUUsagePercent = currentStatus.Metrics.get("CPU Usage").Percent;
+
+        System.out.println("Current CPU usage is: " + CPUUsagePercent + "%");
+
+      } else {
+        System.out.println("Login failed");
+        System.out.println(loginResult);
+      }
+    } catch (RuntimeException e) {
+      // In reality, you'd handle this exception better
+      throw new RuntimeException(e);
     }
+  }
 }
 ```
 
@@ -180,9 +179,7 @@ public class Main {
   - IPermissionsTreeNode
   - WebauthnLoginInfo
   - WebauthnCredentialSummary
-  - ModuleInfo
   - MethodInfoSummary
-  - UpdateInfo
   - ListeningPortSummary
   - TwoFactorSetupInfo
   - UserInfoSummary
@@ -199,3 +196,4 @@ public class Main {
 - Added an enum for `Status#State`, which translates the integer to the enum string
 - Created new type `UpdateInfo` for `API.Core.GetUpdateInfo`
 - Created new type `ModuleInfo` for `API.Core.GetModuleInfo`
+- Refactored all the types into one package and nested single-use types

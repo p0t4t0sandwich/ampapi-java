@@ -1,4 +1,4 @@
-package dev.neuralnexus.ampapi.responses;
+package dev.neuralnexus.ampapi.types;
 
 /**
  * RunningTask - A running task object

@@ -1,4 +1,4 @@
-package dev.neuralnexus.ampapi.responses.Core;
+package dev.neuralnexus.ampapi.types;
 
 import dev.neuralnexus.ampapi.types.UserInfo;
 

@@ -2,7 +2,7 @@ package dev.neuralnexus.ampapi.modules;
 
 import dev.neuralnexus.ampapi.AMPAPI;
 import dev.neuralnexus.ampapi.apimodules.*;
-import dev.neuralnexus.ampapi.responses.Core.LoginResult;
+import dev.neuralnexus.ampapi.types.LoginResult;
 
 public class CommonAPI extends AMPAPI {
     public final Core Core = new Core(this);

@@ -1,7 +1,7 @@
 package dev.neuralnexus.ampapi.modules;
 
 import dev.neuralnexus.ampapi.apimodules.*;
-import dev.neuralnexus.ampapi.responses.Core.LoginResult;
+import dev.neuralnexus.ampapi.types.LoginResult;
 
 public class Minecraft extends CommonAPI {
     public MinecraftModule MinecraftModule = new MinecraftModule(this);

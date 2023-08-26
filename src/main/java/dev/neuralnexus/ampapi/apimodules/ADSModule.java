@@ -2,8 +2,6 @@ package dev.neuralnexus.ampapi.apimodules;
 
 import com.google.gson.reflect.TypeToken;
 import dev.neuralnexus.ampapi.AMPAPI;
-import dev.neuralnexus.ampapi.responses.*;
-import dev.neuralnexus.ampapi.responses.ADSModule.*;
 import dev.neuralnexus.ampapi.types.*;
 
 import java.lang.reflect.Type;
