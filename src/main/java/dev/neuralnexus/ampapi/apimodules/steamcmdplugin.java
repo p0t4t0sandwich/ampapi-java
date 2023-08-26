@@ -7,14 +7,11 @@ import dev.neuralnexus.ampapi.responses.steamcmdplugin.*;
 import dev.neuralnexus.ampapi.types.*;
 
 import java.lang.reflect.Type;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class steamcmdplugin extends AMPAPI {
     public steamcmdplugin(AMPAPI ampapi) {

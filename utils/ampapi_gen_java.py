@@ -7,10 +7,10 @@ import requests
 import json
 
 type_dict = {
-    "InstanceDatastore": "Object",
+    "InstanceDatastore": "InstanceDatastore",
     "ActionResult": "ActionResult",
     "Int32": "Integer",
-    "IEnumerable<InstanceDatastore>": "Result<List<Object>>",
+    "IEnumerable<InstanceDatastore>": "Result<List<InstanceDatastore>>",
     "RunningTask": "Object",
     "Task<RunningTask>": "Task<Object>",
     "IEnumerable<JObject>": "Result<List<Map<String, Object>>>",
@@ -26,14 +26,14 @@ type_dict = {
     "IEnumerable<ApplicationSpec>": "Result<List<Object>>",
     "Void": "Void",
     "IEnumerable<EndpointInfo>": "Result<List<Object>>",
-    "IEnumerable<IADSInstance>": "Result<List<ADSInstance>>",
+    "IEnumerable<IADSInstance>": "Result<List<IADSInstance>>",
     "JObject": "Map<String, Object>",
     "PortProtocol": "String",
     "ActionResult<String>": "Object",
-    "IADSInstance": "Result<ADSInstance>",
-    "Uri": "String",
+    "IADSInstance": "Result<IADSInstance>",
+    "Uri": "URL",
     "IEnumerable<PortUsage>": "Result<List<Object>>",
-    "Dictionary<String, Int32>": "Map",
+    "Dictionary<String, Int32>": "Map<String, Integer>",
     "LocalAMPInstance": "Object",
     "ContainerMemoryPolicy": "Object",
     "Single": "Object",
@@ -42,7 +42,7 @@ type_dict = {
     "IEnumerable<BackupManifest>": "Result<List<Object>>",
     "Nullable<DateTime>": "Object",
     "IEnumerable<IAuditLogEntry>": "Result<List<Object>>",
-    "Dictionary<String, IEnumerable<JObject>>": "Map<String, List<Map<String, Object>>>",
+    "Dictionary<String, IEnumerable<JObject>>": "Result<Map<String, List<Map<String, Object>>>>",
     "IDictionary<String, String>": "Map<String, String>",
     "List<JObject>": "List<Map<String, Object>>",
     "String[]": "List<String>",
@@ -73,10 +73,17 @@ type_dict = {
     "Task<ActionResult>": "Task<ActionResult>",
     "Task<ActionResult<Guid>>": "Task<ActionResult<UUID>>",
 
-    # Custom types
-    "GetStatusResult": "GetStatusResult",
-    "LoginResult": "LoginResult",
+    ## Custom types
+
+    # API.ADS.GetInstance
     "Result<Instance>": "Result<Instance>",
+
+    # API.Core.GetSettingsSpec
+    "Dictionary<String, IEnumerable<SettingSpec>>": "Result<Map<String, List<SettingSpec>>>",
+    # API.Core.GetStatus
+    "GetStatusResult": "GetStatusResult",
+    # API.Core.Login
+    "LoginResult": "LoginResult",
 }
 
 def generate_apimodule_method(module: str, method: str, method_spec: dict):
@@ -186,6 +193,7 @@ def generate_apimodule(module: str, methods: dict):
 
 def generate_spec(spec: dict):
     for module in spec.keys():
+        if module == "CommonCorePlugin": continue
         generate_apimodule(module, spec[module])
 
 if __name__ == "__main__":

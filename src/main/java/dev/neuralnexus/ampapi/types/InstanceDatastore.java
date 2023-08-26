@@ -1,15 +1,15 @@
 package dev.neuralnexus.ampapi.types;
 
 /**
- * Datastore - A datastore object
+ * InstanceDatastore - A datastore object
  * @author p0t4t0sandwich
  */
-public class Datastore {
+public class InstanceDatastore {
     /**
      * Id - The datastore ID
      * FriendlyName - The friendly name
      */
-    public String Id;
+    public int Id;
     public String FriendlyName;
 
     /**
@@ -17,6 +17,6 @@ public class Datastore {
      * @return A string representation of the object
      */
     public String toString() {
-        return "Datastore{Id=" + this.Id + ", FriendlyName=" + this.FriendlyName + "}";
+        return "InstanceDatastore{Id=" + this.Id + ", FriendlyName=" + this.FriendlyName + "}";
     }
 }

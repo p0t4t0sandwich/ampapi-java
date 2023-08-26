@@ -4,10 +4,7 @@ import dev.neuralnexus.ampapi.AMPAPI;
 import dev.neuralnexus.ampapi.apimodules.*;
 import dev.neuralnexus.ampapi.responses.Core.LoginResult;
 
-import java.util.Map;
-
 public class CommonAPI extends AMPAPI {
-    public final CommonCorePlugin CommonCorePlugin = new CommonCorePlugin(this);
     public final Core Core = new Core(this);
     public final EmailSenderPlugin EmailSenderPlugin = new EmailSenderPlugin(this);
     public final FileManagerPlugin FileManagerPlugin = new FileManagerPlugin(this);
@@ -48,8 +45,6 @@ public class CommonAPI extends AMPAPI {
             this.sessionId = loginResult.sessionID;
 
             // Update the session ID and remember me token of submodules
-            this.CommonCorePlugin.sessionId = this.sessionId;
-            this.CommonCorePlugin.rememberMeToken = this.rememberMeToken;
             this.Core.sessionId = this.sessionId;
             this.Core.rememberMeToken = this.rememberMeToken;
             this.EmailSenderPlugin.sessionId = this.sessionId;

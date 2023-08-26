@@ -7,14 +7,11 @@ import dev.neuralnexus.ampapi.responses.EmailSenderPlugin.*;
 import dev.neuralnexus.ampapi.types.*;
 
 import java.lang.reflect.Type;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class EmailSenderPlugin extends AMPAPI {
     public EmailSenderPlugin(AMPAPI ampapi) {

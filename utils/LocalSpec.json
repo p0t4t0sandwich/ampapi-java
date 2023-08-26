@@ -1692,7 +1692,7 @@
         },
         "GetSettingsSpec": {
             "Parameters": [],
-            "ReturnTypeName": "Dictionary<String, IEnumerable<JObject>>",
+            "ReturnTypeName": "Dictionary<String, IEnumerable<SettingSpec>>",
             "IsComplexType": true
         },
         "GetStatus": {

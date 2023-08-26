@@ -72,7 +72,7 @@ import dev.neuralnexus.ampapi.modules.ADS;
 import dev.neuralnexus.ampapi.modules.Minecraft;
 import dev.neuralnexus.ampapi.responses.ADSModule.GetInstancesResult;
 import dev.neuralnexus.ampapi.responses.Core.GetStatusResult;
-import dev.neuralnexus.ampapi.types.ADSInstance;
+import dev.neuralnexus.ampapi.types.IADSInstance;
 import dev.neuralnexus.ampapi.types.Instance;
 
 public class Main {
@@ -80,12 +80,12 @@ public class Main {
         ADS API = new ADS("http://localhost:8080/", "admin", "myfancypassword123", "", "");
 
         // Get the available instances
-        Result<List<ADSInstance>> instancesResult = API.ADSModule.GetInstances();
-        List<ADSInstance> targets = instancesResult.result;
+        Result<List<IADSInstance>> instancesResult = API.ADSModule.GetInstances();
+        List<IADSInstance> targets = instancesResult.result;
 
         // In this example, my Hub server is on the second target
         // If you're running a standalone setup, you can just use targets.get(0)
-        ADSInstance target = targets.get(1);
+        IADSInstance target = targets.get(1);
 
         String hub_instance_id = "";
 
@@ -162,3 +162,4 @@ public class Main {
 
 - `ADS#InstanceLogin` can now return another ADS, in the case of a Controller ADS proxying a login directly to a Target ADS
 - Huge breakthrough with return types, most AMP C# types are now mapped to Java types, with generics and everything!
+- Created custom response type for `API.Core.GetSettingsSpec`

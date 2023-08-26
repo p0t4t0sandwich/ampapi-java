@@ -7,14 +7,11 @@ import dev.neuralnexus.ampapi.responses.FileManagerPlugin.*;
 import dev.neuralnexus.ampapi.types.*;
 
 import java.lang.reflect.Type;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class FileManagerPlugin extends AMPAPI {
     public FileManagerPlugin(AMPAPI ampapi) {
@@ -109,7 +106,7 @@ public class FileManagerPlugin extends AMPAPI {
      * @param TargetDirectory  False
      * @return ActionResult
      */
-    public ActionResult DownloadFileFromURL(String Source, String TargetDirectory) {
+    public ActionResult DownloadFileFromURL(URL Source, String TargetDirectory) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Source", Source);
         args.put("TargetDirectory", TargetDirectory);

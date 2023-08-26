@@ -7,14 +7,11 @@ import dev.neuralnexus.ampapi.responses.ADSModule.*;
 import dev.neuralnexus.ampapi.types.*;
 
 import java.lang.reflect.Type;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class ADSModule extends AMPAPI {
     public ADSModule(AMPAPI ampapi) {
@@ -26,7 +23,7 @@ public class ADSModule extends AMPAPI {
      * @param newDatastore  False
      * @return ActionResult
      */
-    public ActionResult AddDatastore(Object newDatastore) {
+    public ActionResult AddDatastore(InstanceDatastore newDatastore) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("newDatastore", newDatastore);
         Type type = new TypeToken<ActionResult>(){}.getType();
@@ -298,13 +295,13 @@ public class ADSModule extends AMPAPI {
     /**
      * Name Description Optional
      * @param id  False
-     * @return Object
+     * @return InstanceDatastore
      */
-    public Object GetDatastore(Integer id) {
+    public InstanceDatastore GetDatastore(Integer id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("id", id);
-        Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("ADSModule/GetDatastore", args, type);
+        Type type = new TypeToken<InstanceDatastore>(){}.getType();
+        return (InstanceDatastore) this.APICall("ADSModule/GetDatastore", args, type);
     }
 
     /**
@@ -321,12 +318,12 @@ public class ADSModule extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Result<List<Object>>
+     * @return Result<List<InstanceDatastore>>
      */
-    public Result<List<Object>> GetDatastores() {
+    public Result<List<InstanceDatastore>> GetDatastores() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Result<List<Object>>>(){}.getType();
-        return (Result<List<Object>>) this.APICall("ADSModule/GetDatastores", args, type);
+        Type type = new TypeToken<Result<List<InstanceDatastore>>>(){}.getType();
+        return (Result<List<InstanceDatastore>>) this.APICall("ADSModule/GetDatastores", args, type);
     }
 
     /**
@@ -342,13 +339,13 @@ public class ADSModule extends AMPAPI {
     /**
      * Name Description Optional
      * @param GroupId  False
-     * @return Result<ADSInstance>
+     * @return Result<IADSInstance>
      */
-    public Result<ADSInstance> GetGroup(UUID GroupId) {
+    public Result<IADSInstance> GetGroup(UUID GroupId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("GroupId", GroupId);
-        Type type = new TypeToken<Result<ADSInstance>>(){}.getType();
-        return (Result<ADSInstance>) this.APICall("ADSModule/GetGroup", args, type);
+        Type type = new TypeToken<Result<IADSInstance>>(){}.getType();
+        return (Result<IADSInstance>) this.APICall("ADSModule/GetGroup", args, type);
     }
 
     /**
@@ -387,12 +384,12 @@ public class ADSModule extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Result<List<ADSInstance>>
+     * @return Result<List<IADSInstance>>
      */
-    public Result<List<ADSInstance>> GetInstances() {
+    public Result<List<IADSInstance>> GetInstances() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Result<List<ADSInstance>>>(){}.getType();
-        return (Result<List<ADSInstance>>) this.APICall("ADSModule/GetInstances", args, type);
+        Type type = new TypeToken<Result<List<IADSInstance>>>(){}.getType();
+        return (Result<List<IADSInstance>>) this.APICall("ADSModule/GetInstances", args, type);
     }
 
     /**
@@ -659,7 +656,7 @@ public class ADSModule extends AMPAPI {
      * @param PortMappings  False
      * @return Task<ActionResult>
      */
-    public Task<ActionResult> SetInstanceNetworkInfo(UUID InstanceId, Map PortMappings) {
+    public Task<ActionResult> SetInstanceNetworkInfo(UUID InstanceId, Map<String, Integer> PortMappings) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
         args.put("PortMappings", PortMappings);
@@ -746,7 +743,7 @@ public class ADSModule extends AMPAPI {
      * @param updatedDatastore  False
      * @return ActionResult
      */
-    public ActionResult UpdateDatastore(Object updatedDatastore) {
+    public ActionResult UpdateDatastore(InstanceDatastore updatedDatastore) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("updatedDatastore", updatedDatastore);
         Type type = new TypeToken<ActionResult>(){}.getType();
@@ -818,7 +815,7 @@ public class ADSModule extends AMPAPI {
      * @param Tags  False
      * @return ActionResult
      */
-    public ActionResult UpdateTargetInfo(UUID Id, String FriendlyName, String Url, String Description, List Tags) {
+    public ActionResult UpdateTargetInfo(UUID Id, String FriendlyName, URL Url, String Description, List Tags) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         args.put("FriendlyName", FriendlyName);
