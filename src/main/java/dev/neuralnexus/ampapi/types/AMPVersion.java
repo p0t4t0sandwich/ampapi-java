@@ -3,7 +3,6 @@ package dev.neuralnexus.ampapi.types;
 /**
  * AMPVersion - AMP version information
  * @author p0t4t0sandwich
- * @see dev.neuralnexus.ampapi.responses.ADSModule.GetInstanceResult
  */
 public class AMPVersion {
     /**

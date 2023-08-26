@@ -55,7 +55,7 @@ type_dict = {
     "WebauthnLoginInfo": "Object",
     "IEnumerable<WebauthnCredentialSummary>": "Result<List<Object>>",
     "IEnumerable<RunningTask>": "Result<List<RunningTask>>",
-    "ModuleInfo": "Object",
+    "ModuleInfo": "Result<ModuleInfo>",
     "Dictionary<String, Dictionary<String, MethodInfoSummary>>": "Map<String, Map<String, Object>>",
     "Object": "Object",
     "UpdateInfo": "Result<UpdateInfo>",

@@ -476,12 +476,12 @@ public class Core extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Object
+     * @return Result<ModuleInfo>
      */
-    public Object GetModuleInfo() {
+    public Result<ModuleInfo> GetModuleInfo() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("Core/GetModuleInfo", args, type);
+        Type type = new TypeToken<Result<ModuleInfo>>(){}.getType();
+        return (Result<ModuleInfo>) this.APICall("Core/GetModuleInfo", args, type);
     }
 
     /**

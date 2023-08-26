@@ -198,3 +198,4 @@ public class Main {
 - Created new type `Message` for `API.Core.GetUpdates`
 - Added an enum for `Status#State`, which translates the integer to the enum string
 - Created new type `UpdateInfo` for `API.Core.GetUpdateInfo`
+- Created new type `ModuleInfo` for `API.Core.GetModuleInfo`
