@@ -1,11 +1,8 @@
 package dev.neuralnexus.ampapi.types;
 
-import dev.neuralnexus.ampapi.responses.Core.GetStatusResult;
-
 /**
  * Metric - A metric and its values
  * @author p0t4t0sandwich
- * @see GetStatusResult#Metrics
  */
 public class Metric {
     /**

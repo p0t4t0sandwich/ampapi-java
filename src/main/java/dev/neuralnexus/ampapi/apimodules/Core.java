@@ -606,12 +606,12 @@ public class Core extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return GetStatusResult
+     * @return Status
      */
-    public GetStatusResult GetStatus() {
+    public Status GetStatus() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<GetStatusResult>(){}.getType();
-        return (GetStatusResult) this.APICall("Core/GetStatus", args, type);
+        Type type = new TypeToken<Status>(){}.getType();
+        return (Status) this.APICall("Core/GetStatus", args, type);
     }
 
     /**
@@ -649,12 +649,12 @@ public class Core extends AMPAPI {
     /**
      * Gets changes to the server status, in addition to any notifications or console output that have occured since the last time GetUpdates() was called by the current session.
      * Name Description Optional
-     * @return Map<String, Object>
+     * @return GetUpdatesResult
      */
-    public Map<String, Object> GetUpdates() {
+    public GetUpdatesResult GetUpdates() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Map<String, Object>>(){}.getType();
-        return (Map<String, Object>) this.APICall("Core/GetUpdates", args, type);
+        Type type = new TypeToken<GetUpdatesResult>(){}.getType();
+        return (GetUpdatesResult) this.APICall("Core/GetUpdates", args, type);
     }
 
     /**

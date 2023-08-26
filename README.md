@@ -192,3 +192,5 @@ public class Main {
 - Huge breakthrough with return types, most AMP C# types are now mapped to Java types, with generics and everything!
 - Created custom response type for `API.Core.GetSettingsSpec`
 - Created new types `RemoteTargetInfo` and `RunningTask`
+- Turned `GetStatusResult` into `Status` for re-usability in `API.Core.GetUpdates`
+- Created new type `Message` for `API.Core.GetUpdates`

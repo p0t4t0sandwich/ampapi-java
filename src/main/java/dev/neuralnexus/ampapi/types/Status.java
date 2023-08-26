@@ -1,19 +1,16 @@
-package dev.neuralnexus.ampapi.responses.Core;
-
-import dev.neuralnexus.ampapi.types.Metric;
+package dev.neuralnexus.ampapi.types;
 
 import java.util.Map;
 
 /**
  * Response type for API.Core.GetStatus
  * @author p0t4t0sandwich
- * @see dev.neuralnexus.ampapi.apimodules.Core#GetStatus()
  */
-public class GetStatusResult {
+public class Status {
     /**
      * State - Current state of the instance
      * Uptime - Time since the instance was started
-     * Metrics - A map of metrics and their values
+     * {@link Metric Metrics} - A map of metrics and their values
      */
     public int State;
     public String Uptime;
@@ -24,6 +21,6 @@ public class GetStatusResult {
      * @return A string representation of the object
      */
     public String toString() {
-        return "GetStatusResult{State=" + this.State + ", Uptime=" + this.Uptime + ", Metrics=" + this.Metrics + "}";
+        return "Status{State=" + this.State + ", Uptime=" + this.Uptime + ", Metrics=" + this.Metrics + "}";
     }
 }

@@ -1697,7 +1697,7 @@
         },
         "GetStatus": {
             "Parameters": [],
-            "ReturnTypeName": "GetStatusResult",
+            "ReturnTypeName": "Status",
             "IsComplexType": true
         },
         "GetTasks": {
@@ -1726,7 +1726,7 @@
             "Description": "Gets changes to the server status, in addition to any notifications or console output that have occured since the last time GetUpdates() was called by the current session.",
             "Returns": "",
             "Parameters": [],
-            "ReturnTypeName": "JObject",
+            "ReturnTypeName": "GetUpdatesResult",
             "IsComplexType": true
         },
         "GetUserActionsSpec": {

@@ -83,7 +83,9 @@ type_dict = {
     # API.Core.GetSettingsSpec
     "Dictionary<String, IEnumerable<SettingSpec>>": "Result<Map<String, List<SettingSpec>>>",
     # API.Core.GetStatus
-    "GetStatusResult": "GetStatusResult",
+    "Status": "Status",
+    # API.Core.GetUpdates
+    "GetUpdatesResult": "GetUpdatesResult",
     # API.Core.Login
     "LoginResult": "LoginResult",
 }
