@@ -8,11 +8,11 @@ import java.util.Map;
  */
 public class Status {
     /**
-     * State - Current state of the instance
+     * {@link State State} - Current state of the instance
      * Uptime - Time since the instance was started
      * {@link Metric Metrics} - A map of metrics and their values
      */
-    public int State;
+    public State State;
     public String Uptime;
     public Map<String, Metric> Metrics;
 

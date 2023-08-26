@@ -196,3 +196,4 @@ public class Main {
 - Created new types `RemoteTargetInfo` and `RunningTask`
 - Turned `GetStatusResult` into `Status` for re-usability in `API.Core.GetUpdates`
 - Created new type `Message` for `API.Core.GetUpdates`
+- Added an enum for `Status#State`, which translates the integer to the enum string
