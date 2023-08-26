@@ -546,7 +546,7 @@
         },
         "GetTargetInfo": {
             "Parameters": [],
-            "ReturnTypeName": "RemoteTargetInfo",
+            "ReturnTypeName": "Result<RemoteTargetInfo>",
             "IsComplexType": false
         },
         "HandoutInstanceConfigs": {

@@ -1,6 +1,7 @@
 package dev.neuralnexus.ampapi.types;
 
 import java.util.Arrays;
+import java.util.UUID;
 
 /**
  * IADSInstance - An ADS instance object
@@ -8,12 +9,12 @@ import java.util.Arrays;
  */
 public class IADSInstance {
     /**
-     * Id - The instance ID
+     * Id - The ADS instance ID
      * InstanceId - The instance ID
      * FriendlyName - The friendly name
      * Disabled - Whether the instance is disabled
      * isRemote - Whether the instance is remote
-     * {@link Platform Platform} - Platform information object
+     * {@link PlatformInfo PlatformInfo} - PlatformInfo information object
      * {@link InstanceDatastore Datastores} - The datastores
      * CreatesInContainers - Whether the instance creates in containers
      * State - The state
@@ -24,11 +25,11 @@ public class IADSInstance {
      * AvailableIPs - The available IPs
      */
     public double Id;
-    public String InstanceId;
+    public UUID InstanceId;
     public String FriendlyName;
     public boolean Disabled;
     public boolean isRemote;
-    public Platform Platform;
+    public PlatformInfo Platform;
     public InstanceDatastore[] Datastores;
     public boolean CreatesInContainers;
     public double State;
@@ -46,6 +47,6 @@ public class IADSInstance {
      * @return A string representation of the object
      */
     public String toString() {
-        return "IADSInstance{Id=" + this.Id + ", InstanceId=" + this.InstanceId + ", FriendlyName=" + this.FriendlyName + ", Disabled=" + this.Disabled + ", isRemote=" + this.isRemote + ", Platform=" + this.Platform + ", Datastores=" + Arrays.toString(this.Datastores) + ", CreatesInContainers=" + this.CreatesInContainers + ", State=" + this.State + ", StateReason=" + this.StateReason + ", CanCreate=" + this.CanCreate + ", LastUpdated=" + this.LastUpdated + ", AvailableInstances=" + Arrays.toString(this.AvailableInstances) + ", AvailableIPs=" + Arrays.toString(this.AvailableIPs) + ", URL=" + this.URL + ", Tags=" + Arrays.toString(this.Tags) + ", TagNames=" + Arrays.toString(this.TagNames) + "}";
+        return "IADSInstance{Id=" + this.Id + ", InstanceId=" + this.InstanceId + ", FriendlyName=" + this.FriendlyName + ", Disabled=" + this.Disabled + ", isRemote=" + this.isRemote + ", PlatformInfo=" + this.Platform + ", Datastores=" + Arrays.toString(this.Datastores) + ", CreatesInContainers=" + this.CreatesInContainers + ", State=" + this.State + ", StateReason=" + this.StateReason + ", CanCreate=" + this.CanCreate + ", LastUpdated=" + this.LastUpdated + ", AvailableInstances=" + Arrays.toString(this.AvailableInstances) + ", AvailableIPs=" + Arrays.toString(this.AvailableIPs) + ", URL=" + this.URL + ", Tags=" + Arrays.toString(this.Tags) + ", TagNames=" + Arrays.toString(this.TagNames) + "}";
     }
 }

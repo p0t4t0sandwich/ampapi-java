@@ -2,6 +2,7 @@ package dev.neuralnexus.ampapi.types;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Instance - An instance object
@@ -33,12 +34,12 @@ public class Instance {
      * ContainerMemoryPolicy - The container memory policy
      * ContainerCPUs - The container CPUs
      * {@link Metric Metrics} - The metrics
-     * {@link ApplicationEndpoint ApplicationEndpoints} - The application endpoints
+     * {@link EndpointInfo ApplicationEndpoints} - The application endpoints
      * DeploymentArgs - The deployment arguments
      * DisplayImageSource - The display image source
      */
-    public String InstanceID;
-    public String TargetID;
+    public UUID InstanceID;
+    public UUID TargetID;
     public String InstanceName;
     public String FriendlyName;
     public String Module;
@@ -61,7 +62,7 @@ public class Instance {
     public double ContainerMemoryPolicy;
     public double ContainerCPUs;
     public Map<String, Metric> Metrics;
-    public ApplicationEndpoint[] ApplicationEndpoints;
+    public EndpointInfo[] ApplicationEndpoints;
     public Map<String, String> DeploymentArgs;
     public String DisplayImageSource;
 

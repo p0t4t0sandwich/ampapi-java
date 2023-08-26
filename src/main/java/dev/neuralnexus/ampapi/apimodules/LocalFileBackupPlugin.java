@@ -45,13 +45,13 @@ public class LocalFileBackupPlugin extends AMPAPI {
     /**
      * Name Description Optional
      * @param BackupId  False
-     * @return Object
+     * @return Result<RunningTask>
      */
-    public Object DownloadFromS3(UUID BackupId) {
+    public Result<RunningTask> DownloadFromS3(UUID BackupId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
-        Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("LocalFileBackupPlugin/DownloadFromS3", args, type);
+        Type type = new TypeToken<Result<RunningTask>>(){}.getType();
+        return (Result<RunningTask>) this.APICall("LocalFileBackupPlugin/DownloadFromS3", args, type);
     }
 
     /**
@@ -111,13 +111,13 @@ public class LocalFileBackupPlugin extends AMPAPI {
     /**
      * Name Description Optional
      * @param BackupId  False
-     * @return Object
+     * @return Result<RunningTask>
      */
-    public Object UploadToS3(UUID BackupId) {
+    public Result<RunningTask> UploadToS3(UUID BackupId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
-        Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("LocalFileBackupPlugin/UploadToS3", args, type);
+        Type type = new TypeToken<Result<RunningTask>>(){}.getType();
+        return (Result<RunningTask>) this.APICall("LocalFileBackupPlugin/UploadToS3", args, type);
     }
 
 }

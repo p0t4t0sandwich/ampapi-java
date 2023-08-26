@@ -37,7 +37,7 @@ public class ADSModule extends AMPAPI {
      * @param RebuildConfiguration  True
      * @return Task<ActionResult>
      */
-    public Task<ActionResult> ApplyInstanceConfiguration(UUID InstanceID, Map Args, Boolean RebuildConfiguration) {
+    public Task<ActionResult> ApplyInstanceConfiguration(UUID InstanceID, Map<String, String> Args, Boolean RebuildConfiguration) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceID", InstanceID);
         args.put("Args", Args);
@@ -143,7 +143,7 @@ public class ADSModule extends AMPAPI {
      * @param TargetDatastore  True
      * @return ActionResult
      */
-    public ActionResult CreateInstance(UUID TargetADSInstance, UUID NewInstanceId, String Module, String InstanceName, String FriendlyName, String IPBinding, Integer PortNumber, String AdminUsername, String AdminPassword, Map ProvisionSettings, Boolean AutoConfigure, Object PostCreate, Boolean StartOnBoot, String DisplayImageSource, Integer TargetDatastore) {
+    public ActionResult CreateInstance(UUID TargetADSInstance, UUID NewInstanceId, String Module, String InstanceName, String FriendlyName, String IPBinding, Integer PortNumber, String AdminUsername, String AdminPassword, Map<String, String> ProvisionSettings, Boolean AutoConfigure, Object PostCreate, Boolean StartOnBoot, String DisplayImageSource, Integer TargetDatastore) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TargetADSInstance", TargetADSInstance);
         args.put("NewInstanceId", NewInstanceId);
@@ -205,13 +205,13 @@ public class ADSModule extends AMPAPI {
     /**
      * Name Description Optional
      * @param InstanceName  False
-     * @return Object
+     * @return Result<RunningTask>
      */
-    public Object DeleteInstance(String InstanceName) {
+    public Result<RunningTask> DeleteInstance(String InstanceName) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceName", InstanceName);
-        Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("ADSModule/DeleteInstance", args, type);
+        Type type = new TypeToken<Result<RunningTask>>(){}.getType();
+        return (Result<RunningTask>) this.APICall("ADSModule/DeleteInstance", args, type);
     }
 
     /**
@@ -238,9 +238,9 @@ public class ADSModule extends AMPAPI {
      * @param Secret Must be a non-empty strong in order to get a callback on deployment state change. This secret will be passed back to you in the callback so you can verify the request. True
      * @param PostCreate 0: Do nothing, 1: Start instance only, 2: Start instance and update application, 3: Full application startup. True
      * @param ExtraProvisionSettings A dictionary of setting nodes and values to create the new instance with. Identical in function to the provisioning arguments in the template itself. True
-     * @return Object
+     * @return Result<RunningTask>
      */
-    public Object DeployTemplate(Integer TemplateID, String NewUsername, String NewPassword, String NewEmail, List RequiredTags, String Tag, String FriendlyName, String Secret, Object PostCreate, Map ExtraProvisionSettings) {
+    public Result<RunningTask> DeployTemplate(Integer TemplateID, String NewUsername, String NewPassword, String NewEmail, List<String> RequiredTags, String Tag, String FriendlyName, String Secret, Object PostCreate, Map<String, String> ExtraProvisionSettings) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TemplateID", TemplateID);
         args.put("NewUsername", NewUsername);
@@ -252,8 +252,8 @@ public class ADSModule extends AMPAPI {
         args.put("Secret", Secret);
         args.put("PostCreate", PostCreate);
         args.put("ExtraProvisionSettings", ExtraProvisionSettings);
-        Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("ADSModule/DeployTemplate", args, type);
+        Type type = new TypeToken<Result<RunningTask>>(){}.getType();
+        return (Result<RunningTask>) this.APICall("ADSModule/DeployTemplate", args, type);
     }
 
     /**
@@ -283,13 +283,13 @@ public class ADSModule extends AMPAPI {
     /**
      * Name Description Optional
      * @param instanceId  False
-     * @return Result<List<Object>>
+     * @return Result<List<EndpointInfo>>
      */
-    public Result<List<Object>> GetApplicationEndpoints(UUID instanceId) {
+    public Result<List<EndpointInfo>> GetApplicationEndpoints(UUID instanceId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("instanceId", instanceId);
-        Type type = new TypeToken<Result<List<Object>>>(){}.getType();
-        return (Result<List<Object>>) this.APICall("ADSModule/GetApplicationEndpoints", args, type);
+        Type type = new TypeToken<Result<List<EndpointInfo>>>(){}.getType();
+        return (Result<List<EndpointInfo>>) this.APICall("ADSModule/GetApplicationEndpoints", args, type);
     }
 
     /**
@@ -436,12 +436,12 @@ public class ADSModule extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Object
+     * @return Result<RemoteTargetInfo>
      */
-    public Object GetTargetInfo() {
+    public Result<RemoteTargetInfo> GetTargetInfo() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("ADSModule/GetTargetInfo", args, type);
+        Type type = new TypeToken<Result<RemoteTargetInfo>>(){}.getType();
+        return (Result<RemoteTargetInfo>) this.APICall("ADSModule/GetTargetInfo", args, type);
     }
 
     /**
@@ -451,7 +451,7 @@ public class ADSModule extends AMPAPI {
      * @param Values  False
      * @return Task<ActionResult>
      */
-    public Task<ActionResult> HandoutInstanceConfigs(String ForModule, String SettingNode, List Values) {
+    public Task<ActionResult> HandoutInstanceConfigs(String ForModule, String SettingNode, List<String> Values) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ForModule", ForModule);
         args.put("SettingNode", SettingNode);
@@ -463,13 +463,13 @@ public class ADSModule extends AMPAPI {
     /**
      * Name Description Optional
      * @param InstanceId  False
-     * @return Object
+     * @return ActionResult<String>
      */
-    public Object ManageInstance(UUID InstanceId) {
+    public ActionResult<String> ManageInstance(UUID InstanceId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
-        Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("ADSModule/ManageInstance", args, type);
+        Type type = new TypeToken<ActionResult<String>>(){}.getType();
+        return (ActionResult<String>) this.APICall("ADSModule/ManageInstance", args, type);
     }
 
     /**
@@ -482,7 +482,7 @@ public class ADSModule extends AMPAPI {
      * @param Open  False
      * @return Task<ActionResult>
      */
-    public Task<ActionResult> ModifyCustomFirewallRule(UUID instanceId, Integer PortNumber, Integer Range, String Protocol, String Description, Boolean Open) {
+    public Task<ActionResult> ModifyCustomFirewallRule(UUID instanceId, Integer PortNumber, Integer Range, Object Protocol, String Description, Boolean Open) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("instanceId", instanceId);
         args.put("PortNumber", PortNumber);
@@ -498,24 +498,24 @@ public class ADSModule extends AMPAPI {
      * Name Description Optional
      * @param instanceId  False
      * @param datastoreId  False
-     * @return Task<Object>
+     * @return Task<RunningTask>
      */
-    public Task<Object> MoveInstanceDatastore(UUID instanceId, Integer datastoreId) {
+    public Task<RunningTask> MoveInstanceDatastore(UUID instanceId, Integer datastoreId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("instanceId", instanceId);
         args.put("datastoreId", datastoreId);
-        Type type = new TypeToken<Task<Object>>(){}.getType();
-        return (Task<Object>) this.APICall("ADSModule/MoveInstanceDatastore", args, type);
+        Type type = new TypeToken<Task<RunningTask>>(){}.getType();
+        return (Task<RunningTask>) this.APICall("ADSModule/MoveInstanceDatastore", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return Object
+     * @return Result<RunningTask>
      */
-    public Object ReactivateLocalInstances() {
+    public Result<RunningTask> ReactivateLocalInstances() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("ADSModule/ReactivateLocalInstances", args, type);
+        Type type = new TypeToken<Result<RunningTask>>(){}.getType();
+        return (Result<RunningTask>) this.APICall("ADSModule/ReactivateLocalInstances", args, type);
     }
 
     /**
@@ -587,25 +587,25 @@ public class ADSModule extends AMPAPI {
     /**
      * Name Description Optional
      * @param id  False
-     * @return Object
+     * @return Result<RunningTask>
      */
-    public Object RepairDatastore(Integer id) {
+    public Result<RunningTask> RepairDatastore(Integer id) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("id", id);
-        Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("ADSModule/RepairDatastore", args, type);
+        Type type = new TypeToken<Result<RunningTask>>(){}.getType();
+        return (Result<RunningTask>) this.APICall("ADSModule/RepairDatastore", args, type);
     }
 
     /**
      * Name Description Optional
      * @param datastoreId  False
-     * @return Object
+     * @return Result<RunningTask>
      */
-    public Object RequestDatastoreSizeCalculation(Integer datastoreId) {
+    public Result<RunningTask> RequestDatastoreSizeCalculation(Integer datastoreId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("datastoreId", datastoreId);
-        Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("ADSModule/RequestDatastoreSizeCalculation", args, type);
+        Type type = new TypeToken<Result<RunningTask>>(){}.getType();
+        return (Result<RunningTask>) this.APICall("ADSModule/RequestDatastoreSizeCalculation", args, type);
     }
 
     /**
@@ -815,7 +815,7 @@ public class ADSModule extends AMPAPI {
      * @param Tags  False
      * @return ActionResult
      */
-    public ActionResult UpdateTargetInfo(UUID Id, String FriendlyName, URL Url, String Description, List Tags) {
+    public ActionResult UpdateTargetInfo(UUID Id, String FriendlyName, URL Url, String Description, List<String> Tags) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         args.put("FriendlyName", FriendlyName);

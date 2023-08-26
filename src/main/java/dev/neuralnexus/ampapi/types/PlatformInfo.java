@@ -1,10 +1,10 @@
 package dev.neuralnexus.ampapi.types;
 
 /**
- * Platform - A platform object
+ * PlatformInfo - A platform object
  * @author p0t4t0sandwich
  */
-public class Platform {
+public class PlatformInfo {
     /**
      * {@link CPUInfo CPUInfo} - CPU information object
      * InstalledRAMMB - Installed RAM in MB
@@ -25,6 +25,6 @@ public class Platform {
      * @return A string representation of the object
      */
     public String toString() {
-        return "Platform{CPUInfo=" + this.CPUInfo + ", InstalledRAMMB=" + this.InstalledRAMMB + ", OS=" + this.OS + ", PlatformName=" + this.PlatformName + ", SystemType=" + this.SystemType + ", Virtualization=" + this.Virtualization + "}";
+        return "PlatformInfo{CPUInfo=" + this.CPUInfo + ", InstalledRAMMB=" + this.InstalledRAMMB + ", OS=" + this.OS + ", PlatformName=" + this.PlatformName + ", SystemType=" + this.SystemType + ", Virtualization=" + this.Virtualization + "}";
     }
 }

@@ -5,6 +5,7 @@ import dev.neuralnexus.ampapi.responses.Core.LoginResult;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class ADS extends CommonAPI {
     public ADSModule ADSModule = new ADSModule(this);
@@ -49,19 +50,19 @@ public class ADS extends CommonAPI {
 
     /**
      * Proxies a login request to an instance and returns a new AMPAPIHandler for that instance.
-     * @param instance_id The instance ID of the instance to log in to
+     * @param instanceId The instance ID of the instance to log in to
      * @return A new AMPAPIHandler for the instance
      */
-    public CommonAPI InstanceLogin(String instance_id) {
+    public CommonAPI InstanceLogin(UUID instanceId) {
         Map<String, Object> args = new HashMap<>();
         args.put("username", this.username);
         args.put("password", this.password);
         args.put("token", "");
         args.put("rememberMe", true);
-        LoginResult loginResult = (LoginResult) this.APICall("ADSModule/Servers/" + instance_id + "/API/Core/Login", args, LoginResult.class);
+        LoginResult loginResult = (LoginResult) this.APICall("ADSModule/Servers/" + instanceId + "/API/Core/Login", args, LoginResult.class);
 
         if (loginResult != null && loginResult.success) {
-            return new CommonAPI(this.baseUri + "API/ADSModule/Servers/" + instance_id, this.username, "", loginResult.rememberMeToken, loginResult.sessionID);
+            return new CommonAPI(this.baseUri + "API/ADSModule/Servers/" + instanceId, this.username, "", loginResult.rememberMeToken, loginResult.sessionID);
         } else {
             return null;
         }
@@ -69,22 +70,22 @@ public class ADS extends CommonAPI {
 
     /**
      * Proxies a login request to an instance and returns a new AMPAPIHandler for that instance.
-     * @param instance_id The instance ID of the instance to log in to
+     * @param instanceId The instance ID of the instance to log in to
      * @param moduleClass The class of the module to return
      * @return A new AMPAPIHandler for the instance
      */
-    public <T> T InstanceLogin(String instance_id, Class<T> moduleClass) {
+    public <T> T InstanceLogin(UUID instanceId, Class<T> moduleClass) {
         Map<String, Object> args = new HashMap<>();
         args.put("username", this.username);
         args.put("password", this.password);
         args.put("token", "");
         args.put("rememberMe", true);
 
-        LoginResult loginResult = (LoginResult) this.APICall("ADSModule/Servers/" + instance_id + "/API/Core/Login", args, LoginResult.class);
+        LoginResult loginResult = (LoginResult) this.APICall("ADSModule/Servers/" + instanceId + "/API/Core/Login", args, LoginResult.class);
 
         if (loginResult != null && loginResult.success) {
             // Prepare the parameters for the instance
-            String newBaseUri = this.baseUri + "API/ADSModule/Servers/" + instance_id;
+            String newBaseUri = this.baseUri + "API/ADSModule/Servers/" + instanceId;
             String rememberMeToken = loginResult.rememberMeToken;
             String sessionId = loginResult.sessionID;
 
@@ -104,20 +105,20 @@ public class ADS extends CommonAPI {
 
     /**
      * Proxies a login request to an instance and returns a new AMPAPIHandler for that instance.
-     * @param instance_id The instance ID of the instance to log in to
+     * @param instanceId The instance ID of the instance to log in to
      * @param module The module to log in to
      * @return A new AMPAPIHandler for the instance
      */
-    public CommonAPI InstanceLogin(String instance_id, String module) {
+    public CommonAPI InstanceLogin(UUID instanceId, String module) {
         switch (module) {
             case "ADS":
-                return this.InstanceLogin(instance_id, ADS.class);
+                return this.InstanceLogin(instanceId, ADS.class);
             case "GenericModule":
-                return this.InstanceLogin(instance_id, GenericModule.class);
+                return this.InstanceLogin(instanceId, GenericModule.class);
             case "Minecraft":
-                return this.InstanceLogin(instance_id, Minecraft.class);
+                return this.InstanceLogin(instanceId, Minecraft.class);
             default:
-                return this.InstanceLogin(instance_id);
+                return this.InstanceLogin(instanceId);
         }
     }
 }

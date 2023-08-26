@@ -157,9 +157,38 @@ public class Main {
 ## TODO
 
 - Add a check to see if it's been 5min since the last API call, and if so, attempt to re-log
+- Might want to look into `CompletableFuture`s for async calls
+- Create custom types:
+  - DeploymentTemplate
+  - PostCreateActions
+  - ApplicationSpec
+  - PortProtocol
+  - PortUsage
+  - LocalAMPInstance
+  - ContainerMemoryPolicy
+  - Single
+  - FileChunkData
+  - BackupManifest
+  - DateTime
+  - IAuditLogEntry
+  - Nullable -> might be able to use an Optional for this
+  - ScheduleInfo
+  - TimeIntervalTrigger
+  - WebSessionSummary
+  - IPermissionsTreeNode
+  - WebauthnLoginInfo
+  - WebauthnCredentialSummary
+  - ModuleInfo
+  - MethodInfoSummary
+  - UpdateInfo
+  - ListeningPortSummary
+  - TwoFactorSetupInfo
+  - UserInfoSummary
+  - AuthRoleSummary
 
 ## Release Notes
 
 - `ADS#InstanceLogin` can now return another ADS, in the case of a Controller ADS proxying a login directly to a Target ADS
 - Huge breakthrough with return types, most AMP C# types are now mapped to Java types, with generics and everything!
 - Created custom response type for `API.Core.GetSettingsSpec`
+- Created new types `RemoteTargetInfo` and `RunningTask`

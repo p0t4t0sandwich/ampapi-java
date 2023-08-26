@@ -69,7 +69,7 @@ public class Core extends AMPAPI {
      * @param ParameterMapping  False
      * @return ActionResult
      */
-    public ActionResult AddTask(UUID TriggerID, String MethodID, Map ParameterMapping) {
+    public ActionResult AddTask(UUID TriggerID, String MethodID, Map<String, String> ParameterMapping) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
         args.put("MethodID", MethodID);
@@ -327,7 +327,7 @@ public class Core extends AMPAPI {
      * @param ParameterMapping  False
      * @return ActionResult
      */
-    public ActionResult EditTask(UUID TriggerID, UUID TaskID, Map ParameterMapping) {
+    public ActionResult EditTask(UUID TriggerID, UUID TaskID, Map<String, String> ParameterMapping) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
         args.put("TaskID", TaskID);
@@ -466,12 +466,12 @@ public class Core extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Map
+     * @return Map<String, String>
      */
-    public Map GetDiagnosticsInfo() {
+    public Map<String, String> GetDiagnosticsInfo() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Map>(){}.getType();
-        return (Map) this.APICall("Core/GetDiagnosticsInfo", args, type);
+        Type type = new TypeToken<Map<String, String>>(){}.getType();
+        return (Map<String, String>) this.APICall("Core/GetDiagnosticsInfo", args, type);
     }
 
     /**
@@ -496,12 +496,12 @@ public class Core extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return List
+     * @return List<Object>
      */
-    public List GetPermissionsSpec() {
+    public List<Object> GetPermissionsSpec() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<List>(){}.getType();
-        return (List) this.APICall("Core/GetPermissionsSpec", args, type);
+        Type type = new TypeToken<List<Object>>(){}.getType();
+        return (List<Object>) this.APICall("Core/GetPermissionsSpec", args, type);
     }
 
     /**
@@ -616,12 +616,12 @@ public class Core extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Result<List<Object>>
+     * @return Result<List<RunningTask>>
      */
-    public Result<List<Object>> GetTasks() {
+    public Result<List<RunningTask>> GetTasks() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Result<List<Object>>>(){}.getType();
-        return (Result<List<Object>>) this.APICall("Core/GetTasks", args, type);
+        Type type = new TypeToken<Result<List<RunningTask>>>(){}.getType();
+        return (Result<List<RunningTask>>) this.APICall("Core/GetTasks", args, type);
     }
 
     /**
@@ -682,22 +682,22 @@ public class Core extends AMPAPI {
     /**
      * Returns a list of in-application users
      * Name Description Optional
-     * @return Map
+     * @return Map<String, String>
      */
-    public Map GetUserList() {
+    public Map<String, String> GetUserList() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Map>(){}.getType();
-        return (Map) this.APICall("Core/GetUserList", args, type);
+        Type type = new TypeToken<Map<String, String>>(){}.getType();
+        return (Map<String, String>) this.APICall("Core/GetUserList", args, type);
     }
 
     /**
      * Name Description Optional
-     * @return Object
+     * @return ActionResult<String>
      */
-    public Object GetWebauthnChallenge() {
+    public ActionResult<String> GetWebauthnChallenge() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("Core/GetWebauthnChallenge", args, type);
+        Type type = new TypeToken<ActionResult<String>>(){}.getType();
+        return (ActionResult<String>) this.APICall("Core/GetWebauthnChallenge", args, type);
     }
 
     /**
@@ -938,7 +938,7 @@ public class Core extends AMPAPI {
      * @param data  False
      * @return Boolean
      */
-    public Boolean SetConfigs(Map data) {
+    public Boolean SetConfigs(Map<String, String> data) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("data", data);
         Type type = new TypeToken<Boolean>(){}.getType();

@@ -37,13 +37,13 @@ public class FileManagerPlugin extends AMPAPI {
     /**
      * Name Description Optional
      * @param FilePath  False
-     * @return Object
+     * @return ActionResult<String>
      */
-    public Object CalculateFileMD5Sum(String FilePath) {
+    public ActionResult<String> CalculateFileMD5Sum(String FilePath) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("FilePath", FilePath);
-        Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("FileManagerPlugin/CalculateFileMD5Sum", args, type);
+        Type type = new TypeToken<ActionResult<String>>(){}.getType();
+        return (ActionResult<String>) this.APICall("FileManagerPlugin/CalculateFileMD5Sum", args, type);
     }
 
     /**
@@ -183,15 +183,15 @@ public class FileManagerPlugin extends AMPAPI {
      * @param Filename  False
      * @param Offset  False
      * @param ChunkSize  True
-     * @return Object
+     * @return ActionResult<String>
      */
-    public Object ReadFileChunk(String Filename, Integer Offset, Integer ChunkSize) {
+    public ActionResult<String> ReadFileChunk(String Filename, Integer Offset, Integer ChunkSize) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
         args.put("Offset", Offset);
         args.put("ChunkSize", ChunkSize);
-        Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("FileManagerPlugin/ReadFileChunk", args, type);
+        Type type = new TypeToken<ActionResult<String>>(){}.getType();
+        return (ActionResult<String>) this.APICall("FileManagerPlugin/ReadFileChunk", args, type);
     }
 
     /**The name component of the new directory (not the full path)

@@ -1,11 +1,11 @@
 package dev.neuralnexus.ampapi.types;
 
 /**
- * ApplicationEndpoint - An application endpoint object
+ * EndpointInfo - An application endpoint object
  * @author p0t4t0sandwich
- * @see dev.neuralnexus.ampapi.responses.ADSModule.GetInstanceResult
+ * @see dev.neuralnexus.ampapi.apimodules.ADSModule#GetApplicationEndpoints(java.util.UUID)
  */
-public class ApplicationEndpoint {
+public class EndpointInfo {
     /**
      * DisplayName - The display name of the endpoint
      * Endpoint - The endpoint address
@@ -20,6 +20,6 @@ public class ApplicationEndpoint {
      * @return A string representation of the object
      */
     public String toString() {
-        return "ApplicationEndpoint{DisplayName=" + this.DisplayName + ", Endpoint=" + this.Endpoint + ", Uri=" + this.Uri + "}";
+        return "EndpointInfo{DisplayName=" + this.DisplayName + ", Endpoint=" + this.Endpoint + ", Uri=" + this.Uri + "}";
     }
 }

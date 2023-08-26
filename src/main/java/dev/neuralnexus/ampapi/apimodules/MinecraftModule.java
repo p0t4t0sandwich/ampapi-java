@@ -77,13 +77,13 @@ public class MinecraftModule extends AMPAPI {
     /**
      * Name Description Optional
      * @param pluginId  False
-     * @return Task<Object>
+     * @return Task<RunningTask>
      */
-    public Task<Object> BukGetInstallUpdatePlugin(Integer pluginId) {
+    public Task<RunningTask> BukGetInstallUpdatePlugin(Integer pluginId) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("pluginId", pluginId);
-        Type type = new TypeToken<Task<Object>>(){}.getType();
-        return (Task<Object>) this.APICall("MinecraftModule/BukGetInstallUpdatePlugin", args, type);
+        Type type = new TypeToken<Task<RunningTask>>(){}.getType();
+        return (Task<RunningTask>) this.APICall("MinecraftModule/BukGetInstallUpdatePlugin", args, type);
     }
 
     /**
