@@ -5,6 +5,7 @@ import java.util.Map;
 /**
  * Response type for API.Core.GetStatus
  * @author p0t4t0sandwich
+ * @see dev.neuralnexus.ampapi.apimodules.Core#GetStatus()
  */
 public class Status {
     /**

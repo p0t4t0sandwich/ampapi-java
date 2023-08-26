@@ -58,7 +58,7 @@ type_dict = {
     "ModuleInfo": "Object",
     "Dictionary<String, Dictionary<String, MethodInfoSummary>>": "Map<String, Map<String, Object>>",
     "Object": "Object",
-    "UpdateInfo": "Object",
+    "UpdateInfo": "Result<UpdateInfo>",
     "IEnumerable<ListeningPortSummary>": "Result<List<Object>>",
     "Task<JObject>": "Task<Map<String, Object>>",
     "Task<ActionResult<TwoFactorSetupInfo>>": "Task<Object>",

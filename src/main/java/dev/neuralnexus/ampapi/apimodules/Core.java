@@ -638,12 +638,12 @@ public class Core extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Object
+     * @return Result<UpdateInfo>
      */
-    public Object GetUpdateInfo() {
+    public Result<UpdateInfo> GetUpdateInfo() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("Core/GetUpdateInfo", args, type);
+        Type type = new TypeToken<Result<UpdateInfo>>(){}.getType();
+        return (Result<UpdateInfo>) this.APICall("Core/GetUpdateInfo", args, type);
     }
 
     /**
