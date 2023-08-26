@@ -40,7 +40,8 @@ dependencies {
 
 ## Notes
 
-- If a function returns an `Object`, it's safe to assume it's a `Map`, it just doesn't have a defined type yet.
+- If a function returns anything in the form of `Map<String, Object>`, then you can treat it as `JSON` and parse it as such (Feel free to draft up a return type if you'd like).
+- If you're running into a `GSON`/`JSON` error, the API return type may be missing a `Task<T>` or `Result<T>` wrapper (or the return type could just be wrong in general).
 
 ## Examples
 
@@ -87,7 +88,7 @@ public class Main {
         // If you're running a standalone setup, you can just use targets.get(0)
         IADSInstance target = targets.get(1);
 
-        String hub_instance_id = "";
+        UUID hub_instance_id;
 
         // Get the available instances
         Instance[] instances = target.AvailableInstances;
@@ -148,6 +149,7 @@ public class Main {
                 System.out.println(loginResult);
             }
         } catch (RuntimeException e) {
+            // In reality, you'd handle this exception better
             throw new RuntimeException(e);
         }
     }
