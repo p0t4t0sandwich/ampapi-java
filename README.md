@@ -185,7 +185,7 @@ public class Main {
   - UserInfoSummary
   - AuthRoleSummary
 
-## Release Notes
+## Release Notes - 1.2.1
 
 - `ADS#InstanceLogin` can now return another ADS, in the case of a Controller ADS proxying a login directly to a Target ADS
 - Huge breakthrough with return types, most AMP C# types are now mapped to Java types, with generics and everything!
@@ -197,3 +197,5 @@ public class Main {
 - Created new type `UpdateInfo` for `API.Core.GetUpdateInfo`
 - Created new type `ModuleInfo` for `API.Core.GetModuleInfo`
 - Refactored all the types into one package and nested single-use types
+
+## Dev Notes - 1.2.2-SNAPSHOT

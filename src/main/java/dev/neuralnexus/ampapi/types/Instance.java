@@ -51,7 +51,7 @@ public class Instance {
     public boolean DaemonAutostart;
     public boolean ExcludeFromFirewall;
     public boolean Running;
-    public double AppState;
+    public State AppState;
     public String[] Tags;
     public double DiskUsageMB;
     public double ReleaseStream;

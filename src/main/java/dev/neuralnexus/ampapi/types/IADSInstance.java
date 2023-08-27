@@ -32,7 +32,7 @@ public class IADSInstance {
     public PlatformInfo Platform;
     public InstanceDatastore[] Datastores;
     public boolean CreatesInContainers;
-    public double State;
+    public State State;
     public String StateReason;
     public boolean CanCreate;
     public String LastUpdated;
