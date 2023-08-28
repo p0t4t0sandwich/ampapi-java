@@ -9,11 +9,11 @@ import java.util.Map;
  * @author p0t4t0sandwich
  * @see dev.neuralnexus.ampapi.apimodules.Core#GetSettingsSpec()
  */
-public class SettingSpec {
+public class SettingsSpec {
     /**
      * result - The result
      */
-    public Map<String, List<SettingSpec.Spec>> result;
+    public Map<String, List<Spec>> result;
 
     /**
      * toString
@@ -26,7 +26,7 @@ public class SettingSpec {
     /**
      * Spec - A setting specification object
      * @author p0t4t0sandwich
-     * @see SettingSpec
+     * @see SettingsSpec
      * @see dev.neuralnexus.ampapi.apimodules.Core#GetSettingsSpec()
      */
     public static class Spec {

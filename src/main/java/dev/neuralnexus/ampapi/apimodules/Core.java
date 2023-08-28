@@ -5,6 +5,7 @@ import dev.neuralnexus.ampapi.AMPAPI;
 import dev.neuralnexus.ampapi.types.*;
 
 import java.lang.reflect.Type;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -593,12 +594,12 @@ public class Core extends AMPAPI {
 
     /**
      * Name Description Optional
-     * @return Result<Map<String, List<SettingSpec>>>
+     * @return SettingsSpec
      */
-    public Result<Map<String, List<SettingSpec>>> GetSettingsSpec() {
+    public SettingsSpec GetSettingsSpec() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Result<Map<String, List<SettingSpec>>>>(){}.getType();
-        return (Result<Map<String, List<SettingSpec>>>) this.APICall("Core/GetSettingsSpec", args, type);
+        Type type = new TypeToken<SettingsSpec>(){}.getType();
+        return (SettingsSpec) this.APICall("Core/GetSettingsSpec", args, type);
     }
 
     /**
