@@ -5,7 +5,6 @@ import dev.neuralnexus.ampapi.AMPAPI;
 import dev.neuralnexus.ampapi.types.*;
 
 import java.lang.reflect.Type;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -647,12 +646,12 @@ public class Core extends AMPAPI {
     /**
      * Gets changes to the server status, in addition to any notifications or console output that have occured since the last time GetUpdates() was called by the current session.
      * Name Description Optional
-     * @return GetUpdatesResult
+     * @return Updates
      */
-    public GetUpdatesResult GetUpdates() {
+    public Updates GetUpdates() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<GetUpdatesResult>(){}.getType();
-        return (GetUpdatesResult) this.APICall("Core/GetUpdates", args, type);
+        Type type = new TypeToken<Updates>(){}.getType();
+        return (Updates) this.APICall("Core/GetUpdates", args, type);
     }
 
     /**

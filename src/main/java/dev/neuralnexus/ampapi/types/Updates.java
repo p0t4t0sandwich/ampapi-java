@@ -7,7 +7,7 @@ import java.util.Arrays;
  * @author p0t4t0sandwich
  * @see dev.neuralnexus.ampapi.apimodules.Core#GetUpdates()
  */
-public class GetUpdatesResult {
+public class Updates {
     /**
      * {@link Status Status} - The status of the server
      * ConsoleEntries - The console entries of the server
@@ -26,13 +26,13 @@ public class GetUpdatesResult {
      * @return A string representation of the object
      */
     public String toString() {
-        return "GetUpdatesResult{Status=" + this.Status + ", ConsoleEntries=" + Arrays.toString(this.ConsoleEntries) + ", Messages=" + Arrays.toString(this.Messages) + ", Tasks=" + Arrays.toString(this.Tasks) + ", Ports=" + Arrays.toString(this.Ports) + "}";
+        return "Updates{Status=" + this.Status + ", ConsoleEntries=" + Arrays.toString(this.ConsoleEntries) + ", Messages=" + Arrays.toString(this.Messages) + ", Tasks=" + Arrays.toString(this.Tasks) + ", Ports=" + Arrays.toString(this.Ports) + "}";
     }
 
     /**
-     * Message type for API.Core.GetUpdatesResult status messages
+     * Message type for API.Core.Updates status messages
      * @author p0t4t0sandwich
-     * @see GetUpdatesResult
+     * @see Updates
      * @see dev.neuralnexus.ampapi.apimodules.Core#GetUpdates()
      */
     public static class Message {

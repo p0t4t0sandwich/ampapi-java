@@ -199,3 +199,6 @@ public class Main {
 - Refactored all the types into one package and nested single-use types
 
 ## Dev Notes - 1.2.2-SNAPSHOT
+
+- Change Status string to enum for Instance and IADSInstance, consequently pulled State out into its own file
+- Simplified the custom mappings a bit, refactored SettingSpec to include the Map object in the response
