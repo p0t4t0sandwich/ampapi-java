@@ -680,12 +680,12 @@ public class Core extends AMPAPI {
     /**
      * Returns a list of in-application users
      * Name Description Optional
-     * @return Map<String, String>
+     * @return Result<Map<String, String>>
      */
-    public Map<String, String> GetUserList() {
+    public Result<Map<String, String>> GetUserList() {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Map<String, String>>(){}.getType();
-        return (Map<String, String>) this.APICall("Core/GetUserList", args, type);
+        Type type = new TypeToken<Result<Map<String, String>>>(){}.getType();
+        return (Result<Map<String, String>>) this.APICall("Core/GetUserList", args, type);
     }
 
     /**

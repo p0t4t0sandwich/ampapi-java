@@ -159,6 +159,7 @@ public class Main {
 
 - Add a check to see if it's been 5min since the last API call, and if so, attempt to re-log
 - Might want to look into `CompletableFuture`s for async calls
+- Some sort of optional notation for when an API call fails? How would GSON handle two possible outcomes?
 - Create custom types:
   - DeploymentTemplate
   - PostCreateActions
@@ -202,3 +203,4 @@ public class Main {
 
 - Change Status string to enum for Instance and IADSInstance, consequently pulled State out into its own file
 - Simplified the custom mappings a bit, refactored SettingSpec to include the Map object in the response
+- Added `Return<Map<String, String>>` return type for `API.Core.GetUserList`
