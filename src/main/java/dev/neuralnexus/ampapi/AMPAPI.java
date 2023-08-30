@@ -28,11 +28,10 @@ public class AMPAPI {
     public AMPAPI(String baseUri) {
         this.baseUri = baseUri;
 
-        if (baseUri.charAt(baseUri.length() - 1) == '/') {
-            this.dataSource = this.baseUri + "API/";
-        } else {
-            this.dataSource = this.baseUri + "/API/";
+        if (!this.baseUri.endsWith("/")) {
+            this.baseUri += "/";
         }
+        this.dataSource = this.baseUri + "API/";
     }
 
     /**
@@ -42,11 +41,10 @@ public class AMPAPI {
     public AMPAPI(AMPAPI ampapi) {
         this.baseUri = ampapi.baseUri;
 
-        if (this.baseUri.charAt(baseUri.length() - 1) == '/') {
-            this.dataSource = this.baseUri + "API/";
-        } else {
-            this.dataSource = this.baseUri + "/API/";
+        if (!this.baseUri.endsWith("/")) {
+            this.baseUri += "/";
         }
+        this.dataSource = this.baseUri + "API/";
 
         this.username = ampapi.username;
         this.password = ampapi.password;
@@ -67,15 +65,11 @@ public class AMPAPI {
     public AMPAPI(String baseUri, String username, String password, String rememberMeToken, String sessionId) {
         this.baseUri = baseUri;
 
-        if (this.baseUri.charAt(baseUri.length() - 1) == '/') {
-            this.dataSource = this.baseUri + "API/";
-        } else {
-            this.dataSource = this.baseUri + "/API/";
-        }
-
         if (!this.baseUri.endsWith("/")) {
             this.baseUri += "/";
         }
+        this.dataSource = this.baseUri + "API/";
+
         this.username = username;
         this.password = password;
         this.rememberMeToken = rememberMeToken;
