@@ -53,7 +53,8 @@ import dev.neuralnexus.ampapi.types.GetStatusResult;
 
 public class Main {
     public static void main(String[] args) {
-        CommonAPI API = new CommonAPI("http://localhost:8080/", "admin", "myfancypassword123", "");
+        // If you know the module that the instance is using, specify it instead of CommonAPI
+        CommonAPI API = new CommonAPI("http://localhost:8080/", "admin", "myfancypassword123", "", "");
         
         // API call parameters are simply in the same order as shown in the documentation.
         API.Core.SendConsoleMessage("say Hello Everyone, this message was sent from the Java API!");
