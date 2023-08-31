@@ -4,6 +4,11 @@ This API allows you to communicate with AMP installations from within Java.
 
 Documentation for available API calls can be found by appending /API to the URL of any existing AMP installation.
 
+Support:
+
+- Ping `@thepotatoking3452` in the `#development` channel of the [AMP Discord](https://discord.gg/cubecoders)
+- My own [development Discord](https://discord.neuralnexus.dev/)
+
 ## Installation
 
 `{version}` just refers to the release tag, without the `v` prefix.
