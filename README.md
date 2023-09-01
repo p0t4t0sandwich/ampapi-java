@@ -210,3 +210,5 @@ public class Main {
 - Change Status string to enum for Instance and IADSInstance, consequently pulled State out into its own file
 - Simplified the custom mappings a bit, refactored SettingSpec to include the Map object in the response
 - Added `Return<Map<String, String>>` return type for `API.Core.GetUserList`
+- Added `Metrics` WS keepalive type
+- Added `ConsoleEntry` for `API.Core.GetUpdates`
