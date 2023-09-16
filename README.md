@@ -1,6 +1,16 @@
 # ampapi-java
 
-This API allows you to communicate with AMP installations from within Java.
+[![License](https://img.shields.io/github/license/p0t4t0sandwich/ampapi-java?color=blue)](https://img.shields.io/github/downloads/p0t4t0sandwich/ampapi-java/LICENSE)
+[![Github](https://img.shields.io/github/stars/p0t4t0sandwich/ampapi-java)](https://github.com/p0t4t0sandwich/ampapi-java)
+[![Github Issues](https://img.shields.io/github/issues/p0t4t0sandwich/ampapi-java?label=Issues)](https://github.com/p0t4t0sandwich/ampapi-java/issues)
+[![Discord](https://img.shields.io/discord/1067482396246683708?color=7289da&logo=discord&logoColor=white)](https://discord.neuralnexus.dev)
+[![wakatime](https://wakatime.com/badge/github/p0t4t0sandwich/ampapi-java.svg)](https://wakatime.com/badge/github/p0t4t0sandwich/ampapi-java)
+
+[![Github Releases](https://img.shields.io/github/downloads/p0t4t0sandwich/ampapi-java/total?label=Github&logo=github&color=181717)](https://github.com/p0t4t0sandwich/ampapi-java/releases)
+[![Maven Repo](https://img.shields.io/maven-metadata/v?label=Release&metadataUrl=https%3A%2F%2Fmaven.neuralnexus.dev%2Freleases%2Fdev%2Fneuralnexus%2Fampapi%2Fmaven-metadata.xml)](https://maven.neuralnexus.dev/#/releases/dev/neuralnexus/ampapi)
+[![Maven Repo](https://img.shields.io/maven-metadata/v?label=Snapshot&metadataUrl=https%3A%2F%2Fmaven.neuralnexus.dev%2Fsnapshots%2Fdev%2Fneuralnexus%2Fampapi%2Fmaven-metadata.xml)](https://maven.neuralnexus.dev/#/snapshots/dev/neuralnexus/ampapi)
+
+An API that allows you to communicate with AMP installations from within Java.
 
 Documentation for available API calls can be found by appending /API to the URL of any existing AMP installation.
 
