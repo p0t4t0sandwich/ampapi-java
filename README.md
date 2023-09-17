@@ -202,23 +202,14 @@ public class Main {
   - UserInfoSummary
   - AuthRoleSummary
 
-## Release Notes - 1.2.1
-
-- `ADS#InstanceLogin` can now return another ADS, in the case of a Controller ADS proxying a login directly to a Target ADS
-- Huge breakthrough with return types, most AMP C# types are now mapped to Java types, with generics and everything!
-- Created custom response type for `API.Core.GetSettingsSpec`
-- Created new types `RemoteTargetInfo` and `RunningTask`
-- Turned `GetStatusResult` into `Status` for re-usability in `API.Core.GetUpdates`
-- Created new type `Message` for `API.Core.GetUpdates`
-- Added an enum for `Status#State`, which translates the integer to the enum string
-- Created new type `UpdateInfo` for `API.Core.GetUpdateInfo`
-- Created new type `ModuleInfo` for `API.Core.GetModuleInfo`
-- Refactored all the types into one package and nested single-use types
-
-## Dev Notes - 1.2.2-SNAPSHOT
+## Release Notes - 1.2.2
 
 - Change Status string to enum for Instance and IADSInstance, consequently pulled State out into its own file
 - Simplified the custom mappings a bit, refactored SettingSpec to include the Map object in the response
 - Added `Return<Map<String, String>>` return type for `API.Core.GetUserList`
 - Added `Metrics` WS keepalive type
 - Added `ConsoleEntry` for `API.Core.GetUpdates`
+- Fixed an auth bug where rememberMe wasn't handled properly in `AMAPI#Login`
+- Implemented a way for the API to automatically relog after 5min
+
+## Dev Notes - 1.2.3-SNAPSHOT

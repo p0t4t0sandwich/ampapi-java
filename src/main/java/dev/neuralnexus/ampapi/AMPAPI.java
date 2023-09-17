@@ -20,6 +20,9 @@ public class AMPAPI {
     public String password;
     public String rememberMeToken;
     public String sessionId;
+    public String requestMethod = "POST";
+    private long lastAPICall = System.currentTimeMillis();
+    public int relogInterval = 1000*60*5;
 
     /**
      * Constructor
@@ -79,10 +82,19 @@ public class AMPAPI {
     /**
      * General API call method.
      * @param endpoint The endpoint to call.
-     * @param requestMethod The request method to use.
+     * @param data The data to send.
      * @param returnType The class to use when serializing the response.
      */
-    public Object APICall(String endpoint, String requestMethod, Map<String, Object> data, Type returnType) {
+    public Object APICall(String endpoint, Map<String, Object> data, Type returnType) {
+        // Check the last API call time, and if it's been more than the relog interval, relog.
+        if (System.currentTimeMillis() - this.lastAPICall > this.relogInterval) {
+            this.lastAPICall = System.currentTimeMillis();
+            this.Login();
+        } else {
+            this.lastAPICall = System.currentTimeMillis();
+        }
+        data.put("SESSIONID", this.sessionId);
+
         try {
             Gson gson = new GsonBuilder().create();
 
@@ -90,67 +102,28 @@ public class AMPAPI {
 
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setDoOutput(true);
-            con.setRequestMethod(requestMethod);
+            con.setRequestMethod(this.requestMethod);
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");
 
             con.setRequestProperty("User-Agent", "ampapi-java/1.2.0");
             con.setConnectTimeout(5000);
 
-            // Only send data if it's not null.
-            if (data != null) {
-                String json = gson.toJson(data);
-                con.getOutputStream().write(json.getBytes());
-            }
+            String json = gson.toJson(data);
+            con.getOutputStream().write(json.getBytes());
 
             BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
             if (returnType == Void.class) {
                 return null;
             }
-
-            return gson.fromJson(br.readLine(), returnType);
+            String line = br.readLine();
+            br.close();
+            return gson.fromJson(line, returnType);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    /**
-     * General API call method.
-     * @param endpoint The endpoint to call.
-     * @param requestMethod The request method to use.
-     * @param data The data to send.
-     */
-    public Map<?,?> APICall(String endpoint, String requestMethod, Map<String, Object> data) {
-        return (Map<?, ?>) this.APICall(endpoint, requestMethod, data, Map.class);
-    }
-
-    /**
-     * General API call method.
-     * @param endpoint The endpoint to call.
-     * @param data The data to send.
-     */
-    public Object APICall(String endpoint, Map<String, Object> data, Type returnType) {
-        data.put("SESSIONID", this.sessionId);
-        return this.APICall(endpoint, "POST", data, returnType);
-    }
-
-    /**
-     * General API call method.
-     * @param endpoint The endpoint to call.
-     * @param data The data to send.
-     */
-    public Map<?,?> APICall(String endpoint, Map<String, Object> data) {
-        return (Map<?, ?>) this.APICall(endpoint, data, Map.class);
-    }
-
-    /**
-     * General API call method.
-     * @param endpoint The endpoint to call.
-     */
-    public Map<?,?> APICall(String endpoint) {
-        return this.APICall(endpoint, new HashMap<>());
     }
 
     /**
@@ -160,11 +133,19 @@ public class AMPAPI {
     public LoginResult Login() {
         Map<String, Object> args = new HashMap<>();
         args.put("username", this.username);
-        args.put("password", this.password);
+
+        // If remember me token is empty, use the password.
+        if (this.rememberMeToken.isEmpty()) {
+            args.put("password", this.password);
+        } else {
+            args.put("password", "");
+        }
         args.put("token", this.rememberMeToken);
         args.put("rememberMe", true);
+
         LoginResult loginResult = (LoginResult) this.APICall("Core/Login", args, LoginResult.class);
-        if (loginResult != null && loginResult.success) {
+
+        if (loginResult.success) {
             this.rememberMeToken = loginResult.rememberMeToken;
             this.sessionId = loginResult.sessionID;
         }
