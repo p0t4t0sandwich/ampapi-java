@@ -12,6 +12,7 @@ public class IADSInstance {
      * Id - The ADS instance ID
      * InstanceId - The instance ID
      * FriendlyName - The friendly name
+     * Description - The description
      * Disabled - Whether the instance is disabled
      * isRemote - Whether the instance is remote
      * {@link PlatformInfo Platform} - Platform information object
@@ -27,6 +28,7 @@ public class IADSInstance {
     public double Id;
     public UUID InstanceId;
     public String FriendlyName;
+    public String Description;
     public boolean Disabled;
     public boolean isRemote;
     public PlatformInfo Platform;
@@ -47,6 +49,6 @@ public class IADSInstance {
      * @return A string representation of the object
      */
     public String toString() {
-        return "IADSInstance{Id=" + this.Id + ", InstanceId=" + this.InstanceId + ", FriendlyName=" + this.FriendlyName + ", Disabled=" + this.Disabled + ", isRemote=" + this.isRemote + ", PlatformInfo=" + this.Platform + ", Datastores=" + Arrays.toString(this.Datastores) + ", CreatesInContainers=" + this.CreatesInContainers + ", State=" + this.State + ", StateReason=" + this.StateReason + ", CanCreate=" + this.CanCreate + ", LastUpdated=" + this.LastUpdated + ", AvailableInstances=" + Arrays.toString(this.AvailableInstances) + ", AvailableIPs=" + Arrays.toString(this.AvailableIPs) + ", URL=" + this.URL + ", Tags=" + Arrays.toString(this.Tags) + ", TagNames=" + Arrays.toString(this.TagNames) + "}";
+        return "IADSInstance{Id=" + this.Id + ", InstanceId=" + this.InstanceId + ", FriendlyName=" + this.FriendlyName + ", Description=" + this.Description + ", Disabled=" + this.Disabled + ", isRemote=" + this.isRemote + ", Platform=" + this.Platform + ", Datastores=" + Arrays.toString(this.Datastores) + ", CreatesInContainers=" + this.CreatesInContainers + ", State=" + this.State + ", StateReason=" + this.StateReason + ", CanCreate=" + this.CanCreate + ", LastUpdated=" + this.LastUpdated + ", AvailableInstances=" + Arrays.toString(this.AvailableInstances) + ", AvailableIPs=" + Arrays.toString(this.AvailableIPs) + ", URL=" + this.URL + ", Tags=" + Arrays.toString(this.Tags) + ", TagNames=" + Arrays.toString(this.TagNames) + "}";
     }
 }
