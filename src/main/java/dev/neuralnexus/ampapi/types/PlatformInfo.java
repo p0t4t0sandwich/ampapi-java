@@ -15,7 +15,7 @@ public class PlatformInfo {
      */
     public CPUInfo CPUInfo;
     public double InstalledRAMMB;
-    public double OS;
+    public int OS;
     public String PlatformName;
     public double SystemType;
     public double Virtualization;
