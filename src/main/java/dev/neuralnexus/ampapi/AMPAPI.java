@@ -87,11 +87,12 @@ public class AMPAPI {
      */
     public Object APICall(String endpoint, Map<String, Object> data, Type returnType) {
         // Check the last API call time, and if it's been more than the relog interval, relog.
-        if (System.currentTimeMillis() - this.lastAPICall > this.relogInterval) {
-            this.lastAPICall = System.currentTimeMillis();
+        long now = System.currentTimeMillis();
+        if (now - this.lastAPICall > this.relogInterval) {
+            this.lastAPICall = now;
             this.Login();
         } else {
-            this.lastAPICall = System.currentTimeMillis();
+            this.lastAPICall = now;
         }
         data.put("SESSIONID", this.sessionId);
 
@@ -106,7 +107,7 @@ public class AMPAPI {
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");
 
-            con.setRequestProperty("User-Agent", "ampapi-java/1.2.0");
+            con.setRequestProperty("User-Agent", "ampapi-java/1.2.3");
             con.setConnectTimeout(5000);
 
             String json = gson.toJson(data);
@@ -133,15 +134,14 @@ public class AMPAPI {
     public LoginResult Login() {
         Map<String, Object> args = new HashMap<>();
         args.put("username", this.username);
+        args.put("password", "");
+        args.put("token", this.rememberMeToken);
+        args.put("rememberMe", true);
 
         // If remember me token is empty, use the password.
         if (this.rememberMeToken.isEmpty()) {
             args.put("password", this.password);
-        } else {
-            args.put("password", "");
         }
-        args.put("token", this.rememberMeToken);
-        args.put("rememberMe", true);
 
         LoginResult loginResult = (LoginResult) this.APICall("Core/Login", args, LoginResult.class);
 

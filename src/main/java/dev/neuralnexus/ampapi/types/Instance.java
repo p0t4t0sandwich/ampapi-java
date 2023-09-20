@@ -14,7 +14,9 @@ public class Instance {
      * TargetID - The target ID
      * InstanceName - The instance name
      * FriendlyName - The friendly name
+     * Description - The description
      * Module - The module
+     * ModuleDisplayName - The module display name
      * {@link AMPVersion AMPVersion} - The AMP version
      * IsHTTPS - Whether HTTPS is enabled
      * IP - The IP address
@@ -33,6 +35,7 @@ public class Instance {
      * ContainerMemoryMB - The container memory in MB
      * ContainerMemoryPolicy - The container memory policy
      * ContainerCPUs - The container CPUs
+     * SpecificDockerImage - The specific Docker image
      * {@link Metric Metrics} - The metrics
      * {@link EndpointInfo ApplicationEndpoints} - The application endpoints
      * DeploymentArgs - The deployment arguments
@@ -42,7 +45,9 @@ public class Instance {
     public UUID TargetID;
     public String InstanceName;
     public String FriendlyName;
+    public String Description;
     public String Module;
+    public String ModuleDisplayName;
     public AMPVersion AMPVersion;
     public boolean IsHTTPS;
     public String IP;
@@ -61,6 +66,7 @@ public class Instance {
     public double ContainerMemoryMB;
     public double ContainerMemoryPolicy;
     public double ContainerCPUs;
+    public String SpecificDockerImage;
     public Map<String, Metric> Metrics;
     public EndpointInfo[] ApplicationEndpoints;
     public Map<String, String> DeploymentArgs;
@@ -71,6 +77,6 @@ public class Instance {
      * @return A string representation of the object
      */
     public String toString() {
-        return "Instance{InstanceID=" + this.InstanceID + ", TargetID=" + this.TargetID + ", InstanceName=" + this.InstanceName + ", FriendlyName=" + this.FriendlyName + ", Module=" + this.Module + ", AMPVersion=" + this.AMPVersion + ", IsHTTPS=" + this.IsHTTPS + ", IP=" + this.IP + ", Port=" + this.Port + ", Daemon=" + this.Daemon + ", DaemonAutostart=" + this.DaemonAutostart + ", ExcludeFromFirewall=" + this.ExcludeFromFirewall + ", Running=" + this.Running + ", AppState=" + this.AppState + ", Tags=" + Arrays.toString(this.Tags) + ", DiskUsageMB=" + this.DiskUsageMB + ", ReleaseStream=" + this.ReleaseStream + ", ManagementMode=" + this.ManagementMode + ", Suspended=" + this.Suspended + ", IsContainerInstance=" + this.IsContainerInstance + ", ContainerMemoryMB=" + this.ContainerMemoryMB + ", ContainerMemoryPolicy=" + this.ContainerMemoryPolicy + ", ContainerCPUs=" + this.ContainerCPUs + ", Metrics=" + this.Metrics + ", ApplicationEndpoints=" + Arrays.toString(this.ApplicationEndpoints) + ", DeploymentArgs=" + this.DeploymentArgs + ", DisplayImageSource=" + this.DisplayImageSource + "}";
+        return "Instance{InstanceID=" + this.InstanceID + ", TargetID=" + this.TargetID + ", InstanceName=" + this.InstanceName + ", FriendlyName=" + this.FriendlyName + ", Description=" + this.Description + ", Module=" + this.Module + ", ModuleDisplayName=" + this.ModuleDisplayName + ", AMPVersion=" + this.AMPVersion + ", IsHTTPS=" + this.IsHTTPS + ", IP=" + this.IP + ", Port=" + this.Port + ", Daemon=" + this.Daemon + ", DaemonAutostart=" + this.DaemonAutostart + ", ExcludeFromFirewall=" + this.ExcludeFromFirewall + ", Running=" + this.Running + ", AppState=" + this.AppState + ", Tags=" + Arrays.toString(this.Tags) + ", DiskUsageMB=" + this.DiskUsageMB + ", ReleaseStream=" + this.ReleaseStream + ", ManagementMode=" + this.ManagementMode + ", Suspended=" + this.Suspended + ", IsContainerInstance=" + this.IsContainerInstance + ", ContainerMemoryMB=" + this.ContainerMemoryMB + ", ContainerMemoryPolicy=" + this.ContainerMemoryPolicy + ", ContainerCPUs=" + this.ContainerCPUs + ", SpecificDockerImage=" + this.SpecificDockerImage + ", Metrics=" + this.Metrics + ", ApplicationEndpoints=" + Arrays.toString(this.ApplicationEndpoints) + ", DeploymentArgs=" + this.DeploymentArgs + ", DisplayImageSource=" + this.DisplayImageSource + "}";
     }
 }

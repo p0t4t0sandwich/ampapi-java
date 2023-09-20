@@ -173,7 +173,6 @@ public class Main {
 
 ## TODO
 
-- Add a check to see if it's been 5min since the last API call, and if so, attempt to re-log
 - Might want to look into `CompletableFuture`s for async calls
 - Some sort of optional notation for when an API call fails? How would GSON handle two possible outcomes?
 - Create custom types:

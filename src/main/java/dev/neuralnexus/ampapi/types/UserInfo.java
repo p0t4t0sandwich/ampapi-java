@@ -8,6 +8,7 @@ public class UserInfo {
     /**
      * ID - The ID of the user
      * Username - The username of the user
+     * EmailAddress - The email address of the user
      * IsTwoFactorEnabled - Whether 2FA is enabled for the user
      * Disabled - Whether the user is disabled
      * LastLogin - The last time the user logged in
@@ -16,6 +17,7 @@ public class UserInfo {
      */
     public String ID;
     public String Username;
+    public String EmailAddress;
     public boolean IsTwoFactorEnabled;
     public boolean Disabled;
     public String LastLogin;
@@ -24,9 +26,10 @@ public class UserInfo {
 
     /**
      * toString
+     *
      * @return A string representation of the object
      */
     public String toString() {
-        return "UserInfo{ID=" + this.ID + ", Username=" + this.Username + ", IsTwoFactorEnabled=" + this.IsTwoFactorEnabled + ", Disabled=" + this.Disabled + ", LastLogin=" + this.LastLogin + ", GravatarHash=" + this.GravatarHash + ", IsLDAPUser=" + this.IsLDAPUser + "}";
+        return "UserInfo{ID=" + this.ID + ", Username=" + this.Username + ", EmailAddress=" + this.EmailAddress + ", IsTwoFactorEnabled=" + this.IsTwoFactorEnabled + ", Disabled=" + this.Disabled + ", LastLogin=" + this.LastLogin + ", GravatarHash=" + this.GravatarHash + ", IsLDAPUser=" + this.IsLDAPUser + "}";
     }
 }

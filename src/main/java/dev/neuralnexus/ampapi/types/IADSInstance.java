@@ -14,7 +14,7 @@ public class IADSInstance {
      * FriendlyName - The friendly name
      * Disabled - Whether the instance is disabled
      * isRemote - Whether the instance is remote
-     * {@link PlatformInfo PlatformInfo} - PlatformInfo information object
+     * {@link PlatformInfo Platform} - Platform information object
      * {@link InstanceDatastore Datastores} - The datastores
      * CreatesInContainers - Whether the instance creates in containers
      * State - The state
