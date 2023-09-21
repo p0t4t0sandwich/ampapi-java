@@ -73,8 +73,8 @@ public class Main {
         
         // API call parameters are simply in the same order as shown in the documentation.
         API.Core.SendConsoleMessage("say Hello Everyone, this message was sent from the Java API!");
-        
-        GetStatusResult currentStatus = API.Core.GetStatus();
+
+        Status currentStatus = API.Core.GetStatus();
         double CPUUsagePercent = currentStatus.Metrics.get("CPU Usage").Percent;
         
         System.out.println("Current CPU usage is: " + CPUUsagePercent + "%");
@@ -103,7 +103,7 @@ public class Main {
         // If you're running a standalone setup, you can just use targets.get(0)
         IADSInstance target = targets.get(1);
 
-        UUID hub_instance_id;
+        UUID hub_instance_id = null;
 
         // Get the available instances
         Instance[] instances = target.AvailableInstances;
@@ -119,7 +119,7 @@ public class Main {
         Minecraft Hub = API.InstanceLogin(hub_instance_id, Minecraft.class);
 
         // Get the current CPU usage
-        GetStatusResult currentStatus = API.Core.GetStatus();
+        Status currentStatus = Hub.Core.GetStatus();
         double CPUUsagePercent = currentStatus.Metrics.get("CPU Usage").Percent;
 
         // Send a message to the console
@@ -154,7 +154,7 @@ public class Main {
         // API call parameters are simply in the same order as shown in the documentation.
         API.Core.SendConsoleMessage("say Hello Everyone, this message was sent from the Java API!");
 
-        GetStatusResult currentStatus = API.Core.GetStatus();
+        Status currentStatus = API.Core.GetStatus();
         double CPUUsagePercent = currentStatus.Metrics.get("CPU Usage").Percent;
 
         System.out.println("Current CPU usage is: " + CPUUsagePercent + "%");
@@ -201,8 +201,7 @@ public class Main {
   - UserInfoSummary
   - AuthRoleSummary
 
-## Release Notes - 1.2.4
+## Release Notes - 1.2.5
 
-- Added `EmailAddress` to `UserInfo`
-- Added `Description`, `ModuleDisplayName`, and `SpecificDockerImage` to `Instance`
-- Added `Description` to `IADSInstance`
+- Now compile down to Java 7
+- Added `FileDirectory` return type for `FileManagerPlugin#GetDirectoryListing`

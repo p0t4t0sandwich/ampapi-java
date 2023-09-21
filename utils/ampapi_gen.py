@@ -80,7 +80,8 @@ type_dict = {
     "Status": "Status",
     "Updates": "Updates",
     "Result<Map<String, String>>": "Result<Map<String, String>>",
-    "LoginResult": "LoginResult"
+    "LoginResult": "LoginResult",
+    "Result<List<FileDirectory>>": "Result<List<FileDirectory>>",
 }
 
 custom_types = {
@@ -99,6 +100,9 @@ custom_types = {
     "Core.GetUserList": "Result<Map<String, String>>",
     # API.Core.Login
     "Core.Login": "LoginResult",
+
+    # API.FileManagerPlugin.GetDirectoryListing
+    "FileManagerPlugin.GetDirectoryListing": "Result<List<FileDirectory>>",
 }
 
 def generate_apimodule_method(module: str, method: str, method_spec: dict):
