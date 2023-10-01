@@ -107,7 +107,7 @@ public class AMPAPI {
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");
 
-            con.setRequestProperty("User-Agent", "ampapi-java/1.2.3");
+            con.setRequestProperty("User-Agent", "ampapi-java/1.2.4");
             con.setConnectTimeout(5000);
 
             String json = gson.toJson(data);
@@ -134,7 +134,7 @@ public class AMPAPI {
     public LoginResult Login() {
         Map<String, Object> args = new HashMap<>();
         args.put("username", this.username);
-        args.put("password", "");
+        args.put("password", this.password);
         args.put("token", this.rememberMeToken);
         args.put("rememberMe", true);
 

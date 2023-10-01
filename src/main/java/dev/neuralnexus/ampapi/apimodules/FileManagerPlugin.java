@@ -183,13 +183,13 @@ public class FileManagerPlugin extends AMPAPI {
      * @param ChunkSize  True
      * @return ActionResult<String>
      */
-    public ActionResult<String> ReadFileChunk(String Filename, Integer Offset, Integer ChunkSize) {
+    public Result<ActionResult<String>> ReadFileChunk(String Filename, Integer Offset, Integer ChunkSize) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
         args.put("Offset", Offset);
         args.put("ChunkSize", ChunkSize);
-        Type type = new TypeToken<ActionResult<String>>(){}.getType();
-        return (ActionResult<String>) this.APICall("FileManagerPlugin/ReadFileChunk", args, type);
+        Type type = new TypeToken<Result<ActionResult<String>>>(){}.getType();
+        return (Result<ActionResult<String>>) this.APICall("FileManagerPlugin/ReadFileChunk", args, type);
     }
 
     /**The name component of the new directory (not the full path)
