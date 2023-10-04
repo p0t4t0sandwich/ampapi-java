@@ -28,6 +28,20 @@ public class Core extends AMPAPI {
 
     /**
      * Name Description Optional
+     * @param LicenceKey  False
+     * @param QueryOnly  True
+     * @return Task<ActionResult<LicenceInfo>>
+     */
+    public Task<ActionResult<LicenceInfo>> ActivateAMPLicence(String LicenceKey, Boolean QueryOnly) {
+        HashMap<String, Object> args = new HashMap<>();
+        args.put("LicenceKey", LicenceKey);
+        args.put("QueryOnly", QueryOnly);
+        Type type = new TypeToken<Task<ActionResult<LicenceInfo>>>(){}.getType();
+        return (Task<ActionResult<LicenceInfo>>) this.APICall("Core/ActivateAMPLicence", args, type);
+    }
+
+    /**
+     * Name Description Optional
      * @param triggerId  False
      * @return ActionResult
      */

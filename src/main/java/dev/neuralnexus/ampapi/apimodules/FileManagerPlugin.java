@@ -181,7 +181,7 @@ public class FileManagerPlugin extends AMPAPI {
      * @param Filename  False
      * @param Offset  False
      * @param ChunkSize  True
-     * @return ActionResult<String>
+     * @return Result<ActionResult<String>>
      */
     public Result<ActionResult<String>> ReadFileChunk(String Filename, Integer Offset, Integer ChunkSize) {
         HashMap<String, Object> args = new HashMap<>();

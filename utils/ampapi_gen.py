@@ -72,6 +72,7 @@ type_dict = {
     "Task<IDictionary<Guid, String>>": "Task<Map<UUID, String>>",
     "Task<ActionResult>": "Task<ActionResult>",
     "Task<ActionResult<Guid>>": "Task<ActionResult<UUID>>",
+    "Task<ActionResult<LicenceInfo>>": "Task<ActionResult<LicenceInfo>>",
 
     ## Custom types
     "Result<Instance>": "Result<Instance>",
@@ -82,6 +83,7 @@ type_dict = {
     "Result<Map<String, String>>": "Result<Map<String, String>>",
     "LoginResult": "LoginResult",
     "Result<List<FileDirectory>>": "Result<List<FileDirectory>>",
+    "Result<ActionResult<String>>": "Result<ActionResult<String>>",
 }
 
 custom_types = {
@@ -103,6 +105,8 @@ custom_types = {
 
     # API.FileManagerPlugin.GetDirectoryListing
     "FileManagerPlugin.GetDirectoryListing": "Result<List<FileDirectory>>",
+    # API.FileManagerPlugin.ReadFileChunk
+    "FileManagerPlugin.ReadFileChunk": "Result<ActionResult<String>>",
 }
 
 def generate_apimodule_method(module: str, method: str, method_spec: dict):

@@ -201,8 +201,4 @@ public class Main {
   - UserInfoSummary
   - AuthRoleSummary
 
-## Release Notes - 1.2.4
-
-- Now compiles down to Java 7
-- Added `FileDirectory` return type for `FileManagerPlugin#GetDirectoryListing`
-- Fixed auth bug in `AMPAPI#Login`
+## In-Progress Release Notes
