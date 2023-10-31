@@ -40,6 +40,8 @@ Support:
 </dependency>
 ```
 
+Note: Be sure to remove the `<scope>provided</scope>` if you're shading the library.
+
 ### Gradle
 
 ```gradle
