@@ -2,6 +2,7 @@ package dev.neuralnexus.ampapi;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import dev.neuralnexus.ampapi.types.LoginResult;
 
 import java.io.BufferedReader;
@@ -14,18 +15,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AMPAPI {
-    public String baseUri;
     public final String dataSource;
+    public String baseUri;
     public String username;
     public String password;
     public String rememberMeToken;
     public String sessionId;
     public String requestMethod = "POST";
+    public int relogInterval = 1000 * 60 * 5;
     private long lastAPICall = System.currentTimeMillis();
-    public int relogInterval = 1000*60*5;
 
     /**
      * Constructor
+     *
      * @param baseUri The base URI of the AMP instance
      */
     public AMPAPI(String baseUri) {
@@ -39,6 +41,7 @@ public class AMPAPI {
 
     /**
      * Constructor
+     *
      * @param ampapi The AMPAPI to copy
      */
     public AMPAPI(AMPAPI ampapi) {
@@ -57,15 +60,20 @@ public class AMPAPI {
 
     /**
      * Constructor
+     *
      * @param baseUri The base URI of the AMP instance
      * @param username The username to log in with
      * @param password The password to log in with
-     * @param rememberMeToken The rememberMeToken to log in with
-     *                        (if you don't have one, use an empty string)
-     * @param sessionId The session ID to log in with
-     *                  (if you don't have one, use an empty string)
+     * @param rememberMeToken The rememberMeToken to log in with (if you don't have one, use an
+     *     empty string)
+     * @param sessionId The session ID to log in with (if you don't have one, use an empty string)
      */
-    public AMPAPI(String baseUri, String username, String password, String rememberMeToken, String sessionId) {
+    public AMPAPI(
+            String baseUri,
+            String username,
+            String password,
+            String rememberMeToken,
+            String sessionId) {
         this.baseUri = baseUri;
 
         if (!this.baseUri.endsWith("/")) {
@@ -81,6 +89,7 @@ public class AMPAPI {
 
     /**
      * General API call method.
+     *
      * @param endpoint The endpoint to call.
      * @param data The data to send.
      * @param returnType The class to use when serializing the response.
@@ -129,6 +138,7 @@ public class AMPAPI {
 
     /**
      * Simplified login function
+     *
      * @return The result of the login
      */
     public LoginResult Login() {

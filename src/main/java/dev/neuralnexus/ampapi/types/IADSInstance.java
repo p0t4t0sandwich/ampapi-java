@@ -5,27 +5,21 @@ import java.util.UUID;
 
 /**
  * IADSInstance - An ADS instance object
+ *
  * @author p0t4t0sandwich
  */
 public class IADSInstance {
     /**
-     * Id - The ADS instance ID
-     * InstanceId - The instance ID
-     * FriendlyName - The friendly name
-     * Description - The description
-     * Disabled - Whether the instance is disabled
-     * isRemote - Whether the instance is remote
-     * {@link PlatformInfo Platform} - Platform information object
-     * {@link InstanceDatastore Datastores} - The datastores
-     * CreatesInContainers - Whether the instance creates in containers
-     * State - The state
-     * StateReason - The state reason
-     * CanCreate - Whether the instance can create
-     * LastUpdated - The last updated
-     * {@link Instance AvailableInstances} - The available instances
-     * AvailableIPs - The available IPs
+     * Id - The ADS instance ID InstanceId - The instance ID FriendlyName - The friendly name
+     * Description - The description Disabled - Whether the instance is disabled isRemote - Whether
+     * the instance is remote {@link PlatformInfo Platform} - Platform information object {@link
+     * InstanceDatastore Datastores} - The datastores CreatesInContainers - Whether the instance
+     * creates in containers State - The state StateReason - The state reason CanCreate - Whether
+     * the instance can create LastUpdated - The last updated {@link Instance AvailableInstances} -
+     * The available instances AvailableIPs - The available IPs
      */
     public double Id;
+
     public UUID InstanceId;
     public String FriendlyName;
     public String Description;
@@ -46,9 +40,46 @@ public class IADSInstance {
 
     /**
      * toString
+     *
      * @return A string representation of the object
      */
     public String toString() {
-        return "IADSInstance{Id=" + this.Id + ", InstanceId=" + this.InstanceId + ", FriendlyName=" + this.FriendlyName + ", Description=" + this.Description + ", Disabled=" + this.Disabled + ", isRemote=" + this.isRemote + ", Platform=" + this.Platform + ", Datastores=" + Arrays.toString(this.Datastores) + ", CreatesInContainers=" + this.CreatesInContainers + ", State=" + this.State + ", StateReason=" + this.StateReason + ", CanCreate=" + this.CanCreate + ", LastUpdated=" + this.LastUpdated + ", AvailableInstances=" + Arrays.toString(this.AvailableInstances) + ", AvailableIPs=" + Arrays.toString(this.AvailableIPs) + ", URL=" + this.URL + ", Tags=" + Arrays.toString(this.Tags) + ", TagNames=" + Arrays.toString(this.TagNames) + "}";
+        return "IADSInstance{Id="
+                + this.Id
+                + ", InstanceId="
+                + this.InstanceId
+                + ", FriendlyName="
+                + this.FriendlyName
+                + ", Description="
+                + this.Description
+                + ", Disabled="
+                + this.Disabled
+                + ", isRemote="
+                + this.isRemote
+                + ", Platform="
+                + this.Platform
+                + ", Datastores="
+                + Arrays.toString(this.Datastores)
+                + ", CreatesInContainers="
+                + this.CreatesInContainers
+                + ", State="
+                + this.State
+                + ", StateReason="
+                + this.StateReason
+                + ", CanCreate="
+                + this.CanCreate
+                + ", LastUpdated="
+                + this.LastUpdated
+                + ", AvailableInstances="
+                + Arrays.toString(this.AvailableInstances)
+                + ", AvailableIPs="
+                + Arrays.toString(this.AvailableIPs)
+                + ", URL="
+                + this.URL
+                + ", Tags="
+                + Arrays.toString(this.Tags)
+                + ", TagNames="
+                + Arrays.toString(this.TagNames)
+                + "}";
     }
 }

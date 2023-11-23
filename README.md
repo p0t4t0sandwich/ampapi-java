@@ -26,6 +26,7 @@ Support:
 ### Maven
 
 ```xml
+
 <repository>
     <id>neural-nexus</id>
     <name>NerualNexus</name>
@@ -33,10 +34,10 @@ Support:
 </repository>
 
 <dependency>
-    <groupId>dev.neuralnexus</groupId>
-    <artifactId>ampapi</artifactId>
-    <version>{version}</version>
-    <scope>provided</scope>
+<groupId>dev.neuralnexus</groupId>
+<artifactId>ampapi</artifactId>
+<version>{version}</version>
+<scope>provided</scope>
 </dependency>
 ```
 
@@ -57,8 +58,10 @@ dependencies {
 
 ## Notes
 
-- If a function returns anything in the form of `Map<String, Object>`, then you can treat it as `JSON` and parse it as such (Feel free to draft up a return type if you'd like).
-- If you're running into a `GSON`/`JSON` error, the API return type may be missing a `Task<T>` or `Result<T>` wrapper (or the return type could just be wrong in general).
+- If a function returns anything in the form of `Map<String, Object>`, then you can treat it as `JSON` and parse it as
+  such (Feel free to draft up a return type if you'd like).
+- If you're running into a `GSON`/`JSON` error, the API return type may be missing a `Task<T>` or `Result<T>` wrapper (
+  or the return type could just be wrong in general).
 
 ## Examples
 
@@ -72,13 +75,13 @@ public class Main {
     public static void main(String[] args) {
         // If you know the module that the instance is using, specify it instead of CommonAPI
         CommonAPI API = new CommonAPI("http://localhost:8080/", "admin", "myfancypassword123", "", "");
-        
+
         // API call parameters are simply in the same order as shown in the documentation.
         API.Core.SendConsoleMessage("say Hello Everyone, this message was sent from the Java API!");
 
         Status currentStatus = API.Core.GetStatus();
         double CPUUsagePercent = currentStatus.Metrics.get("CPU Usage").Percent;
-        
+
         System.out.println("Current CPU usage is: " + CPUUsagePercent + "%");
     }
 }
@@ -138,38 +141,38 @@ import dev.neuralnexus.ampapi.types.GetStatusResult;
 import dev.neuralnexus.ampapi.types.LoginResult;
 
 public class Main {
-  public static void main(String[] args) {
-    CommonAPI API = new CommonAPI("http://localhost:8080/");
+    public static void main(String[] args) {
+        CommonAPI API = new CommonAPI("http://localhost:8080/");
 
-    try {
-      // The third parameter is either used for 2FA logins, or if no password is specified to use a remembered token from a previous login, or a service login token.
-      LoginResult loginResult = API.Core.Login("admin", "myfancypassword123", "", false);
+        try {
+            // The third parameter is either used for 2FA logins, or if no password is specified to use a remembered token from a previous login, or a service login token.
+            LoginResult loginResult = API.Core.Login("admin", "myfancypassword123", "", false);
 
-      if (loginResult.success) {
-        System.out.println("Login successful");
+            if (loginResult.success) {
+                System.out.println("Login successful");
 
-        // Update the session ID
-        String sessionId = loginResult.sessionID;
-        API.sessionId = sessionId;
-        API.Core.sessionId = sessionId;
+                // Update the session ID
+                String sessionId = loginResult.sessionID;
+                API.sessionId = sessionId;
+                API.Core.sessionId = sessionId;
 
-        // API call parameters are simply in the same order as shown in the documentation.
-        API.Core.SendConsoleMessage("say Hello Everyone, this message was sent from the Java API!");
+                // API call parameters are simply in the same order as shown in the documentation.
+                API.Core.SendConsoleMessage("say Hello Everyone, this message was sent from the Java API!");
 
-        Status currentStatus = API.Core.GetStatus();
-        double CPUUsagePercent = currentStatus.Metrics.get("CPU Usage").Percent;
+                Status currentStatus = API.Core.GetStatus();
+                double CPUUsagePercent = currentStatus.Metrics.get("CPU Usage").Percent;
 
-        System.out.println("Current CPU usage is: " + CPUUsagePercent + "%");
+                System.out.println("Current CPU usage is: " + CPUUsagePercent + "%");
 
-      } else {
-        System.out.println("Login failed");
-        System.out.println(loginResult);
-      }
-    } catch (RuntimeException e) {
-      // In reality, you'd handle this exception better
-      throw new RuntimeException(e);
+            } else {
+                System.out.println("Login failed");
+                System.out.println(loginResult);
+            }
+        } catch (RuntimeException e) {
+            // In reality, you'd handle this exception better
+            throw new RuntimeException(e);
+        }
     }
-  }
 }
 ```
 
@@ -178,29 +181,29 @@ public class Main {
 - Might want to look into `CompletableFuture`s for async calls
 - Some sort of optional notation for when an API call fails? How would GSON handle two possible outcomes?
 - Create custom types:
-  - DeploymentTemplate
-  - PostCreateActions
-  - ApplicationSpec
-  - PortProtocol
-  - PortUsage
-  - LocalAMPInstance
-  - ContainerMemoryPolicy
-  - Single
-  - FileChunkData
-  - BackupManifest
-  - DateTime
-  - IAuditLogEntry
-  - Nullable -> might be able to use an Optional for this
-  - ScheduleInfo
-  - TimeIntervalTrigger
-  - WebSessionSummary
-  - IPermissionsTreeNode
-  - WebauthnLoginInfo
-  - WebauthnCredentialSummary
-  - MethodInfoSummary
-  - ListeningPortSummary
-  - TwoFactorSetupInfo
-  - UserInfoSummary
-  - AuthRoleSummary
+    - DeploymentTemplate
+    - PostCreateActions
+    - ApplicationSpec
+    - PortProtocol
+    - PortUsage
+    - LocalAMPInstance
+    - ContainerMemoryPolicy
+    - Single
+    - FileChunkData
+    - BackupManifest
+    - DateTime
+    - IAuditLogEntry
+    - Nullable -> might be able to use an Optional for this
+    - ScheduleInfo
+    - TimeIntervalTrigger
+    - WebSessionSummary
+    - IPermissionsTreeNode
+    - WebauthnLoginInfo
+    - WebauthnCredentialSummary
+    - MethodInfoSummary
+    - ListeningPortSummary
+    - TwoFactorSetupInfo
+    - UserInfoSummary
+    - AuthRoleSummary
 
 ## In-Progress Release Notes

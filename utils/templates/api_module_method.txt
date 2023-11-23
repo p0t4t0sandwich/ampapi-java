@@ -1,4 +1,6 @@
-    /**%METHOD_DESCRIPTION%
+    /**
+     * %METHOD_DESCRIPTION%
+     *
      * Name Description Optional%METHOD_PARAMETER_DOC%
      * @return %METHOD_RETURN_TYPE%
      */

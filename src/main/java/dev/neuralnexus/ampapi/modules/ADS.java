@@ -12,21 +12,27 @@ public class ADS extends CommonAPI {
 
     /**
      * Constructor
+     *
      * @param baseUri The base URI of the AMP instance
      * @param username The username to log in with
      * @param password The password to log in with
-     * @param rememberMeToken The rememberMeToken to log in with
-     *                        (if you don't have one, use an empty string)
-     * @param sessionId The session ID to log in with
-     *                  (if you don't have one, use an empty string)
+     * @param rememberMeToken The rememberMeToken to log in with (if you don't have one, use an
+     *     empty string)
+     * @param sessionId The session ID to log in with (if you don't have one, use an empty string)
      */
-    public ADS(String baseUri, String username, String password, String rememberMeToken, String sessionId) {
+    public ADS(
+            String baseUri,
+            String username,
+            String password,
+            String rememberMeToken,
+            String sessionId) {
         super(baseUri, username, password, rememberMeToken, sessionId);
         this.Login();
     }
 
     /**
      * Simplified login function
+     *
      * @return The result of the login
      */
     public LoginResult Login() {
@@ -50,6 +56,7 @@ public class ADS extends CommonAPI {
 
     /**
      * Proxies a login request to an instance and returns a new AMPAPIHandler for that instance.
+     *
      * @param instanceId The instance ID of the instance to log in to
      * @return A new AMPAPIHandler for the instance
      */
@@ -59,10 +66,20 @@ public class ADS extends CommonAPI {
         args.put("password", this.password);
         args.put("token", "");
         args.put("rememberMe", true);
-        LoginResult loginResult = (LoginResult) this.APICall("ADSModule/Servers/" + instanceId + "/API/Core/Login", args, LoginResult.class);
+        LoginResult loginResult =
+                (LoginResult)
+                        this.APICall(
+                                "ADSModule/Servers/" + instanceId + "/API/Core/Login",
+                                args,
+                                LoginResult.class);
 
         if (loginResult != null && loginResult.success) {
-            return new CommonAPI(this.baseUri + "API/ADSModule/Servers/" + instanceId, this.username, "", loginResult.rememberMeToken, loginResult.sessionID);
+            return new CommonAPI(
+                    this.baseUri + "API/ADSModule/Servers/" + instanceId,
+                    this.username,
+                    "",
+                    loginResult.rememberMeToken,
+                    loginResult.sessionID);
         } else {
             return null;
         }
@@ -70,6 +87,7 @@ public class ADS extends CommonAPI {
 
     /**
      * Proxies a login request to an instance and returns a new AMPAPIHandler for that instance.
+     *
      * @param instanceId The instance ID of the instance to log in to
      * @param moduleClass The class of the module to return
      * @return A new AMPAPIHandler for the instance
@@ -81,7 +99,12 @@ public class ADS extends CommonAPI {
         args.put("token", "");
         args.put("rememberMe", true);
 
-        LoginResult loginResult = (LoginResult) this.APICall("ADSModule/Servers/" + instanceId + "/API/Core/Login", args, LoginResult.class);
+        LoginResult loginResult =
+                (LoginResult)
+                        this.APICall(
+                                "ADSModule/Servers/" + instanceId + "/API/Core/Login",
+                                args,
+                                LoginResult.class);
 
         if (loginResult != null && loginResult.success) {
             // Prepare the parameters for the instance
@@ -95,7 +118,9 @@ public class ADS extends CommonAPI {
             } else if (Minecraft.class.equals(moduleClass)) {
                 return (T) new Minecraft(newBaseUri, this.username, "", rememberMeToken, sessionId);
             } else if (GenericModule.class.equals(moduleClass)) {
-                return (T) new GenericModule(newBaseUri, this.username, "", rememberMeToken, sessionId);
+                return (T)
+                        new GenericModule(
+                                newBaseUri, this.username, "", rememberMeToken, sessionId);
             }
             return (T) new CommonAPI(newBaseUri, this.username, "", rememberMeToken, sessionId);
         } else {
@@ -105,6 +130,7 @@ public class ADS extends CommonAPI {
 
     /**
      * Proxies a login request to an instance and returns a new AMPAPIHandler for that instance.
+     *
      * @param instanceId The instance ID of the instance to log in to
      * @param module The module to log in to
      * @return A new AMPAPIHandler for the instance
