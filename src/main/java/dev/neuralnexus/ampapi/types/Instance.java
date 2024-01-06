@@ -11,20 +11,34 @@ import java.util.UUID;
  */
 public class Instance {
     /**
-     * InstanceID - The instance ID TargetID - The target ID InstanceName - The instance name
-     * FriendlyName - The friendly name Description - The description Module - The module
-     * ModuleDisplayName - The module display name {@link AMPVersion AMPVersion} - The AMP version
-     * IsHTTPS - Whether HTTPS is enabled IP - The IP address Port - The port Daemon - Whether the
-     * instance is a daemon DaemonAutostart - Whether the daemon autostarts ExcludeFromFirewall -
-     * Whether the instance is excluded from the firewall Running - Whether the instance is running
-     * AppState - The application state Tags - The tags DiskUsageMB - The disk usage in MB
-     * ReleaseStream - The release stream ManagementMode - The management mode Suspended - Whether
-     * the instance is suspended IsContainerInstance - Whether the instance is a container instance
-     * ContainerMemoryMB - The container memory in MB ContainerMemoryPolicy - The container memory
-     * policy ContainerCPUs - The container CPUs SpecificDockerImage - The specific Docker image
-     * {@link Metric Metrics} - The metrics {@link EndpointInfo ApplicationEndpoints} - The
-     * application endpoints DeploymentArgs - The deployment arguments DisplayImageSource - The
-     * display image source
+     * InstanceID - The instance ID <br>
+     * TargetID - The target ID <br>
+     * InstanceName - The instance name <br>
+     * FriendlyName - The friendly name <br>
+     * Description - The description <br>
+     * Module - The module <br>
+     * ModuleDisplayName - The module display name <br>
+     * {@link AMPVersion AMPVersion} - The AMP version <br>
+     * IsHTTPS - Whether HTTPS is enabled IP - The IP address <br>
+     * Port - The port <br>
+     * Daemon - Whether the instance is a daemon <br>
+     * DaemonAutostart - Whether the daemon autostarts <br>
+     * ExcludeFromFirewall - Whether the instance is excluded from the firewall <br>
+     * Running - Whether the instance is running <br>
+     * AppState - The application state <br>
+     * Tags - The tags <br>
+     * DiskUsageMB - The disk usage in MB <br>
+     * ReleaseStream - The release stream <br>
+     * ManagementMode - The management mode Suspended - Whether the instance is suspended
+     * IsContainerInstance - Whether the instance is a container instance <br>
+     * ContainerMemoryMB - The container memory in MB <br>
+     * ContainerMemoryPolicy - The container memory policy <br>
+     * ContainerCPUs - The container CPUs <br>
+     * SpecificDockerImage - The specific Docker image <br>
+     * {@link Metric Metrics} - The metrics <br>
+     * {@link EndpointInfo ApplicationEndpoints} - The application endpoints <br>
+     * DeploymentArgs - The deployment arguments <br>
+     * DisplayImageSource - The display image source
      */
     public UUID InstanceID;
 
@@ -63,6 +77,7 @@ public class Instance {
      *
      * @return A string representation of the object
      */
+    @Override
     public String toString() {
         return "Instance{InstanceID="
                 + this.InstanceID

@@ -4,6 +4,8 @@ import dev.neuralnexus.ampapi.apimodules.*;
 import dev.neuralnexus.ampapi.types.LoginResult;
 
 public class GenericModule extends CommonAPI {
+    public dev.neuralnexus.ampapi.apimodules.GenericModule GenericModule =
+            new dev.neuralnexus.ampapi.apimodules.GenericModule(this);
     public RCONPlugin RCONPlugin = new RCONPlugin(this);
     public steamcmdplugin steamcmdplugin = new steamcmdplugin(this);
 
@@ -28,6 +30,18 @@ public class GenericModule extends CommonAPI {
     }
 
     /**
+     * Constructor
+     *
+     * @param baseUri The base URI of the AMP instance
+     * @param username The username to log in with
+     * @param password The password to log in with
+     */
+    public GenericModule(String baseUri, String username, String password) {
+        super(baseUri, username, password, "", "");
+        this.Login();
+    }
+
+    /**
      * Simplified login function
      *
      * @return The result of the login
@@ -40,6 +54,9 @@ public class GenericModule extends CommonAPI {
             this.sessionId = loginResult.sessionID;
 
             // Update the session ID and remember me token of submodules
+            if (this.GenericModule == null) {
+                this.GenericModule = new dev.neuralnexus.ampapi.apimodules.GenericModule(this);
+            }
             if (this.RCONPlugin == null) {
                 this.RCONPlugin = new RCONPlugin(this);
             }
@@ -47,6 +64,8 @@ public class GenericModule extends CommonAPI {
                 this.steamcmdplugin = new steamcmdplugin(this);
             }
 
+            this.GenericModule.sessionId = this.sessionId;
+            this.GenericModule.rememberMeToken = this.rememberMeToken;
             this.RCONPlugin.sessionId = this.sessionId;
             this.RCONPlugin.rememberMeToken = this.rememberMeToken;
             this.steamcmdplugin.sessionId = this.sessionId;

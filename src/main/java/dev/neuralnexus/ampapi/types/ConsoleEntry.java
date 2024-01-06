@@ -8,8 +8,11 @@ package dev.neuralnexus.ampapi.types;
  */
 public class ConsoleEntry {
     /**
-     * Timestamp - The timestamp of the entry Source - The source of the entry SourceId - The source
-     * ID of the entry Type - The type of the entry Contents - The contents of the entry
+     * Timestamp - The timestamp of the entry <br>
+     * Source - The source of the entry <br>
+     * SourceId - The source ID of the entry <br>
+     * Type - The type of the entry <br>
+     * Contents - The contents of the entry
      */
     public String Timestamp;
 
@@ -23,6 +26,7 @@ public class ConsoleEntry {
      *
      * @return A string representation of the object
      */
+    @Override
     public String toString() {
         return "ConsoleEntry{Timestamp="
                 + this.Timestamp

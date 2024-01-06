@@ -7,16 +7,31 @@ package dev.neuralnexus.ampapi.types;
  */
 public class ModuleInfo {
     /**
-     * Name - The name of the module Author - The author of the module AppName - The app name
-     * SupportsSleep - Whether the module supports sleep LoadedPlugins - The loaded plugins
-     * AMPVersion - The AMP version AMPBuild - The AMP build ToolsVersion - The tools version
-     * APIVersion - The API version VersionCodename - The version codename Timestamp - The timestamp
-     * BuildSpec - The build spec {@link Branding Branding} - The branding object Analytics -
-     * Whether analytics are enabled FeatureSet - The feature set InstanceId - The instance ID
-     * InstanceName - The instance name FriendlyName - The friendly name EndpointURI - The endpoint
-     * URI PrimaryEndpoint - The primary endpoint ModuleName - The module name IsRemoteInstance -
-     * Whether the instance is remote DisplayBaseURI - The display base URI RequiresFullLoad -
-     * Whether a full load is required AllowRememberMe - Whether remember me is allowed
+     * Name - The name of the module <br>
+     * Author - The author of the module <br>
+     * AppName - The app name <br>
+     * SupportsSleep - Whether the module supports sleep <br>
+     * LoadedPlugins - The loaded plugins <br>
+     * AMPVersion - The AMP version <br>
+     * AMPBuild - The AMP build <br>
+     * ToolsVersion - The tools version <br>
+     * APIVersion - The API version <br>
+     * VersionCodename - The version codename <br>
+     * Timestamp - The timestamp <br>
+     * BuildSpec - The build spec <br>
+     * {@link Branding Branding} - The branding object <br>
+     * Analytics - Whether analytics are enabled <br>
+     * FeatureSet - The feature set <br>
+     * InstanceId - The instance ID <br>
+     * InstanceName - The instance name <br>
+     * FriendlyName - The friendly name <br>
+     * EndpointURI - The endpoint URI <br>
+     * PrimaryEndpoint - The primary endpoint <br>
+     * ModuleName - The module name <br>
+     * IsRemoteInstance - Whether the instance is remote <br>
+     * DisplayBaseURI - The display base URI <br>
+     * RequiresFullLoad - Whether a full load is required <br>
+     * AllowRememberMe - Whether remember me is allowed
      */
     public String Name;
 
@@ -50,6 +65,7 @@ public class ModuleInfo {
      *
      * @return A string representation of the object
      */
+    @Override
     public String toString() {
         return "ModuleInfo{Name="
                 + this.Name

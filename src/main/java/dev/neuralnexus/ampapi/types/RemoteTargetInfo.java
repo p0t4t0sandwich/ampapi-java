@@ -10,9 +10,10 @@ import java.util.Arrays;
  */
 public class RemoteTargetInfo {
     /**
-     * IPAddressList - The IP address list {@link PlatformInfo PlatformInfo} - PlatformInfo
-     * information object {@link InstanceDatastore Datastores} - The datastores DeploysInContainers
-     * - Whether the instance deploys in containers
+     * IPAddressList - The IP address list <br>
+     * {@link PlatformInfo PlatformInfo} - PlatformInfo information object <br>
+     * {@link InstanceDatastore Datastores} - The datastores <br>
+     * DeploysInContainers - Whether the instance deploys in containers
      */
     public String[] IPAddressList;
 
@@ -25,6 +26,7 @@ public class RemoteTargetInfo {
      *
      * @return A string representation of the object
      */
+    @Override
     public String toString() {
         return "RemoteTargetInfo{IPAddressList="
                 + Arrays.toString(this.IPAddressList)

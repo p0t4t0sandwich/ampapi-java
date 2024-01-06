@@ -74,7 +74,7 @@ import dev.neuralnexus.ampapi.types.GetStatusResult;
 public class Main {
     public static void main(String[] args) {
         // If you know the module that the instance is using, specify it instead of CommonAPI
-        CommonAPI API = new CommonAPI("http://localhost:8080/", "admin", "myfancypassword123", "", "");
+        CommonAPI API = new CommonAPI("http://localhost:8080/", "admin", "myfancypassword123");
 
         // API call parameters are simply in the same order as shown in the documentation.
         API.Core.SendConsoleMessage("say Hello Everyone, this message was sent from the Java API!");
@@ -95,14 +95,17 @@ import dev.neuralnexus.ampapi.modules.Minecraft;
 import dev.neuralnexus.ampapi.types.GetStatusResult;
 import dev.neuralnexus.ampapi.types.IADSInstance;
 import dev.neuralnexus.ampapi.types.Instance;
+import dev.neuralnexus.ampapi.types.Status;
+
+import java.util.List;
+import java.util.UUID;
 
 public class Main {
     public static void main(String[] args) {
-        ADS API = new ADS("http://localhost:8080/", "admin", "myfancypassword123", "", "");
+        ADS API = new ADS("http://localhost:8080/", "admin", "myfancypassword123");
 
         // Get the available instances
-        Result<List<IADSInstance>> instancesResult = API.ADSModule.GetInstances();
-        List<IADSInstance> targets = instancesResult.result;
+        List<IADSInstance> targets = API.ADSModule.GetInstances();
 
         // In this example, my Hub server is on the second target
         // If you're running a standalone setup, you can just use targets.get(0)

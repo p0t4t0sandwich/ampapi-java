@@ -107,7 +107,6 @@ public class AMPAPI {
 
         try {
             Gson gson = new GsonBuilder().create();
-
             URL url = new URL(this.dataSource + endpoint);
 
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -116,7 +115,7 @@ public class AMPAPI {
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");
 
-            con.setRequestProperty("User-Agent", "ampapi-java/1.2.4");
+            con.setRequestProperty("User-Agent", "ampapi-java/1.2.7");
             con.setConnectTimeout(5000);
 
             String json = gson.toJson(data);
@@ -127,10 +126,17 @@ public class AMPAPI {
             if (returnType == Void.class) {
                 return null;
             }
-            String line = br.readLine();
+            String jsonString = br.readLine();
             br.close();
-            return gson.fromJson(line, returnType);
 
+            // TODO: There's an internal library issue with Core/Login that needs to be solved.
+            if (!endpoint.equals("Core/Login")
+                    && jsonString.contains("Title")
+                    && jsonString.contains("Message")
+                    && jsonString.contains("StackTrace")) {
+                throw new AMPAPIException(gson.fromJson(jsonString, AMPAPIException.Data.class));
+            }
+            return gson.fromJson(jsonString, returnType);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -160,5 +166,17 @@ public class AMPAPI {
             this.sessionId = loginResult.sessionID;
         }
         return loginResult;
+    }
+
+    public static class AMPAPIException extends RuntimeException {
+        public AMPAPIException(Data data) {
+            super(data.Title + ": " + data.Message + "\n" + data.StackTrace);
+        }
+
+        public static class Data {
+            public String Title;
+            public String Message;
+            public String StackTrace;
+        }
     }
 }

@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class RCONPlugin extends AMPAPI {
-    public RCONPlugin(AMPAPI ampapi) {
+public class GenericModule extends AMPAPI {
+    public GenericModule(AMPAPI ampapi) {
         super(ampapi);
     }
 
@@ -21,12 +21,14 @@ public class RCONPlugin extends AMPAPI {
      * 
      *
      * Name Description Optional
-     * @return Void
+     * @param filename  False
+     * @return Map<String, String>
      */
-    public Void Dummy() {
+    public Map<String, String> ImportConfig(String filename) {
         HashMap<String, Object> args = new HashMap<>();
-        Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("RCONPlugin/Dummy", args, type);
+        args.put("filename", filename);
+        Type type = new TypeToken<Map<String, String>>(){}.getType();
+        return (Map<String, String>) this.APICall("GenericModule/ImportConfig", args, type);
     }
 
 }

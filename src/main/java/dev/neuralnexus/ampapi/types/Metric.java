@@ -7,9 +7,12 @@ package dev.neuralnexus.ampapi.types;
  */
 public class Metric {
     /**
-     * RawValue - The raw value of the metric MaxValue - The maximum value of the metric Percent -
-     * The percentage of the metric Units - The units of the metric Color - The color of the metric
-     * Color2 - The secondary color of the metric Color3 - The tertiary color of the metric
+     * RawValue - The raw value of the metric <br>
+     * MaxValue - The maximum value of the metric <br>
+     * Percent - The percentage of the metric Units - The units of the metric <br>
+     * Color - The color of the metric <br>
+     * Color2 - The secondary color of the metric <br>
+     * Color3 - The tertiary color of the metric
      */
     public int RawValue;
 
@@ -25,6 +28,7 @@ public class Metric {
      *
      * @return A string representation of the object
      */
+    @Override
     public String toString() {
         return "StatusMetric{RawValue="
                 + this.RawValue

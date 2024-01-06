@@ -8,8 +8,9 @@ package dev.neuralnexus.ampapi.types;
  */
 public class EndpointInfo {
     /**
-     * DisplayName - The display name of the endpoint Endpoint - The endpoint address Uri - The URI
-     * of the endpoint
+     * DisplayName - The display name of the endpoint <br>
+     * Endpoint - The endpoint address <br>
+     * Uri - The URI of the endpoint
      */
     public String DisplayName;
 
@@ -21,6 +22,7 @@ public class EndpointInfo {
      *
      * @return A string representation of the object
      */
+    @Override
     public String toString() {
         return "EndpointInfo{DisplayName="
                 + this.DisplayName

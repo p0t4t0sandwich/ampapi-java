@@ -1,6 +1,5 @@
 package dev.neuralnexus.ampapi.types;
 
-
 import java.util.Arrays;
 
 /**
@@ -11,9 +10,13 @@ import java.util.Arrays;
  */
 public class LoginResult {
     /**
-     * success - Whether the login was successful permissions - An array of permissions the user has
-     * sessionID - The session ID of the user rememberMeToken - The remember-me token of the user
-     * {@link UserInfo userInfo} - Information about the user result - The result of the login
+     * success - Whether the login was successful <br>
+     * permissions - An array of permissions the user has <br>
+     * sessionID - The session ID of the user <br>
+     * rememberMeToken - The remember-me token of the user <br>
+     * {@link UserInfo userInfo} - Information about the user <br>
+     * resultReason - The reason for the result <br>
+     * result - The result of the login
      */
     public boolean success;
 
@@ -21,6 +24,7 @@ public class LoginResult {
     public String sessionID;
     public String rememberMeToken;
     public UserInfo userInfo;
+    public String resultReason;
     public double result;
 
     /**
@@ -28,6 +32,7 @@ public class LoginResult {
      *
      * @return A string representation of the object
      */
+    @Override
     public String toString() {
         return "LoginResult{success="
                 + this.success
@@ -39,6 +44,8 @@ public class LoginResult {
                 + this.rememberMeToken
                 + ", userInfo="
                 + this.userInfo
+                + ", resultReason="
+                + this.resultReason
                 + ", result="
                 + this.result
                 + "}";

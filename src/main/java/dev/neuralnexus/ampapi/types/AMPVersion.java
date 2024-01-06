@@ -7,9 +7,11 @@ package dev.neuralnexus.ampapi.types;
  */
 public class AMPVersion {
     /**
-     * Major - The major version number Minor - The minor version number Build - The build number
-     * Revision - The revision number MajorRevision - The major revision number MinorRevision - The
-     * minor revision number
+     * Major - The major version number <br>
+     * Minor - The minor version number <br>
+     * Build - The build number Revision - The revision number <br>
+     * MajorRevision - The major revision number <br>
+     * MinorRevision - The minor revision number
      */
     public int Major;
 
@@ -24,6 +26,7 @@ public class AMPVersion {
      *
      * @return A string representation of the object
      */
+    @Override
     public String toString() {
         return "AMPVersion{Major="
                 + this.Major

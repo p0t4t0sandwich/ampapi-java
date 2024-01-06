@@ -1,6 +1,5 @@
 package dev.neuralnexus.ampapi.types;
 
-
 import java.util.Map;
 
 /**
@@ -11,8 +10,9 @@ import java.util.Map;
  */
 public class Status {
     /**
-     * {@link State State} - Current state of the instance Uptime - Time since the instance was
-     * started {@link Metric Metrics} - A map of metrics and their values
+     * {@link State State} - Current state of the instance <br>
+     * Uptime - Time since the instance was started <br>
+     * {@link Metric Metrics} - A map of metrics and their values
      */
     public State State;
 
@@ -24,6 +24,7 @@ public class Status {
      *
      * @return A string representation of the object
      */
+    @Override
     public String toString() {
         return "Status{State="
                 + this.State

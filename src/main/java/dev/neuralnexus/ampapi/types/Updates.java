@@ -10,9 +10,11 @@ import java.util.Arrays;
  */
 public class Updates {
     /**
-     * {@link Status Status} - The status of the server {@link ConsoleEntry ConsoleEntries} - The
-     * console entries of the server {@link Message Messages} - The messages of the server Tasks -
-     * The tasks of the server Ports - The ports of the server
+     * {@link Status Status} - The status of the server <br>
+     * {@link ConsoleEntry ConsoleEntries} - The console entries of the server <br>
+     * {@link Message Messages} - The messages of the server <br>
+     * Tasks - The tasks of the server <br>
+     * Ports - The ports of the server
      */
     public Status Status;
 
@@ -26,6 +28,7 @@ public class Updates {
      *
      * @return A string representation of the object
      */
+    @Override
     public String toString() {
         return "Updates{Status="
                 + this.Status

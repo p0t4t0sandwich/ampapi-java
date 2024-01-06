@@ -7,10 +7,14 @@ package dev.neuralnexus.ampapi.types;
  */
 public class UserInfo {
     /**
-     * ID - The ID of the user Username - The username of the user EmailAddress - The email address
-     * of the user IsTwoFactorEnabled - Whether 2FA is enabled for the user Disabled - Whether the
-     * user is disabled LastLogin - The last time the user logged in GravatarHash - The Gravatar
-     * hash of the user IsLDAPUser - Whether the user is an LDAP user
+     * ID - The ID of the user <br>
+     * Username - The username of the user <br>
+     * EmailAddress - The email address of the user <br>
+     * IsTwoFactorEnabled - Whether 2FA is enabled for the user <br>
+     * Disabled - Whether the user is disabled <br>
+     * LastLogin - The last time the user logged in <br>
+     * GravatarHash - The Gravatar hash of the user <br>
+     * IsLDAPUser - Whether the user is an LDAP user
      */
     public String ID;
 
@@ -27,6 +31,7 @@ public class UserInfo {
      *
      * @return A string representation of the object
      */
+    @Override
     public String toString() {
         return "UserInfo{ID="
                 + this.ID

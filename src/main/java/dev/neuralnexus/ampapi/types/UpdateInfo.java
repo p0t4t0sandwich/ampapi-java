@@ -8,9 +8,12 @@ package dev.neuralnexus.ampapi.types;
  */
 public class UpdateInfo {
     /**
-     * UpdateAvailable - Whether an update is available Version - The version of the update Build -
-     * The build of the update ReleaseNotesURL - The URL to the release notes ToolsVersion - The
-     * version of the tools PatchOnly - Whether the update is a patch
+     * UpdateAvailable - Whether an update is available <br>
+     * Version - The version of the update <br>
+     * Build - The build of the update <br>
+     * ReleaseNotesURL - The URL to the release notes <br>
+     * ToolsVersion - The version of the tools <br>
+     * PatchOnly - Whether the update is a patch
      */
     public boolean UpdateAvailable;
 
@@ -25,6 +28,7 @@ public class UpdateInfo {
      *
      * @return A string representation of the object
      */
+    @Override
     public String toString() {
         return "UpdateInfo{UpdateAvailable="
                 + this.UpdateAvailable

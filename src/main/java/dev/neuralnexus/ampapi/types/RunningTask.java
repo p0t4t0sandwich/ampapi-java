@@ -8,13 +8,20 @@ package dev.neuralnexus.ampapi.types;
  */
 public class RunningTask {
     /**
-     * IsPrimaryTask - Whether the task is the primary task StartTime - The start time of the task
-     * Id - The ID of the task Name - The name of the task Description - The description of the task
-     * HideFromUI - Whether the task is hidden from the UI FastDismiss - Whether the task can be
-     * dismissed quickly LastUpdatePushed - The last time the update was pushed ProgressPercent -
-     * The progress percentage of the task IsCancellable - Whether the task is cancellable Origin -
-     * The origin of the task IsIndeterminate - Whether the task is indeterminate State - The state
-     * of the task Status - The status of the task
+     * IsPrimaryTask - Whether the task is the primary task <br>
+     * StartTime - The start time of the task <br>
+     * Id - The ID of the task <br>
+     * Name - The name of the task <br>
+     * Description - The description of the task <br>
+     * HideFromUI - Whether the task is hidden from the UI <br>
+     * FastDismiss - Whether the task can be dismissed quickly <br>
+     * LastUpdatePushed - The last time the update was pushed <br>
+     * ProgressPercent - The progress percentage of the task <br>
+     * IsCancellable - Whether the task is cancellable <br>
+     * Origin - The origin of the task <br>
+     * IsIndeterminate - Whether the task is indeterminate <br>
+     * State - The state of the task <br>
+     * Status - The status of the task
      */
     public boolean IsPrimaryTask;
 
@@ -37,6 +44,7 @@ public class RunningTask {
      *
      * @return A string representation of the object
      */
+    @Override
     public String toString() {
         return "RunningTask{IsPrimaryTask="
                 + this.IsPrimaryTask

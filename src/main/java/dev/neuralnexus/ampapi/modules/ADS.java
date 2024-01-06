@@ -31,6 +31,18 @@ public class ADS extends CommonAPI {
     }
 
     /**
+     * Constructor
+     *
+     * @param baseUri The base URI of the AMP instance
+     * @param username The username to log in with
+     * @param password The password to log in with
+     */
+    public ADS(String baseUri, String username, String password) {
+        super(baseUri, username, password, "", "");
+        this.Login();
+    }
+
+    /**
      * Simplified login function
      *
      * @return The result of the login

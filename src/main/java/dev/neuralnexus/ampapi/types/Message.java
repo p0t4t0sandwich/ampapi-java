@@ -11,8 +11,11 @@ import java.util.UUID;
  */
 public class Message {
     /**
-     * Id - The ID of the message Expired - Whether the message has expired Source - The source of
-     * the message Message - The message AgeMinutes - The age of the message in minutes
+     * Id - The ID of the message <br>
+     * Expired - Whether the message has expired <br>
+     * Source - The source of the message <br>
+     * Message - The message <br>
+     * AgeMinutes - The age of the message in minutes
      */
     public UUID Id;
 
@@ -26,6 +29,7 @@ public class Message {
      *
      * @return A string representation of the object
      */
+    @Override
     public String toString() {
         return "Message{Id="
                 + this.Id

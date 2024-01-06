@@ -8,12 +8,16 @@ package dev.neuralnexus.ampapi.types;
  */
 public class FileDirectory {
     /**
-     * IsDirectory - Whether the file is a directory IsVirtualDirectory - Whether the file is a
-     * virtual directory Filename - The name of the file SizeBytes - The size of the file in bytes
-     * Created - The date the file was created Modified - The date the file was last modified
-     * IsDownloadable - Whether the file is downloadable IsEditable - Whether the file is editable
-     * IsArchive - Whether the file is an archive IsExcludedFromBackups - Whether the file is
-     * excluded from backups
+     * IsDirectory - Whether the file is a directory <br>
+     * IsVirtualDirectory - Whether the file is a virtual directory <br>
+     * Filename - The name of the file <br>
+     * SizeBytes - The size of the file in bytes <br>
+     * Created - The date the file was created <br>
+     * Modified - The date the file was last modified <br>
+     * IsDownloadable - Whether the file is downloadable <br>
+     * IsEditable - Whether the file is editable <br>
+     * IsArchive - Whether the file is an archive <br>
+     * IsExcludedFromBackups - Whether the file is excluded from backups
      */
     public Boolean IsDirectory;
 
@@ -32,6 +36,7 @@ public class FileDirectory {
      *
      * @return A string representation of the object
      */
+    @Override
     public String toString() {
         return "File{IsDirectory="
                 + this.IsDirectory

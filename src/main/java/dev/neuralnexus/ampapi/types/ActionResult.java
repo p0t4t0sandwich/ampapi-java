@@ -7,8 +7,9 @@ package dev.neuralnexus.ampapi.types;
  */
 public class ActionResult<T> {
     /**
-     * Status - true if successful, false if not Reason - reason for failure Result - result of the
-     * call
+     * Status - true if successful, false if not <br>
+     * Reason - reason for failure <br>
+     * Result - result of the call
      */
     public boolean Status;
 
@@ -20,6 +21,7 @@ public class ActionResult<T> {
      *
      * @return A string representation of the object
      */
+    @Override
     public String toString() {
         return "ActionResult{Status="
                 + this.Status

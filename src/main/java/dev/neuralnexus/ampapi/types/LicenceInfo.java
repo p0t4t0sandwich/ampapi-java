@@ -8,8 +8,12 @@ package dev.neuralnexus.ampapi.types;
  */
 public class LicenceInfo {
     /**
-     * LicenceKey - The licence key Grade - The grade GradeName - The grade name Product - The
-     * product ProductName - The product name Expires - The expiry date Usage - The usage
+     * LicenceKey - The licence key <br>
+     * Grade - The grade <br>
+     * GradeName - The grade name <br>
+     * Product - The product <br>
+     * ProductName - The product name <br>
+     * Expires - The expiry date Usage - The usage
      */
     public String LicenceKey;
 
@@ -25,6 +29,7 @@ public class LicenceInfo {
      *
      * @return A string representation of the object
      */
+    @Override
     public String toString() {
         return "LicenceInfo{LicenceKey="
                 + this.LicenceKey

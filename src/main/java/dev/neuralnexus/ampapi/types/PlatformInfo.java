@@ -7,9 +7,12 @@ package dev.neuralnexus.ampapi.types;
  */
 public class PlatformInfo {
     /**
-     * {@link CPUInfo CPUInfo} - CPU information object InstalledRAMMB - Installed RAM in MB OS -
-     * The OS PlatformName - The platform name SystemType - The system type Virtualization - The
-     * virtualization
+     * {@link CPUInfo CPUInfo} - CPU information object <br>
+     * InstalledRAMMB - Installed RAM in MB <br>
+     * OS - The OS <br>
+     * PlatformName - The platform name <br>
+     * SystemType - The system type <br>
+     * Virtualization - The virtualization
      */
     public CPUInfo CPUInfo;
 
@@ -24,6 +27,7 @@ public class PlatformInfo {
      *
      * @return A string representation of the object
      */
+    @Override
     public String toString() {
         return "PlatformInfo{CPUInfo="
                 + this.CPUInfo

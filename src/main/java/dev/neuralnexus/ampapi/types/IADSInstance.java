@@ -10,13 +10,21 @@ import java.util.UUID;
  */
 public class IADSInstance {
     /**
-     * Id - The ADS instance ID InstanceId - The instance ID FriendlyName - The friendly name
-     * Description - The description Disabled - Whether the instance is disabled isRemote - Whether
-     * the instance is remote {@link PlatformInfo Platform} - Platform information object {@link
-     * InstanceDatastore Datastores} - The datastores CreatesInContainers - Whether the instance
-     * creates in containers State - The state StateReason - The state reason CanCreate - Whether
-     * the instance can create LastUpdated - The last updated {@link Instance AvailableInstances} -
-     * The available instances AvailableIPs - The available IPs
+     * Id - The ADS instance ID <br>
+     * InstanceId - The instance ID <br>
+     * FriendlyName - The friendly name <br>
+     * Description - The description <br>
+     * Disabled - Whether the instance is disabled <br>
+     * isRemote - Whether the instance is remote <br>
+     * {@link PlatformInfo Platform} - Platform information object <br>
+     * {@link InstanceDatastore Datastores} - The datastores <br>
+     * CreatesInContainers - Whether the instance creates in containers <br>
+     * State - The state <br>
+     * StateReason - The state reason <br>
+     * CanCreate - Whether the instance can create <br>
+     * LastUpdated - The last updated <br>
+     * {@link Instance AvailableInstances} - The available instances <br>
+     * AvailableIPs - The available IPs
      */
     public double Id;
 
@@ -43,6 +51,7 @@ public class IADSInstance {
      *
      * @return A string representation of the object
      */
+    @Override
     public String toString() {
         return "IADSInstance{Id="
                 + this.Id
