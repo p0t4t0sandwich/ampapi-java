@@ -65,7 +65,7 @@ type_dict = {
     "AuthRoleSummary": "Object",
     "ContainerMemoryPolicy": "Object",
     "DeploymentTemplate": "Object",
-    "FileChunkData": "Object",
+    "FileChunkData": "FileChunkData",
     "IADSInstance": "IADSInstance",
     "Instance": "Instance",
     "InstanceDatastore": "InstanceDatastore",

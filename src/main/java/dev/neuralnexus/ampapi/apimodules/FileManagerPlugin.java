@@ -190,15 +190,15 @@ public class FileManagerPlugin extends AMPAPI {
      * @param Filename  False
      * @param Position  False
      * @param Length  False
-     * @return Object
+     * @return FileChunkData
      */
-    public Object GetFileChunk(String Filename, Integer Position, Integer Length) {
+    public FileChunkData GetFileChunk(String Filename, Integer Position, Integer Length) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
         args.put("Position", Position);
         args.put("Length", Length);
-        Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("FileManagerPlugin/GetFileChunk", args, type);
+        Type type = new TypeToken<FileChunkData>(){}.getType();
+        return (FileChunkData) this.APICall("FileManagerPlugin/GetFileChunk", args, type);
     }
 
     /**

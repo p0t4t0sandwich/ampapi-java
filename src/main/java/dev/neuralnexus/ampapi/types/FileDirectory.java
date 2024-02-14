@@ -1,7 +1,7 @@
 package dev.neuralnexus.ampapi.types;
 
 /**
- * File - A file object
+ * File - A file directory object
  *
  * @author p0t4t0sandwich
  * @see dev.neuralnexus.ampapi.apimodules.FileManagerPlugin#GetDirectoryListing(String)
