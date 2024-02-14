@@ -41,6 +41,7 @@ type_dict = {
     "IEnumerable<BackupManifest>": "List<Object>",
     "IEnumerable<DeploymentTemplate>": "List<Object>",
     "IEnumerable<EndpointInfo>": "List<EndpointInfo>",
+    "IEnumerable<FileDirectory>": "List<FileDirectory>",
     "IEnumerable<IADSInstance>": "List<IADSInstance>",
     "IEnumerable<IAuditLogEntry>": "List<Object>",
     "IEnumerable<InstanceDatastore>": "List<InstanceDatastore>",

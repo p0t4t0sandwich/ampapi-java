@@ -174,13 +174,13 @@ public class FileManagerPlugin extends AMPAPI {
      *
      * Name Description Optional
      * @param Dir  False
-     * @return List<Map<String, Object>>
+     * @return List<FileDirectory>
      */
-    public List<Map<String, Object>> GetDirectoryListing(String Dir) {
+    public List<FileDirectory> GetDirectoryListing(String Dir) {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Dir", Dir);
-        Type type = new TypeToken<List<Map<String, Object>>>(){}.getType();
-        return (List<Map<String, Object>>) this.APICall("FileManagerPlugin/GetDirectoryListing", args, type);
+        Type type = new TypeToken<List<FileDirectory>>(){}.getType();
+        return (List<FileDirectory>) this.APICall("FileManagerPlugin/GetDirectoryListing", args, type);
     }
 
     /**
