@@ -14,4 +14,18 @@ public class FileChunkData {
     public String Base64Data;
 
     public double BytesLength;
+
+    /**
+     * toString
+     *
+     * @return A string representation of the object
+     */
+    @Override
+    public String toString() {
+        return "FileChunkData{Base64Data="
+                + this.Base64Data
+                + ", BytesLength="
+                + this.BytesLength
+                + "}";
+    }
 }
