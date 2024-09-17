@@ -7,6 +7,6 @@
     public %METHOD_RETURN_TYPE% %METHOD_NAME%(%METHOD_PARAMETERS%) {
         HashMap<String, Object> args = new HashMap<>();%METHOD_PARAMETER_MAP%
         Type type = new TypeToken<%METHOD_RETURN_TYPE%>(){}.getType();
-        return (%METHOD_RETURN_TYPE%) this.APICall("%MODULE_NAME%/%METHOD_NAME%", args, type);
+        return (%METHOD_RETURN_TYPE%) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 

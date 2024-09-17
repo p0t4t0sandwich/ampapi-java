@@ -3,6 +3,7 @@ package dev.neuralnexus.ampapi.apimodules;
 import com.google.gson.reflect.TypeToken;
 
 import dev.neuralnexus.ampapi.AMPAPI;
+import dev.neuralnexus.ampapi.auth.AuthStore;
 import dev.neuralnexus.ampapi.types.*;
 
 import java.lang.reflect.Type;
@@ -13,8 +14,8 @@ import java.util.Map;
 import java.util.UUID;
 
 public class Core extends AMPAPI {
-    public Core(AMPAPI ampapi) {
-        super(ampapi);
+    public Core(AuthStore authStore, String instanceName) {
+        super(authStore, instanceName);
     }
 
     /**
@@ -26,7 +27,7 @@ public class Core extends AMPAPI {
     public Void AcknowledgeAMPUpdate() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("Core/AcknowledgeAMPUpdate", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -42,7 +43,7 @@ public class Core extends AMPAPI {
         args.put("LicenceKey", LicenceKey);
         args.put("QueryOnly", QueryOnly);
         Type type = new TypeToken<ActionResult<LicenceInfo>>(){}.getType();
-        return (ActionResult<LicenceInfo>) this.APICall("Core/ActivateAMPLicence", args, type);
+        return (ActionResult<LicenceInfo>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -56,7 +57,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("triggerId", triggerId);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/AddEventTrigger", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -80,7 +81,7 @@ public class Core extends AMPAPI {
         args.put("daysOfMonth", daysOfMonth);
         args.put("description", description);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/AddIntervalTrigger", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -98,7 +99,7 @@ public class Core extends AMPAPI {
         args.put("MethodID", MethodID);
         args.put("ParameterMapping", ParameterMapping);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/AddTask", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -111,7 +112,7 @@ public class Core extends AMPAPI {
     public String AsyncTest() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<String>(){}.getType();
-        return (String) this.APICall("Core/AsyncTest", args, type);
+        return (String) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -125,7 +126,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TaskId", TaskId);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/CancelTask", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -143,7 +144,7 @@ public class Core extends AMPAPI {
         args.put("TaskID", TaskID);
         args.put("NewOrder", NewOrder);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/ChangeTaskOrder", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -163,7 +164,7 @@ public class Core extends AMPAPI {
         args.put("NewPassword", NewPassword);
         args.put("TwoFactorPIN", TwoFactorPIN);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/ChangeUserPassword", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -179,7 +180,7 @@ public class Core extends AMPAPI {
         args.put("Username", Username);
         args.put("TwoFactorCode", TwoFactorCode);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/ConfirmTwoFactorSetup", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -195,7 +196,7 @@ public class Core extends AMPAPI {
         args.put("Name", Name);
         args.put("AsCommonRole", AsCommonRole);
         Type type = new TypeToken<ActionResult<UUID>>(){}.getType();
-        return (ActionResult<UUID>) this.APICall("Core/CreateRole", args, type);
+        return (ActionResult<UUID>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -208,7 +209,7 @@ public class Core extends AMPAPI {
     public Void CreateTestTask() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("Core/CreateTestTask", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -222,7 +223,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         Type type = new TypeToken<ActionResult<UUID>>(){}.getType();
-        return (ActionResult<UUID>) this.APICall("Core/CreateUser", args, type);
+        return (ActionResult<UUID>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -236,7 +237,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("PermissionNode", PermissionNode);
         Type type = new TypeToken<Boolean>(){}.getType();
-        return (Boolean) this.APICall("Core/CurrentSessionHasPermission", args, type);
+        return (Boolean) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -250,7 +251,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("InstanceId", InstanceId);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/DeleteInstanceUsers", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -264,7 +265,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/DeleteRole", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -280,7 +281,7 @@ public class Core extends AMPAPI {
         args.put("TriggerID", TriggerID);
         args.put("TaskID", TaskID);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/DeleteTask", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -294,7 +295,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TriggerID", TriggerID);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/DeleteTrigger", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -308,7 +309,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/DeleteUser", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -324,7 +325,7 @@ public class Core extends AMPAPI {
         args.put("Password", Password);
         args.put("TwoFactorCode", TwoFactorCode);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/DisableTwoFactor", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -336,7 +337,7 @@ public class Core extends AMPAPI {
     public ActionResult DismissAllTasks() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/DismissAllTasks", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -350,7 +351,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("TaskId", TaskId);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/DismissTask", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -376,7 +377,7 @@ public class Core extends AMPAPI {
         args.put("daysOfMonth", daysOfMonth);
         args.put("description", description);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/EditIntervalTrigger", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -394,7 +395,7 @@ public class Core extends AMPAPI {
         args.put("TaskID", TaskID);
         args.put("ParameterMapping", ParameterMapping);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/EditTask", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -410,7 +411,7 @@ public class Core extends AMPAPI {
         args.put("Username", Username);
         args.put("Password", Password);
         Type type = new TypeToken<ActionResult<Object>>(){}.getType();
-        return (ActionResult<Object>) this.APICall("Core/EnableTwoFactor", args, type);
+        return (ActionResult<Object>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -424,7 +425,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("Core/EndUserSession", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -438,7 +439,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
         Type type = new TypeToken<List<String>>(){}.getType();
-        return (List<String>) this.APICall("Core/GetAMPRolePermissions", args, type);
+        return (List<String>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -452,7 +453,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Username", Username);
         Type type = new TypeToken<UserInfo>(){}.getType();
-        return (UserInfo) this.APICall("Core/GetAMPUserInfo", args, type);
+        return (UserInfo) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -464,7 +465,7 @@ public class Core extends AMPAPI {
     public List<Object> GetAMPUsersSummary() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<List<Object>>(){}.getType();
-        return (List<Object>) this.APICall("Core/GetAMPUsersSummary", args, type);
+        return (List<Object>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -476,7 +477,7 @@ public class Core extends AMPAPI {
     public Map<String, Map<String, Object>> GetAPISpec() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Map<String, Map<String, Object>>>(){}.getType();
-        return (Map<String, Map<String, Object>>) this.APICall("Core/GetAPISpec", args, type);
+        return (Map<String, Map<String, Object>>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -488,7 +489,7 @@ public class Core extends AMPAPI {
     public List<Object> GetActiveAMPSessions() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<List<Object>>(){}.getType();
-        return (List<Object>) this.APICall("Core/GetActiveAMPSessions", args, type);
+        return (List<Object>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -500,7 +501,7 @@ public class Core extends AMPAPI {
     public List<UserInfo> GetAllAMPUserInfo() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<List<UserInfo>>(){}.getType();
-        return (List<UserInfo>) this.APICall("Core/GetAllAMPUserInfo", args, type);
+        return (List<UserInfo>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -516,7 +517,7 @@ public class Core extends AMPAPI {
         args.put("Before", Before);
         args.put("Count", Count);
         Type type = new TypeToken<List<Object>>(){}.getType();
-        return (List<Object>) this.APICall("Core/GetAuditLogEntries", args, type);
+        return (List<Object>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -530,7 +531,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("node", node);
         Type type = new TypeToken<Map<String, Object>>(){}.getType();
-        return (Map<String, Object>) this.APICall("Core/GetConfig", args, type);
+        return (Map<String, Object>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -544,7 +545,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("nodes", nodes);
         Type type = new TypeToken<List<Map<String, Object>>>(){}.getType();
-        return (List<Map<String, Object>>) this.APICall("Core/GetConfigs", args, type);
+        return (List<Map<String, Object>>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -556,7 +557,7 @@ public class Core extends AMPAPI {
     public Map<String, String> GetDiagnosticsInfo() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Map<String, String>>(){}.getType();
-        return (Map<String, String>) this.APICall("Core/GetDiagnosticsInfo", args, type);
+        return (Map<String, String>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -568,7 +569,7 @@ public class Core extends AMPAPI {
     public ModuleInfo GetModuleInfo() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<ModuleInfo>(){}.getType();
-        return (ModuleInfo) this.APICall("Core/GetModuleInfo", args, type);
+        return (ModuleInfo) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -580,7 +581,7 @@ public class Core extends AMPAPI {
     public UUID GetNewGuid() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<UUID>(){}.getType();
-        return (UUID) this.APICall("Core/GetNewGuid", args, type);
+        return (UUID) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -592,7 +593,7 @@ public class Core extends AMPAPI {
     public List<Object> GetPermissionsSpec() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<List<Object>>(){}.getType();
-        return (List<Object>) this.APICall("Core/GetPermissionsSpec", args, type);
+        return (List<Object>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -604,7 +605,7 @@ public class Core extends AMPAPI {
     public List<Object> GetPortSummaries() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<List<Object>>(){}.getType();
-        return (List<Object>) this.APICall("Core/GetPortSummaries", args, type);
+        return (List<Object>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -616,7 +617,7 @@ public class Core extends AMPAPI {
     public List<Map<String, Object>> GetProvisionSpec() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<List<Map<String, Object>>>(){}.getType();
-        return (List<Map<String, Object>>) this.APICall("Core/GetProvisionSpec", args, type);
+        return (List<Map<String, Object>>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -632,7 +633,7 @@ public class Core extends AMPAPI {
         args.put("Description", Description);
         args.put("IsTemporary", IsTemporary);
         Type type = new TypeToken<String>(){}.getType();
-        return (String) this.APICall("Core/GetRemoteLoginToken", args, type);
+        return (String) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -646,7 +647,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("RoleId", RoleId);
         Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("Core/GetRole", args, type);
+        return (Object) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -658,7 +659,7 @@ public class Core extends AMPAPI {
     public List<Object> GetRoleData() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<List<Object>>(){}.getType();
-        return (List<Object>) this.APICall("Core/GetRoleData", args, type);
+        return (List<Object>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -670,7 +671,7 @@ public class Core extends AMPAPI {
     public Map<UUID, String> GetRoleIds() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Map<UUID, String>>(){}.getType();
-        return (Map<UUID, String>) this.APICall("Core/GetRoleIds", args, type);
+        return (Map<UUID, String>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -682,7 +683,7 @@ public class Core extends AMPAPI {
     public Object GetScheduleData() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("Core/GetScheduleData", args, type);
+        return (Object) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -698,7 +699,7 @@ public class Core extends AMPAPI {
         args.put("SettingNode", SettingNode);
         args.put("WithRefresh", WithRefresh);
         Type type = new TypeToken<Map<String, String>>(){}.getType();
-        return (Map<String, String>) this.APICall("Core/GetSettingValues", args, type);
+        return (Map<String, String>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -710,7 +711,7 @@ public class Core extends AMPAPI {
     public Map<String, SettingSpec> GetSettingsSpec() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Map<String, SettingSpec>>(){}.getType();
-        return (Map<String, SettingSpec>) this.APICall("Core/GetSettingsSpec", args, type);
+        return (Map<String, SettingSpec>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -722,7 +723,7 @@ public class Core extends AMPAPI {
     public Status GetStatus() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Status>(){}.getType();
-        return (Status) this.APICall("Core/GetStatus", args, type);
+        return (Status) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -734,7 +735,7 @@ public class Core extends AMPAPI {
     public List<RunningTask> GetTasks() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<List<RunningTask>>(){}.getType();
-        return (List<RunningTask>) this.APICall("Core/GetTasks", args, type);
+        return (List<RunningTask>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -748,7 +749,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Id", Id);
         Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("Core/GetTimeIntervalTrigger", args, type);
+        return (Object) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -760,7 +761,7 @@ public class Core extends AMPAPI {
     public UpdateInfo GetUpdateInfo() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<UpdateInfo>(){}.getType();
-        return (UpdateInfo) this.APICall("Core/GetUpdateInfo", args, type);
+        return (UpdateInfo) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -773,7 +774,7 @@ public class Core extends AMPAPI {
     public Updates GetUpdates() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Updates>(){}.getType();
-        return (Updates) this.APICall("Core/GetUpdates", args, type);
+        return (Updates) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -785,7 +786,7 @@ public class Core extends AMPAPI {
     public Object GetUserActionsSpec() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("Core/GetUserActionsSpec", args, type);
+        return (Object) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -799,7 +800,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("UID", UID);
         Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("Core/GetUserInfo", args, type);
+        return (Object) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -812,7 +813,7 @@ public class Core extends AMPAPI {
     public Map<String, String> GetUserList() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Map<String, String>>(){}.getType();
-        return (Map<String, String>) this.APICall("Core/GetUserList", args, type);
+        return (Map<String, String>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -824,7 +825,7 @@ public class Core extends AMPAPI {
     public ActionResult<String> GetWebauthnChallenge() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<ActionResult<String>>(){}.getType();
-        return (ActionResult<String>) this.APICall("Core/GetWebauthnChallenge", args, type);
+        return (ActionResult<String>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -838,7 +839,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("username", username);
         Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("Core/GetWebauthnCredentialIDs", args, type);
+        return (Object) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -850,7 +851,7 @@ public class Core extends AMPAPI {
     public List<Object> GetWebauthnCredentialSummaries() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<List<Object>>(){}.getType();
-        return (List<Object>) this.APICall("Core/GetWebauthnCredentialSummaries", args, type);
+        return (List<Object>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -862,7 +863,7 @@ public class Core extends AMPAPI {
     public Object GetWebserverMetrics() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.APICall("Core/GetWebserverMetrics", args, type);
+        return (Object) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -874,7 +875,7 @@ public class Core extends AMPAPI {
     public Void Kill() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("Core/Kill", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -894,7 +895,7 @@ public class Core extends AMPAPI {
         args.put("token", token);
         args.put("rememberMe", rememberMe);
         Type type = new TypeToken<LoginResult>(){}.getType();
-        return (LoginResult) this.APICall("Core/Login", args, type);
+        return (LoginResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -906,7 +907,7 @@ public class Core extends AMPAPI {
     public Void Logout() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("Core/Logout", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -920,7 +921,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("Node", Node);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/RefreshSettingValueList", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -932,7 +933,7 @@ public class Core extends AMPAPI {
     public Void RefreshSettingsSourceCache() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("Core/RefreshSettingsSourceCache", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -948,7 +949,7 @@ public class Core extends AMPAPI {
         args.put("RoleId", RoleId);
         args.put("NewName", NewName);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/RenameRole", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -964,7 +965,7 @@ public class Core extends AMPAPI {
         args.put("Username", Username);
         args.put("NewPassword", NewPassword);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/ResetUserPassword", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -976,7 +977,7 @@ public class Core extends AMPAPI {
     public ActionResult Restart() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/Restart", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -988,7 +989,7 @@ public class Core extends AMPAPI {
     public Void RestartAMP() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("Core/RestartAMP", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -1001,7 +1002,7 @@ public class Core extends AMPAPI {
     public Void Resume() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("Core/Resume", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -1015,7 +1016,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ID", ID);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/RevokeWebauthnCredential", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -1029,7 +1030,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("triggerId", triggerId);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/RunEventTriggerImmediately", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -1043,7 +1044,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("message", message);
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("Core/SendConsoleMessage", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -1061,7 +1062,7 @@ public class Core extends AMPAPI {
         args.put("PermissionNode", PermissionNode);
         args.put("Enabled", Enabled);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/SetAMPRolePermission", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -1079,7 +1080,7 @@ public class Core extends AMPAPI {
         args.put("RoleId", RoleId);
         args.put("IsMember", IsMember);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/SetAMPUserRoleMembership", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -1095,7 +1096,7 @@ public class Core extends AMPAPI {
         args.put("node", node);
         args.put("value", value);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/SetConfig", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -1109,7 +1110,7 @@ public class Core extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("data", data);
         Type type = new TypeToken<Boolean>(){}.getType();
-        return (Boolean) this.APICall("Core/SetConfigs", args, type);
+        return (Boolean) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -1125,7 +1126,7 @@ public class Core extends AMPAPI {
         args.put("Id", Id);
         args.put("Enabled", Enabled);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/SetTriggerEnabled", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -1137,7 +1138,7 @@ public class Core extends AMPAPI {
     public ActionResult Sleep() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/Sleep", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -1149,7 +1150,7 @@ public class Core extends AMPAPI {
     public ActionResult Start() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/Start", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -1161,7 +1162,7 @@ public class Core extends AMPAPI {
     public Void Stop() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("Core/Stop", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -1174,7 +1175,7 @@ public class Core extends AMPAPI {
     public Void Suspend() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("Core/Suspend", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -1186,7 +1187,7 @@ public class Core extends AMPAPI {
     public Void UpdateAMPInstance() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("Core/UpdateAMPInstance", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -1202,7 +1203,7 @@ public class Core extends AMPAPI {
         args.put("EmailAddress", EmailAddress);
         args.put("TwoFactorPIN", TwoFactorPIN);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/UpdateAccountInfo", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -1214,7 +1215,7 @@ public class Core extends AMPAPI {
     public ActionResult UpdateApplication() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/UpdateApplication", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -1238,7 +1239,7 @@ public class Core extends AMPAPI {
         args.put("MustChangePassword", MustChangePassword);
         args.put("EmailAddress", EmailAddress);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/UpdateUserInfo", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -1250,7 +1251,7 @@ public class Core extends AMPAPI {
     public Void UpgradeAMP() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("Core/UpgradeAMP", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -1268,7 +1269,33 @@ public class Core extends AMPAPI {
         args.put("clientDataJSON", clientDataJSON);
         args.put("description", description);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("Core/WebauthnRegister", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+    }
+
+    /**
+     * 
+     *
+     * Name Description Optional
+     * @param username  False
+     * @return List<Object>
+     */
+    public List<Object> GetAuthenticationRequirements(String username) {
+        HashMap<String, Object> args = new HashMap<>();
+        args.put("username", username);
+        Type type = new TypeToken<List<Object>>(){}.getType();
+        return (List<Object>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+    }
+
+    /**
+     * 
+     *
+     * Name Description Optional
+     * @return List<Map<String, Object>>
+     */
+    public List<Map<String, Object>> RunSecurityCheck() {
+        HashMap<String, Object> args = new HashMap<>();
+        Type type = new TypeToken<List<Map<String, Object>>>(){}.getType();
+        return (List<Map<String, Object>>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
 }

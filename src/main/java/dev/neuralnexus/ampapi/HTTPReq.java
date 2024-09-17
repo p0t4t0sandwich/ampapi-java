@@ -12,9 +12,10 @@ import java.net.URL;
 import java.util.Map;
 
 public class HTTPReq {
-    public static Object APICall(String endpoint, String requestMethod, Map<String, Object> data, Type returnType) {
+    private static final Gson gson = new GsonBuilder().create();
+
+    public static <T> T APICall(String endpoint, String requestMethod, Map<String, Object> data, Type returnType) {
         try {
-            Gson gson = new GsonBuilder().create();
             URL url = new URL(endpoint);
 
             HttpURLConnection con = (HttpURLConnection) url.openConnection();

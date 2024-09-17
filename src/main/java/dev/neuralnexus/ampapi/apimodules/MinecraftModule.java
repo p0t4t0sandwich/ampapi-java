@@ -3,6 +3,7 @@ package dev.neuralnexus.ampapi.apimodules;
 import com.google.gson.reflect.TypeToken;
 
 import dev.neuralnexus.ampapi.AMPAPI;
+import dev.neuralnexus.ampapi.auth.AuthStore;
 import dev.neuralnexus.ampapi.types.*;
 
 import java.lang.reflect.Type;
@@ -13,8 +14,8 @@ import java.util.Map;
 import java.util.UUID;
 
 public class MinecraftModule extends AMPAPI {
-    public MinecraftModule(AMPAPI ampapi) {
-        super(ampapi);
+    public MinecraftModule(AuthStore authStore, String instanceName) {
+        super(authStore, instanceName);
     }
 
     /**
@@ -26,7 +27,7 @@ public class MinecraftModule extends AMPAPI {
     public Boolean AcceptEULA() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Boolean>(){}.getType();
-        return (Boolean) this.APICall("MinecraftModule/AcceptEULA", args, type);
+        return (Boolean) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -40,7 +41,7 @@ public class MinecraftModule extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("UserOrUUID", UserOrUUID);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("MinecraftModule/AddOPEntry", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -54,7 +55,7 @@ public class MinecraftModule extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("UserOrUUID", UserOrUUID);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.APICall("MinecraftModule/AddToWhitelist", args, type);
+        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -68,7 +69,7 @@ public class MinecraftModule extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ID", ID);
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("MinecraftModule/BanUserByID", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -80,7 +81,7 @@ public class MinecraftModule extends AMPAPI {
     public Map<String, Object> BukGetCategories() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Map<String, Object>>(){}.getType();
-        return (Map<String, Object>) this.APICall("MinecraftModule/BukGetCategories", args, type);
+        return (Map<String, Object>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -94,7 +95,7 @@ public class MinecraftModule extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("pluginId", pluginId);
         Type type = new TypeToken<RunningTask>(){}.getType();
-        return (RunningTask) this.APICall("MinecraftModule/BukGetInstallUpdatePlugin", args, type);
+        return (RunningTask) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -106,7 +107,7 @@ public class MinecraftModule extends AMPAPI {
     public Map<String, Object> BukGetInstalledPlugins() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Map<String, Object>>(){}.getType();
-        return (Map<String, Object>) this.APICall("MinecraftModule/BukGetInstalledPlugins", args, type);
+        return (Map<String, Object>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -120,7 +121,7 @@ public class MinecraftModule extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("PluginId", PluginId);
         Type type = new TypeToken<Map<String, Object>>(){}.getType();
-        return (Map<String, Object>) this.APICall("MinecraftModule/BukGetPluginInfo", args, type);
+        return (Map<String, Object>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -138,7 +139,7 @@ public class MinecraftModule extends AMPAPI {
         args.put("PageNumber", PageNumber);
         args.put("PageSize", PageSize);
         Type type = new TypeToken<Map<String, Object>>(){}.getType();
-        return (Map<String, Object>) this.APICall("MinecraftModule/BukGetPluginsForCategory", args, type);
+        return (Map<String, Object>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -150,7 +151,7 @@ public class MinecraftModule extends AMPAPI {
     public Map<String, Object> BukGetPopularPlugins() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Map<String, Object>>(){}.getType();
-        return (Map<String, Object>) this.APICall("MinecraftModule/BukGetPopularPlugins", args, type);
+        return (Map<String, Object>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -164,7 +165,7 @@ public class MinecraftModule extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("PluginId", PluginId);
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("MinecraftModule/BukGetRemovePlugin", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -182,7 +183,7 @@ public class MinecraftModule extends AMPAPI {
         args.put("PageNumber", PageNumber);
         args.put("PageSize", PageSize);
         Type type = new TypeToken<Map<String, Object>>(){}.getType();
-        return (Map<String, Object>) this.APICall("MinecraftModule/BukGetSearch", args, type);
+        return (Map<String, Object>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -196,7 +197,7 @@ public class MinecraftModule extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ID", ID);
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("MinecraftModule/ClearInventoryByID", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -208,7 +209,7 @@ public class MinecraftModule extends AMPAPI {
     public String GetFailureReason() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<String>(){}.getType();
-        return (String) this.APICall("MinecraftModule/GetFailureReason", args, type);
+        return (String) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -222,7 +223,7 @@ public class MinecraftModule extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("id", id);
         Type type = new TypeToken<String>(){}.getType();
-        return (String) this.APICall("MinecraftModule/GetHeadByUUID", args, type);
+        return (String) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -234,7 +235,7 @@ public class MinecraftModule extends AMPAPI {
     public Map<String, Object> GetOPWhitelist() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Map<String, Object>>(){}.getType();
-        return (Map<String, Object>) this.APICall("MinecraftModule/GetOPWhitelist", args, type);
+        return (Map<String, Object>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -246,7 +247,7 @@ public class MinecraftModule extends AMPAPI {
     public List<Map<String, Object>> GetWhitelist() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<List<Map<String, Object>>>(){}.getType();
-        return (List<Map<String, Object>>) this.APICall("MinecraftModule/GetWhitelist", args, type);
+        return (List<Map<String, Object>>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -260,7 +261,7 @@ public class MinecraftModule extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ID", ID);
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("MinecraftModule/KickUserByID", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -274,7 +275,7 @@ public class MinecraftModule extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ID", ID);
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("MinecraftModule/KillByID", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -286,7 +287,7 @@ public class MinecraftModule extends AMPAPI {
     public List<Map<String, Object>> LoadOPList() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<List<Map<String, Object>>>(){}.getType();
-        return (List<Map<String, Object>>) this.APICall("MinecraftModule/LoadOPList", args, type);
+        return (List<Map<String, Object>>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -300,7 +301,7 @@ public class MinecraftModule extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("UserOrUUID", UserOrUUID);
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("MinecraftModule/RemoveOPEntry", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -314,7 +315,7 @@ public class MinecraftModule extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("UserOrUUID", UserOrUUID);
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("MinecraftModule/RemoveWhitelistEntry", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -328,7 +329,7 @@ public class MinecraftModule extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("ID", ID);
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("MinecraftModule/SmiteByID", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
 }

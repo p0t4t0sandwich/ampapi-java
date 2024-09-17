@@ -3,6 +3,7 @@ package dev.neuralnexus.ampapi.apimodules;
 import com.google.gson.reflect.TypeToken;
 
 import dev.neuralnexus.ampapi.AMPAPI;
+import dev.neuralnexus.ampapi.auth.AuthStore;
 import dev.neuralnexus.ampapi.types.*;
 
 import java.lang.reflect.Type;
@@ -13,8 +14,8 @@ import java.util.Map;
 import java.util.UUID;
 
 public class steamcmdplugin extends AMPAPI {
-    public steamcmdplugin(AMPAPI ampapi) {
-        super(ampapi);
+    public steamcmdplugin(AuthStore authStore, String instanceName) {
+        super(authStore, instanceName);
     }
 
     /**
@@ -26,7 +27,7 @@ public class steamcmdplugin extends AMPAPI {
     public Void CancelSteamGuard() {
         HashMap<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("steamcmdplugin/CancelSteamGuard", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -40,7 +41,7 @@ public class steamcmdplugin extends AMPAPI {
         HashMap<String, Object> args = new HashMap<>();
         args.put("code", code);
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("steamcmdplugin/SteamGuardCode", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
     /**
@@ -56,7 +57,7 @@ public class steamcmdplugin extends AMPAPI {
         args.put("username", username);
         args.put("password", password);
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.APICall("steamcmdplugin/SteamUsernamePassword", args, type);
+        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
     }
 
 }
