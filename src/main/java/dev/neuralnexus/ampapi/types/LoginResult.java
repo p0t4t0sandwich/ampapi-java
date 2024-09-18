@@ -6,7 +6,7 @@ import java.util.Arrays;
  * Response type for API.Core.Login
  *
  * @author p0t4t0sandwich
- * @see dev.neuralnexus.ampapi.apimodules.Core#Login(String, String, String, Boolean)
+ * @see dev.neuralnexus.ampapi.plugins.Core#Login(String, String, String, Boolean)
  */
 public class LoginResult {
     /**

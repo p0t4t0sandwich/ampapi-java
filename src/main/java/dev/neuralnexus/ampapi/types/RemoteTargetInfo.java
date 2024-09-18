@@ -6,7 +6,7 @@ import java.util.Arrays;
  * RemoteTargetInfo - A remote target info object
  *
  * @author p0t4t0sandwich
- * @see dev.neuralnexus.ampapi.apimodules.ADSModule#GetTargetInfo()
+ * @see dev.neuralnexus.ampapi.plugins.ADSModule#GetTargetInfo()
  */
 public class RemoteTargetInfo {
     /**

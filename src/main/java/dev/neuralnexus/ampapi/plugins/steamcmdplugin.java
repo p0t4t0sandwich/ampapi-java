@@ -1,9 +1,9 @@
-package dev.neuralnexus.ampapi.apimodules;
+package dev.neuralnexus.ampapi.plugins;
 
 import com.google.gson.reflect.TypeToken;
 
 import dev.neuralnexus.ampapi.AMPAPI;
-import dev.neuralnexus.ampapi.auth.AuthStore;
+import dev.neuralnexus.ampapi.auth.AuthProvider;
 import dev.neuralnexus.ampapi.types.*;
 
 import java.lang.reflect.Type;
@@ -13,9 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+@SuppressWarnings({"rawtypes", "unchecked", "unused", "DataFlowIssue", "JavadocBlankLines", "RedundantCast", "UnusedReturnValue"})
 public class steamcmdplugin extends AMPAPI {
-    public steamcmdplugin(AuthStore authStore, String instanceName) {
-        super(authStore, instanceName);
+    public steamcmdplugin(AuthProvider authProvider) {
+        super(authProvider);
     }
 
     /**
@@ -25,9 +26,9 @@ public class steamcmdplugin extends AMPAPI {
      * @return Void
      */
     public Void CancelSteamGuard() {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (Void) this.authProvider.APICall("steamcmdplugin/CancelSteamGuard", args, type);
     }
 
     /**
@@ -38,10 +39,10 @@ public class steamcmdplugin extends AMPAPI {
      * @return Void
      */
     public Void SteamGuardCode(String code) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("code", code);
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (Void) this.authProvider.APICall("steamcmdplugin/SteamGuardCode", args, type);
     }
 
     /**
@@ -53,11 +54,11 @@ public class steamcmdplugin extends AMPAPI {
      * @return Void
      */
     public Void SteamUsernamePassword(String username, String password) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("username", username);
         args.put("password", password);
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (Void) this.authProvider.APICall("steamcmdplugin/SteamUsernamePassword", args, type);
     }
 
 }

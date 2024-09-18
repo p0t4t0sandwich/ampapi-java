@@ -1,9 +1,9 @@
-package dev.neuralnexus.ampapi.apimodules;
+package dev.neuralnexus.ampapi.plugins;
 
 import com.google.gson.reflect.TypeToken;
 
 import dev.neuralnexus.ampapi.AMPAPI;
-import dev.neuralnexus.ampapi.auth.AuthStore;
+import dev.neuralnexus.ampapi.auth.AuthProvider;
 import dev.neuralnexus.ampapi.types.*;
 
 import java.lang.reflect.Type;
@@ -13,9 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+@SuppressWarnings({"rawtypes", "unchecked", "unused", "DataFlowIssue", "JavadocBlankLines", "RedundantCast", "UnusedReturnValue"})
 public class LocalFileBackupPlugin extends AMPAPI {
-    public LocalFileBackupPlugin(AuthStore authStore, String instanceName) {
-        super(authStore, instanceName);
+    public LocalFileBackupPlugin(AuthProvider authProvider) {
+        super(authProvider);
     }
 
     /**
@@ -26,10 +27,10 @@ public class LocalFileBackupPlugin extends AMPAPI {
      * @return ActionResult
      */
     public ActionResult DeleteFromS3(UUID BackupId) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (ActionResult) this.authProvider.APICall("LocalFileBackupPlugin/DeleteFromS3", args, type);
     }
 
     /**
@@ -40,10 +41,10 @@ public class LocalFileBackupPlugin extends AMPAPI {
      * @return Void
      */
     public Void DeleteLocalBackup(UUID BackupId) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (Void) this.authProvider.APICall("LocalFileBackupPlugin/DeleteLocalBackup", args, type);
     }
 
     /**
@@ -54,10 +55,10 @@ public class LocalFileBackupPlugin extends AMPAPI {
      * @return RunningTask
      */
     public RunningTask DownloadFromS3(UUID BackupId) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
         Type type = new TypeToken<RunningTask>(){}.getType();
-        return (RunningTask) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (RunningTask) this.authProvider.APICall("LocalFileBackupPlugin/DownloadFromS3", args, type);
     }
 
     /**
@@ -67,9 +68,9 @@ public class LocalFileBackupPlugin extends AMPAPI {
      * @return List<Object>
      */
     public List<Object> GetBackups() {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         Type type = new TypeToken<List<Object>>(){}.getType();
-        return (List<Object>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (List<Object>) this.authProvider.APICall("LocalFileBackupPlugin/GetBackups", args, type);
     }
 
     /**
@@ -81,11 +82,11 @@ public class LocalFileBackupPlugin extends AMPAPI {
      * @return ActionResult
      */
     public ActionResult RestoreBackup(UUID BackupId, Boolean DeleteExistingData) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
         args.put("DeleteExistingData", DeleteExistingData);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (ActionResult) this.authProvider.APICall("LocalFileBackupPlugin/RestoreBackup", args, type);
     }
 
     /**
@@ -97,11 +98,11 @@ public class LocalFileBackupPlugin extends AMPAPI {
      * @return Void
      */
     public Void SetBackupSticky(UUID BackupId, Boolean Sticky) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
         args.put("Sticky", Sticky);
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (Void) this.authProvider.APICall("LocalFileBackupPlugin/SetBackupSticky", args, type);
     }
 
     /**
@@ -115,13 +116,13 @@ public class LocalFileBackupPlugin extends AMPAPI {
      * @return ActionResult
      */
     public ActionResult TakeBackup(String Title, String Description, Boolean Sticky, Boolean WasCreatedAutomatically) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("Title", Title);
         args.put("Description", Description);
         args.put("Sticky", Sticky);
         args.put("WasCreatedAutomatically", WasCreatedAutomatically);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (ActionResult) this.authProvider.APICall("LocalFileBackupPlugin/TakeBackup", args, type);
     }
 
     /**
@@ -132,10 +133,10 @@ public class LocalFileBackupPlugin extends AMPAPI {
      * @return RunningTask
      */
     public RunningTask UploadToS3(UUID BackupId) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("BackupId", BackupId);
         Type type = new TypeToken<RunningTask>(){}.getType();
-        return (RunningTask) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (RunningTask) this.authProvider.APICall("LocalFileBackupPlugin/UploadToS3", args, type);
     }
 
     /**
@@ -145,9 +146,9 @@ public class LocalFileBackupPlugin extends AMPAPI {
      * @return Void
      */
     public Void RefreshBackupList() {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (Void) this.authProvider.APICall("LocalFileBackupPlugin/RefreshBackupList", args, type);
     }
 
 }

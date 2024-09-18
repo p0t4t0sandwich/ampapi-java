@@ -1,17 +1,17 @@
 package dev.neuralnexus.ampapi.modules;
 
-import dev.neuralnexus.ampapi.apimodules.*;
-import dev.neuralnexus.ampapi.auth.AuthStore;
+import dev.neuralnexus.ampapi.auth.AuthProvider;
+import dev.neuralnexus.ampapi.plugins.*;
 
 public class GenericModule extends CommonAPI {
-    public dev.neuralnexus.ampapi.apimodules.GenericModule GenericModule;
+    public dev.neuralnexus.ampapi.plugins.GenericModule GenericModule;
     public RCONPlugin RCONPlugin;
     public steamcmdplugin steamcmdplugin;
 
-    public GenericModule(AuthStore authStore, String instanceName) {
-        super(authStore, instanceName);
-        this.GenericModule = new dev.neuralnexus.ampapi.apimodules.GenericModule(authStore, instanceName);
-        this.RCONPlugin = new RCONPlugin(authStore, instanceName);
-        this.steamcmdplugin = new steamcmdplugin(authStore, instanceName);
+    public GenericModule(AuthProvider authProvider) {
+        super(authProvider);
+        this.GenericModule = new dev.neuralnexus.ampapi.plugins.GenericModule(authProvider);
+        this.RCONPlugin = new RCONPlugin(authProvider);
+        this.steamcmdplugin = new steamcmdplugin(authProvider);
     }
 }

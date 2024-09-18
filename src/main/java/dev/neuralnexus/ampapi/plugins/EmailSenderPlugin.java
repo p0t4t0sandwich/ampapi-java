@@ -1,9 +1,9 @@
-package dev.neuralnexus.ampapi.apimodules;
+package dev.neuralnexus.ampapi.plugins;
 
 import com.google.gson.reflect.TypeToken;
 
 import dev.neuralnexus.ampapi.AMPAPI;
-import dev.neuralnexus.ampapi.auth.AuthStore;
+import dev.neuralnexus.ampapi.auth.AuthProvider;
 import dev.neuralnexus.ampapi.types.*;
 
 import java.lang.reflect.Type;
@@ -13,9 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+@SuppressWarnings({"rawtypes", "unchecked", "unused", "DataFlowIssue", "JavadocBlankLines", "RedundantCast", "UnusedReturnValue"})
 public class EmailSenderPlugin extends AMPAPI {
-    public EmailSenderPlugin(AuthStore authStore, String instanceName) {
-        super(authStore, instanceName);
+    public EmailSenderPlugin(AuthProvider authProvider) {
+        super(authProvider);
     }
 
     /**
@@ -25,9 +26,9 @@ public class EmailSenderPlugin extends AMPAPI {
      * @return ActionResult
      */
     public ActionResult TestSMTPSettings() {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (ActionResult) this.authProvider.APICall("EmailSenderPlugin/TestSMTPSettings", args, type);
     }
 
 }

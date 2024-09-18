@@ -6,7 +6,7 @@ import java.util.Arrays;
  * Response type for API.Core.GetUpdates
  *
  * @author p0t4t0sandwich
- * @see dev.neuralnexus.ampapi.apimodules.Core#GetUpdates()
+ * @see dev.neuralnexus.ampapi.plugins.Core#GetUpdates()
  */
 public class Updates {
     /**

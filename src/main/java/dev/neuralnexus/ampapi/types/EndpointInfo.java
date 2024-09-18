@@ -4,7 +4,7 @@ package dev.neuralnexus.ampapi.types;
  * EndpointInfo - An application endpoint object
  *
  * @author p0t4t0sandwich
- * @see dev.neuralnexus.ampapi.apimodules.ADSModule#GetApplicationEndpoints(java.util.UUID)
+ * @see dev.neuralnexus.ampapi.plugins.ADSModule#GetApplicationEndpoints(java.util.UUID)
  */
 public class EndpointInfo {
     /**

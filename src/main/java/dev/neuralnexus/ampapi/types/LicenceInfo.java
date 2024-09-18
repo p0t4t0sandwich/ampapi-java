@@ -4,7 +4,7 @@ package dev.neuralnexus.ampapi.types;
  * Response type for ADSModule.GetLicenceInfo
  *
  * @author p0t4t0sandwich
- * @see dev.neuralnexus.ampapi.apimodules.Core#ActivateAMPLicence(String, Boolean)
+ * @see dev.neuralnexus.ampapi.plugins.Core#ActivateAMPLicence(String, Boolean)
  */
 public class LicenceInfo {
     /**

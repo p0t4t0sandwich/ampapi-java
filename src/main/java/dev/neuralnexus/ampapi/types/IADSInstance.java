@@ -1,6 +1,7 @@
 package dev.neuralnexus.ampapi.types;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -40,7 +41,7 @@ public class IADSInstance {
     public String StateReason;
     public boolean CanCreate;
     public String LastUpdated;
-    public Instance[] AvailableInstances;
+    public List<Instance> AvailableInstances;
     public String[] AvailableIPs;
     public String URL;
     public String[] Tags;
@@ -80,7 +81,7 @@ public class IADSInstance {
                 + ", LastUpdated="
                 + this.LastUpdated
                 + ", AvailableInstances="
-                + Arrays.toString(this.AvailableInstances)
+                + this.AvailableInstances
                 + ", AvailableIPs="
                 + Arrays.toString(this.AvailableIPs)
                 + ", URL="

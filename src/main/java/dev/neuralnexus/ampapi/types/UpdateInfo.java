@@ -4,7 +4,7 @@ package dev.neuralnexus.ampapi.types;
  * Response type for API.Core.GetUpdateInfo
  *
  * @author p0t4t0sandwich
- * @see dev.neuralnexus.ampapi.apimodules.Core#GetUpdateInfo()
+ * @see dev.neuralnexus.ampapi.plugins.Core#GetUpdateInfo()
  */
 public class UpdateInfo {
     /**

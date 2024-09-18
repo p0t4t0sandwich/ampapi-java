@@ -7,7 +7,7 @@ import java.util.Arrays;
  *
  * @author p0t4t0sandwich
  * @see SettingSpec
- * @see dev.neuralnexus.ampapi.apimodules.Core#GetSettingsSpec()
+ * @see dev.neuralnexus.ampapi.plugins.Core#GetSettingsSpec()
  */
 public class SettingSpec {
     /**

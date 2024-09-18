@@ -1,9 +1,9 @@
-package dev.neuralnexus.ampapi.apimodules;
+package dev.neuralnexus.ampapi.plugins;
 
 import com.google.gson.reflect.TypeToken;
 
 import dev.neuralnexus.ampapi.AMPAPI;
-import dev.neuralnexus.ampapi.auth.AuthStore;
+import dev.neuralnexus.ampapi.auth.AuthProvider;
 import dev.neuralnexus.ampapi.types.*;
 
 import java.lang.reflect.Type;
@@ -13,9 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+@SuppressWarnings({"rawtypes", "unchecked", "unused", "DataFlowIssue", "JavadocBlankLines", "RedundantCast", "UnusedReturnValue"})
 public class FileManagerPlugin extends AMPAPI {
-    public FileManagerPlugin(AuthStore authStore, String instanceName) {
-        super(authStore, instanceName);
+    public FileManagerPlugin(AuthProvider authProvider) {
+        super(authProvider);
     }
 
     /**
@@ -28,12 +29,12 @@ public class FileManagerPlugin extends AMPAPI {
      * @return Void
      */
     public Void AppendFileChunk(String Filename, String Data, Boolean Delete) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
         args.put("Data", Data);
         args.put("Delete", Delete);
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (Void) this.authProvider.APICall("FileManagerPlugin/AppendFileChunk", args, type);
     }
 
     /**
@@ -44,10 +45,10 @@ public class FileManagerPlugin extends AMPAPI {
      * @return ActionResult<String>
      */
     public ActionResult<String> CalculateFileMD5Sum(String FilePath) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("FilePath", FilePath);
         Type type = new TypeToken<ActionResult<String>>(){}.getType();
-        return (ActionResult<String>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (ActionResult<String>) this.authProvider.APICall("FileManagerPlugin/CalculateFileMD5Sum", args, type);
     }
 
     /**
@@ -60,12 +61,12 @@ public class FileManagerPlugin extends AMPAPI {
      * @return ActionResult
      */
     public ActionResult ChangeExclusion(String ModifyPath, Boolean AsDirectory, Boolean Exclude) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("ModifyPath", ModifyPath);
         args.put("AsDirectory", AsDirectory);
         args.put("Exclude", Exclude);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (ActionResult) this.authProvider.APICall("FileManagerPlugin/ChangeExclusion", args, type);
     }
 
     /**
@@ -77,11 +78,11 @@ public class FileManagerPlugin extends AMPAPI {
      * @return ActionResult
      */
     public ActionResult CopyFile(String Origin, String TargetDirectory) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("Origin", Origin);
         args.put("TargetDirectory", TargetDirectory);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (ActionResult) this.authProvider.APICall("FileManagerPlugin/CopyFile", args, type);
     }
 
     /**
@@ -92,10 +93,10 @@ public class FileManagerPlugin extends AMPAPI {
      * @return ActionResult
      */
     public ActionResult CreateArchive(String PathToArchive) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("PathToArchive", PathToArchive);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (ActionResult) this.authProvider.APICall("FileManagerPlugin/CreateArchive", args, type);
     }
 
     /**
@@ -106,10 +107,10 @@ public class FileManagerPlugin extends AMPAPI {
      * @return ActionResult
      */
     public ActionResult CreateDirectory(String NewPath) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("NewPath", NewPath);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (ActionResult) this.authProvider.APICall("FileManagerPlugin/CreateDirectory", args, type);
     }
 
     /**
@@ -121,11 +122,11 @@ public class FileManagerPlugin extends AMPAPI {
      * @return ActionResult
      */
     public ActionResult DownloadFileFromURL(URL Source, String TargetDirectory) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("Source", Source);
         args.put("TargetDirectory", TargetDirectory);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (ActionResult) this.authProvider.APICall("FileManagerPlugin/DownloadFileFromURL", args, type);
     }
 
     /**
@@ -135,9 +136,9 @@ public class FileManagerPlugin extends AMPAPI {
      * @return Void
      */
     public Void Dummy() {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (Void) this.authProvider.APICall("FileManagerPlugin/Dummy", args, type);
     }
 
     /**
@@ -148,10 +149,10 @@ public class FileManagerPlugin extends AMPAPI {
      * @return ActionResult
      */
     public ActionResult EmptyTrash(String TrashDirectoryName) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("TrashDirectoryName", TrashDirectoryName);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (ActionResult) this.authProvider.APICall("FileManagerPlugin/EmptyTrash", args, type);
     }
 
     /**
@@ -163,11 +164,11 @@ public class FileManagerPlugin extends AMPAPI {
      * @return ActionResult
      */
     public ActionResult ExtractArchive(String ArchivePath, String DestinationPath) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("ArchivePath", ArchivePath);
         args.put("DestinationPath", DestinationPath);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (ActionResult) this.authProvider.APICall("FileManagerPlugin/ExtractArchive", args, type);
     }
 
     /**
@@ -178,10 +179,10 @@ public class FileManagerPlugin extends AMPAPI {
      * @return List<FileDirectory>
      */
     public List<FileDirectory> GetDirectoryListing(String Dir) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("Dir", Dir);
         Type type = new TypeToken<List<FileDirectory>>(){}.getType();
-        return (List<FileDirectory>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (List<FileDirectory>) this.authProvider.APICall("FileManagerPlugin/GetDirectoryListing", args, type);
     }
 
     /**
@@ -194,12 +195,12 @@ public class FileManagerPlugin extends AMPAPI {
      * @return FileChunkData
      */
     public FileChunkData GetFileChunk(String Filename, Integer Position, Integer Length) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
         args.put("Position", Position);
         args.put("Length", Length);
         Type type = new TypeToken<FileChunkData>(){}.getType();
-        return (FileChunkData) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (FileChunkData) this.authProvider.APICall("FileManagerPlugin/GetFileChunk", args, type);
     }
 
     /**
@@ -212,12 +213,12 @@ public class FileManagerPlugin extends AMPAPI {
      * @return ActionResult<String>
      */
     public ActionResult<String> ReadFileChunk(String Filename, Integer Offset, Integer ChunkSize) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
         args.put("Offset", Offset);
         args.put("ChunkSize", ChunkSize);
         Type type = new TypeToken<ActionResult<String>>(){}.getType();
-        return (ActionResult<String>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (ActionResult<String>) this.authProvider.APICall("FileManagerPlugin/ReadFileChunk", args, type);
     }
 
     /**
@@ -229,11 +230,11 @@ public class FileManagerPlugin extends AMPAPI {
      * @return ActionResult
      */
     public ActionResult RenameDirectory(String oldDirectory, String NewDirectoryName) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("oldDirectory", oldDirectory);
         args.put("NewDirectoryName", NewDirectoryName);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (ActionResult) this.authProvider.APICall("FileManagerPlugin/RenameDirectory", args, type);
     }
 
     /**
@@ -245,11 +246,11 @@ public class FileManagerPlugin extends AMPAPI {
      * @return ActionResult
      */
     public ActionResult RenameFile(String Filename, String NewFilename) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
         args.put("NewFilename", NewFilename);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (ActionResult) this.authProvider.APICall("FileManagerPlugin/RenameFile", args, type);
     }
 
     /**
@@ -260,10 +261,10 @@ public class FileManagerPlugin extends AMPAPI {
      * @return ActionResult
      */
     public ActionResult TrashDirectory(String DirectoryName) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("DirectoryName", DirectoryName);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (ActionResult) this.authProvider.APICall("FileManagerPlugin/TrashDirectory", args, type);
     }
 
     /**
@@ -274,10 +275,10 @@ public class FileManagerPlugin extends AMPAPI {
      * @return ActionResult
      */
     public ActionResult TrashFile(String Filename) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (ActionResult) this.authProvider.APICall("FileManagerPlugin/TrashFile", args, type);
     }
 
     /**
@@ -291,13 +292,13 @@ public class FileManagerPlugin extends AMPAPI {
      * @return ActionResult
      */
     public ActionResult WriteFileChunk(String Filename, String Data, Integer Offset, Boolean FinalChunk) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
         args.put("Data", Data);
         args.put("Offset", Offset);
         args.put("FinalChunk", FinalChunk);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (ActionResult) this.authProvider.APICall("FileManagerPlugin/WriteFileChunk", args, type);
     }
 
     /**
@@ -308,10 +309,10 @@ public class FileManagerPlugin extends AMPAPI {
      * @return ActionResult
      */
     public ActionResult ReleaseFileUploadLock(String Filename) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("Filename", Filename);
         Type type = new TypeToken<ActionResult>(){}.getType();
-        return (ActionResult) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (ActionResult) this.authProvider.APICall("FileManagerPlugin/ReleaseFileUploadLock", args, type);
     }
 
 }

@@ -1,5 +1,7 @@
 package dev.neuralnexus.ampapi.types;
 
+import java.util.UUID;
+
 /**
  * ModuleInfo - A class to represent the ModuleInfo object returned by the GetModuleInfo() method.
  *
@@ -49,7 +51,7 @@ public class ModuleInfo {
     public Branding Branding;
     public boolean Analytics;
     public String[] FeatureSet;
-    public String InstanceId;
+    public UUID InstanceId;
     public String InstanceName;
     public String FriendlyName;
     public String EndpointURI;

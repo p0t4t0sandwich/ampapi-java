@@ -1,8 +1,8 @@
 package dev.neuralnexus.ampapi.modules;
 
 import dev.neuralnexus.ampapi.AMPAPI;
-import dev.neuralnexus.ampapi.apimodules.*;
-import dev.neuralnexus.ampapi.auth.AuthStore;
+import dev.neuralnexus.ampapi.auth.AuthProvider;
+import dev.neuralnexus.ampapi.plugins.*;
 
 public class CommonAPI extends AMPAPI {
     public final Core Core;
@@ -10,11 +10,11 @@ public class CommonAPI extends AMPAPI {
     public final FileManagerPlugin FileManagerPlugin;
     public final LocalFileBackupPlugin LocalFileBackupPlugin;
 
-    public CommonAPI(AuthStore authStore, String instanceName) {
-        super(authStore, instanceName);
-        this.Core = new Core(authStore, instanceName);
-        this.EmailSenderPlugin = new EmailSenderPlugin(authStore, instanceName);
-        this.FileManagerPlugin = new FileManagerPlugin(authStore, instanceName);
-        this.LocalFileBackupPlugin = new LocalFileBackupPlugin(authStore, instanceName);
+    public CommonAPI(AuthProvider authProvider) {
+        super(authProvider);
+        this.Core = new Core(authProvider);
+        this.EmailSenderPlugin = new EmailSenderPlugin(authProvider);
+        this.FileManagerPlugin = new FileManagerPlugin(authProvider);
+        this.LocalFileBackupPlugin = new LocalFileBackupPlugin(authProvider);
     }
 }

@@ -14,20 +14,16 @@ import java.util.Map;
 public class HTTPReq {
     private static final Gson gson = new GsonBuilder().create();
 
-    public static <T> T APICall(String endpoint, String requestMethod, Map<String, Object> data, Type returnType) {
+    public static <T> T APICall(String endpoint, String requestMethod, Map<String, Object> args, Type returnType) {
         try {
-            URL url = new URL(endpoint);
-
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            HttpURLConnection con = (HttpURLConnection) new URL(endpoint).openConnection();
             con.setDoOutput(true);
             con.setRequestMethod(requestMethod);
             con.setRequestProperty("Content-Type", "application/json");
             con.setRequestProperty("Accept", "application/json");
             con.setRequestProperty("User-Agent", "ampapi-java/1.3.0");
             con.setConnectTimeout(5000);
-
-            String json = gson.toJson(data);
-            con.getOutputStream().write(json.getBytes());
+            con.getOutputStream().write(gson.toJson(args).getBytes());
 
             if (returnType == Void.class) {
                 return null;

@@ -1,9 +1,9 @@
-package dev.neuralnexus.ampapi.apimodules;
+package dev.neuralnexus.ampapi.plugins;
 
 import com.google.gson.reflect.TypeToken;
 
 import dev.neuralnexus.ampapi.AMPAPI;
-import dev.neuralnexus.ampapi.auth.AuthStore;
+import dev.neuralnexus.ampapi.auth.AuthProvider;
 import dev.neuralnexus.ampapi.types.*;
 
 import java.lang.reflect.Type;
@@ -13,8 +13,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+@SuppressWarnings({"rawtypes", "unchecked", "unused", "DataFlowIssue", "JavadocBlankLines", "RedundantCast", "UnusedReturnValue"})
 public class %MODULE_NAME% extends AMPAPI {
-    public %MODULE_NAME%(AuthStore authStore, String instanceName) {
-        super(authStore, instanceName);
+    public %MODULE_NAME%(AuthProvider authProvider) {
+        super(authProvider);
     }
 

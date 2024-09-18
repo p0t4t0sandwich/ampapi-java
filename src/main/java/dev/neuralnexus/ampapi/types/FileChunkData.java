@@ -4,7 +4,7 @@ package dev.neuralnexus.ampapi.types;
  * File - A file chunk object
  *
  * @author p0t4t0sandwich
- * @see dev.neuralnexus.ampapi.apimodules.FileManagerPlugin#GetFileChunk(String, Integer, Integer)
+ * @see dev.neuralnexus.ampapi.plugins.FileManagerPlugin#GetFileChunk(String, Integer, Integer)
  */
 public class FileChunkData {
     /**

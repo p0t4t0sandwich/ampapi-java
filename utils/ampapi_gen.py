@@ -90,10 +90,10 @@ type_dict = {
 
 custom_types = {
     # API.ADSModule.GetInstance
-#     "ADSModule.GetInstance": "Result<Instance>",
+    "ADSModule.ManageInstance": "ActionResult<Guid>",
 }
 
-def generate_apimodule_method(module: str, method: str, method_spec: dict):
+def generate_plugin_method(module: str, method: str, method_spec: dict):
     # Read the template file
     api_module_method_template = ""
     with open("templates/api_module_method.txt", "r") as tf:
@@ -181,7 +181,7 @@ def generate_apimodule_method(module: str, method: str, method_spec: dict):
     # End result will return a string
     return template
 
-def generate_apimodule(module: str, methods: dict):
+def generate_plugin(module: str, methods: dict):
     # Read the template file
     api_module_template = ""
     with open("templates/api_module.txt", "r") as tf:
@@ -189,11 +189,11 @@ def generate_apimodule(module: str, methods: dict):
         tf.close()
 
     # Create a new file called f{module}.java
-    f = open(f"../src/main/java/dev/neuralnexus/ampapi/apimodules/{module}.java","w+")
+    f = open(f"../src/main/java/dev/neuralnexus/ampapi/plugins/{module}.java","w+")
     f.write(api_module_template.replace("%MODULE_NAME%", module))
 
     for method in methods.keys():
-        f.write(generate_apimodule_method(module, method, methods[method]))
+        f.write(generate_plugin_method(module, method, methods[method]))
 
     f.write("}\n")
     f.close()
@@ -201,7 +201,7 @@ def generate_apimodule(module: str, methods: dict):
 def generate_spec(spec: dict):
     for module in spec.keys():
         if module == "CommonCorePlugin": continue
-        generate_apimodule(module, spec[module])
+        generate_plugin(module, spec[module])
 
 def load_custom_types(spec: dict):
     for type_index in custom_types.keys():

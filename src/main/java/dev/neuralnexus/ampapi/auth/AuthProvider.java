@@ -1,7 +1,10 @@
 package dev.neuralnexus.ampapi.auth;
 
+import dev.neuralnexus.ampapi.types.LoginResult;
+
 import java.lang.reflect.Type;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -9,16 +12,37 @@ import java.util.UUID;
  * Generalized Auth Provider for working with AMP instances
  */
 public interface AuthProvider {
+    String dataSource();
 
-    Object APICall(String endpoint, String requestMethod, Map<String, Object> data, Type returnType);
+    String username();
+
+    String password();
+
+    String token();
+
+    String sessionId();
+
+    String instanceName();
+
+    UUID instanceId();
+
+    <T> T APICall(String endpoint, Map<String, Object> args, Type returnType);
+
+    default <T> T APICall(String endpoint, Type returnType) {
+        return this.APICall(endpoint, new HashMap<>(), returnType);
+    }
 
     /**
-     * Simplified login function
+     * Method to log into the remote AMP instance
+     * @param rememberMe Whether to enable "remember me"
      */
-    void Login(boolean rememberMe);
+    LoginResult Login(boolean rememberMe);
 
-    default void Login() {
-        this.Login(false);
+    /**
+     * Method to log into the remote AMP instance
+     */
+    default LoginResult Login() {
+        return this.Login(false);
     }
 
     interface Builder {
@@ -33,6 +57,12 @@ public interface AuthProvider {
          * @param panelUrl The panel URL to connect to
          */
         Builder panelUrl(URL panelUrl);
+
+        /**
+         * Sets the requestMethod property (optional, defaults to POST)
+         * @param requestMethod The request method to use with the API
+         */
+        Builder requestMethod(String requestMethod);
 
         /**
          * Sets the username property (required)

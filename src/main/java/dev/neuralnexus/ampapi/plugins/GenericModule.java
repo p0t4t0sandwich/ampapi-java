@@ -1,9 +1,9 @@
-package dev.neuralnexus.ampapi.apimodules;
+package dev.neuralnexus.ampapi.plugins;
 
 import com.google.gson.reflect.TypeToken;
 
 import dev.neuralnexus.ampapi.AMPAPI;
-import dev.neuralnexus.ampapi.auth.AuthStore;
+import dev.neuralnexus.ampapi.auth.AuthProvider;
 import dev.neuralnexus.ampapi.types.*;
 
 import java.lang.reflect.Type;
@@ -13,9 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+@SuppressWarnings({"rawtypes", "unchecked", "unused", "DataFlowIssue", "JavadocBlankLines", "RedundantCast", "UnusedReturnValue"})
 public class GenericModule extends AMPAPI {
-    public GenericModule(AuthStore authStore, String instanceName) {
-        super(authStore, instanceName);
+    public GenericModule(AuthProvider authProvider) {
+        super(authProvider);
     }
 
     /**
@@ -26,10 +27,10 @@ public class GenericModule extends AMPAPI {
      * @return Map<String, String>
      */
     public Map<String, String> ImportConfig(String filename) {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         args.put("filename", filename);
         Type type = new TypeToken<Map<String, String>>(){}.getType();
-        return (Map<String, String>) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (Map<String, String>) this.authProvider.APICall("GenericModule/ImportConfig", args, type);
     }
 
     /**
@@ -39,9 +40,9 @@ public class GenericModule extends AMPAPI {
      * @return Void
      */
     public Void ReloadGenericConfig() {
-        HashMap<String, Object> args = new HashMap<>();
+        Map<String, Object> args = new HashMap<>();
         Type type = new TypeToken<Void>(){}.getType();
-        return (Void) this.authStore.get(this.instanceName).APICall("ADSModule/AddDatastore", "POST", args, type);
+        return (Void) this.authProvider.APICall("GenericModule/ReloadGenericConfig", args, type);
     }
 
 }

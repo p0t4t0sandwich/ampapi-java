@@ -3,7 +3,7 @@ package dev.neuralnexus.ampapi.types;
 /**
  * Interface for the result of API.Core#GetUpdates.ConsoleEntries
  *
- * @see dev.neuralnexus.ampapi.apimodules.Core#GetUpdates()
+ * @see dev.neuralnexus.ampapi.plugins.Core#GetUpdates()
  * @author p0t4t0sandwich
  */
 public class ConsoleEntry {

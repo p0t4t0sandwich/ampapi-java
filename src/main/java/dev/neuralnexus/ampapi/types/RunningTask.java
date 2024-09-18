@@ -4,7 +4,7 @@ package dev.neuralnexus.ampapi.types;
  * RunningTask - A running task object
  *
  * @author p0t4t0sandwich
- * @see dev.neuralnexus.ampapi.apimodules.Core#GetTasks()
+ * @see dev.neuralnexus.ampapi.plugins.Core#GetTasks()
  */
 public class RunningTask {
     /**

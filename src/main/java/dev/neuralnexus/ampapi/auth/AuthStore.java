@@ -13,4 +13,8 @@ public class AuthStore {
     public void add(String instanceName, AuthProvider authProvider) {
         this.authProviders.put(instanceName, authProvider);
     }
+
+    public void add(AuthProvider authProvider) {
+        this.add(authProvider.instanceName(), authProvider);
+    }
 }
