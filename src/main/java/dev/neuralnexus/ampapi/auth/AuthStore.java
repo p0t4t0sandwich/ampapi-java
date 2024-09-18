@@ -17,4 +17,8 @@ public class AuthStore {
     public void add(AuthProvider authProvider) {
         this.add(authProvider.instanceName(), authProvider);
     }
+
+    public void remove(String instanceName) {
+        this.authProviders.remove(instanceName);
+    }
 }

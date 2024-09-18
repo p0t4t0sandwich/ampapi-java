@@ -26,7 +26,7 @@ public class ADS extends CommonAPI {
                 .token(remoteToken)
                 .build();
         auth.Login(true);
-        this.authStore.add(authProvider);
+        this.authStore.add(auth);
 
         if (clazz.equals(ADS.class)) {
             return (T) new ADS(this.authStore, auth);
@@ -46,8 +46,8 @@ public class ADS extends CommonAPI {
     public <T extends AMPAPI> T InstanceLogin(String instanceName, AuthProvider.Builder authBuilder, Class<T> clazz) {
         UUID instanceId = this.ADSModule.GetInstances(false).stream()
                 .flatMap(ads -> ads.AvailableInstances.stream())
-                .filter(hub -> hub.InstanceName.equals(instanceName))
-                .map(hub -> hub.InstanceID)
+                .filter(i -> i.InstanceName.equals(instanceName))
+                .map(i -> i.InstanceID)
                 .findFirst()
                 .orElse(null);
         return this.InstanceLogin(instanceId, authBuilder, clazz);

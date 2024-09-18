@@ -25,15 +25,15 @@ public class HTTPReq {
             con.setConnectTimeout(5000);
             con.getOutputStream().write(gson.toJson(args).getBytes());
 
-            if (returnType == Void.class) {
-                return null;
-            }
             BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String jsonString = br.readLine();
             br.close();
 
             if (jsonString.contains("Title") && jsonString.contains("Message") && jsonString.contains("StackTrace")) {
                 throw new AMPAPI.AMPAPIException(gson.fromJson(jsonString, AMPAPI.AMPAPIException.Data.class));
+            }
+            if (returnType == Void.class) {
+                return null;
             }
             return gson.fromJson(jsonString, returnType);
         } catch (IOException e) {
