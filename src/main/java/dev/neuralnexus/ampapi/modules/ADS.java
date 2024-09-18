@@ -19,13 +19,28 @@ public class ADS extends CommonAPI {
     }
 
     public <T extends AMPAPI> T InstanceLogin(UUID instanceId, AuthProvider.Builder authBuilder, Class<T> clazz) {
-        UUID remoteToken = this.ADSModule.ManageInstance(instanceId).Result;
-        AuthProvider auth = authBuilder
+        if (this.authProvider.username().isEmpty()) {
+            throw new IllegalStateException("Username must be defined to manage remote instances");
+        }
+
+        authBuilder
                 .panelUrl(this.authProvider.dataSource() + "ADSModule/Servers/" + instanceId)
-                .username(this.authProvider.username())
-                .token(remoteToken)
-                .build();
-        auth.Login(true);
+                .username(this.authProvider.username());
+        AuthProvider auth;
+        if (this.authProvider.password().isEmpty()) {
+            UUID remoteToken = this.ADSModule.ManageInstance(instanceId).Result;
+            auth = authBuilder
+                    .token(remoteToken)
+                    .rememberMe(false)
+                    // TODO: Add some sort of callback to restore itself instead of refresh?
+                    .build();
+        } else {
+            auth = authBuilder
+                    .password(this.authProvider.password())
+                    .build();
+        }
+        auth.Login();
+
         this.authStore.add(auth);
 
         if (clazz.equals(ADS.class)) {

@@ -14,16 +14,17 @@ import java.util.UUID;
  * AuthProvider implementation for basic single-session logins
  */
 public class BasicAuthProvider implements AuthProvider {
-    private final String dataSource;
-    private final String requestMethod;
-    private final String username;
-    private final String password;
-    private String token;
-    private String sessionId;
+    final String dataSource;
+    final String requestMethod;
+    final String username;
+    final String password;
+    String token;
+    boolean rememberMe;
+    String sessionId;
     private String instanceName = "";
     private UUID instanceId = null;
 
-    BasicAuthProvider(String dataSource, String requestMethod, String username, String password, String token, String sessionId) {
+    BasicAuthProvider(String dataSource, String requestMethod, String username, String password, String token, boolean rememberMe, String sessionId) {
         this.dataSource = dataSource;
         this.requestMethod = requestMethod;
         this.username = username;
@@ -50,6 +51,11 @@ public class BasicAuthProvider implements AuthProvider {
     @Override
     public String token() {
         return this.token;
+    }
+
+    @Override
+    public boolean rememberMe() {
+        return this.rememberMe;
     }
 
     @Override
@@ -85,7 +91,7 @@ public class BasicAuthProvider implements AuthProvider {
             this.Login();
         }
         args.put("SESSIONID", this.sessionId);
-        return HTTPReq.APICall(this.dataSource + endpoint, requestMethod, args, returnType);
+        return HTTPReq.APICall(this.dataSource + endpoint, this.requestMethod, args, returnType);
     }
 
     @Override
@@ -96,9 +102,19 @@ public class BasicAuthProvider implements AuthProvider {
         args.put("token", this.token);
         args.put("rememberMe", rememberMe);
 
-        LoginResult loginResult = HTTPReq.APICall(this.dataSource + "Core/Login", requestMethod, args, LoginResult.class);
+        //
+        System.out.println("PrevToken: " + this.token);
+        System.out.println("LoginResult: " + this.instanceId + " (" + this.instanceName + ")");
+        //
 
-        if (loginResult != null && loginResult.success) {
+        LoginResult loginResult = HTTPReq.APICall(this.dataSource + "Core/Login", this.requestMethod, args, LoginResult.class);
+
+        //
+        System.out.println(loginResult);
+        System.out.println("PostToken: " + loginResult.rememberMeToken);
+        //
+
+        if (loginResult.success) {
             this.token = loginResult.rememberMeToken;
             this.sessionId = loginResult.sessionID;
         }
@@ -110,12 +126,13 @@ public class BasicAuthProvider implements AuthProvider {
     }
 
     public static class Builder implements AuthProvider.Builder {
-        private String dataSource = "";
-        private String requestMethod = "POST";
-        private String username = "";
-        private String password = "";
-        private String token = "";
-        private String sessionId = "";
+        String dataSource = "";
+        String requestMethod = "POST";
+        String username = "";
+        String password = "";
+        String token = "";
+        boolean rememberMe = false;
+        String sessionId = "";
 
         @Override
         public AuthProvider.Builder panelUrl(String panelUrl) {
@@ -168,6 +185,12 @@ public class BasicAuthProvider implements AuthProvider {
         }
 
         @Override
+        public AuthProvider.Builder rememberMe(boolean rememberMe) {
+            this.rememberMe = rememberMe;
+            return this;
+        }
+
+        @Override
         public AuthProvider.Builder sessionId(String sessionId) {
             this.sessionId = sessionId;
             return this;
@@ -190,7 +213,10 @@ public class BasicAuthProvider implements AuthProvider {
             if (this.password.isEmpty() && this.token.isEmpty() && this.sessionId.isEmpty()) {
                 throw new IllegalStateException("You must provide a Password, Token, or a SessionId");
             }
-            return new BasicAuthProvider(this.dataSource, this.requestMethod, this.username, this.password, this.token, this.sessionId);
+            if (this.rememberMe) {
+                throw new IllegalStateException("This AuthProvider does not support rememberMe");
+            }
+            return new BasicAuthProvider(this.dataSource, this.requestMethod, this.username, this.password, this.token, this.rememberMe, this.sessionId);
         }
     }
 }

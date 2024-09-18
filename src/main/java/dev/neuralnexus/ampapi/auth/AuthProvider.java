@@ -20,6 +20,8 @@ public interface AuthProvider {
 
     String token();
 
+    boolean rememberMe();
+
     String sessionId();
 
     String instanceName();
@@ -42,7 +44,7 @@ public interface AuthProvider {
      * Method to log into the remote AMP instance
      */
     default LoginResult Login() {
-        return this.Login(false);
+        return this.Login(this.rememberMe());
     }
 
     interface Builder {
@@ -93,6 +95,12 @@ public interface AuthProvider {
          * @param token The token to use
          */
         Builder token(int token);
+
+        /**
+         * Sets the rememberMe property (used with refreshing auth)
+         * @param rememberMe The state of rememberMe
+         */
+        Builder rememberMe(boolean rememberMe);
 
         /**
          * Sets the sessionId property (optional)
