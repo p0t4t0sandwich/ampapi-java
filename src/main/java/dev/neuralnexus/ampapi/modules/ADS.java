@@ -2,6 +2,7 @@ package dev.neuralnexus.ampapi.modules;
 
 import dev.neuralnexus.ampapi.AMPAPI;
 import dev.neuralnexus.ampapi.auth.AuthProvider;
+import dev.neuralnexus.ampapi.auth.RefreshingAuthProvider;
 import dev.neuralnexus.ampapi.plugins.*;
 import dev.neuralnexus.ampapi.auth.AuthStore;
 
@@ -23,27 +24,48 @@ public class ADS extends CommonAPI {
             throw new IllegalStateException("Username must be defined to manage remote instances");
         }
 
-        authBuilder
-                .panelUrl(this.authProvider.dataSource() + "ADSModule/Servers/" + instanceId)
-                .username(this.authProvider.username());
-        AuthProvider auth;
-        if (this.authProvider.password().isEmpty()) {
-            UUID remoteToken = this.ADSModule.ManageInstance(instanceId).Result;
-            auth = authBuilder
-                    .token(remoteToken)
-                    .rememberMe(false)
-                    // TODO: Add some sort of callback to restore itself instead of refresh?
-                    .build();
-        } else {
-            auth = authBuilder
-                    .password(this.authProvider.password())
-                    .build();
+        AuthProvider auth = this.authStore.get(instanceId);
+        if (auth == null) {
+            authBuilder
+                    .panelUrl(this.authProvider.dataSource() + "ADSModule/Servers/" + instanceId)
+                    .username(this.authProvider.username());
+            if (this.authProvider.password().isEmpty()) {
+                UUID remoteToken = this.ADSModule.ManageInstance(instanceId).Result;
+                authBuilder.token(remoteToken).rememberMe(false);
+                if (authBuilder instanceof RefreshingAuthProvider.Builder) {
+                    RefreshingAuthProvider.Builder refBuilder =
+                            (RefreshingAuthProvider.Builder) authBuilder;
+                    if (this.authProvider instanceof RefreshingAuthProvider) {
+                        refBuilder.relogInterval(
+                                ((RefreshingAuthProvider) authProvider).relogInterval());
+                    }
+                    refBuilder.relogCallback(
+                            ap -> {
+                                ap.setToken(
+                                        this.ADSModule.ManageInstance(instanceId)
+                                                .Result
+                                                .toString());
+                                ap.Login();
+                            });
+                }
+            } else {
+                authBuilder.password(this.authProvider.password());
+                if (authBuilder instanceof RefreshingAuthProvider.Builder) {
+                    RefreshingAuthProvider.Builder refBuilder =
+                            (RefreshingAuthProvider.Builder) authBuilder;
+                    if (this.authProvider instanceof RefreshingAuthProvider) {
+                        refBuilder.relogInterval(
+                                ((RefreshingAuthProvider) authProvider).relogInterval());
+                    }
+                }
+            }
+            auth = authBuilder.build();
+            auth.Login();
+
+            this.authStore.add(auth);
         }
-        auth.Login();
 
-        this.authStore.add(auth);
-
-        if (clazz.equals(ADS.class)) {
+        if (clazz.isAssignableFrom(ADS.class)) {
             return (T) new ADS(this.authStore, auth);
         }
 

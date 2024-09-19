@@ -21,8 +21,8 @@ public class BasicAuthProvider implements AuthProvider {
     String token;
     boolean rememberMe;
     String sessionId;
-    private String instanceName = "";
-    private UUID instanceId = null;
+    String instanceName = "";
+    UUID instanceId = null;
 
     BasicAuthProvider(String dataSource, String requestMethod, String username, String password, String token, boolean rememberMe, String sessionId) {
         this.dataSource = dataSource;
@@ -30,6 +30,7 @@ public class BasicAuthProvider implements AuthProvider {
         this.username = username;
         this.password = password;
         this.token = token;
+        this.rememberMe = rememberMe;
         this.sessionId = sessionId;
     }
 
@@ -102,22 +103,10 @@ public class BasicAuthProvider implements AuthProvider {
         args.put("token", this.token);
         args.put("rememberMe", rememberMe);
 
-        //
-        System.out.println("PrevToken: " + this.token);
-        System.out.println("LoginResult: " + this.instanceId + " (" + this.instanceName + ")");
-        //
-
         LoginResult loginResult = HTTPReq.APICall(this.dataSource + "Core/Login", this.requestMethod, args, LoginResult.class);
+        this.token = loginResult.rememberMeToken;
+        this.sessionId = loginResult.sessionID;
 
-        //
-        System.out.println(loginResult);
-        System.out.println("PostToken: " + loginResult.rememberMeToken);
-        //
-
-        if (loginResult.success) {
-            this.token = loginResult.rememberMeToken;
-            this.sessionId = loginResult.sessionID;
-        }
         return loginResult;
     }
 

@@ -3,6 +3,8 @@ package dev.neuralnexus.ampapi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import dev.neuralnexus.ampapi.exceptions.AMPAPIException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -30,7 +32,7 @@ public class HTTPReq {
             br.close();
 
             if (jsonString.contains("Title") && jsonString.contains("Message") && jsonString.contains("StackTrace")) {
-                throw new AMPAPI.AMPAPIException(gson.fromJson(jsonString, AMPAPI.AMPAPIException.Data.class));
+                throw new AMPAPIException(gson.fromJson(jsonString, AMPAPIException.Data.class));
             }
             if (returnType == Void.class) {
                 return null;

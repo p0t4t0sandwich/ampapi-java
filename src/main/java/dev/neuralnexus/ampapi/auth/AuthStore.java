@@ -2,23 +2,24 @@ package dev.neuralnexus.ampapi.auth;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class AuthStore {
-    private final Map<String, AuthProvider> authProviders = new HashMap<>();
+    private final Map<UUID, AuthProvider> authProviders = new HashMap<>();
 
-    public AuthProvider get(String instanceName) {
-        return this.authProviders.get(instanceName);
+    public AuthProvider get(UUID instanceId) {
+        return this.authProviders.get(instanceId);
     }
 
-    public void add(String instanceName, AuthProvider authProvider) {
-        this.authProviders.put(instanceName, authProvider);
+    public void add(UUID instanceId, AuthProvider authProvider) {
+        this.authProviders.put(instanceId, authProvider);
     }
 
     public void add(AuthProvider authProvider) {
-        this.add(authProvider.instanceName(), authProvider);
+        this.add(authProvider.instanceId(), authProvider);
     }
 
-    public void remove(String instanceName) {
-        this.authProviders.remove(instanceName);
+    public void remove(UUID instanceId) {
+        this.authProviders.remove(instanceId);
     }
 }
