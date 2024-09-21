@@ -19,6 +19,7 @@ public class ADS extends CommonAPI {
         this.ADSModule = new ADSModule(authProvider);
     }
 
+    @SuppressWarnings("unchecked")
     public <T extends AMPAPI> T InstanceLogin(UUID instanceId, AuthProvider.Builder authBuilder, Class<T> clazz) {
         if (this.authProvider.username().isEmpty()) {
             throw new IllegalStateException("Username must be defined to manage remote instances");
@@ -26,36 +27,26 @@ public class ADS extends CommonAPI {
 
         AuthProvider auth = this.authStore.get(instanceId);
         if (auth == null) {
-            authBuilder
-                    .panelUrl(this.authProvider.dataSource() + "ADSModule/Servers/" + instanceId)
-                    .username(this.authProvider.username());
+            authBuilder.panelUrl(this.authProvider.dataSource() + "ADSModule/Servers/" + instanceId).username(this.authProvider.username());
             if (this.authProvider.password().isEmpty()) {
                 UUID remoteToken = this.ADSModule.ManageInstance(instanceId).Result;
                 authBuilder.token(remoteToken).rememberMe(false);
-                if (authBuilder instanceof RefreshingAuthProvider.Builder) {
-                    RefreshingAuthProvider.Builder refBuilder =
-                            (RefreshingAuthProvider.Builder) authBuilder;
+                if (authBuilder instanceof RefreshingAuthProvider.Builder refBuilder) {
                     if (this.authProvider instanceof RefreshingAuthProvider) {
                         refBuilder.relogInterval(
                                 ((RefreshingAuthProvider) authProvider).relogInterval());
                     }
                     refBuilder.relogCallback(
                             ap -> {
-                                ap.setToken(
-                                        this.ADSModule.ManageInstance(instanceId)
-                                                .Result
-                                                .toString());
+                                ap.setToken(this.ADSModule.ManageInstance(instanceId).Result.toString());
                                 ap.Login();
                             });
                 }
             } else {
                 authBuilder.password(this.authProvider.password());
-                if (authBuilder instanceof RefreshingAuthProvider.Builder) {
-                    RefreshingAuthProvider.Builder refBuilder =
-                            (RefreshingAuthProvider.Builder) authBuilder;
-                    if (this.authProvider instanceof RefreshingAuthProvider) {
-                        refBuilder.relogInterval(
-                                ((RefreshingAuthProvider) authProvider).relogInterval());
+                if (authBuilder instanceof RefreshingAuthProvider.Builder refBuilder) {
+                    if (this.authProvider instanceof RefreshingAuthProvider refAuthProvider) {
+                        refBuilder.relogInterval(refAuthProvider.relogInterval());
                     }
                 }
             }
