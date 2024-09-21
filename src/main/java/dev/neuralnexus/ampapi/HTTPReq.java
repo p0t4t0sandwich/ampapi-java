@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) 2024 Dylan Sperrer - dylan@sperrer.ca
+ * The project is Licensed under <a href="https://github.com/p0t4t0sandwich/TaterLib/blob/dev/LICENSE-API">MIT</a>
+ */
 package dev.neuralnexus.ampapi;
 
 import com.google.gson.Gson;
@@ -16,7 +20,8 @@ import java.util.Map;
 public class HTTPReq {
     private static final Gson gson = new GsonBuilder().create();
 
-    public static <T> T APICall(String endpoint, String requestMethod, Map<String, Object> args, Type returnType) {
+    public static <T> T APICall(
+            String endpoint, String requestMethod, Map<String, Object> args, Type returnType) {
         try {
             HttpURLConnection con = (HttpURLConnection) new URL(endpoint).openConnection();
             con.setDoOutput(true);
@@ -31,7 +36,9 @@ public class HTTPReq {
             String jsonString = br.readLine();
             br.close();
 
-            if (jsonString.contains("Title") && jsonString.contains("Message") && jsonString.contains("StackTrace")) {
+            if (jsonString.contains("Title")
+                    && jsonString.contains("Message")
+                    && jsonString.contains("StackTrace")) {
                 throw new AMPAPIException(gson.fromJson(jsonString, AMPAPIException.Data.class));
             }
             if (returnType == Void.class) {

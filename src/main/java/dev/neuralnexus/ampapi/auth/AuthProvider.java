@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) 2024 Dylan Sperrer - dylan@sperrer.ca
+ * The project is Licensed under <a href="https://github.com/p0t4t0sandwich/TaterLib/blob/dev/LICENSE-API">MIT</a>
+ */
 package dev.neuralnexus.ampapi.auth;
 
 import dev.neuralnexus.ampapi.types.LoginResult;
@@ -8,9 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * Generalized Auth Provider for working with AMP instances
- */
+/** Generalized Auth Provider for working with AMP instances */
 public interface AuthProvider {
     String dataSource();
 
@@ -36,13 +38,12 @@ public interface AuthProvider {
 
     /**
      * Method to log into the remote AMP instance
+     *
      * @param rememberMe Whether to enable "remember me"
      */
     LoginResult Login(boolean rememberMe);
 
-    /**
-     * Method to log into the remote AMP instance
-     */
+    /** Method to log into the remote AMP instance */
     default LoginResult Login() {
         return this.Login(this.rememberMe());
     }
@@ -50,66 +51,77 @@ public interface AuthProvider {
     interface Builder {
         /**
          * Sets the panelUrl property (required)
+         *
          * @param panelUrl The panel URL to connect to
          */
         Builder panelUrl(String panelUrl);
 
         /**
          * Sets the panelUrl property (required)
+         *
          * @param panelUrl The panel URL to connect to
          */
         Builder panelUrl(URL panelUrl);
 
         /**
          * Sets the requestMethod property (optional, defaults to POST)
+         *
          * @param requestMethod The request method to use with the API
          */
         Builder requestMethod(String requestMethod);
 
         /**
          * Sets the username property (required)
+         *
          * @param username The username to use
          */
         Builder username(String username);
 
         /**
          * Sets the password property (required when not using a one-use or rememberMe token)
+         *
          * @param password The password to use
          */
         Builder password(String password);
 
         /**
          * Sets the token property (required when not using a password, or for 2FA)
+         *
          * @param token The token to use
          */
         Builder token(String token);
 
         /**
          * Sets the token property (required when not using a password, or for 2FA)
+         *
          * @param token The token to use
          */
         Builder token(UUID token);
 
         /**
          * Sets the token property (required when not using a password, or for 2FA)
+         *
          * @param token The token to use
          */
         Builder token(int token);
 
         /**
          * Sets the rememberMe property (used with refreshing auth)
+         *
          * @param rememberMe The state of rememberMe
          */
         Builder rememberMe(boolean rememberMe);
 
         /**
          * Sets the sessionId property (optional)
+         *
          * @param sessionId The sessionId to use
          */
         AuthProvider.Builder sessionId(String sessionId);
 
         /**
          * Sets the sessionId property (optional)
+         *
          * @param sessionId The sessionId to use
          */
         AuthProvider.Builder sessionId(UUID sessionId);

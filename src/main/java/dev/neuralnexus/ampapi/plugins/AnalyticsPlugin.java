@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) 2024 Dylan Sperrer - dylan@sperrer.ca
+ * The project is Licensed under <a href="https://github.com/p0t4t0sandwich/TaterLib/blob/dev/LICENSE-API">MIT</a>
+ */
 package dev.neuralnexus.ampapi.plugins;
 
 import com.google.gson.reflect.TypeToken;
@@ -7,34 +11,38 @@ import dev.neuralnexus.ampapi.auth.AuthProvider;
 import dev.neuralnexus.ampapi.types.*;
 
 import java.lang.reflect.Type;
-import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
-@SuppressWarnings({"rawtypes", "unchecked", "unused", "DataFlowIssue", "JavadocBlankLines", "RedundantCast", "UnusedReturnValue"})
+@SuppressWarnings({
+    "rawtypes",
+    "unchecked",
+    "unused",
+    "DataFlowIssue",
+    "JavadocBlankLines",
+    "RedundantCast",
+    "UnusedReturnValue"
+})
 public class AnalyticsPlugin extends AMPAPI {
     public AnalyticsPlugin(AuthProvider authProvider) {
         super(authProvider);
     }
 
     /**
-     * 
-     *
      * Name Description Optional
-     * @param PeriodDays  True
-     * @param StartDate  True
-     * @param Filters  True
+     *
+     * @param PeriodDays True
+     * @param StartDate True
+     * @param Filters True
      * @return Object
      */
-    public Object GetAnalyticsSummary(Integer PeriodDays, Object StartDate, Map<String, String> Filters) {
+    public Object GetAnalyticsSummary(
+            Integer PeriodDays, Object StartDate, Map<String, String> Filters) {
         Map<String, Object> args = new HashMap<>();
         args.put("PeriodDays", PeriodDays);
         args.put("StartDate", StartDate);
         args.put("Filters", Filters);
-        Type type = new TypeToken<Object>(){}.getType();
-        return (Object) this.authProvider.APICall("AnalyticsPlugin/GetAnalyticsSummary", args, type);
+        Type type = new TypeToken<Object>() {}.getType();
+        return (Object) this.APICall("AnalyticsPlugin/GetAnalyticsSummary", args, type);
     }
-
 }

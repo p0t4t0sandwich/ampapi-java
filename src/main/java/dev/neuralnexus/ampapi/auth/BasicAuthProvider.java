@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) 2024 Dylan Sperrer - dylan@sperrer.ca
+ * The project is Licensed under <a href="https://github.com/p0t4t0sandwich/TaterLib/blob/dev/LICENSE-API">MIT</a>
+ */
 package dev.neuralnexus.ampapi.auth;
 
 import dev.neuralnexus.ampapi.HTTPReq;
@@ -10,9 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * AuthProvider implementation for basic single-session logins
- */
+/** AuthProvider implementation for basic single-session logins */
 public class BasicAuthProvider implements AuthProvider {
     final String dataSource;
     final String requestMethod;
@@ -24,7 +26,14 @@ public class BasicAuthProvider implements AuthProvider {
     String instanceName = "";
     UUID instanceId = null;
 
-    BasicAuthProvider(String dataSource, String requestMethod, String username, String password, String token, boolean rememberMe, String sessionId) {
+    BasicAuthProvider(
+            String dataSource,
+            String requestMethod,
+            String username,
+            String password,
+            String token,
+            boolean rememberMe,
+            String sessionId) {
         this.dataSource = dataSource;
         this.requestMethod = requestMethod;
         this.username = username;
@@ -103,7 +112,12 @@ public class BasicAuthProvider implements AuthProvider {
         args.put("token", this.token);
         args.put("rememberMe", rememberMe);
 
-        LoginResult loginResult = HTTPReq.APICall(this.dataSource + "Core/Login", this.requestMethod, args, LoginResult.class);
+        LoginResult loginResult =
+                HTTPReq.APICall(
+                        this.dataSource + "Core/Login",
+                        this.requestMethod,
+                        args,
+                        LoginResult.class);
         this.token = loginResult.rememberMeToken;
         this.sessionId = loginResult.sessionID;
 
@@ -200,12 +214,20 @@ public class BasicAuthProvider implements AuthProvider {
                 throw new IllegalStateException("Username must be defined");
             }
             if (this.password.isEmpty() && this.token.isEmpty() && this.sessionId.isEmpty()) {
-                throw new IllegalStateException("You must provide a Password, Token, or a SessionId");
+                throw new IllegalStateException(
+                        "You must provide a Password, Token, or a SessionId");
             }
             if (this.rememberMe) {
                 throw new IllegalStateException("This AuthProvider does not support rememberMe");
             }
-            return new BasicAuthProvider(this.dataSource, this.requestMethod, this.username, this.password, this.token, this.rememberMe, this.sessionId);
+            return new BasicAuthProvider(
+                    this.dataSource,
+                    this.requestMethod,
+                    this.username,
+                    this.password,
+                    this.token,
+                    this.rememberMe,
+                    this.sessionId);
         }
     }
 }

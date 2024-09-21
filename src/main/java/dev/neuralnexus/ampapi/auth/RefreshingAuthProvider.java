@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) 2024 Dylan Sperrer - dylan@sperrer.ca
+ * The project is Licensed under <a href="https://github.com/p0t4t0sandwich/TaterLib/blob/dev/LICENSE-API">MIT</a>
+ */
 package dev.neuralnexus.ampapi.auth;
 
 import dev.neuralnexus.ampapi.HTTPReq;
@@ -9,15 +13,22 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-/**
- * AuthProvider implementation for refreshing auth sessions with long-running processes
- */
+/** AuthProvider implementation for refreshing auth sessions with long-running processes */
 public class RefreshingAuthProvider extends BasicAuthProvider {
     private final int relogInterval;
     private final Consumer<RefreshingAuthProvider> relogCallback;
     private long lastCall = System.currentTimeMillis();
 
-    RefreshingAuthProvider(String dataSource, String requestMethod, String username, String password, String token, boolean rememberMe, String sessionId, int relogInterval, Consumer<RefreshingAuthProvider> relogCallback) {
+    RefreshingAuthProvider(
+            String dataSource,
+            String requestMethod,
+            String username,
+            String password,
+            String token,
+            boolean rememberMe,
+            String sessionId,
+            int relogInterval,
+            Consumer<RefreshingAuthProvider> relogCallback) {
         super(dataSource, requestMethod, username, password, token, rememberMe, sessionId);
         this.relogInterval = relogInterval;
         if (relogCallback != null) {
@@ -69,7 +80,12 @@ public class RefreshingAuthProvider extends BasicAuthProvider {
         System.out.println("LoginResult: " + this.instanceId + " (" + this.instanceName + ")");
         //
 
-        LoginResult loginResult = HTTPReq.APICall(this.dataSource + "Core/Login", this.requestMethod, args, LoginResult.class);
+        LoginResult loginResult =
+                HTTPReq.APICall(
+                        this.dataSource + "Core/Login",
+                        this.requestMethod,
+                        args,
+                        LoginResult.class);
 
         //
         System.out.println(loginResult);
@@ -121,9 +137,19 @@ public class RefreshingAuthProvider extends BasicAuthProvider {
                 throw new IllegalStateException("Username must be defined for refreshing auth");
             }
             if (this.password.isEmpty() && this.token.isEmpty()) {
-                throw new IllegalStateException("You must provide a Password or a valid RememberMe Token for refreshing auth");
+                throw new IllegalStateException(
+                        "You must provide a Password or a valid RememberMe Token for refreshing auth");
             }
-            return new RefreshingAuthProvider(this.dataSource, this.requestMethod, this.username, this.password, this.token, this.rememberMe, this.sessionId, this.relogInterval, this.relogCallback);
+            return new RefreshingAuthProvider(
+                    this.dataSource,
+                    this.requestMethod,
+                    this.username,
+                    this.password,
+                    this.token,
+                    this.rememberMe,
+                    this.sessionId,
+                    this.relogInterval,
+                    this.relogCallback);
         }
     }
 }

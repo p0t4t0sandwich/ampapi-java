@@ -3,6 +3,7 @@ import xyz.wagyourtail.jvmdg.gradle.task.DowngradeJar
 plugins {
     id("java")
     id("maven-publish")
+    id("com.diffplug.spotless") version("6.25.0")
     id("xyz.wagyourtail.jvmdowngrader") version("1.1.3")
 }
 
@@ -21,6 +22,29 @@ tasks.named<DowngradeJar>("downgradeJar") {
     downgradeTo = JavaVersion.VERSION_1_8
 }
 
+spotless {
+    format("misc") {
+    target("*.gradle", ".gitattributes", ".gitignore")
+
+        trimTrailingWhitespace()
+        indentWithSpaces()
+        endWithNewline()
+    }
+    java {
+        importOrder()
+        removeUnusedImports()
+        cleanthat()
+        googleJavaFormat("1.17.0").aosp().formatJavadoc(true).reorderImports(true)
+        formatAnnotations()
+        licenseHeader("""/**
+ * Copyright (c) 2024 Dylan Sperrer - dylan@sperrer.ca
+ * The project is Licensed under <a href="https://github.com/p0t4t0sandwich/TaterLib/blob/dev/LICENSE-API">MIT</a>
+ */
+"""
+        )
+    }
+}
+
 tasks.withType<JavaCompile>().configureEach {
     options.encoding = "UTF-8"
 }
@@ -35,8 +59,12 @@ java {
     }
 }
 
-tasks.named("assemble") {
-    dependsOn("downgradeJar")
+tasks.downgradeJar {
+    dependsOn(tasks.spotlessApply)
+}
+
+tasks.assemble {
+    dependsOn(tasks.downgradeJar)
 }
 
 tasks.withType<GenerateModuleMetadata> {

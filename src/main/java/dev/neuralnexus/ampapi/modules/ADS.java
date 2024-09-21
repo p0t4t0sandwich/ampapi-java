@@ -1,10 +1,14 @@
+/**
+ * Copyright (c) 2024 Dylan Sperrer - dylan@sperrer.ca
+ * The project is Licensed under <a href="https://github.com/p0t4t0sandwich/TaterLib/blob/dev/LICENSE-API">MIT</a>
+ */
 package dev.neuralnexus.ampapi.modules;
 
 import dev.neuralnexus.ampapi.AMPAPI;
 import dev.neuralnexus.ampapi.auth.AuthProvider;
+import dev.neuralnexus.ampapi.auth.AuthStore;
 import dev.neuralnexus.ampapi.auth.RefreshingAuthProvider;
 import dev.neuralnexus.ampapi.plugins.*;
-import dev.neuralnexus.ampapi.auth.AuthStore;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
@@ -20,14 +24,17 @@ public class ADS extends CommonAPI {
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends AMPAPI> T InstanceLogin(UUID instanceId, AuthProvider.Builder authBuilder, Class<T> clazz) {
+    public <T extends AMPAPI> T InstanceLogin(
+            UUID instanceId, AuthProvider.Builder authBuilder, Class<T> clazz) {
         if (this.authProvider.username().isEmpty()) {
             throw new IllegalStateException("Username must be defined to manage remote instances");
         }
 
         AuthProvider auth = this.authStore.get(instanceId);
         if (auth == null) {
-            authBuilder.panelUrl(this.authProvider.dataSource() + "ADSModule/Servers/" + instanceId).username(this.authProvider.username());
+            authBuilder
+                    .panelUrl(this.authProvider.dataSource() + "ADSModule/Servers/" + instanceId)
+                    .username(this.authProvider.username());
             if (this.authProvider.password().isEmpty()) {
                 UUID remoteToken = this.ADSModule.ManageInstance(instanceId).Result;
                 authBuilder.token(remoteToken).rememberMe(false);
@@ -38,7 +45,10 @@ public class ADS extends CommonAPI {
                     }
                     refBuilder.relogCallback(
                             ap -> {
-                                ap.setToken(this.ADSModule.ManageInstance(instanceId).Result.toString());
+                                ap.setToken(
+                                        this.ADSModule.ManageInstance(instanceId)
+                                                .Result
+                                                .toString());
                                 ap.Login();
                             });
                 }
@@ -62,8 +72,12 @@ public class ADS extends CommonAPI {
 
         try {
             return clazz.getConstructor(AuthProvider.class).newInstance(auth);
-        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException | InstantiationException e) {
-            throw new RuntimeException("No constructor found for " + clazz.getName() + " that takes AuthProvider");
+        } catch (NoSuchMethodException
+                | InvocationTargetException
+                | IllegalAccessException
+                | InstantiationException e) {
+            throw new RuntimeException(
+                    "No constructor found for " + clazz.getName() + " that takes AuthProvider");
         }
     }
 
@@ -71,13 +85,15 @@ public class ADS extends CommonAPI {
         return this.InstanceLogin(instanceId, authBuilder, CommonAPI.class);
     }
 
-    public <T extends AMPAPI> T InstanceLogin(String instanceName, AuthProvider.Builder authBuilder, Class<T> clazz) {
-        UUID instanceId = this.ADSModule.GetInstances(false).stream()
-                .flatMap(ads -> ads.AvailableInstances.stream())
-                .filter(i -> i.InstanceName.equals(instanceName))
-                .map(i -> i.InstanceID)
-                .findFirst()
-                .orElse(null);
+    public <T extends AMPAPI> T InstanceLogin(
+            String instanceName, AuthProvider.Builder authBuilder, Class<T> clazz) {
+        UUID instanceId =
+                this.ADSModule.GetInstances(false).stream()
+                        .flatMap(ads -> ads.AvailableInstances.stream())
+                        .filter(i -> i.InstanceName.equals(instanceName))
+                        .map(i -> i.InstanceID)
+                        .findFirst()
+                        .orElse(null);
         return this.InstanceLogin(instanceId, authBuilder, clazz);
     }
 
