@@ -1,3 +1,5 @@
+# **Archived and moved to https://github.com/p0t4t0sandwich/ampapi**
+
 # ampapi-java
 
 [![License](https://img.shields.io/github/license/p0t4t0sandwich/ampapi-java?color=blue)](https://img.shields.io/github/downloads/p0t4t0sandwich/ampapi-java/LICENSE)
