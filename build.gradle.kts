@@ -3,8 +3,8 @@ import xyz.wagyourtail.jvmdg.gradle.task.DowngradeJar
 plugins {
     id("java")
     id("maven-publish")
-    id("com.diffplug.spotless") version("6.25.0")
-    id("xyz.wagyourtail.jvmdowngrader") version("1.1.3")
+    id("com.diffplug.spotless") version("7.0.2")
+    id("xyz.wagyourtail.jvmdowngrader") version("1.2.2")
 }
 
 group = "dev.neuralnexus"
@@ -27,18 +27,21 @@ spotless {
     target("*.gradle", ".gitattributes", ".gitignore")
 
         trimTrailingWhitespace()
-        indentWithSpaces()
+        leadingTabsToSpaces()
         endWithNewline()
     }
     java {
         importOrder()
         removeUnusedImports()
         cleanthat()
-        googleJavaFormat("1.17.0").aosp().formatJavadoc(true).reorderImports(true)
+        googleJavaFormat("1.24.0")
+            .aosp()
+            .formatJavadoc(true)
+            .reorderImports(true)
         formatAnnotations()
         licenseHeader("""/**
- * Copyright (c) 2024 Dylan Sperrer - dylan@sperrer.ca
- * This project is Licensed under <a href="https://github.com/p0t4t0sandwich/ampapi-java/blob/main/LICENSE">MIT</a>
+ * Copyright (c) 2025 Dylan Sperrer - dylan@sperrer.ca
+ * This project is Licensed under <a href="https://github.com/p0t4t0sandwich/ampapi/blob/main/LICENSE">MIT</a>
  */
 """
         )
@@ -77,27 +80,22 @@ publishing {
         maven("https://maven.neuralnexus.dev/releases") {
             name = "NeuralNexusReleases"
             credentials {
-                username = (project.findProperty("neuralNexusUsername") ?: System.getenv("NEURALNEXUS_USERNAME")).toString()
-                password = (project.findProperty("neuralNexusPassword") ?: System.getenv("NEURALNEXUS_PASSWORD")).toString()
+                username = project.findProperty("neuralNexusUsername") as? String ?: System.getenv("NEURALNEXUS_USERNAME") ?: ""
+                password = project.findProperty("neuralNexusPassword") as? String ?: System.getenv("NEURALNEXUS_PASSWORD") ?: ""
             }
         }
         maven("https://maven.neuralnexus.dev/snapshots") {
             name = "NeuralNexusSnapshots"
             credentials {
-                username = (project.findProperty("neuralNexusUsername") ?: System.getenv("NEURALNEXUS_USERNAME")).toString()
-                password = (project.findProperty("neuralNexusPassword") ?: System.getenv("NEURALNEXUS_PASSWORD")).toString()
+                username = project.findProperty("neuralNexusUsername") as? String ?: System.getenv("NEURALNEXUS_USERNAME") ?: ""
+                password = project.findProperty("neuralNexusPassword") as? String ?: System.getenv("NEURALNEXUS_PASSWORD") ?: ""
             }
         }
     }
     publications {
-        register("originalJar", MavenPublication::class) {
-            artifact(tasks["jar"])
-        }
-        register("downgradedJar", MavenPublication::class) {
+        create<MavenPublication>("maven") {
+            from(components["java"])
             artifact(tasks["downgradeJar"])
-        }
-        register("sourcesJar", MavenPublication::class) {
-            artifact(tasks["sourcesJar"])
         }
     }
 }

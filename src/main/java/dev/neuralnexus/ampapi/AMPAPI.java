@@ -7,7 +7,6 @@ package dev.neuralnexus.ampapi;
 import dev.neuralnexus.ampapi.auth.AuthProvider;
 
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.Map;
 
 public class AMPAPI {
@@ -24,9 +23,5 @@ public class AMPAPI {
 
     public <T> T APICall(String endpoint, Map<String, Object> args, Type returnType) {
         return this.authProvider.APICall(endpoint, args, returnType);
-    }
-
-    public <T> T APICall(String endpoint, Type returnType) {
-        return this.authProvider.APICall(endpoint, new HashMap<>(), returnType);
     }
 }

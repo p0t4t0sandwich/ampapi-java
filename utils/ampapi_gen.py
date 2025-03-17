@@ -217,7 +217,7 @@ if __name__ == "__main__":
         branch = sys.argv[1]
 
     # Load remote file
-    res = requests.get(f"https://raw.githubusercontent.com/p0t4t0sandwich/ampapi-spec/{branch}/OldAPISpec.json")
+    res = requests.get(f"https://raw.githubusercontent.com/p0t4t0sandwich/ampapi/{branch}/APISpec.json")
     spec = json.loads(res.content)
 
     # Load custom types

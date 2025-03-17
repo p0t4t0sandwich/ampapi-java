@@ -4,7 +4,6 @@
  */
 package dev.neuralnexus.ampapi.auth;
 
-import dev.neuralnexus.ampapi.HTTPReq;
 import dev.neuralnexus.ampapi.exceptions.APILoginException;
 import dev.neuralnexus.ampapi.types.LoginResult;
 
@@ -131,7 +130,7 @@ public class RefreshingAuthProvider extends BasicAuthProvider {
         @Override
         public AuthProvider build() {
             if (this.dataSource.isEmpty()) {
-                throw new IllegalStateException("Base panel URL must be defined");
+                throw new IllegalStateException("Panel URL must be defined");
             }
             if (this.username.isEmpty()) {
                 throw new IllegalStateException("Username must be defined for refreshing auth");

@@ -2,7 +2,7 @@
  * Copyright (c) 2024 Dylan Sperrer - dylan@sperrer.ca
  * This project is Licensed under <a href="https://github.com/p0t4t0sandwich/ampapi-java/blob/main/LICENSE">MIT</a>
  */
-package dev.neuralnexus.ampapi;
+package dev.neuralnexus.ampapi.auth;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
 import java.util.Map;
 
 public class HTTPReq {
@@ -23,7 +23,7 @@ public class HTTPReq {
     public static <T> T APICall(
             String endpoint, String requestMethod, Map<String, Object> args, Type returnType) {
         try {
-            HttpURLConnection con = (HttpURLConnection) new URL(endpoint).openConnection();
+            HttpURLConnection con = (HttpURLConnection) URI.create(endpoint).toURL().openConnection();
             con.setDoOutput(true);
             con.setRequestMethod(requestMethod);
             con.setRequestProperty("Content-Type", "application/json");

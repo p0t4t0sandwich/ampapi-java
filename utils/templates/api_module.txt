@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-@SuppressWarnings({"rawtypes", "unchecked", "unused", "DataFlowIssue", "JavadocBlankLines", "RedundantCast", "UnusedReturnValue"})
 public class %MODULE_NAME% extends AMPAPI {
     public %MODULE_NAME%(AuthProvider authProvider) {
         super(authProvider);

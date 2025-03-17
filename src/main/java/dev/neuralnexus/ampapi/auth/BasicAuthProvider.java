@@ -4,7 +4,6 @@
  */
 package dev.neuralnexus.ampapi.auth;
 
-import dev.neuralnexus.ampapi.HTTPReq;
 import dev.neuralnexus.ampapi.types.LoginResult;
 import dev.neuralnexus.ampapi.types.ModuleInfo;
 
@@ -208,7 +207,7 @@ public class BasicAuthProvider implements AuthProvider {
         @Override
         public AuthProvider build() {
             if (this.dataSource.isEmpty()) {
-                throw new IllegalStateException("Base panel URL must be defined");
+                throw new IllegalStateException("Panel URL must be defined");
             }
             if (this.username.isEmpty() && this.sessionId.isEmpty()) {
                 throw new IllegalStateException("Username must be defined");
